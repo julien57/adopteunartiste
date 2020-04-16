@@ -1,0 +1,55 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Domaine artistique : {{ domain_artist.title }}{% endblock %}
+
+{% block body %}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-4">
+                <h1>Domaine artistique : {{ domain_artist.title }}</h1>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Domaine artistique : {{ domain_artist.title }}</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fas fa-minus"></i></button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                        <i class="fas fa-times"></i></button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>ID</th>
+                            <td>{{ domain_artist.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nom</th>
+                            <td>{{ domain_artist.title }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+            <div class="col-md-4 row justify-content-between mt-5">
+                <a href="{{ path('back_domain_artist_index') }}" class="btn btn-secondary">Retour</a>
+                {{ include('back/domain_artist/_delete_form.html.twig') }}
+                <a href="{{ path('back_domain_artist_edit', {'id': domain_artist.id}) }}" class="btn btn-info">Editer</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

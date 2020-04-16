@@ -1,0 +1,67 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Domaines artistiques{% endblock %}
+
+{% block body %}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-4">
+                <h1>Domaines artistiques</h1>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Domaines artistiques</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fas fa-minus"></i></button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                        <i class="fas fa-times"></i></button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nom</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for domain_artist in domain_artists %}
+                        <tr>
+                            <td>{{ domain_artist.id }}</td>
+                            <td>{{ domain_artist.title }}</td>
+                            <td>
+                                <a href="{{ path('back_domain_artist_show', {'id': domain_artist.id}) }}" class="btn btn-secondary">Voir</a>
+                                <a href="{{ path('back_domain_artist_edit', {'id': domain_artist.id}) }}" class="btn btn-info">Editer</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="3">Aucune donnée</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <a href="{{ path('back_domain_artist_new') }}" class="btn btn-info">Créer un domaine artistique</a>
+            </div>
+            <!-- /.card-body -->
+            <p class="text-center"><div class="navigation">
+                {{ knp_pagination_render(domain_artists) }}
+            </div></p>
+        </div>
+    </div>
+</section>
+{% endblock %}

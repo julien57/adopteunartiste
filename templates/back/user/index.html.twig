@@ -1,0 +1,72 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Utilisateurs{% endblock %}
+
+{% block body %}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-4">
+                <h1>Liste utilisateurs</h1>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Liste utilisateurs</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fas fa-minus"></i></button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                        <i class="fas fa-times"></i></button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Mail</th>
+                            <th>Prénom/Nom</th>
+                            <th>Pseudo</th>
+                            <th>DollArts</th>
+                            <th>actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.firstName }} {{ user.lastName }}</td>
+                            <td>{{ user.pseudo }}</td>
+                            <td>{{ user.doll }}</td>
+                            <td>
+                                <a href="{{ path('user_show', {'id': user.id}) }}" class="btn btn-secondary">Voir</a>
+                                <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-info">Editer</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="16">Aucune donnée</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <a href="{{ path('user_new') }}" class="btn btn-info">Créer un utilisateur</a>
+            </div>
+            <!-- /.card-body -->
+            <p class="text-center"><div class="navigation">
+                {{ knp_pagination_render(users) }}
+            </div></p>
+        </div>
+    </div>
+</section>
+{% endblock %}
