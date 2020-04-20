@@ -1,0 +1,21 @@
+
+    {% for react in post_react.getReactPost(post) %}
+        <div class="reaction-item">
+            <!-- REACTION IMAGE -->
+            <img class="reaction-image reaction-item-dropdown-trigger" src="{{ asset('img/reaction/' ~ react.type ~ '.png') }}" alt="reaction-{{ react.type }}">
+            <!-- /REACTION IMAGE -->
+
+            <!-- SIMPLE DROPDOWN -->
+            <div class="simple-dropdown padded reaction-item-dropdown">
+                <!-- SIMPLE DROPDOWN TEXT -->
+                <p class="simple-dropdown-text"><img class="reaction" src="{{ asset('img/reaction/' ~ react.type ~ '.png') }}" alt="reaction-{{ react.type }}"> <span class="bold">{{ react.type }}</span></p>
+                <!-- /SIMPLE DROPDOWN TEXT -->
+
+                <!-- SIMPLE DROPDOWN TEXT -->
+                <p class="simple-dropdown-text">{{ react.count }}</p>
+                <!-- /SIMPLE DROPDOWN TEXT -->
+            </div>
+            <!-- /SIMPLE DROPDOWN -->
+        </div>
+        <!-- /REACTION ITEM -->
+    {% endfor %}

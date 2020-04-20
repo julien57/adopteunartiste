@@ -1,12 +1,33 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- bootstrap 4.3.1 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- styles -->
+    <link rel="stylesheet" href="{{ asset('css/styles.min.css') }}">
+    <!-- favicon -->
+    <link rel="icon" href="{{ asset('img/favicon.ico') }}">
+    {% block style %}{% endblock %}
+
+    <title>{% block title %}{% endblock %} | AdopteUnArtiste</title>
+    <meta name="description" content="{% block description %}{% endblock %}">
+</head>
+<body>
+
+{% block body %}{% endblock %}
+
+<!-- app -->
+<script src="{{ asset('js/utils/app.js') }}"></script>
+<!-- XM_Plugins -->
+<script src="{{ asset('js/vendor/xm_plugins.min.js') }}"></script>
+<!-- form.utils -->
+<script src="{{ asset('js/form/form.utils.js') }}"></script>
+<!-- landing.tabs -->
+<script src="{{ asset('js/landing/landing.tabs.js') }}"></script>
+<!-- SVG icons -->
+<script src="{{ asset('js/utils/svg-loader.js') }}"></script>
+{% block javascript %}{% endblock %}
+</body>
 </html>

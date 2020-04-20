@@ -1,0 +1,162 @@
+{% extends 'base_profil.html.twig' %}
+
+{% block body %}
+    <!-- GRID -->
+    <div class="grid grid-3-9 medium-space">
+
+        {{ include('front/space/inc/sidebar.html.twig') }}
+
+        <div class="account-hub-content">
+            <!-- SECTION HEADER -->
+            <div class="section-header">
+                <!-- SECTION HEADER INFO -->
+                <div class="section-header-info">
+                    <!-- SECTION PRETITLE -->
+                    <p class="section-pretitle">Mon profil</p>
+                    <!-- /SECTION PRETITLE -->
+
+                    <!-- SECTION TITLE -->
+                    <h2 class="section-title">Réseaux sociaux</h2>
+                    <!-- /SECTION TITLE -->
+                </div>
+                <!-- /SECTION HEADER INFO -->
+            </div>
+
+        <!-- GRID COLUMN -->
+        <div class="grid-column">
+            <!-- WIDGET BOX -->
+            <div class="widget-box">
+                <!-- WIDGET BOX TITLE -->
+                <p class="widget-box-title">Mes réseaux sociaux</p>
+                <!-- /WIDGET BOX TITLE -->
+
+                <!-- WIDGET BOX CONTENT -->
+                <div class="widget-box-content">
+                    <!-- FORM -->
+                    {{ form_start(form) }}
+                        <!-- FORM ROW -->
+                        <div class="form-row split">
+                            <!-- FORM ITEM -->
+                            <div class="form-item">
+                                <!-- FORM INPUT -->
+                                <div class="form-input social-input small active">
+                                    <!-- SOCIAL LINK -->
+                                    <div class="social-link no-hover facebook">
+                                        <!-- ICON FACEBOOK -->
+                                        <svg class="icon-facebook">
+                                            <use xlink:href="#svg-facebook"></use>
+                                        </svg>
+                                        <!-- /ICON FACEBOOK -->
+                                    </div>
+                                    {{ form_label(form.facebook) }}
+                                    {{ form_widget(form.facebook) }}
+                                    <small style="color:red">{{ form_errors(form.facebook) }}</small>
+                                </div>
+                                <!-- /FORM INPUT -->
+                            </div>
+                            <!-- /FORM ITEM -->
+
+                            <!-- FORM ITEM -->
+                            <div class="form-item">
+                                <!-- FORM INPUT -->
+                                <div class="form-input social-input small active">
+                                    <!-- SOCIAL LINK -->
+                                    <div class="social-link no-hover twitter">
+                                        <!-- ICON TWITTER -->
+                                        <svg class="icon-twitter">
+                                            <use xlink:href="#svg-twitter"></use>
+                                        </svg>
+                                        <!-- /ICON TWITTER -->
+                                    </div>
+                                    {{ form_label(form.twitter) }}
+                                    {{ form_widget(form.twitter) }}
+                                    <small style="color:red">{{ form_errors(form.twitter) }}</small>
+                                </div>
+                                <!-- /FORM INPUT -->
+                            </div>
+                            <!-- /FORM ITEM -->
+                        </div>
+                        <!-- /FORM ROW -->
+
+                        <!-- FORM ROW -->
+                        <div class="form-row split">
+                            <!-- FORM ITEM -->
+                            <div class="form-item">
+                                <!-- FORM INPUT -->
+                                <div class="form-input social-input small active">
+                                    <!-- SOCIAL LINK -->
+                                    <div class="social-link no-hover instagram">
+                                        <!-- ICON INSTAGRAM -->
+                                        <svg class="icon-instagram">
+                                            <use xlink:href="#svg-instagram"></use>
+                                        </svg>
+                                        <!-- /ICON INSTAGRAM -->
+                                    </div>
+                                    {{ form_label(form.instagram) }}
+                                    {{ form_widget(form.instagram) }}
+                                    <small style="color:red">{{ form_errors(form.instagram) }}</small>
+                                </div>
+                                <!-- /FORM INPUT -->
+                            </div>
+                            <!-- /FORM ITEM -->
+
+                            <!-- FORM ITEM -->
+                            <div class="form-item">
+                                <!-- FORM INPUT -->
+                                <div class="form-input social-input small active">
+                                    <!-- SOCIAL LINK -->
+                                    <div class="social-link no-hover twitch">
+                                        <!-- ICON TWITCH -->
+                                        <svg class="icon-twitch">
+                                            <use xlink:href="#svg-twitch"></use>
+                                        </svg>
+                                        <!-- /ICON TWITCH -->
+                                    </div>
+                                    {{ form_label(form.twitch) }}
+                                    {{ form_widget(form.twitch) }}
+                                    <small style="color:red">{{ form_errors(form.twitch) }}</small>
+                                </div>
+                                <!-- /FORM INPUT -->
+                            </div>
+                            <!-- /FORM ITEM -->
+                        </div>
+                        <!-- /FORM ROW -->
+
+                        <!-- FORM ROW -->
+                        <div class="form-row split">
+                            <!-- FORM ITEM -->
+                            <div class="form-item">
+                                <!-- FORM INPUT -->
+                                <div class="form-input social-input small active">
+                                    <!-- SOCIAL LINK -->
+                                    <div class="social-link no-hover youtube">
+                                        <!-- ICON YOUTUBE -->
+                                        <svg class="icon-youtube">
+                                            <use xlink:href="#svg-youtube"></use>
+                                        </svg>
+                                        <!-- /ICON YOUTUBE -->
+                                    </div>
+                                    {{ form_label(form.youtube) }}
+                                    {{ form_widget(form.youtube) }}
+                                    <small style="color:red">{{ form_errors(form.youtube) }}</small>
+                                </div>
+                                <!-- /FORM INPUT -->
+                            </div>
+                            <!-- /FORM ITEM -->
+                            <div class="form-item">
+                                <div class="form-item">
+                                    <input type="submit" class="button primary" value="Enregistrer" style="width:100%">
+                                </div>
+                            </div>
+                        </div>
+                    {{ form_end(form) }}
+                    <!-- /FORM -->
+                </div>
+                <!-- WIDGET BOX CONTENT -->
+            </div>
+            <!-- /WIDGET BOX -->
+        </div>
+        </div>
+        <!-- /GRID -->
+    </div>
+{% endblock %}

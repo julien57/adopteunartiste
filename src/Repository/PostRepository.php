@@ -19,6 +19,55 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
+    public function findLastPost()
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.publishedAt', 'desc')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getArrayResult();
+    }
+
+    public function getPostOffset($start, $limit)
+    {
+        $query = $this->createQueryBuilder('p')
+            ->setFirstResult($start)
+            ->setMaxResults($limit)
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function getLast10Posts()
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.commentPosts', 'comment')
+            ->addSelect('comment')
+            ->leftJoin('p.photo', 'photo')
+            ->addSelect('photo')
+            ->leftJoin('p.reacts', 'reacts')
+            ->addSelect('reacts')
+            ->leftJoin('p.user', 'user')
+            ->addSelect('user')
+            ->orderBy('p.publishedAt', 'DESC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findPostById(int $post)
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.photo', 'photo')
+            ->addSelect('photo')
+            ->leftJoin('p.user', 'user')
+            ->addSelect('user')
+            ->where('p.id = :id')
+            ->setParameter('id', $post)
+            ->getQuery()
+            ->getArrayResult();
+    }
+
     // /**
     //  * @return Post[] Returns an array of Post objects
     //  */

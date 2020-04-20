@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- bootstrap 4.3.1 -->
+    <link rel="stylesheet" href="{{ asset('css/vendor/bootstrap.min.css') }}">
+    <!-- styles -->
+    <link rel="stylesheet" href="{{ asset('css/styles.min.css') }}">
+    <!-- simplebar styles -->
+    <link rel="stylesheet" href="{{ asset('css/vendor/simplebar.css') }}">
+    <!-- tiny-slider styles -->
+    <link rel="stylesheet" href="{{ asset('css/vendor/tiny-slider.css') }}">
+    <!-- favicon -->
+    <link rel="icon" href="{{ asset('img/favicon.ico') }}">
+    <title>Profil</title>
+</head>
+<body>
+
+<!-- PAGE LOADER -->
+{{ include('front/inc/loader.html.twig') }}
+
+<!-- NAVIGATION LEFT -->
+{# {{ include('front/inc/navbar_left.html.twig') }} #}
+{# TODO #}
+<!-- CHAT WIDGET -->
+{# {{ include('front/inc/chat_right.html.twig') }} #}
+
+<!-- HEADER -->
+{{ include('front/inc/header.html.twig') }}
+
+{{ include('front/inc/popup_picture.html.twig') }}
+
+{% block start_body %}{% endblock %}
+
+<!-- CONTENT GRID -->
+<div class="content-grid">
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('danger') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% block body %}{% endblock %}
+</div>
+
+<!-- POPUP PICTURE -->
+
+<!-- /POPUP PICTURE -->
+
+<!-- app -->
+<script src="{{ asset('js/utils/app.js') }}"></script>
+<!-- page loader -->
+<script src="{{ asset('js/utils/page-loader.js') }}"></script>
+<!-- simplebar -->
+<script src="{{ asset('js/vendor/simplebar.min.js') }}"></script>
+<!-- liquidify -->
+<script src="{{ asset('js/utils/liquidify.js') }}"></script>
+<!-- XM_Plugins -->
+<script src="{{ asset('js/vendor/xm_plugins.min.js') }}"></script>
+<!-- tiny-slider -->
+<script src="{{ asset('js/vendor/tiny-slider.min.js') }}"></script>
+<!-- global.hexagons -->
+<script src="{{ asset('js/global/global.hexagons.js') }}"></script>
+<!-- global.tooltips -->
+<script src="{{ asset('js/global/global.tooltips.js') }}"></script>
+<script src="{{ asset('js/global/global.popups.js') }}"></script>
+<!-- global.popups -->
+<!-- header -->
+<script src="{{ asset('js/header/header.js') }}"></script>
+<!-- sidebar -->
+<script src="{{ asset('js/sidebar/sidebar.js') }}"></script>
+<!-- content -->
+<script src="{{ asset('js/content/content.js') }}"></script>
+<!-- form.utils -->
+<script src="{{ asset('js/form/form.utils.js') }}"></script>
+<!-- twitter widget -->
+<script src="{{ asset('js/widget/twitter.js') }}"></script>
+<!-- SVG icons -->
+<script src="{{ asset('js/utils/svg-loader.js') }}"></script>
+{% block javascript %}{% endblock %}
+<script>
+    var links = document.getElementsByClassName('reacting');
+
+    // For each <li> inside #links
+    for (var i = 0; i < links.length; i++) {
+        var link = links[i];
+        link.addEventListener('click', (e) => {
+            let reactIcon = e.target.parentNode;
+
+            const dataPostId = reactIcon.getAttribute('data-post');
+            const dataReact = reactIcon.getAttribute('data-react');
+            const data = {
+                postId: dataPostId,
+                userId: "{{ app.user.id }}",
+                react: dataReact
+            };
+
+            let datas = new FormData();
+            datas.append("data", JSON.stringify(data));
+
+            fetch("{{ path('front_react_post_add') }}", { method: 'POST', body: datas })
+                .then(response => response.json())
+                .then(data => {
+                    const postId = document.getElementById(`like-${dataPostId}`);
+                    postId.style.color = '#23d2e2';
+
+                    const reactId = document.getElementById(`react-${dataPostId}`);
+
+                    reactId.innerHTML = data.react.content;
+
+                    app.plugins.createDropdown({
+                        trigger: '.reaction-item-dropdown-trigger',
+                        container: '.reaction-item-dropdown',
+                        triggerEvent: 'hover',
+                        offset: {
+                            bottom: 38,
+                            left: -16
+                        },
+                        animation: {
+                            type: 'translate-bottom',
+                            speed: .3,
+                            translateOffset: {
+                                vertical: 20
+                            }
+                        }
+                    });
+
+                    app.plugins.createDropdown({
+                        trigger: '.reaction-options-dropdown-trigger',
+                        container: '.reaction-options-dropdown',
+                        triggerEvent: 'click',
+                        offset: {
+                            bottom: 54,
+                            left: -16
+                        },
+                        animation: {
+                            type: 'translate-bottom',
+                            speed: .3,
+                            translateOffset: {
+                                vertical: 20
+                            }
+                        },
+                        closeOnDropdownClick: true
+                    });
+
+                    app.plugins.createDropdown({
+                        trigger: '.reaction-options-small-dropdown-trigger',
+                        container: '.reaction-options-small-dropdown',
+                        triggerEvent: 'click',
+                        offset: {
+                            bottom: 30,
+                            left: -80
+                        },
+                        animation: {
+                            type: 'translate-bottom',
+                            speed: .3,
+                            translateOffset: {
+                                vertical: 16
+                            }
+                        },
+                        closeOnDropdownClick: true
+                    });
+                });
+        });
+    }
+</script>
+</body>
+</html>

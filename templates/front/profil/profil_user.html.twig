@@ -1,0 +1,1281 @@
+{% extends 'base_profil.html.twig' %}
+
+
+{% block body %}
+    <div class="profile-header">
+        <!-- PROFILE HEADER COVER -->
+        <figure class="profile-header-cover liquid">
+            <img src="{% if userProfil.cover %}{{ asset( constant('App\\Services\\File\\UploadFile::COVERUPLOAD_DIR')) ~ userProfil.cover }}{% else %}{{ asset('img/cover/01.jpg') }}{% endif %}" alt="photo couverture {{ userProfil.pseudo }}">
+        </figure>
+        <!-- /PROFILE HEADER COVER -->
+
+        <!-- PROFILE HEADER INFO -->
+        <div class="profile-header-info">
+            <!-- USER SHORT DESCRIPTION -->
+            <div class="user-short-description big">
+                <!-- USER SHORT DESCRIPTION AVATAR -->
+                <a class="user-short-description-avatar user-avatar big" href="profile-timeline.html">
+                    <!-- USER AVATAR BORDER -->
+                    <div class="user-avatar-border">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-148-164"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR BORDER -->
+
+                    <!-- USER AVATAR CONTENT -->
+                    <div class="user-avatar-content">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-image-100-110" data-src="{% if userProfil.avatar %}{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ userProfil.avatar }}{% else %}{{ asset('img/avatar/01.jpg') }}{% endif %}"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR CONTENT -->
+
+                    <!-- USER AVATAR PROGRESS -->
+                    <div class="user-avatar-progress">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-progress-124-136"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR PROGRESS -->
+
+                    <!-- USER AVATAR PROGRESS BORDER -->
+                    <div class="user-avatar-progress-border">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-border-124-136"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR PROGRESS BORDER -->
+
+                    <!-- USER AVATAR BADGE -->
+                    <div class="user-avatar-badge">
+                        <!-- USER AVATAR BADGE BORDER -->
+                        <div class="user-avatar-badge-border">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-40-44"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR BADGE BORDER -->
+
+                        <!-- USER AVATAR BADGE CONTENT -->
+                        <div class="user-avatar-badge-content">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-dark-32-34"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR BADGE CONTENT -->
+
+                        <!-- USER AVATAR BADGE TEXT -->
+                        <p class="user-avatar-badge-text">24</p>
+                        <!-- /USER AVATAR BADGE TEXT -->
+                    </div>
+                    <!-- /USER AVATAR BADGE -->
+                </a>
+                <!-- /USER SHORT DESCRIPTION AVATAR -->
+
+                <!-- USER SHORT DESCRIPTION AVATAR -->
+                <a class="user-short-description-avatar user-short-description-avatar-mobile user-avatar medium" href="profile-timeline.html">
+                    <!-- USER AVATAR BORDER -->
+                    <div class="user-avatar-border">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-120-132"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR BORDER -->
+
+                    <!-- USER AVATAR CONTENT -->
+                    <div class="user-avatar-content">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-image-82-90" data-src="{% if userProfil.avatar %}{% else %}{{ asset('img/avatar/01.jpg') }}{% endif %}"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR CONTENT -->
+
+                    <!-- USER AVATAR PROGRESS -->
+                    <div class="user-avatar-progress">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-progress-100-110"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR PROGRESS -->
+
+                    <!-- USER AVATAR PROGRESS BORDER -->
+                    <div class="user-avatar-progress-border">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-border-100-110"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR PROGRESS BORDER -->
+
+                    <!-- USER AVATAR BADGE -->
+                    <div class="user-avatar-badge">
+                        <!-- USER AVATAR BADGE BORDER -->
+                        <div class="user-avatar-badge-border">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-32-36"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR BADGE BORDER -->
+
+                        <!-- USER AVATAR BADGE CONTENT -->
+                        <div class="user-avatar-badge-content">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-dark-26-28"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR BADGE CONTENT -->
+
+                        <!-- USER AVATAR BADGE TEXT -->
+                        <p class="user-avatar-badge-text">24</p>
+                        <!-- /USER AVATAR BADGE TEXT -->
+                    </div>
+                    <!-- /USER AVATAR BADGE -->
+                </a>
+                <!-- /USER SHORT DESCRIPTION AVATAR -->
+
+                <!-- USER SHORT DESCRIPTION TITLE -->
+                <p class="user-short-description-title"><a href="profile-timeline.html">{{ userProfil.domainArtist.title }}</a></p>
+                <!-- /USER SHORT DESCRIPTION TITLE -->
+
+                <!-- USER SHORT DESCRIPTION TEXT -->
+                <p class="user-short-description-text"><a href="{{ userProfil.website }}" target="_blank">{{ userProfil.website }}</a></p>
+                <!-- /USER SHORT DESCRIPTION TEXT -->
+            </div>
+            <!-- /USER SHORT DESCRIPTION -->
+
+            <!-- PROFILE HEADER SOCIAL LINKS WRAP -->
+            <div class="profile-header-social-links-wrap">
+                <!-- PROFILE HEADER SOCIAL LINKS -->
+                <div id="profile-header-social-links-slider" class="profile-header-social-links">
+
+                    {% if userProfil.facebook %}
+                    <div class="profile-header-social-link">
+                        <a class="social-link facebook" target="_blank" href="{{ userProfil.facebook }}">
+                            <svg class="icon-facebook">
+                                <use xlink:href="#svg-facebook"></use>
+                            </svg>
+                        </a>
+                    </div>
+                    {% endif %}
+
+                    {% if userProfil.twitter %}
+                    <div class="profile-header-social-link">
+                        <a class="social-link twitter" target="_blank"  href="{{ userProfil.twitter }}">
+                            <svg class="icon-twitter">
+                                <use xlink:href="#svg-twitter"></use>
+                            </svg>
+                        </a>
+                    </div>
+                    {% endif %}
+
+                    {% if userProfil.instagram %}
+                    <div class="profile-header-social-link">
+                        <a class="social-link instagram" target="_blank"  href="{{ userProfil.instagram }}">
+                            <svg class="icon-instagram">
+                                <use xlink:href="#svg-instagram"></use>
+                            </svg>
+                        </a>
+                    </div>
+                    {% endif %}
+
+                    {% if userProfil.twitch %}
+                    <div class="profile-header-social-link">
+                        <a class="social-link twitch" target="_blank"  href="{{ userProfil.twitch }}">
+                            <svg class="icon-twitch">
+                                <use xlink:href="#svg-twitch"></use>
+                            </svg>
+                        </a>
+                    </div>
+                    {% endif %}
+
+                    {% if userProfil.youtube %}
+                    <div class="profile-header-social-link">
+                        <a class="social-link youtube" href="{{ userProfil.youtube }}">
+                            <svg class="icon-youtube">
+                                <use xlink:href="#svg-youtube"></use>
+                            </svg>
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+
+            </div>
+
+            <!-- USER STATS -->
+            <div class="user-stats">
+                <!-- USER STAT -->
+                <div class="user-stat big">
+                    <!-- USER STAT TITLE -->
+                    <p class="user-stat-title" id="nb_published">{{ userProfil.posts|length }}</p>
+                    <!-- /USER STAT TITLE -->
+
+                    <!-- USER STAT TEXT -->
+                    <p class="user-stat-text">publications</p>
+                    <!-- /USER STAT TEXT -->
+                </div>
+                <!-- /USER STAT -->
+
+                <!-- USER STAT -->
+                <div class="user-stat big">
+                    <!-- USER STAT TITLE -->
+                    <p class="user-stat-title">{{ post_adopt.getAllAdoptUser(userProfil)|length }}</p>
+                    <!-- /USER STAT TITLE -->
+
+                    <!-- USER STAT TEXT -->
+                    <p class="user-stat-text">Adoptés</p>
+                    <!-- /USER STAT TEXT -->
+                </div>
+                <!-- /USER STAT -->
+
+                <!-- USER STAT -->
+                <div class="user-stat big">
+                    <!-- USER STAT TITLE -->
+                    <p class="user-stat-title">{{ userProfil.nbVisit }}</p>
+                    <!-- /USER STAT TITLE -->
+
+                    <!-- USER STAT TEXT -->
+                    <p class="user-stat-text">vues</p>
+                    <!-- /USER STAT TEXT -->
+                </div>
+                <!-- /USER STAT -->
+
+                <!-- USER STAT -->
+                <div class="user-stat big">
+                    <!-- USER STAT IMAGE -->
+                    <img class="user-stat-image" src="{{ asset('img/flag/usa.png') }}" alt="flag-usa">
+                    <!-- /USER STAT IMAGE -->
+
+                    <!-- USER STAT TEXT -->
+                    <p class="user-stat-text">usa</p>
+                    <!-- /USER STAT TEXT -->
+                </div>
+                <!-- /USER STAT -->
+            </div>
+            <!-- /USER STATS -->
+
+            {% if app.user != userProfil %}
+                <!-- PROFILE HEADER INFO ACTIONS -->
+                <div class="profile-header-info-actions">
+                    <!-- PROFILE HEADER INFO ACTION -->
+                    <button class="profile-header-info-action button secondary" id="btn_adopt">{% if post_adopt.getAdoptAxist(userProfil, app.user) %}Abandonner{% else %}Adopter{% endif %}</button>
+                    <!-- /PROFILE HEADER INFO ACTION -->
+
+                    <!-- PROFILE HEADER INFO ACTION -->
+                    <button class="profile-header-info-action button primary"><span class="hide-text-mobile">Send</span> Message</button>
+                    <!-- /PROFILE HEADER INFO ACTION -->
+                </div>
+            {% endif %}
+            <!-- /PROFILE HEADER INFO ACTIONS -->
+        </div>
+        <!-- /PROFILE HEADER INFO -->
+    </div>
+    <!-- /PROFILE HEADER -->
+
+    <!-- SECTION NAVIGATION -->
+    <nav class="section-navigation">
+        <!-- SECTION MENU -->
+        <div id="section-navigation-slider" class="section-menu">
+            <!-- SECTION MENU ITEM -->
+            <a class="section-menu-item" href="profile-about.html">
+                <!-- SECTION MENU ITEM ICON -->
+                <svg class="section-menu-item-icon icon-profile">
+                    <use xlink:href="#svg-profile"></use>
+                </svg>
+                <!-- /SECTION MENU ITEM ICON -->
+
+                <!-- SECTION MENU ITEM TEXT -->
+                <p class="section-menu-item-text">About</p>
+                <!-- /SECTION MENU ITEM TEXT -->
+            </a>
+            <!-- /SECTION MENU ITEM -->
+
+            <!-- SECTION MENU ITEM -->
+            <a class="section-menu-item active" href="profile-timeline.html">
+                <!-- SECTION MENU ITEM ICON -->
+                <svg class="section-menu-item-icon icon-timeline">
+                    <use xlink:href="#svg-timeline"></use>
+                </svg>
+                <!-- /SECTION MENU ITEM ICON -->
+
+                <!-- SECTION MENU ITEM TEXT -->
+                <p class="section-menu-item-text">Timeline</p>
+                <!-- /SECTION MENU ITEM TEXT -->
+            </a>
+            <!-- /SECTION MENU ITEM -->
+
+            <!-- SECTION MENU ITEM -->
+            <a class="section-menu-item" href="profile-friends.html">
+                <!-- SECTION MENU ITEM ICON -->
+                <svg class="section-menu-item-icon icon-friend">
+                    <use xlink:href="#svg-friend"></use>
+                </svg>
+                <!-- /SECTION MENU ITEM ICON -->
+
+                <!-- SECTION MENU ITEM TEXT -->
+                <p class="section-menu-item-text">Friends</p>
+                <!-- /SECTION MENU ITEM TEXT -->
+            </a>
+            <!-- /SECTION MENU ITEM -->
+
+            <!-- SECTION MENU ITEM -->
+            <a class="section-menu-item" href="profile-groups.html">
+                <!-- SECTION MENU ITEM ICON -->
+                <svg class="section-menu-item-icon icon-group">
+                    <use xlink:href="#svg-group"></use>
+                </svg>
+                <!-- /SECTION MENU ITEM ICON -->
+
+                <!-- SECTION MENU ITEM TEXT -->
+                <p class="section-menu-item-text">Groups</p>
+                <!-- /SECTION MENU ITEM TEXT -->
+            </a>
+            <!-- /SECTION MENU ITEM -->
+
+            <!-- SECTION MENU ITEM -->
+            <a class="section-menu-item" href="profile-photos.html">
+                <!-- SECTION MENU ITEM ICON -->
+                <svg class="section-menu-item-icon icon-photos">
+                    <use xlink:href="#svg-photos"></use>
+                </svg>
+                <!-- /SECTION MENU ITEM ICON -->
+
+                <!-- SECTION MENU ITEM TEXT -->
+                <p class="section-menu-item-text">Photos</p>
+                <!-- /SECTION MENU ITEM TEXT -->
+            </a>
+            <!-- /SECTION MENU ITEM -->
+
+            <!-- SECTION MENU ITEM -->
+            <a class="section-menu-item" href="profile-videos.html">
+                <!-- SECTION MENU ITEM ICON -->
+                <svg class="section-menu-item-icon icon-videos">
+                    <use xlink:href="#svg-videos"></use>
+                </svg>
+                <!-- /SECTION MENU ITEM ICON -->
+
+                <!-- SECTION MENU ITEM TEXT -->
+                <p class="section-menu-item-text">Videos</p>
+                <!-- /SECTION MENU ITEM TEXT -->
+            </a>
+            <!-- /SECTION MENU ITEM -->
+
+            <!-- SECTION MENU ITEM -->
+            <a class="section-menu-item" href="profile-badges.html">
+                <!-- SECTION MENU ITEM ICON -->
+                <svg class="section-menu-item-icon icon-badges">
+                    <use xlink:href="#svg-badges"></use>
+                </svg>
+                <!-- /SECTION MENU ITEM ICON -->
+
+                <!-- SECTION MENU ITEM TEXT -->
+                <p class="section-menu-item-text">Badges</p>
+                <!-- /SECTION MENU ITEM TEXT -->
+            </a>
+            <!-- /SECTION MENU ITEM -->
+
+            <!-- SECTION MENU ITEM -->
+            <a class="section-menu-item" href="profile-stream.html">
+                <!-- SECTION MENU ITEM ICON -->
+                <svg class="section-menu-item-icon icon-streams">
+                    <use xlink:href="#svg-streams"></use>
+                </svg>
+                <!-- /SECTION MENU ITEM ICON -->
+
+                <!-- SECTION MENU ITEM TEXT -->
+                <p class="section-menu-item-text">Streams</p>
+                <!-- /SECTION MENU ITEM TEXT -->
+            </a>
+            <!-- /SECTION MENU ITEM -->
+
+            <!-- SECTION MENU ITEM -->
+            <a class="section-menu-item" href="profile-blog.html">
+                <!-- SECTION MENU ITEM ICON -->
+                <svg class="section-menu-item-icon icon-blog-posts">
+                    <use xlink:href="#svg-blog-posts"></use>
+                </svg>
+                <!-- /SECTION MENU ITEM ICON -->
+
+                <!-- SECTION MENU ITEM TEXT -->
+                <p class="section-menu-item-text">Blog</p>
+                <!-- /SECTION MENU ITEM TEXT -->
+            </a>
+            <!-- /SECTION MENU ITEM -->
+
+            <!-- SECTION MENU ITEM -->
+            <a class="section-menu-item" href="profile-forum.html">
+                <!-- SECTION MENU ITEM ICON -->
+                <svg class="section-menu-item-icon icon-forum">
+                    <use xlink:href="#svg-forum"></use>
+                </svg>
+                <!-- /SECTION MENU ITEM ICON -->
+
+                <!-- SECTION MENU ITEM TEXT -->
+                <p class="section-menu-item-text">Forum</p>
+                <!-- /SECTION MENU ITEM TEXT -->
+            </a>
+            <!-- /SECTION MENU ITEM -->
+
+            <!-- SECTION MENU ITEM -->
+            <a class="section-menu-item" href="profile-store.html">
+                <!-- SECTION MENU ITEM ICON -->
+                <svg class="section-menu-item-icon icon-store">
+                    <use xlink:href="#svg-store"></use>
+                </svg>
+                <!-- /SECTION MENU ITEM ICON -->
+
+                <!-- SECTION MENU ITEM TEXT -->
+                <p class="section-menu-item-text">Store</p>
+                <!-- /SECTION MENU ITEM TEXT -->
+            </a>
+            <!-- /SECTION MENU ITEM -->
+        </div>
+        <!-- /SECTION MENU -->
+
+        <!-- SLIDER CONTROLS -->
+        <div id="section-navigation-slider-controls" class="slider-controls">
+            <!-- SLIDER CONTROL -->
+            <div class="slider-control left">
+                <!-- SLIDER CONTROL ICON -->
+                <svg class="slider-control-icon icon-small-arrow">
+                    <use xlink:href="#svg-small-arrow"></use>
+                </svg>
+                <!-- /SLIDER CONTROL ICON -->
+            </div>
+            <!-- /SLIDER CONTROL -->
+
+            <!-- SLIDER CONTROL -->
+            <div class="slider-control right">
+                <!-- SLIDER CONTROL ICON -->
+                <svg class="slider-control-icon icon-small-arrow">
+                    <use xlink:href="#svg-small-arrow"></use>
+                </svg>
+                <!-- /SLIDER CONTROL ICON -->
+            </div>
+            <!-- /SLIDER CONTROL -->
+        </div>
+        <!-- /SLIDER CONTROLS -->
+    </nav>
+    <!-- /SECTION NAVIGATION -->
+
+    <!-- GRID -->
+    <div class="grid grid-3-6-3 mobile-prefer-content">
+        <!-- GRID COLUMN -->
+        <div class="grid-column">
+
+            <!-- WIDGET BOX -->
+            <div class="widget-box">
+                <!-- WIDGET BOX SETTINGS -->
+                <div class="widget-box-settings">
+                    <!-- POST SETTINGS WRAP -->
+                    <div class="post-settings-wrap">
+                        <!-- POST SETTINGS -->
+                        <div class="post-settings widget-box-post-settings-dropdown-trigger">
+                            <!-- POST SETTINGS ICON -->
+                            <svg class="post-settings-icon icon-more-dots">
+                                <use xlink:href="#svg-more-dots"></use>
+                            </svg>
+                            <!-- /POST SETTINGS ICON -->
+                        </div>
+                        <!-- /POST SETTINGS -->
+
+                        <!-- SIMPLE DROPDOWN -->
+                        <div class="simple-dropdown widget-box-post-settings-dropdown">
+                            <!-- SIMPLE DROPDOWN LINK -->
+                            <p class="simple-dropdown-link">Widget Settings</p>
+                            <!-- /SIMPLE DROPDOWN LINK -->
+                        </div>
+                        <!-- /SIMPLE DROPDOWN -->
+                    </div>
+                    <!-- /POST SETTINGS WRAP -->
+                </div>
+                <!-- /WIDGET BOX SETTINGS -->
+
+                <!-- WIDGET BOX TITLE -->
+                <p class="widget-box-title">Blog Posts <span class="highlighted">5</span></p>
+                <!-- /WIDGET BOX TITLE -->
+
+                <!-- WIDGET BOX CONTENT -->
+                <div class="widget-box-content">
+                    <!-- POST PEEK LIST -->
+                    <div class="post-peek-list">
+                        <!-- POST PEEK -->
+                        <div class="post-peek">
+                            <!-- POST PEEK IMAGE -->
+                            <a class="post-peek-image" href="profile-post.html">
+                                <figure class="picture small round liquid">
+                                    <img src="img/cover/19.jpg" alt="cover-19">
+                                </figure>
+                            </a>
+                            <!-- /POST PEEK IMAGE -->
+
+                            <!-- POST PEEK TITLE -->
+                            <p class="post-peek-title"><a href="profile-post.html">Here's the how and why did I became a full time Gaming Streamer</a></p>
+                            <!-- /POST PEEK TITLE -->
+
+                            <!-- POST PEEK TEXT -->
+                            <p class="post-peek-text">6 days ago</p>
+                            <!-- /POST PEEK TEXT -->
+                        </div>
+                        <!-- /POST PEEK -->
+
+                        <!-- POST PEEK -->
+                        <div class="post-peek">
+                            <!-- POST PEEK IMAGE -->
+                            <a class="post-peek-image" href="profile-post.html">
+                                <figure class="picture small round liquid">
+                                    <img src="img/cover/10.jpg" alt="cover-10">
+                                </figure>
+                            </a>
+                            <!-- /POST PEEK IMAGE -->
+
+                            <!-- POST PEEK TITLE -->
+                            <p class="post-peek-title"><a href="profile-post.html">I spoke with the developers of RoBot SaMurai II at the 2019 GamingCon</a></p>
+                            <!-- /POST PEEK TITLE -->
+
+                            <!-- POST PEEK TEXT -->
+                            <p class="post-peek-text">3 weeks ago</p>
+                            <!-- /POST PEEK TEXT -->
+                        </div>
+                        <!-- /POST PEEK -->
+
+                        <!-- POST PEEK -->
+                        <div class="post-peek">
+                            <!-- POST PEEK IMAGE -->
+                            <a class="post-peek-image" href="profile-post.html">
+                                <figure class="picture small round liquid">
+                                    <img src="img/cover/20.jpg" alt="cover-20">
+                                </figure>
+                            </a>
+                            <!-- /POST PEEK IMAGE -->
+
+                            <!-- POST PEEK TITLE -->
+                            <p class="post-peek-title"><a href="profile-post.html">I will be at this month's StreamCon with NekoBebop</a></p>
+                            <!-- /POST PEEK TITLE -->
+
+                            <!-- POST PEEK TEXT -->
+                            <p class="post-peek-text">4 weeks ago</p>
+                            <!-- /POST PEEK TEXT -->
+                        </div>
+                        <!-- /POST PEEK -->
+
+                        <!-- POST PEEK -->
+                        <div class="post-peek">
+                            <!-- POST PEEK IMAGE -->
+                            <a class="post-peek-image" href="profile-post.html">
+                                <figure class="picture small round liquid">
+                                    <img src="img/cover/06.jpg" alt="cover-06">
+                                </figure>
+                            </a>
+                            <!-- /POST PEEK IMAGE -->
+
+                            <!-- POST PEEK TITLE -->
+                            <p class="post-peek-title"><a href="profile-post.html">[Exclusive!] Check out all the new missions and story of the Fire Witch DLC!</a></p>
+                            <!-- /POST PEEK TITLE -->
+
+                            <!-- POST PEEK TEXT -->
+                            <p class="post-peek-text">1 month ago</p>
+                            <!-- /POST PEEK TEXT -->
+                        </div>
+                        <!-- /POST PEEK -->
+
+                        <!-- POST PEEK -->
+                        <div class="post-peek">
+                            <!-- POST PEEK IMAGE -->
+                            <a class="post-peek-image" href="profile-post.html">
+                                <figure class="picture small round liquid">
+                                    <img src="img/cover/07.jpg" alt="cover-07">
+                                </figure>
+                            </a>
+                            <!-- /POST PEEK IMAGE -->
+
+                            <!-- POST PEEK TITLE -->
+                            <p class="post-peek-title"><a href="profile-post.html">Old Super Mochi's Island is getting a remake!</a></p>
+                            <!-- /POST PEEK TITLE -->
+
+                            <!-- POST PEEK TEXT -->
+                            <p class="post-peek-text">1 month ago</p>
+                            <!-- /POST PEEK TEXT -->
+                        </div>
+                        <!-- /POST PEEK -->
+                    </div>
+                    <!-- /POST PEEK LIST -->
+                </div>
+                <!-- /WIDGET BOX CONTENT -->
+            </div>
+            <!-- /WIDGET BOX -->
+        </div>
+        <!-- /GRID COLUMN -->
+
+        <!-- GRID COLUMN -->
+        <div class="grid-column" id="fil_actu_posts">
+            <div class="quick-post">
+                {% if userProfil == app.user %}
+                    <!-- QUICK POST HEADER -->
+                    <div class="quick-post-header">
+                        <!-- OPTION ITEMS -->
+                        <div class="option-items">
+                            <!-- OPTION ITEM -->
+                            <div class="option-item active">
+                                <!-- OPTION ITEM ICON -->
+                                <svg class="option-item-icon icon-status">
+                                    <use xlink:href="#svg-status"></use>
+                                </svg>
+                                <!-- /OPTION ITEM ICON -->
+
+                                <!-- OPTION ITEM TITLE -->
+                                <p class="option-item-title">Poster sur son fil</p>
+                                <!-- /OPTION ITEM TITLE -->
+                            </div>
+                            <!-- /OPTION ITEM -->
+                        </div>
+                        <!-- /OPTION ITEMS -->
+                    </div>
+                    <!-- /QUICK POST HEADER -->
+
+                    <!-- QUICK POST BODY -->
+                <form class="form" id="form-post" method="post" action="{{ path('front_post_add') }}">
+                    <div class="quick-post-body">
+                        <!-- FORM -->
+                            <!-- FORM ROW -->
+                            <div class="form-row">
+                                <!-- FORM ITEM -->
+                                <div class="form-item">
+                                    <!-- FORM TEXTAREA -->
+                                    <div class="form-textarea">
+                                        <textarea id="quick-post-text" name="quick-post-text" placeholder="Hello {{ app.user.firstName }} ! Un petit mot à partager ?"></textarea>
+                                    </div>
+                                    <!-- /FORM TEXTAREA -->
+                                </div>
+                                <!-- /FORM ITEM -->
+                            </div>
+                            <!-- /FORM ROW -->
+                        <!-- /FORM -->
+                    </div>
+                    <div id="block_preview"><img id="photo_preview" src="" style="height:300px;"></div>
+                    <!-- /QUICK POST BODY -->
+
+                    <!-- QUICK POST FOOTER -->
+                    <div class="quick-post-footer">
+                        <!-- QUICK POST FOOTER ACTIONS -->
+                        <div class="quick-post-footer-actions">
+                            <!-- QUICK POST FOOTER ACTION -->
+                            <div class="quick-post-footer-action text-tooltip-tft-medium" data-title="Insert Photo" style="position: relative;">
+                                <!-- QUICK POST FOOTER ACTION ICON -->
+                                <label for="file-input">
+                                    <svg class="quick-post-footer-action-icon icon-camera" style="cursor:pointer">
+                                        <use xlink:href="#svg-camera"></use>
+                                    </svg>
+                                </label>
+                                <!-- /QUICK POST FOOTER ACTION ICON -->
+                                <div class="xm-tooltip" style="white-space: nowrap; position: absolute; z-index: 99999; top: -32px; left: 50%; margin-left: -42.5px; opacity: 0; visibility: hidden; transform: translate(0px, 10px); transition: all 0.3s ease-in-out 0s;"><p class="xm-tooltip-text">Insert Photo</p></div></div>
+                            <!-- /QUICK POST FOOTER ACTION -->
+
+                            <!-- QUICK POST FOOTER ACTION -->
+                            <div class="quick-post-footer-action text-tooltip-tft-medium" data-title="Insert GIF" style="position: relative;">
+                                <!-- QUICK POST FOOTER ACTION ICON -->
+                                <svg class="quick-post-footer-action-icon icon-gif">
+                                    <use xlink:href="#svg-gif"></use>
+                                </svg>
+                                <!-- /QUICK POST FOOTER ACTION ICON -->
+                                <div class="xm-tooltip" style="white-space: nowrap; position: absolute; z-index: 99999; top: -32px; left: 50%; margin-left: -35.5px; opacity: 0; visibility: hidden; transform: translate(0px, 10px); transition: all 0.3s ease-in-out 0s;"><p class="xm-tooltip-text">Insert GIF</p></div></div>
+                            <!-- /QUICK POST FOOTER ACTION -->
+                            <input id="file-input" name="file_post" type="file" style="display:none"/>
+                            <!-- QUICK POST FOOTER ACTION -->
+                            <div class="quick-post-footer-action text-tooltip-tft-medium" data-title="Insert Tag" style="position: relative;">
+                                <!-- QUICK POST FOOTER ACTION ICON -->
+                                <svg class="quick-post-footer-action-icon icon-tags">
+                                    <use xlink:href="#svg-tags"></use>
+                                </svg>
+                                <!-- /QUICK POST FOOTER ACTION ICON -->
+                                <div class="xm-tooltip" style="white-space: nowrap; position: absolute; z-index: 99999; top: -32px; left: 50%; margin-left: -37px; opacity: 0; visibility: hidden; transform: translate(0px, 10px); transition: all 0.3s ease-in-out 0s;"><p class="xm-tooltip-text">Insert Tag</p></div></div>
+                            <!-- /QUICK POST FOOTER ACTION -->
+                            <input type="hidden" value="{{ app.user.id }}" name="user-profil">
+                        </div>
+                        <!-- /QUICK POST FOOTER ACTIONS -->
+
+                        <!-- QUICK POST FOOTER ACTIONS -->
+                        <div class="quick-post-footer-actions">
+                            <!-- BUTTON -->
+                            <p class="button small void" id="discard_post">Effacer</p>
+                            <!-- /BUTTON -->
+
+                            <!-- BUTTON -->
+                            <input type="submit" class="button small secondary" value="Poster">
+                            <!-- /BUTTON -->
+                        </div>
+                        <!-- /QUICK POST FOOTER ACTIONS -->
+                    </div>
+                </form>
+                    <!-- /QUICK POST FOOTER -->
+                </div>
+            {% endif %}
+
+            <div id="next_post"></div>
+
+            {% for post in posts %}
+            <!-- WIDGET BOX -->
+            <div class="widget-box no-padding">
+                <!-- WIDGET BOX SETTINGS -->
+                {% if post.user == app.user %}
+                    <div class="widget-box-settings">
+                        <!-- POST SETTINGS WRAP -->
+                        <div class="post-settings-wrap">
+                            <!-- POST SETTINGS -->
+                            <div class="post-settings widget-box-post-settings-dropdown-trigger">
+                                <!-- POST SETTINGS ICON -->
+                                <svg class="post-settings-icon icon-more-dots">
+                                    <use xlink:href="#svg-more-dots"></use>
+                                </svg>
+                                <!-- /POST SETTINGS ICON -->
+                            </div>
+                            <!-- /POST SETTINGS -->
+
+                            <!-- SIMPLE DROPDOWN -->
+                            <div class="simple-dropdown widget-box-post-settings-dropdown">
+
+                                <!-- SIMPLE DROPDOWN LINK -->
+                                <a class="simple-dropdown-link" href="{{ path('front_profil_remove_post', {id: post.id}) }}">Supprimer</a>
+                                <!-- /SIMPLE DROPDOWN LINK -->
+                            </div>
+                            <!-- /SIMPLE DROPDOWN -->
+                        </div>
+                        <!-- /POST SETTINGS WRAP -->
+                    </div>
+                {% endif %}
+                <!-- /WIDGET BOX SETTINGS -->
+
+                <!-- WIDGET BOX STATUS -->
+                <div class="widget-box-status">
+
+                    <!-- WIDGET BOX STATUS CONTENT -->
+                    <div class="widget-box-status-content">
+                        <!-- USER STATUS -->
+                        <div class="user-status">
+                            <!-- USER STATUS AVATAR -->
+                            <a class="user-status-avatar" href="profile-timeline.html">
+                                <!-- USER AVATAR -->
+                                <div class="user-avatar small no-outline">
+                                    <!-- USER AVATAR CONTENT -->
+                                    <div class="user-avatar-content">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-image-30-32" data-src="{% if userProfil.avatar %}{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ userProfil.avatar }}{% else %}{{ asset('img/avatar/01.jpg') }}{% endif %}"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR CONTENT -->
+
+                                    <!-- USER AVATAR PROGRESS -->
+                                    <div class="user-avatar-progress">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-progress-40-44"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR PROGRESS -->
+
+                                    <!-- USER AVATAR PROGRESS BORDER -->
+                                    <div class="user-avatar-progress-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-border-40-44"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR PROGRESS BORDER -->
+
+                                    <!-- USER AVATAR BADGE -->
+                                    <div class="user-avatar-badge">
+                                        <!-- USER AVATAR BADGE BORDER -->
+                                        <div class="user-avatar-badge-border">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-22-24"></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR BADGE BORDER -->
+
+                                        <!-- USER AVATAR BADGE CONTENT -->
+                                        <div class="user-avatar-badge-content">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-dark-16-18"></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR BADGE CONTENT -->
+
+                                        <!-- USER AVATAR BADGE TEXT -->
+                                        <p class="user-avatar-badge-text">24</p>
+                                        <!-- /USER AVATAR BADGE TEXT -->
+                                    </div>
+                                    <!-- /USER AVATAR BADGE -->
+                                </div>
+                                <!-- /USER AVATAR -->
+                            </a>
+                            <!-- /USER STATUS AVATAR -->
+
+                            <!-- USER STATUS TITLE -->
+                            <p class="user-status-title medium"><a class="bold" href="profile-timeline.html">{{ userProfil.pseudo }}</a></p>
+                            <!-- /USER STATUS TITLE -->
+
+                            <!-- USER STATUS TEXT -->
+                            {% set difference = date(post.publishedAt).diff(date('now')) %}
+                            {% set days = difference.days %}
+                            {% set hours = difference.h %}
+                            {% set minutes = difference.i %}
+                            <p class="user-status-text small">
+                                {% if days > 0 %}
+                                    il y a {{ days }} jours
+                                {% elseif hours > 0 %}
+                                    il y a {{ hours }} heures
+                                {% else %}
+                                    il y a {{ minutes }} minutes
+                                {% endif %}
+                            </p>
+                            <!-- /USER STATUS TEXT -->
+                        </div>
+                        <!-- /USER STATUS -->
+
+                        <!-- WIDGET BOX STATUS TEXT -->
+                        <p class="widget-box-status-text">{{ post.text }}</p>
+                        <!-- /WIDGET BOX STATUS TEXT -->
+                        {% for photo in post.photo %}
+                            <figure class="widget-box-picture popup-picture-trigger">
+                                <img src="{{ asset( constant('App\\Services\\File\\UploadFile::PHOTO_POST_UPLOAD_DIR')) ~ photo.url }}" alt="cover-04">
+                            </figure>
+                        {% endfor %}
+
+                        <!-- CONTENT ACTIONS -->
+                        <div class="content-actions">
+                            <!-- CONTENT ACTION -->
+                            <div class="content-action">
+                                <!-- META LINE -->
+                                <div class="meta-line">
+                                    <!-- META LINE LIST -->
+                                    <div class="meta-line-list reaction-item-list" id="react-{{ post.id }}" data-post="{{ post.id }}">
+                                        <!-- REACTION ITEM -->
+                                        {% for react in post_react.getReactPost(post) %}
+                                            <div class="reaction-item">
+                                                <!-- REACTION IMAGE -->
+                                                <img class="reaction-image reaction-item-dropdown-trigger" src="{{ asset('img/reaction/' ~ react.type ~ '.png') }}" alt="reaction-{{ react.type }}">
+                                                <!-- /REACTION IMAGE -->
+
+                                                <!-- SIMPLE DROPDOWN -->
+                                                <div class="simple-dropdown padded reaction-item-dropdown">
+                                                    <!-- SIMPLE DROPDOWN TEXT -->
+                                                    <p class="simple-dropdown-text"><img class="reaction" src="{{ asset('img/reaction/' ~ react.type ~ '.png') }}" alt="reaction-{{ react.type }}"> <span class="bold">{{ react.type }}</span></p>
+                                                    <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                                        <!-- SIMPLE DROPDOWN TEXT -->
+                                                        <p class="simple-dropdown-text">{{ react.count }}</p>
+                                                        <!-- /SIMPLE DROPDOWN TEXT -->
+                                                </div>
+                                                <!-- /SIMPLE DROPDOWN -->
+                                            </div>
+                                            <!-- /REACTION ITEM -->
+                                        {% endfor %}
+                                    </div>
+                                    <!-- /META LINE LIST -->
+
+                                    <!-- META LINE TEXT -->
+                                    <p class="meta-line-text ml-1">{{ post_react.countReactPost(post) }}</p>
+                                    <!-- /META LINE TEXT -->
+                                </div>
+                                <!-- /META LINE -->
+
+                                <!-- META LINE -->
+                                <div class="meta-line">
+                                    <!-- META LINE LIST -->
+                                    <div class="meta-line-list user-avatar-list">
+                                        <!-- USER AVATAR -->
+                                        <div class="user-avatar micro no-stats">
+                                            <!-- USER AVATAR BORDER -->
+                                            <div class="user-avatar-border">
+                                                <!-- HEXAGON -->
+                                                <div class="hexagon-22-24"></div>
+                                                <!-- /HEXAGON -->
+                                            </div>
+                                            <!-- /USER AVATAR BORDER -->
+
+                                            <!-- USER AVATAR CONTENT -->
+                                            <div class="user-avatar-content">
+                                                <!-- HEXAGON -->
+                                                <div class="hexagon-image-18-20" data-src="img/avatar/09.jpg"></div>
+                                                <!-- /HEXAGON -->
+                                            </div>
+                                            <!-- /USER AVATAR CONTENT -->
+                                        </div>
+                                        <!-- /USER AVATAR -->
+
+                                        <!-- USER AVATAR -->
+                                        <div class="user-avatar micro no-stats">
+                                            <!-- USER AVATAR BORDER -->
+                                            <div class="user-avatar-border">
+                                                <!-- HEXAGON -->
+                                                <div class="hexagon-22-24"></div>
+                                                <!-- /HEXAGON -->
+                                            </div>
+                                            <!-- /USER AVATAR BORDER -->
+
+                                            <!-- USER AVATAR CONTENT -->
+                                            <div class="user-avatar-content">
+                                                <!-- HEXAGON -->
+                                                <div class="hexagon-image-18-20" data-src="img/avatar/08.jpg"></div>
+                                                <!-- /HEXAGON -->
+                                            </div>
+                                            <!-- /USER AVATAR CONTENT -->
+                                        </div>
+                                        <!-- /USER AVATAR -->
+
+                                        <!-- USER AVATAR -->
+                                        <div class="user-avatar micro no-stats">
+                                            <!-- USER AVATAR BORDER -->
+                                            <div class="user-avatar-border">
+                                                <!-- HEXAGON -->
+                                                <div class="hexagon-22-24"></div>
+                                                <!-- /HEXAGON -->
+                                            </div>
+                                            <!-- /USER AVATAR BORDER -->
+
+                                            <!-- USER AVATAR CONTENT -->
+                                            <div class="user-avatar-content">
+                                                <!-- HEXAGON -->
+                                                <div class="hexagon-image-18-20" data-src="img/avatar/12.jpg"></div>
+                                                <!-- /HEXAGON -->
+                                            </div>
+                                            <!-- /USER AVATAR CONTENT -->
+                                        </div>
+                                        <!-- /USER AVATAR -->
+
+                                        <!-- USER AVATAR -->
+                                        <div class="user-avatar micro no-stats">
+                                            <!-- USER AVATAR BORDER -->
+                                            <div class="user-avatar-border">
+                                                <!-- HEXAGON -->
+                                                <div class="hexagon-22-24"></div>
+                                                <!-- /HEXAGON -->
+                                            </div>
+                                            <!-- /USER AVATAR BORDER -->
+
+                                            <!-- USER AVATAR CONTENT -->
+                                            <div class="user-avatar-content">
+                                                <!-- HEXAGON -->
+                                                <div class="hexagon-image-18-20" data-src="img/avatar/16.jpg"></div>
+                                                <!-- /HEXAGON -->
+                                            </div>
+                                            <!-- /USER AVATAR CONTENT -->
+                                        </div>
+                                        <!-- /USER AVATAR -->
+
+                                        <!-- USER AVATAR -->
+                                        <div class="user-avatar micro no-stats">
+                                            <!-- USER AVATAR BORDER -->
+                                            <div class="user-avatar-border">
+                                                <!-- HEXAGON -->
+                                                <div class="hexagon-22-24"></div>
+                                                <!-- /HEXAGON -->
+                                            </div>
+                                            <!-- /USER AVATAR BORDER -->
+
+                                            <!-- USER AVATAR CONTENT -->
+                                            <div class="user-avatar-content">
+                                                <!-- HEXAGON -->
+                                                <div class="hexagon-image-18-20" data-src="img/avatar/06.jpg"></div>
+                                                <!-- /HEXAGON -->
+                                            </div>
+                                            <!-- /USER AVATAR CONTENT -->
+                                        </div>
+                                        <!-- /USER AVATAR -->
+                                    </div>
+                                    <!-- /META LINE LIST -->
+
+                                </div>
+                                <!-- /META LINE -->
+                            </div>
+                            <!-- /CONTENT ACTION -->
+
+                            <!-- CONTENT ACTION -->
+                            <div class="content-action">
+                                <!-- META LINE -->
+                                <div class="meta-line">
+                                    <!-- META LINE LINK -->
+                                    <p class="meta-line-link">3 Comments</p>
+                                    <!-- /META LINE LINK -->
+                                </div>
+                                <!-- /META LINE -->
+
+                                <!-- META LINE -->
+                                <div class="meta-line">
+                                    <!-- META LINE TEXT -->
+                                    <p class="meta-line-text">0 Shares</p>
+                                    <!-- /META LINE TEXT -->
+                                </div>
+                                <!-- /META LINE -->
+                            </div>
+                            <!-- /CONTENT ACTION -->
+                        </div>
+                        <!-- /CONTENT ACTIONS -->
+                    </div>
+                    <!-- /WIDGET BOX STATUS CONTENT -->
+                </div>
+                <!-- /WIDGET BOX STATUS -->
+
+                <!-- POST OPTIONS -->
+                <div class="post-options">
+                    <!-- POST OPTION WRAP -->
+                    <div class="post-option-wrap">
+                        <!-- POST OPTION -->
+                        <div class="post-option reaction-options-dropdown-trigger">
+                            <!-- POST OPTION ICON -->
+                            <svg class="post-option-icon icon-thumbs-up">
+                                <use xlink:href="#svg-thumbs-up"></use>
+                            </svg>
+                            <!-- /POST OPTION ICON -->
+
+                            <!-- POST OPTION TEXT -->
+                            <p class="post-option-text" id="like-{{ post.id }}" {% if post_react.getIfReactUser(post, app.user) %}style="color:#23d2e2"{% endif %}>Réagir!</p>
+                            <!-- /POST OPTION TEXT -->
+                        </div>
+                        <!-- /POST OPTION -->
+
+                        <!-- REACTION OPTIONS -->
+                        <div class="reaction-options reaction-options-dropdown">
+                            <!-- REACTION OPTION -->
+                            <div class="reaction-option text-tooltip-tft reacting" data-react="like" data-post="{{ post.id }}" id="react-like" data-title="Like">
+                                <!-- REACTION OPTION IMAGE -->
+                                <img class="reaction-option-image" src="{{ asset('img/reaction/like.png') }}" alt="reaction-like">
+                                <!-- /REACTION OPTION IMAGE -->
+                            </div>
+                            <!-- /REACTION OPTION -->
+
+                            <!-- REACTION OPTION -->
+                            <div class="reaction-option text-tooltip-tft reacting" data-react="love" data-post="{{ post.id }}" id="react-love" data-title="Love">
+                                <!-- REACTION OPTION IMAGE -->
+                                <img class="reaction-option-image" src="{{ asset('img/reaction/love.png') }}" alt="reaction-love">
+                                <!-- /REACTION OPTION IMAGE -->
+                            </div>
+                            <!-- /REACTION OPTION -->
+
+                            <!-- REACTION OPTION -->
+                            <div class="reaction-option text-tooltip-tft reacting" data-react="dislike" data-post="{{ post.id }}" id="react-dislike" data-title="Dislike">
+                                <!-- REACTION OPTION IMAGE -->
+                                <img class="reaction-option-image" src="{{ asset('img/reaction/dislike.png') }}" alt="reaction-dislike">
+                                <!-- /REACTION OPTION IMAGE -->
+                            </div>
+                            <!-- /REACTION OPTION -->
+
+                            <!-- REACTION OPTION -->
+                            <div class="reaction-option text-tooltip-tft reacting" data-react="happy" data-post="{{ post.id }}" id="react-happy" data-title="Happy">
+                                <!-- REACTION OPTION IMAGE -->
+                                <img class="reaction-option-image" src="{{ asset('img/reaction/happy.png') }}" alt="reaction-happy">
+                                <!-- /REACTION OPTION IMAGE -->
+                            </div>
+                            <!-- /REACTION OPTION -->
+
+                            <!-- REACTION OPTION -->
+                            <div class="reaction-option text-tooltip-tft reacting" data-react="funny" data-post="{{ post.id }}" id="react-funny" data-title="Funny">
+                                <!-- REACTION OPTION IMAGE -->
+                                <img class="reaction-option-image" src="{{ asset('img/reaction/funny.png') }}" alt="reaction-funny">
+                                <!-- /REACTION OPTION IMAGE -->
+                            </div>
+                            <!-- /REACTION OPTION -->
+
+                            <!-- REACTION OPTION -->
+                            <div class="reaction-option text-tooltip-tft reacting" data-react="wow" data-post="{{ post.id }}" id="react-wow" data-title="Wow">
+                                <!-- REACTION OPTION IMAGE -->
+                                <img class="reaction-option-image" src="{{ asset('img/reaction/wow.png') }}" alt="reaction-wow">
+                                <!-- /REACTION OPTION IMAGE -->
+                            </div>
+                            <!-- /REACTION OPTION -->
+
+                            <!-- REACTION OPTION -->
+                            <div class="reaction-option text-tooltip-tft reacting" data-react="angry" data-post="{{ post.id }}" id="react-angry" data-title="Angry">
+                                <!-- REACTION OPTION IMAGE -->
+                                <img class="reaction-option-image" id="react-angry" src="{{ asset('img/reaction/angry.png') }}" alt="reaction-angry">
+                                <!-- /REACTION OPTION IMAGE -->
+                            </div>
+                            <!-- /REACTION OPTION -->
+
+                            <!-- REACTION OPTION -->
+                            <div class="reaction-option text-tooltip-tft reacting" data-react="sad" data-post="{{ post.id }}" data-title="Sad" id="react-sad">
+                                <!-- REACTION OPTION IMAGE -->
+                                <img class="reaction-option-image" src="{{ asset('img/reaction/sad.png') }}" alt="reaction-sad">
+                                <!-- /REACTION OPTION IMAGE -->
+                            </div>
+                            <!-- /REACTION OPTION -->
+                        </div>
+                        <!-- /REACTION OPTIONS -->
+                    </div>
+                    <!-- /POST OPTION WRAP -->
+
+                    <!-- POST OPTION -->
+                    <div class="post-option">
+                        <!-- POST OPTION ICON -->
+                        <svg class="post-option-icon icon-comment">
+                            <use xlink:href="#svg-comment"></use>
+                        </svg>
+                        <!-- /POST OPTION ICON -->
+
+                        <!-- POST OPTION TEXT -->
+                        <p class="post-option-text">Commentaires</p>
+                        <!-- /POST OPTION TEXT -->
+                    </div>
+                    <!-- /POST OPTION -->
+
+                    <!-- POST OPTION -->
+                    <div class="post-option">
+                        <!-- POST OPTION ICON -->
+                        <svg class="post-option-icon icon-share">
+                            <use xlink:href="#svg-share"></use>
+                        </svg>
+                        <!-- /POST OPTION ICON -->
+
+                        <!-- POST OPTION TEXT -->
+                        <p class="post-option-text">Share</p>
+                        <!-- /POST OPTION TEXT -->
+                    </div>
+                    <!-- /POST OPTION -->
+                </div>
+                <!-- /POST OPTIONS -->
+            </div>
+            <!-- /WIDGET BOX -->
+            {% endfor %}
+
+            <!-- /LOADER BARS -->
+        </div>
+
+        <!-- /GRID COLUMN -->
+    </div>
+{% endblock %}
+
+{% block javascript %}
+{{ parent() }}
+
+<script>
+document.getElementById('discard_post').addEventListener('click', () => {
+    document.getElementById('quick-post-text').value = '';
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    const inpFile = document.getElementById('file-input');
+    const form = document.getElementById('form-post');
+
+
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      let form = e.target;
+      const formData = new FormData(form);
+
+      formData.append('inpFile', inpFile.files[0])
+
+      fetch(form.action, { method: form.method, body: formData })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('next_post').insertAdjacentHTML('afterbegin', data.post.content);
+            document.getElementById('quick-post-text').value = '';
+            document.getElementById('nb_published').textContent++;
+            document.getElementById('photo_preview').src = '';
+        });
+      return false;
+    });
+
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                document.getElementById('photo_preview').setAttribute('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+
+            let linkElt = document.createElement('button');
+            linkElt.id = 'remove_preview';
+            linkElt.textContent = 'Supprimer';
+            document.getElementById('block_preview').after(linkElt);
+
+
+            linkElt.addEventListener('click', function() {
+              document.getElementById('photo_preview').src = '';
+              linkElt.remove();
+            });
+        }
+    }
+
+    document.getElementById('file-input').addEventListener('change', function(){
+        readURL(this);
+    });
+
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.js"></script>
+<script>
+is_processing = false;
+    last_page = false;
+    page = 2;
+    function addMoreElements() {
+        is_processing = true;
+
+        $.ajax({
+            type: "POST",
+            //FOS Routing
+            url: "{{ path('front_profil_user', {'pseudo': userProfil.pseudo}) }}",
+            data: {page: page},
+            success: function(data) {
+                if (data.posts.content) {
+                    $('#fil_actu_posts').append(data.posts.content);
+                    $('#load-bar').css('display', 'none');
+                    page = page + 1;
+                    //The server can answer saying it's the last page so that the browser doesn't make anymore calls
+                    last_page = false;
+                } else {
+                    last_page = true;
+                }
+                is_processing = false;
+            },
+            error: function(data) {
+                is_processing = false;
+            }
+        });
+    }
+
+    $(window).scroll(function() {
+        var wintop = $(window).scrollTop(), docheight = $(document).height(), winheight = $(window).height();
+        //Modify this parameter to establish how far down do you want to make the ajax call
+        var scrolltrigger = 0.80;
+        if ((wintop / (docheight - winheight)) > scrolltrigger) {
+        //I added the is_processing variable to keep the ajax asynchronous but avoiding making the same call multiple times
+
+            if (last_page === false && is_processing === false) {
+
+                addMoreElements();
+            }
+        }
+    });
+</script>
+<script>
+const btnAdopt = document.getElementById('btn_adopt');
+
+btnAdopt.addEventListener('click', (e) => {
+
+    if (btnAdopt.textContent === 'Adopter') {
+        fetch("{{ path('front_profil_add_adopt', {id: userProfil.id}) }}", { method: 'POST'})
+        .then(response => response.json())
+        .then(data => {
+
+            if (data.message === 'ok') {
+                btnAdopt.textContent = 'Abandonner';
+            }
+        });
+    } else if (btnAdopt.textContent === 'Abandonner') {
+        fetch("{{ path('front_profil_remove_adopt', {id: userProfil.id}) }}", { method: 'POST'})
+        .then(response => response.json())
+        .then(data => {
+
+            if (data.message === 'ok') {
+                btnAdopt.textContent = 'Adopter';
+            }
+        });
+    }
+
+
+});
+</script>
+{% endblock %}

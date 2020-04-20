@@ -40,7 +40,7 @@ class UserController extends AbstractController
     public function new(Request $request, UserPasswordEncoderInterface $encoder, SendMail $sendMail): Response
     {
         $user = new User();
-        $form = $this->createForm(BackUserType::class, $user);
+        $form = $this->createForm(BackUserType::class, $user, ['isFront' => false]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -81,7 +81,7 @@ class UserController extends AbstractController
      */
     public function edit(Request $request, User $user): Response
     {
-        $form = $this->createForm(BackUserType::class, $user);
+        $form = $this->createForm(BackUserType::class, $user, ['isFront' => false]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -1,0 +1,137 @@
+{% extends 'base_profil.html.twig' %}
+
+{% block body %}
+    <!-- GRID -->
+    <div class="grid grid-3-9 medium-space">
+
+        {{ include('front/space/inc/sidebar.html.twig') }}
+
+        <div class="account-hub-content">
+            <!-- SECTION HEADER -->
+            <div class="section-header">
+                <!-- SECTION HEADER INFO -->
+                <div class="section-header-info">
+                    <!-- SECTION PRETITLE -->
+                    <p class="section-pretitle">Mon profil</p>
+                    <!-- /SECTION PRETITLE -->
+
+                    <!-- SECTION TITLE -->
+                    <h2 class="section-title">Services</h2>
+                    <!-- /SECTION TITLE -->
+                </div>
+                <!-- /SECTION HEADER INFO -->
+            </div>
+
+            <!-- GRID COLUMN -->
+            <div class="grid-column">
+                <!-- WIDGET BOX -->
+                <div class="widget-box">
+                    <!-- WIDGET BOX TITLE -->
+                    <p class="widget-box-title">Mes services</p>
+                    <!-- /WIDGET BOX TITLE -->
+
+                    <!-- WIDGET BOX CONTENT -->
+                    <div class="widget-box-content">
+                        <!-- FORM -->
+                        {{ form_start(form) }}
+                        <!-- FORM ROW -->
+                        <ul class="row" id="email-fields-list"
+                            data-prototype="{{ form_widget(form.services.vars.prototype)|e }}"
+                            data-widget-tags="{{ '<li class="col-md-12 mt-3"></li>'|e }}"
+                            data-widget-counter="{{ form.services|length }}">
+                            {% for service in form.services %}
+                                <h3 class="mt-3">Service {{ loop.index }}</h3>
+                                <li class="form-row split col-md-12 mt-3">
+                                    <!-- FORM ITEM -->
+                                    <div class="form-item">
+                                        <!-- FORM INPUT -->
+                                        <div class="form-input social-input small active">
+                                            {{ form_label(service.title) }}
+                                            {{ form_widget(service.title) }}
+                                            <small style="color:red">{{ form_errors(service.title) }}</small>
+                                        </div>
+                                        <!-- /FORM INPUT -->
+                                    </div>
+                                    <!-- /FORM ITEM -->
+
+                                    <!-- FORM ITEM -->
+                                    <div class="form-item">
+                                        <!-- FORM INPUT -->
+                                        <div class="form-input social-input small active">
+                                            {{ form_label(service.description) }}
+                                            {{ form_widget(service.description, {'attr': {'rows': 5}}) }}
+                                            <small style="color:red">{{ form_errors(service.description) }}</small>
+                                        </div>
+                                        <!-- /FORM INPUT -->
+                                    </div>
+                                    <!-- /FORM ITEM -->
+                                </li>
+                                <!-- /FORM ROW -->
+                                <a type="button" href="{{ path('front_space_service_remove', {'id': service.vars.data.id}) }}" onclick="return confirm('Etes-vous sûr de vouloir supprimer ce service ?')" class="btn btn-block btn-danger btn-sm col-md-12 mt-3">Supprimer ce service</a>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <button type="button"
+                                    class="add-another-collection-widget btn"
+                                    data-list-selector="#email-fields-list" style="background-color:#800200;color:white">Ajouter un service</button>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="submit" class="button primary" value="Enregistrer" style="width:100%">
+                        </div>
+                    </div>
+
+                        {{ form_end(form) }}
+                        <!-- /FORM -->
+                    </div>
+                    <!-- WIDGET BOX CONTENT -->
+                <!-- /WIDGET BOX -->
+            </div>
+        </div>
+        <!-- /GRID -->
+    </div>
+{% endblock %}
+
+{% block javascript %}
+{{ parent() }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+<script>
+jQuery(document).ready(function () {
+
+    counter = null;
+    jQuery('.add-another-collection-widget').click(function (e) {
+        var list = jQuery(jQuery(this).attr('data-list-selector'));
+        // Try to find the counter of the list or use the length of the list
+        var counter = list.data('widget-counter') || list.children().length;
+
+        // grab the prototype template
+        var newWidget = list.attr('data-prototype');
+        counter++;
+
+        newWidget = newWidget.replace(/__name__/g, counter);
+        newWidget = `<h3>Service ${counter}</h3><div id="services_user_services_${counter}" class="row"><div class="col-md-6"><label for="services_user_services_${counter}_title" class="required">Nom du service</label><input type="text" id="services_user_services_${counter}_title" name="services_user[services][${counter}][title]" required="required" class="form-control" /></div><div class="col-md-6"><label for="services_user_services_${counter}_description" class="required">Description</label><textarea id="services_user_services_${counter}_description" name="services_user[services][${counter}][description]" required="required" rows="5" class="form-control"></textarea></div></div>`;
+
+        // And store it, the length cannot be used if deleting widgets is allowed
+        list.data('widget-counter', counter);
+
+        // create a new list element and add it to the list
+        var newElem = jQuery(list.attr('data-widget-tags')).html(newWidget);
+        addTagFormDeleteLink(newElem);
+        newElem.appendTo(list);
+    });
+
+    function addTagFormDeleteLink($tagFormLi) {
+        var $removeFormButton = $('<button type="button" class="btn btn-block btn-danger btn-sm col-md-12 mt-3">Supprimer ce service</button>');
+        $tagFormLi.append($removeFormButton);
+
+        $removeFormButton.on('click', function(e) {
+            counter--;
+
+            $tagFormLi.remove();
+        });
+    }
+});
+</script>
+{% endblock %}

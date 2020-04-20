@@ -12,8 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @UniqueEntity("email")
- * @UniqueEntity("slug")
+ * @UniqueEntity(fields={"email"}, message="Cette adresse mail existe déjà")
+ * @UniqueEntity(fields={"pseudo"}, message="Ce pseudo existe déjà, veuillez en choisir un autre")
  */
 class User implements UserInterface
 {
@@ -40,6 +40,9 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank(message="Veuillez définir un mot de passe")
+     * @Assert\Length(min=6, minMessage="Veuillez choisir au moins 6 caractères pour votre mot de passe")
      */
     private $password;
 
@@ -58,7 +61,7 @@ class User implements UserInterface
     private $lastName;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      *
      * @Assert\NotBlank(message="Veuillez renseigner un pseudo")
      */
@@ -120,14 +123,90 @@ class User implements UserInterface
     private $posts;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\React", inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="App\Entity\React", inversedBy="users")
      */
     private $react;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $website;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Assert\Url(message="L'URL renseignée n'est pas valide")
+     */
+    private $facebook;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Assert\Url(message="L'URL renseignée n'est pas valide")
+     */
+    private $twitter;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Assert\Url(message="L'URL renseignée n'est pas valide")
+     */
+    private $youtube;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Assert\Url(message="L'URL renseignée n'est pas valide")
+     */
+    private $instagram;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Assert\Url(message="L'URL renseignée n'est pas valide")
+     */
+    private $twitch;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $nbVisit;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Adopt", mappedBy="userTo", orphanRemoval=true)
+     */
+    private $userFrom;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Adopt", mappedBy="userFrom", orphanRemoval=true)
+     */
+    private $adopts;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Competence", mappedBy="user", orphanRemoval=true, cascade={"persist", "remove"})
+     */
+    private $competences;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Service", mappedBy="user", orphanRemoval=true, cascade={"persist", "remove"})
+     */
+    private $services;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CommentPost", mappedBy="user")
+     */
+    private $commentPosts;
 
     public function __construct()
     {
         $this->posts = new ArrayCollection();
         $this->doll = 0;
+        $this->react = new ArrayCollection();
+        $this->userFrom = new ArrayCollection();
+        $this->adopts = new ArrayCollection();
+        $this->competences = new ArrayCollection();
+        $this->services = new ArrayCollection();
+        $this->commentPosts = new ArrayCollection();
     }
 
     public function computeSlug(SluggerInterface $slugger)
@@ -191,7 +270,7 @@ class User implements UserInterface
         return (string) $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(?string $password): self
     {
         $this->password = $password;
 
@@ -256,7 +335,7 @@ class User implements UserInterface
         return $this->birthAt;
     }
 
-    public function setBirthAt(\DateTimeInterface $birthAt): self
+    public function setBirthAt(?\DateTimeInterface $birthAt): self
     {
         $this->birthAt = $birthAt;
 
@@ -390,14 +469,267 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getReact(): ?React
+    public function getWebsite(): ?string
+    {
+        return $this->website;
+    }
+
+    public function setWebsite(?string $website): self
+    {
+        $this->website = $website;
+
+        return $this;
+    }
+
+    public function getFacebook(): ?string
+    {
+        return $this->facebook;
+    }
+
+    public function setFacebook(?string $facebook): self
+    {
+        $this->facebook = $facebook;
+
+        return $this;
+    }
+
+    public function getTwitter(): ?string
+    {
+        return $this->twitter;
+    }
+
+    public function setTwitter(?string $twitter): self
+    {
+        $this->twitter = $twitter;
+
+        return $this;
+    }
+
+    public function getYoutube(): ?string
+    {
+        return $this->youtube;
+    }
+
+    public function setYoutube(?string $youtube): self
+    {
+        $this->youtube = $youtube;
+
+        return $this;
+    }
+
+    public function getInstagram(): ?string
+    {
+        return $this->instagram;
+    }
+
+    public function setInstagram(?string $instagram): self
+    {
+        $this->instagram = $instagram;
+
+        return $this;
+    }
+
+    public function getTwitch(): ?string
+    {
+        return $this->twitch;
+    }
+
+    public function setTwitch(?string $twitch): self
+    {
+        $this->twitch = $twitch;
+
+        return $this;
+    }
+
+    public function getNbVisit(): ?int
+    {
+        return $this->nbVisit;
+    }
+
+    public function setNbVisit(int $nbVisit): self
+    {
+        $this->nbVisit = $nbVisit;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|React[]
+     */
+    public function getReact(): Collection
     {
         return $this->react;
     }
 
-    public function setReact(?React $react): self
+    public function addReact(React $react): self
     {
-        $this->react = $react;
+        if (!$this->react->contains($react)) {
+            $this->react[] = $react;
+        }
+
+        return $this;
+    }
+
+    public function removeReact(React $react): self
+    {
+        if ($this->react->contains($react)) {
+            $this->react->removeElement($react);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Adopt[]
+     */
+    public function getUserFrom(): Collection
+    {
+        return $this->userFrom;
+    }
+
+    public function addUserFrom(Adopt $userFrom): self
+    {
+        if (!$this->userFrom->contains($userFrom)) {
+            $this->userFrom[] = $userFrom;
+            $userFrom->setUserTo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserFrom(Adopt $userFrom): self
+    {
+        if ($this->userFrom->contains($userFrom)) {
+            $this->userFrom->removeElement($userFrom);
+            // set the owning side to null (unless already changed)
+            if ($userFrom->getUserTo() === $this) {
+                $userFrom->setUserTo(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Adopt[]
+     */
+    public function getAdopts(): Collection
+    {
+        return $this->adopts;
+    }
+
+    public function addAdopt(Adopt $adopt): self
+    {
+        if (!$this->adopts->contains($adopt)) {
+            $this->adopts[] = $adopt;
+            $adopt->setUserFrom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdopt(Adopt $adopt): self
+    {
+        if ($this->adopts->contains($adopt)) {
+            $this->adopts->removeElement($adopt);
+            // set the owning side to null (unless already changed)
+            if ($adopt->getUserFrom() === $this) {
+                $adopt->setUserFrom(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Competence[]
+     */
+    public function getCompetences(): Collection
+    {
+        return $this->competences;
+    }
+
+    public function addCompetence(Competence $competence): self
+    {
+        if (!$this->competences->contains($competence)) {
+            $this->competences[] = $competence;
+            $competence->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompetence(Competence $competence): self
+    {
+        if ($this->competences->contains($competence)) {
+            $this->competences->removeElement($competence);
+            // set the owning side to null (unless already changed)
+            if ($competence->getUser() === $this) {
+                $competence->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Service[]
+     */
+    public function getServices(): Collection
+    {
+        return $this->services;
+    }
+
+    public function addService(Service $service): self
+    {
+        if (!$this->services->contains($service)) {
+            $this->services[] = $service;
+            $service->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeService(Service $service): self
+    {
+        if ($this->services->contains($service)) {
+            $this->services->removeElement($service);
+            // set the owning side to null (unless already changed)
+            if ($service->getUser() === $this) {
+                $service->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CommentPost[]
+     */
+    public function getCommentPosts(): Collection
+    {
+        return $this->commentPosts;
+    }
+
+    public function addCommentPost(CommentPost $commentPost): self
+    {
+        if (!$this->commentPosts->contains($commentPost)) {
+            $this->commentPosts[] = $commentPost;
+            $commentPost->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentPost(CommentPost $commentPost): self
+    {
+        if ($this->commentPosts->contains($commentPost)) {
+            $this->commentPosts->removeElement($commentPost);
+            // set the owning side to null (unless already changed)
+            if ($commentPost->getUser() === $this) {
+                $commentPost->setUser(null);
+            }
+        }
 
         return $this;
     }

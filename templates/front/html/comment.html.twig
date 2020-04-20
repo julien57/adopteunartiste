@@ -1,0 +1,23 @@
+<div class="post-comment">
+    <a class="user-avatar small no-outline" href="{{ path('front_profil_user', {'pseudo': comment.user.pseudo}) }}">
+        <div class="user-avatar-content">
+            <div class="hexagon-image-30-32" data-src="{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ comment.user.avatar }}"></div>
+        </div>
+        <div class="user-avatar-progress">
+            <div class="hexagon-progress-40-44"></div>
+        </div>
+        <div class="user-avatar-progress-border">
+            <div class="hexagon-border-40-44"></div>
+        </div>
+        <div class="user-avatar-badge">
+            <div class="user-avatar-badge-border">
+                <div class="hexagon-22-24"></div>
+            </div>
+            <div class="user-avatar-badge-content">
+                <div class="hexagon-dark-16-18"></div>
+            </div>
+            <p class="user-avatar-badge-text">12</p>
+        </div>
+    </a>
+    <p class="post-comment-text"><a class="post-comment-text-author" href="{{ path('front_profil_user', {'pseudo': comment.user.pseudo}) }}">{{ comment.user.pseudo }}</a>{{ comment.text }}</p>
+</div>

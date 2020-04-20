@@ -1,0 +1,375 @@
+{% extends 'base_profil.html.twig' %}
+
+{% block body %}
+    <!-- GRID -->
+    <div class="grid grid-3-9 medium-space">
+
+        {{ include('front/space/inc/sidebar.html.twig') }}
+
+        <!-- GRID COLUMN -->
+        <div class="account-hub-content">
+            <!-- SECTION HEADER -->
+            <div class="section-header">
+                <!-- SECTION HEADER INFO -->
+                <div class="section-header-info">
+                    <!-- SECTION PRETITLE -->
+                    <p class="section-pretitle">Mon profil</p>
+                    <!-- /SECTION PRETITLE -->
+
+                    <!-- SECTION TITLE -->
+                    <h2 class="section-title">Mes infos</h2>
+                    <!-- /SECTION TITLE -->
+                </div>
+                <!-- /SECTION HEADER INFO -->
+            </div>
+            <!-- /SECTION HEADER -->
+
+            <!-- GRID COLUMN -->
+            <div class="grid-column">
+                <!-- GRID -->
+                <div class="grid grid-3-3-3 centered">
+                    <!-- USER PREVIEW -->
+                    <div class="user-preview small fixed-height">
+                        <!-- USER PREVIEW COVER -->
+                        <figure class="user-preview-cover liquid">
+                            <img src="{% if app.user.cover %}{{ asset( constant('App\\Services\\File\\UploadFile::COVERUPLOAD_DIR')) ~ app.user.cover }}{% else %}{{ asset('img/cover/01.jpg') }}{% endif %}" id="preview_cover" alt="cover-01">
+                        </figure>
+                        <!-- /USER PREVIEW COVER -->
+                        <!-- USER PREVIEW INFO -->
+                        <div class="user-preview-info">
+                            <!-- USER SHORT DESCRIPTION -->
+                            <div class="user-short-description small">
+                                <!-- USER SHORT DESCRIPTION AVATAR -->
+                                <div class="user-short-description-avatar user-avatar">
+                                    <!-- USER AVATAR BORDER -->
+                                    <div class="user-avatar-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-100-110"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BORDER -->
+
+                                    <!-- USER AVATAR CONTENT -->
+                                    <div class="user-avatar-content">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-image-68-74" id="preview_avatar" data-src="{% if app.user.avatar %}{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ app.user.avatar }}{% else %}{{ asset('img/avatar/01.jpg') }}{% endif %}"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR CONTENT -->
+
+                                    <!-- USER AVATAR PROGRESS -->
+                                    <div class="user-avatar-progress">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-progress-84-92"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR PROGRESS -->
+
+                                    <!-- USER AVATAR PROGRESS BORDER -->
+                                    <div class="user-avatar-progress-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-border-84-92"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR PROGRESS BORDER -->
+
+                                    <!-- USER AVATAR BADGE -->
+                                    <div class="user-avatar-badge">
+                                        <!-- USER AVATAR BADGE BORDER -->
+                                        <div class="user-avatar-badge-border">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-28-32"></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR BADGE BORDER -->
+
+                                        <!-- USER AVATAR BADGE CONTENT -->
+                                        <div class="user-avatar-badge-content">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-dark-22-24"></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR BADGE CONTENT -->
+
+                                        <!-- USER AVATAR BADGE TEXT -->
+                                        <p class="user-avatar-badge-text">24</p>
+                                        <!-- /USER AVATAR BADGE TEXT -->
+                                    </div>
+                                    <!-- /USER AVATAR BADGE -->
+                                </div>
+                                <!-- /USER SHORT DESCRIPTION AVATAR -->
+                            </div>
+                            <!-- /USER SHORT DESCRIPTION -->
+                        </div>
+                        <!-- /USER PREVIEW INFO -->
+                    </div>
+                    <!-- /USER PREVIEW -->
+                </div>
+                <!-- /GRID -->
+
+                <!-- WIDGET BOX -->
+                <div class="widget-box mt-3">
+                    <!-- WIDGET BOX TITLE -->
+                    <p class="widget-box-title mb-4">A propos de toi</p>
+                    <!-- /WIDGET BOX TITLE -->
+                    {{ form_start(form) }}
+                    <!-- WIDGET BOX CONTENT -->
+                    <div class="widget-box-content">
+                        <!-- FORM -->
+                            <!-- FORM ROW -->
+                            <div class="form-row split">
+                                <!-- FORM ITEM -->
+                                <div class="form-item">
+                                    <!-- FORM INPUT -->
+                                    <div class="form-input small active">
+                                        {{ form_label(form.firstName) }}
+                                        {{ form_widget(form.firstName) }}
+                                        {{ form_errors(form.firstName) }}
+                                    </div>
+                                    <!-- /FORM INPUT -->
+                                </div>
+                                <!-- /FORM ITEM -->
+
+                                <!-- FORM ITEM -->
+                                <div class="form-item">
+                                    <!-- FORM INPUT -->
+                                    <div class="form-input small active">
+                                        {{ form_label(form.lastName) }}
+                                        {{ form_widget(form.lastName) }}
+                                        {{ form_errors(form.lastName) }}
+                                    </div>
+                                    <!-- /FORM INPUT -->
+                                </div>
+                                <!-- /FORM ITEM -->
+                            </div>
+                            <!-- /FORM ROW -->
+
+                            <!-- FORM ROW -->
+                            <div class="form-row split">
+                                <!-- FORM ITEM -->
+                                <div class="form-item">
+                                    <!-- FORM INPUT -->
+                                    {{ form_label(form.avatar) }}
+                                    <div class="form-input small active">
+
+                                        {{ form_widget(form.avatar) }}
+                                        {{ form_errors(form.avatar) }}
+                                    </div>
+                                    <!-- /FORM INPUT -->
+                                </div>
+                                <!-- /FORM ITEM -->
+
+                                <!-- FORM ITEM -->
+                                <div class="form-item">
+                                    <!-- FORM INPUT -->
+                                    {{ form_label(form.cover) }}
+                                    <div class="form-input small active">
+
+                                        {{ form_widget(form.cover) }}
+                                        {{ form_errors(form.cover) }}
+                                    </div>
+                                    <!-- /FORM INPUT -->
+                                </div>
+                                <!-- /FORM ITEM -->
+                            </div>
+
+                            <!-- FORM ROW -->
+                            <div class="form-row split">
+                                <!-- FORM ITEM -->
+                                <div class="form-item">
+                                    <div class="form-input small active">
+                                        {{ form_label(form.email) }}
+                                        {{ form_widget(form.email) }}
+                                        {{ form_errors(form.email) }}
+                                    </div>
+                                </div>
+                                <!-- /FORM ITEM -->
+
+                                <div class="form-item">
+                                    <div class="form-input small active">
+                                        {{ form_label(form.pseudo) }}
+                                        {{ form_widget(form.pseudo) }}
+                                        {{ form_errors(form.pseudo) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /FORM ROW -->
+
+                            <!-- FORM ROW -->
+                            <div class="form-row split">
+                                <!-- FORM ITEM -->
+                                <div class="form-item">
+                                    <!-- FORM INPUT DECORATED -->
+                                    <div class="form-input-decorated">
+                                        <!-- FORM INPUT -->
+                                        <div class="form-input small active">
+                                            {{ form_label(form.birthAt) }}
+                                            {{ form_widget(form.birthAt) }}
+                                            {{ form_errors(form.birthAt) }}
+                                        </div>
+                                        <!-- /FORM INPUT -->
+
+                                        <!-- FORM INPUT ICON -->
+                                        <svg class="form-input-icon icon-events">
+                                            <use xlink:href="#svg-events"></use>
+                                        </svg>
+                                        <!-- /FORM INPUT ICON -->
+                                    </div>
+                                    <!-- /FORM INPUT DECORATED -->
+                                </div>
+                                <!-- /FORM ITEM -->
+
+                                <!-- FORM ITEM -->
+                                <div class="form-item">
+                                    <!-- FORM INPUT -->
+                                    <div class="form-select">
+                                        {{ form_label(form.language) }}
+                                        {{ form_widget(form.language) }}
+                                        <svg class="form-select-icon icon-small-arrow">
+                                            <use xlink:href="#svg-small-arrow"></use>
+                                        </svg>
+                                        {{ form_errors(form.language) }}
+                                    </div>
+                                    <!-- /FORM INPUT -->
+                                </div>
+                                <!-- /FORM ITEM -->
+                            </div>
+                            <!-- /FORM ROW -->
+
+                            <!-- FORM ROW -->
+                            <div class="form-row split">
+                                <!-- FORM ITEM -->
+                                <div class="form-item">
+                                    <!-- FORM SELECT -->
+                                    <div class="form-select">
+                                        {{ form_label(form.domainArtist) }}
+                                        {{ form_widget(form.domainArtist) }}
+                                        <!-- FORM SELECT ICON -->
+                                        <svg class="form-select-icon icon-small-arrow">
+                                            <use xlink:href="#svg-small-arrow"></use>
+                                        </svg>
+                                        {{ form_errors(form.language) }}
+                                        <!-- /FORM SELECT ICON -->
+                                    </div>
+                                    <!-- /FORM SELECT -->
+                                </div>
+                                <!-- /FORM ITEM -->
+
+                                <!-- FORM ITEM -->
+                                <div class="form-item">
+                                    <!-- FORM INPUT -->
+                                    <div class="form-input small">
+                                        {{ form_label(form.city) }}
+                                        {{ form_widget(form.city) }}
+                                        {{ form_errors(form.city) }}
+                                    </div>
+                                    <!-- /FORM INPUT -->
+                                </div>
+                                <!-- /FORM ITEM -->
+                            </div>
+                            <!-- /FORM ROW -->
+
+                            <!-- FORM ROW -->
+                            <div class="form-row split">
+                                <!-- FORM ITEM -->
+                                <div class="form-item">
+                                    <div class="form-input small active">
+                                        {{ form_label(form.website) }}
+                                        {{ form_widget(form.website) }}
+                                        {{ form_errors(form.website) }}
+                                    </div>
+                                </div>
+                                <!-- /FORM ITEM -->
+
+                                <div class="form-item">
+                                    <div class="form-input small active">
+                                        {{ form_label(form.phone) }}
+                                        {{ form_widget(form.phone) }}
+                                        {{ form_errors(form.phone) }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row split">
+                                <!-- FORM ITEM -->
+                                <div class="form-item">
+                                    <div class="form-input small active">
+                                    </div>
+                                </div>
+                                <!-- /FORM ITEM -->
+
+                                <div class="form-item">
+                                    <div class="form-item">
+                                        <input type="submit" class="button primary" value="Enregistrer" style="width:100%">
+                                    </div>
+                                </div>
+                            </div>
+                        {{ form_end(form) }}
+                        <!-- /FORM -->
+                    </div>
+                    <!-- WIDGET BOX CONTENT -->
+                </div>
+
+            </div>
+        </div>
+    <!-- /GRID -->
+    </div>
+{% endblock %}
+
+{% block javascript %}
+{{ parent() }}
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<script>
+    $(function() {
+        $('input[name="infos_user[birthAt]"]').daterangepicker({
+            autoUpdateInput: false,
+            linkedCalendars: false,
+            singleDatePicker: true,
+            locale: {
+                format: "DD-MM-YYYY",
+                showCustomRangeLabel: false,
+                separator: " - ",
+                applyLabel: "Valider",
+                cancelLabel: "Annuler",
+                fromLabel: "De",
+                toLabel: "à",
+                customRangeLabel: "Custom",
+                daysOfWeek: [
+                    "Dim",
+                    "Lun",
+                    "Mar",
+                    "Mer",
+                    "Jeu",
+                    "Ven",
+                    "Sam"
+                ],
+                monthNames: [
+                    "Janvier",
+                    "Février",
+                    "Mars",
+                    "Avril",
+                    "Mai",
+                    "Juin",
+                    "Juillet",
+                    "Août",
+                    "Septembre",
+                    "Octobre",
+                    "Novembre",
+                    "Décembre"
+                ],
+                firstDay: 1
+            }
+        });
+        $('input[name="infos_user[birthAt]"]').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('DD-MM-YYYY'));
+        });
+        $('input[name="infos_user[birthAt]"]').on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
+        });
+    });
+</script>
+
+{% endblock %}

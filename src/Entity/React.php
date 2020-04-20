@@ -24,7 +24,7 @@ class React
     private $type;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="react")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="react", orphanRemoval=true)
      */
     private $users;
 
@@ -56,6 +56,18 @@ class React
         return $this;
     }
 
+    public function getPost(): ?Post
+    {
+        return $this->post;
+    }
+
+    public function setPost(?Post $post): self
+    {
+        $this->post = $post;
+
+        return $this;
+    }
+
     /**
      * @return Collection|User[]
      */
@@ -68,7 +80,7 @@ class React
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->setReact($this);
+            $user->addReact($this);
         }
 
         return $this;
@@ -78,23 +90,8 @@ class React
     {
         if ($this->users->contains($user)) {
             $this->users->removeElement($user);
-            // set the owning side to null (unless already changed)
-            if ($user->getReact() === $this) {
-                $user->setReact(null);
-            }
+            $user->removeReact($this);
         }
-
-        return $this;
-    }
-
-    public function getPost(): ?Post
-    {
-        return $this->post;
-    }
-
-    public function setPost(?Post $post): self
-    {
-        $this->post = $post;
 
         return $this;
     }

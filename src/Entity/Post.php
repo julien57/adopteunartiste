@@ -24,7 +24,7 @@ class Post
     private $text;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Photo", mappedBy="post")
+     * @ORM\OneToMany(targetEntity="App\Entity\Photo", mappedBy="post", cascade={"remove"})
      */
     private $photo;
 
@@ -35,14 +35,26 @@ class Post
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\React", mappedBy="post")
+     * @ORM\OneToMany(targetEntity="App\Entity\React", mappedBy="post", cascade={"remove"}, orphanRemoval=true)
      */
     private $reacts;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $publishedAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CommentPost", mappedBy="post")
+     */
+    private $commentPosts;
 
     public function __construct()
     {
         $this->photo = new ArrayCollection();
         $this->reacts = new ArrayCollection();
+        $this->publishedAt = new \DateTime();
+        $this->commentPosts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -135,4 +147,48 @@ class Post
 
         return $this;
     }
+
+    public function getPublishedAt(): ?\DateTimeInterface
+    {
+        return $this->publishedAt;
+    }
+
+    public function setPublishedAt(\DateTimeInterface $publishedAt): self
+    {
+        $this->publishedAt = $publishedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CommentPost[]
+     */
+    public function getCommentPosts(): Collection
+    {
+        return $this->commentPosts;
+    }
+
+    public function addCommentPost(CommentPost $commentPost): self
+    {
+        if (!$this->commentPosts->contains($commentPost)) {
+            $this->commentPosts[] = $commentPost;
+            $commentPost->setPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentPost(CommentPost $commentPost): self
+    {
+        if ($this->commentPosts->contains($commentPost)) {
+            $this->commentPosts->removeElement($commentPost);
+            // set the owning side to null (unless already changed)
+            if ($commentPost->getPost() === $this) {
+                $commentPost->setPost(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

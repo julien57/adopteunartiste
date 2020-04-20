@@ -1,0 +1,185 @@
+{% extends 'base_profil.html.twig' %}
+
+{% block body %}
+    <!-- GRID -->
+    <div class="grid grid-3-9 medium-space">
+
+        {{ include('front/space/inc/sidebar.html.twig') }}
+
+        <div class="account-hub-content">
+            <!-- SECTION HEADER -->
+            <div class="section-header">
+                <!-- SECTION HEADER INFO -->
+                <div class="section-header-info">
+                    <!-- SECTION PRETITLE -->
+                    <p class="section-pretitle">Mon profil</p>
+                    <!-- /SECTION PRETITLE -->
+
+                    <!-- SECTION TITLE -->
+                    <h2 class="section-title">Demandes d'adoption <span class="highlighted" id="nb_request">{{ adopts|length }}</span></h2>
+                    <!-- /SECTION TITLE -->
+                </div>
+                <!-- /SECTION HEADER INFO -->
+            </div>
+
+        <!-- GRID COLUMN -->
+            <div class="notification-box-list">
+
+                {% for adopt in adopts %}
+                <!-- NOTIFICATION BOX -->
+                <div class="notification-box" id="box-adopt-{{ adopt.id }}">
+                    <!-- USER STATUS -->
+                    <div class="user-status request">
+                        <!-- USER STATUS AVATAR -->
+                        <a class="user-status-avatar" href="{{ path('front_profil_user', {'pseudo': adopt.userTo.pseudo}) }}">
+                            <!-- USER AVATAR -->
+                            <div class="user-avatar small no-outline">
+                                <!-- USER AVATAR CONTENT -->
+                                <div class="user-avatar-content">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-image-30-32" data-src="{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ adopt.userTo.avatar }}" style="width: 30px; height: 32px; position: relative;"><canvas width="30" height="32" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR CONTENT -->
+
+                                <!-- USER AVATAR PROGRESS -->
+                                <div class="user-avatar-progress">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-progress-40-44" style="width: 40px; height: 44px; position: relative;"><canvas width="40" height="44" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR PROGRESS -->
+
+                                <!-- USER AVATAR PROGRESS BORDER -->
+                                <div class="user-avatar-progress-border">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-border-40-44" style="width: 40px; height: 44px; position: relative;"><canvas width="40" height="44" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR PROGRESS BORDER -->
+
+                                <!-- USER AVATAR BADGE -->
+                                <div class="user-avatar-badge">
+                                    <!-- USER AVATAR BADGE BORDER -->
+                                    <div class="user-avatar-badge-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-22-24" style="width: 22px; height: 24px; position: relative;"><canvas width="22" height="24" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BADGE BORDER -->
+
+                                    <!-- USER AVATAR BADGE CONTENT -->
+                                    <div class="user-avatar-badge-content">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-dark-16-18" style="width: 16px; height: 18px; position: relative;"><canvas width="16" height="18" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BADGE CONTENT -->
+
+                                    <!-- USER AVATAR BADGE TEXT -->
+                                    <p class="user-avatar-badge-text">3</p>
+                                    <!-- /USER AVATAR BADGE TEXT -->
+                                </div>
+                                <!-- /USER AVATAR BADGE -->
+                            </div>
+                            <!-- /USER AVATAR -->
+                        </a>
+                        <!-- /USER STATUS AVATAR -->
+
+                        <!-- USER STATUS TITLE -->
+                        <p class="user-status-title"><a class="bold" href="{{ path('front_profil_user', {'pseudo': adopt.userTo.pseudo}) }}">{{ adopt.userTo.pseudo }}</a></p>
+                        <!-- /USER STATUS TITLE -->
+
+                        <!-- ACTION REQUEST LIST -->
+                        <div class="action-request-list">
+                            <!-- ACTION REQUEST -->
+                            <button class="action-request accept with-text" id="accept_request" data-req="{{ adopt.id }}">
+                                <!-- ACTION REQUEST ICON -->
+                                <svg class="action-request-icon icon-add-friend">
+                                    <use xlink:href="#svg-add-friend"></use>
+                                </svg>
+                                <!-- /ACTION REQUEST ICON -->
+
+                                <!-- ACTION REQUEST TEXT -->
+                                <span class="action-request-text">Accepter</span>
+                                <!-- /ACTION REQUEST TEXT -->
+                            </button>
+                            <!-- /ACTION REQUEST -->
+
+                            <!-- ACTION REQUEST -->
+                            <button class="action-request decline" id="decline_request" data-req="{{ adopt.id }}">
+                                <!-- ACTION REQUEST ICON -->
+                                <svg class="action-request-icon icon-remove-friend">
+                                    <use xlink:href="#svg-remove-friend"></use>
+                                </svg>
+                                <!-- /ACTION REQUEST ICON -->
+                            </button>
+                            <!-- /ACTION REQUEST -->
+                        </div>
+                        <!-- ACTION REQUEST LIST -->
+                    </div>
+                    <!-- /USER STATUS -->
+                </div>
+                <!-- /NOTIFICATION BOX -->
+                {% endfor %}
+
+            </div>
+        </div>
+        </div>
+        <!-- /GRID -->
+    </div>
+{% endblock %}
+
+{% block javascript %}
+{{ parent() }}
+<script>
+const btnAdopt = document.getElementById('accept_request');
+
+btnAdopt.addEventListener('click', (e) => {
+
+    const adoptId = btnAdopt.getAttribute('data-req');
+    const data = {
+          adoptId: adoptId
+      };
+
+    let datas = new FormData();
+    datas.append("data", JSON.stringify(data));
+
+    fetch("{{ path('front_space_confirm_adoption') }}", { method: 'POST', body: datas})
+    .then(response => response.json())
+    .then(data => {
+
+        if (data.message === 'ok') {
+            let box = document.getElementById(`box-adopt-${adoptId}`);
+            document.getElementById('nb_request').textContent--;
+            box.remove();
+        }
+    });
+})
+</script>
+<script>
+const btnDecline = document.getElementById('decline_request');
+
+btnDecline.addEventListener('click', (e) => {
+
+    const adoptId = btnDecline.getAttribute('data-req');
+    const data = {
+          adoptId: adoptId
+      };
+
+    let datas = new FormData();
+    datas.append("data", JSON.stringify(data));
+
+    fetch("{{ path('front_space_decline_adoption') }}", { method: 'POST', body: datas})
+    .then(response => response.json())
+    .then(data => {
+
+        if (data.message === 'ok') {
+            let box = document.getElementById(`box-adopt-${adoptId}`);
+            document.getElementById('nb_request').textContent--;
+            box.remove();
+        }
+    });
+})
+</script>
+{% endblock %}

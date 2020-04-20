@@ -1,0 +1,345 @@
+{% extends 'base.html.twig' %}
+
+{% block style %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+{% endblock %}
+
+{% block title %}Connexion / Inscription{% endblock %}
+
+{% block body %}
+    <!-- LANDING -->
+    <div class="landing">
+        <!-- LANDING DECORATION -->
+        <div class="landing-decoration"></div>
+        <!-- /LANDING DECORATION -->
+
+        <!-- LANDING INFO -->
+        <div class="landing-info">
+            <!-- LOGO -->
+            <div class="logo">
+                <!-- ICON LOGO VIKINGER -->
+                <svg class="icon-logo-vikinger">
+                    <use xlink:href="#svg-logo-vikinger"></use>
+                </svg>
+                <!-- /ICON LOGO VIKINGER -->
+            </div>
+            <!-- /LOGO -->
+
+            <!-- LANDING INFO PRETITLE -->
+            <h2 class="landing-info-pretitle">Welcome to</h2>
+            <!-- /LANDING INFO PRETITLE -->
+
+            <!-- LANDING INFO TITLE -->
+            <h1 class="landing-info-title">Vikinger</h1>
+            <!-- /LANDING INFO TITLE -->
+
+            <!-- LANDING INFO TEXT -->
+            <p class="landing-info-text">The next generation social network &amp; community! Connect with your friends and play with our quests and badges gamification system!</p>
+            <!-- /LANDING INFO TEXT -->
+
+            <!-- TAB SWITCH -->
+            <div class="tab-switch">
+                <!-- TAB SWITCH BUTTON -->
+                <p class="tab-switch-button login-register-form-trigger">Connexion</p>
+                <!-- /TAB SWITCH BUTTON -->
+
+                <!-- TAB SWITCH BUTTON -->
+                <p class="tab-switch-button login-register-form-trigger">Inscription</p>
+                <!-- /TAB SWITCH BUTTON -->
+            </div>
+            <!-- /TAB SWITCH -->
+        </div>
+        <!-- /LANDING INFO -->
+
+        <!-- LANDING FORM -->
+        <div class="landing-form">
+            <!-- FORM BOX -->
+            <div class="form-box login-register-form-element">
+                <!-- FORM BOX DECORATION -->
+                <img class="form-box-decoration overflowing" src="img/landing/rocket.png" alt="rocket">
+                <!-- /FORM BOX DECORATION -->
+
+                <!-- FORM BOX TITLE -->
+                <h2 class="form-box-title">Connexion</h2>
+                <!-- /FORM BOX TITLE -->
+                <!-- FORM -->
+                <form class="form" method="post">
+                    <!-- FORM ROW -->
+                    <div class="form-row">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input">
+                                <label for="login-username">Adresse mail</label>
+                                <input type="text" id="login-username" name="email">
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <!-- /FORM ROW -->
+
+                    <!-- FORM ROW -->
+                    <div class="form-row">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input">
+                                <label for="login-password">Mot de passe</label>
+                                <input type="password" id="login-password" name="password">
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <!-- /FORM ROW -->
+
+                    <!-- FORM ROW -->
+                    <div class="form-row space-between">
+
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM LINK -->
+                            <a class="form-link" href="#">Mot de passe oublié ?</a>
+                            <!-- /FORM LINK -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <!-- /FORM ROW -->
+                    <!-- FORM ROW -->
+                    <div class="form-row">
+                        <!-- FORM ITEM -->
+                        <input type="hidden" name="_csrf_token_auth"
+                               value="{{ csrf_token('authenticate') }}"
+                        >
+                        <div class="form-item">
+                            <!-- BUTTON -->
+                            <button class="button medium secondary">Se connecter</button>
+                            <!-- /BUTTON -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <!-- /FORM ROW -->
+                </form>
+                <!-- /FORM -->
+
+                {% if error %}
+                    <p class="lined-text">Erreur lors de la connexion</p>
+                    <!-- /LINED TEXT -->
+
+                    <!-- SOCIAL LINKS -->
+                    <div class="social-links">
+                        <div style="color:red">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    </div>
+                {% endif %}
+            </div>
+            <!-- /FORM BOX -->
+
+            <!-- FORM BOX -->
+            <div class="form-box login-register-form-element" style="padding-rop:20px;padding-bottom:20px">
+                <!-- FORM BOX DECORATION -->
+                <img class="form-box-decoration" src="img/landing/rocket.png" alt="rocket">
+                <!-- /FORM BOX DECORATION -->
+
+                <!-- FORM BOX TITLE -->
+                <h2 class="form-box-title">Créez votre compte !</h2>
+                <!-- /FORM BOX TITLE -->
+
+                <!-- FORM -->
+                {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                    <!-- FORM ROW -->
+                    <div class="form-row mt-3">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input">
+                                {{ form_label(form.firstName) }}
+                                {{ form_widget(form.firstName) }}
+                                <small style="color:red">{{ form_errors(form.firstName) }}</small>
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <!-- /FORM ROW -->
+
+                    <!-- FORM ROW -->
+                    <div class="form-row mt-3">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input">
+                                {{ form_label(form.lastName) }}
+                                {{ form_widget(form.lastName) }}
+                                <small style="color:red">{{ form_errors(form.lastName) }}</small>
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <!-- /FORM ROW -->
+
+                    <!-- FORM ROW -->
+                    <div class="form-row mt-3">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input">
+                                {{ form_label(form.pseudo) }}
+                                {{ form_widget(form.pseudo) }}
+                                <small style="color:red">{{ form_errors(form.pseudo) }}</small>
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <div class="form-row mt-3">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input">
+                                {{ form_label(form.email) }}
+                                {{ form_widget(form.email) }}
+                                <small style="color:red">{{ form_errors(form.email) }}</small>
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <!-- /FORM ROW -->
+
+                    <!-- FORM ROW -->
+                    <div class="form-row mt-3">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input">
+                                {{ form_label(form.birthAt) }}
+                                {{ form_widget(form.birthAt, {'attr': {'autocomplete': 'off'}}) }}
+                                <small style="color:red">{{ form_errors(form.birthAt) }}</small>
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <div class="form-row mt-3">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input">
+                                {{ form_label(form.password.first) }}
+                                {{ form_widget(form.password.first) }}
+                                <small style="color:red">{{ form_errors(form.password) }}</small>
+                                <small style="color:red">{{ form_errors(form.password.first) }}</small>
+                                <small style="color:red">{{ form_errors(form.password.second) }}</small>
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <div class="form-row mt-3">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input">
+                                {{ form_row(form.password.second) }}
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <div class="form-row mt-4">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <div class="form-select">
+                                {{ form_label(form.domainArtist) }}
+                                {{ form_widget(form.domainArtist) }}
+                                <small style="color:red">{{ form_errors(form.domainArtist) }}</small>
+                                <!-- FORM SELECT ICON -->
+                                <svg class="form-select-icon icon-small-arrow">
+                                    <use xlink:href="#svg-small-arrow"></use>
+                                </svg>
+                                <!-- /FORM SELECT ICON -->
+                            </div>
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <!-- /FORM ROW -->
+
+                    <!-- FORM ROW -->
+                    <div class="form-row">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- BUTTON -->
+                            <button class="button medium primary">S'inscrire</button>
+                            <!-- /BUTTON -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <!-- /FORM ROW -->
+                {{ form_end(form) }}
+                <!-- /FORM -->
+            </div>
+            <!-- /FORM BOX -->
+        </div>
+        <!-- /LANDING FORM -->
+    </div>
+    <!-- /LANDING -->
+{% endblock %}
+
+{% block javascript %}
+{{ parent() }}
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<script>
+    $(function() {
+        $('input[name="back_user[birthAt]"]').daterangepicker({
+            autoUpdateInput: false,
+            linkedCalendars: false,
+            singleDatePicker: true,
+            locale: {
+                format: "DD-MM-YYYY",
+                showCustomRangeLabel: false,
+                separator: " - ",
+                applyLabel: "Valider",
+                cancelLabel: "Annuler",
+                fromLabel: "De",
+                toLabel: "à",
+                customRangeLabel: "Custom",
+                daysOfWeek: [
+                    "Dim",
+                    "Lun",
+                    "Mar",
+                    "Mer",
+                    "Jeu",
+                    "Ven",
+                    "Sam"
+                ],
+                monthNames: [
+                    "Janvier",
+                    "Février",
+                    "Mars",
+                    "Avril",
+                    "Mai",
+                    "Juin",
+                    "Juillet",
+                    "Août",
+                    "Septembre",
+                    "Octobre",
+                    "Novembre",
+                    "Décembre"
+                ],
+                firstDay: 1
+            }
+        });
+        $('input[name="back_user[birthAt]"]').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('DD-MM-YYYY'));
+        });
+        $('input[name="back_user[birthAt]"]').on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
+        });
+    });
+</script>
+{% endblock %}

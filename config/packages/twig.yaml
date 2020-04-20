@@ -1,2 +1,5 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
+    globals:
+        post_react: '@App\Services\Post\React'
+        post_adopt: '@App\Services\Post\Adopt'
