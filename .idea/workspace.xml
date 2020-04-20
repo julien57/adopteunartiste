@@ -2,143 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63ff9cd7-3cb6-497e-b0b2-d6f2408246d0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/sass/_404.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/_button.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/_color-theme-custom.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/_color-theme.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/_color.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/_font.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/_form.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/_general.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/_grid.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/_header.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/_icon.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/_loader.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/_navigation.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/_reset.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/_section.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/_sidebar.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/_table.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/_utils.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/_widget.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/album-preview/_album-preview.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/album-preview/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/badge-item/_badge-item-preview.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/badge-item/_badge-item.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/badge-item/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/bootstrap/_bootstrap-override.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/bootstrap/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/calendar/_calendar.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/calendar/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/cart-item-preview/_cart-item-preview.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/cart-item-preview/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/chart/_chart.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/chart/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/chat-widget/_chat-widget.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/chat-widget/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/content-actions/_content-actions.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/content-actions/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/demo-box/_demo-box.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/demo-box/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/dropdown-box/_dropdown-box.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/dropdown-box/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/dropdown-navigation/_dropdown-navigation.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/dropdown-navigation/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/event-preview/_event-preview.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/event-preview/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/form-box/_form-box.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/form-box/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/forum-post/_forum-post.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/forum-post/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/landing/_landing.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/landing/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/navigation-widget/_navigation-widget.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/navigation-widget/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/picture/_picture.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/picture/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/popup-box/_popup-box.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/popup-box/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/post-comment/_post-comment.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/post-comment/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/post-open/_post-open.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/post-open/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/post-preview/_post-preview.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/post-preview/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/product-preview/_product-preview.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/product-preview/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/profile-header/_profile-header.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/profile-header/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/progress-arc/_progress-arc.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/progress-arc/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/progress-stat/_progress-stat.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/progress-stat/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/quest/_quest-item.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/quest/_quest-preview.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/quest/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/slider-panel/_slider-panel.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/slider-panel/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/stream-box/_stream-box.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/stream-box/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/streamer-box/_streamer-box.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/streamer-box/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/user-avatar/_user-avatar.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/user-avatar/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/user-preview/_user-preview.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/user-preview/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/user-status/_user-status.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/user-status/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/video-box/_video-box.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/video-box/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/video-status/_video-status.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/video-status/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/Front/FilController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/Front/PostController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/Front/Profil/ProfilController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/Front/Space/PersonalSpace.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/CompetencesUserType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/ServicesUserType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Security/AppAuthenticator.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Services/File/UploadFile.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Services/Post/Adopt.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Services/Post/React.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/base_profil.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/front/fil/list.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/front/html/comment.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/front/html/post.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/front/html/posts.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/front/html/react.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/front/inc/chat_right.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/front/inc/header.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/front/inc/loader.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/front/inc/navbar_left.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/front/inc/popup_picture.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/front/index.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/front/profil/profil_user.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/front/space/adopts.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/front/space/competences.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/front/space/inc/sidebar.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/front/space/infos.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/front/space/password.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/front/space/services.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/front/space/social.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/twig.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/twig.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/raw/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/raw/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/raw/styles.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/raw/styles.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/styles.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/styles.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/global/global.popups.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/global/global.popups.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/utils/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/utils/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Back/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Back/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Front/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Front/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Post.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/React.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/React.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/BackUserType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/BackUserType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Repository/PostRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/PostRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/ReactRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/ReactRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/fil/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/fil/list.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/inc/popup_picture.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/inc/popup_picture.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/profil/profil_user.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/profil/profil_user.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -337,7 +205,7 @@
       <option name="presentableId" value="Default" />
       <updated>1586982412399</updated>
       <workItem from="1586982415408" duration="4882000" />
-      <workItem from="1586988301740" duration="137910000" />
+      <workItem from="1586988301740" duration="145271000" />
     </task>
     <servers />
   </component>
@@ -381,10 +249,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="653" y="372" key="com.intellij.ide.util.TipDialog/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1586982415807" />
-    <state x="648" y="142" width="986" height="682" key="find.popup" timestamp="1587400266716">
+    <state x="648" y="142" width="986" height="682" key="find.popup" timestamp="1587411594033">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="648" y="142" width="986" height="682" key="find.popup/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1587400266716" />
+    <state x="648" y="142" width="986" height="682" key="find.popup/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1587411594033" />
     <state x="609" y="274" width="700" height="530" key="recent.locations.popup" timestamp="1587301970015">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

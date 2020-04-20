@@ -41,8 +41,6 @@ class PostRepository extends ServiceEntityRepository
     public function getLast10Posts()
     {
         return $this->createQueryBuilder('p')
-            ->leftJoin('p.commentPosts', 'comment')
-            ->addSelect('comment')
             ->leftJoin('p.photo', 'photo')
             ->addSelect('photo')
             ->leftJoin('p.reacts', 'reacts')

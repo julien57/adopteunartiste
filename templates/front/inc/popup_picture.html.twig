@@ -1,3 +1,13 @@
+<div class="loader-bars" id="load-bar-picture" style="height:150px;display:none">
+    <div class="loader-bar"></div>
+    <div class="loader-bar"></div>
+    <div class="loader-bar"></div>
+    <div class="loader-bar"></div>
+    <div class="loader-bar"></div>
+    <div class="loader-bar"></div>
+    <div class="loader-bar"></div>
+    <div class="loader-bar"></div>
+</div>
 <div class="popup-picture">
     <!-- POPUP CLOSE BUTTON -->
     <div class="popup-close-button popup-picture-trigger">
@@ -11,6 +21,7 @@
 
     <!-- WIDGET BOX -->
     <div class="widget-box no-padding">
+
         <!-- WIDGET BOX SCROLLABLE -->
         <div class="widget-box-scrollable" data-simplebar>
             <!-- WIDGET BOX SETTINGS -->
@@ -68,7 +79,7 @@
                                 <!-- USER AVATAR CONTENT -->
                                 <div class="user-avatar-content">
                                     <!-- HEXAGON -->
-                                    <div class="hexagon-image-30-32" data-src="img/avatar/01.jpg"></div>
+                                    <div class="hexagon-image-30-32" data-src="" id="author_post_img"></div>
                                     <!-- /HEXAGON -->
                                 </div>
                                 <!-- /USER AVATAR CONTENT -->
@@ -306,7 +317,7 @@
                 <!-- USER AVATAR CONTENT -->
                 <div class="user-avatar-content">
                     <!-- HEXAGON -->
-                    <div class="hexagon-image-30-32" data-src="{{ asset(constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR') ~ app.user.avatar) }}"></div>
+                    <div class="hexagon-image-30-32" id="author_post_img" data-src="{{ asset(constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR') ~ app.user.avatar) }}"></div>
                     <!-- /HEXAGON -->
                 </div>
                 <!-- /USER AVATAR CONTENT -->

@@ -833,7 +833,7 @@
                         <p class="widget-box-status-text">{{ post.text }}</p>
                         <!-- /WIDGET BOX STATUS TEXT -->
                         {% for photo in post.photo %}
-                            <figure class="widget-box-picture popup-picture-trigger">
+                            <figure class="widget-box-picture popup-picture-trigger photo-post" data-post="{{ post.id }}">
                                 <img src="{{ asset( constant('App\\Services\\File\\UploadFile::PHOTO_POST_UPLOAD_DIR')) ~ photo.url }}" alt="cover-04">
                             </figure>
                         {% endfor %}
@@ -1253,7 +1253,8 @@ is_processing = false;
 <script>
 const btnAdopt = document.getElementById('btn_adopt');
 
-btnAdopt.addEventListener('click', (e) => {
+if (btnAdopt) {
+    btnAdopt.addEventListener('click', (e) => {
 
     if (btnAdopt.textContent === 'Adopter') {
         fetch("{{ path('front_profil_add_adopt', {id: userProfil.id}) }}", { method: 'POST'})
@@ -1274,8 +1275,881 @@ btnAdopt.addEventListener('click', (e) => {
             }
         });
     }
-
-
 });
+}
+
+
+let photoPost = document.querySelectorAll('.photo-post');
+
+photoPost.forEach(function(post) {
+
+  $(post).off().on('click', function() {
+    let postId = null;
+    postId = post.getAttribute('data-post');
+
+    const data = {
+          postId: postId
+      };
+
+    let datas = new FormData();
+    datas.append("data", JSON.stringify(data));
+
+    async function loadPicture() {
+        let loading = document.getElementById('load-bar-picture');
+        loading.style.display = 'inline-flex';
+        loading.style.position = 'fixed';
+        loading.style.top = '50%';
+        loading.style.left = '50%';
+        loading.style.zIndex = '999999';
+
+         await fetch("{{ path('front_fil_get_picture') }}", { method: 'POST', body: datas})
+    .then(response => response.json())
+    .then(data => {
+        loading.style.display = 'none';
+        document.getElementById('cover_picture').src = '/img/upload/posts/'+data.post[0].photo[0].url;
+        document.getElementById('post_text').textContent = data.post[0].text;
+
+        let datePost = new Date(data.post[0].publishedAt);
+
+        document.getElementById('time_to_post').textContent = `il y a ${datePost.getHours()}h`;
+
+        document.getElementById('link_user').textContent = data.post[0].user.pseudo;
+        document.getElementById('link_user').href = `/profil/${data.post[0].user.pseudo}`;
+        document.getElementById('author_post_img').setAttribute('data-src', `/{{ constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR') }}${data.post[0].user.avatar}`);
+
+        document.getElementById('list_react_post').innerHTML = '';
+        let countReactions = 0;
+        for (const react of data.reacts) {
+            countReactions++;
+
+            const reactHtml = `<div class="reaction-item">
+                                        <img class="reaction-image reaction-item-dropdown-trigger" src="/img/reaction/${react.type}.png" alt="reaction-${react.type}">
+                                        <div class="simple-dropdown padded reaction-item-dropdown">
+                                            <p class="simple-dropdown-text"><img class="reaction" src="/img/reaction/${react.type}.png" alt="reaction-love"> <span class="bold">${react.type}</span></p>
+                                            <p class="simple-dropdown-text" id="count_react">${react.count}</p>
+                                        </div>
+                                    </div>`;
+
+            document.getElementById('list_react_post').innerHTML = reactHtml;
+
+            app.plugins.createDropdown({
+              trigger: '.reaction-item-dropdown-trigger',
+              container: '.reaction-item-dropdown',
+              triggerEvent: 'hover',
+              offset: {
+                bottom: 38,
+                left: -16
+              },
+              animation: {
+                type: 'translate-bottom',
+                speed: .3,
+                translateOffset: {
+                  vertical: 20
+                }
+              }
+            });
+        }
+
+        document.getElementById('count_reactions').textContent = countReactions;
+        document.getElementById('comment_list_post').innerHTML = '';
+
+        for (const comment of data.comments) {
+
+            const htmlComment = `<div class="post-comment">
+                <a class="user-avatar small no-outline" href="/profil/${comment.user.pseudo}">
+                    <div class="user-avatar-content">
+                        <div class="hexagon-image-30-32" data-src="/{{ constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR') }}${comment.user.avatar ? comment.user.avatar : '/img/avatar/01.jpg'}"></div>
+                    </div>
+                    <div class="user-avatar-progress">
+                        <div class="hexagon-progress-40-44"></div>
+                    </div>
+                    <div class="user-avatar-progress-border">
+                        <div class="hexagon-border-40-44"></div>
+                    </div>
+                    <div class="user-avatar-badge">
+                        <div class="user-avatar-badge-border">
+                            <div class="hexagon-22-24"></div>
+                        </div>
+                        <div class="user-avatar-badge-content">
+                            <div class="hexagon-dark-16-18"></div>
+                        </div>
+                        <p class="user-avatar-badge-text">12</p>
+                    </div>
+                </a>
+                <p class="post-comment-text"><a class="post-comment-text-author" href="profile-timeline.html">${comment.user.pseudo}</a>${comment.text}</p>
+            </div>`;
+
+            document.getElementById('comment_list_post').insertAdjacentHTML('beforeend', htmlComment);
+
+            app.plugins.createHexagon({
+              container: '.hexagon-148-164',
+              width: 148,
+              height: 164,
+              roundedCorners: true,
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-progress-124-136',
+              width: 124,
+              height: 136,
+              lineWidth: 8,
+              roundedCorners: true,
+              gradient: {
+                colors: ['#41efff', '#615dfa']
+              },
+              scale: {
+                start: 0,
+                end: 1,
+                stop: .74
+              }
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-border-124-136',
+              width: 124,
+              height: 136,
+              lineWidth: 8,
+              roundedCorners: true,
+              lineColor: '#e7e8ee'
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-image-100-110',
+              width: 100,
+              height: 110,
+              roundedCorners: true,
+              clip: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-120-132',
+              width: 120,
+              height: 132,
+              roundedCorners: true,
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-progress-100-110',
+              width: 100,
+              height: 110,
+              lineWidth: 6,
+              roundedCorners: true,
+              gradient: {
+                colors: ['#41efff', '#615dfa']
+              },
+              scale: {
+                start: 0,
+                end: 1,
+                stop: .8
+              }
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-border-100-110',
+              width: 100,
+              height: 110,
+              lineWidth: 6,
+              roundedCorners: true,
+              lineColor: '#e7e8ee'
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-image-82-90',
+              width: 82,
+              height: 90,
+              roundedCorners: true,
+              roundedCornerRadius: 3,
+              clip: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-100-110',
+              width: 100,
+              height: 110,
+              roundedCorners: true,
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-progress-84-92',
+              width: 84,
+              height: 92,
+              lineWidth: 5,
+              roundedCorners: true,
+              roundedCornerRadius: 3,
+              gradient: {
+                colors: ['#41efff', '#615dfa']
+              },
+              scale: {
+                start: 0,
+                end: 1,
+                stop: .8
+              }
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-border-84-92',
+              width: 84,
+              height: 92,
+              lineWidth: 5,
+              roundedCorners: true,
+              roundedCornerRadius: 3,
+              lineColor: '#e7e8ee'
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-image-68-74',
+              width: 68,
+              height: 74,
+              roundedCorners: true,
+              roundedCornerRadius: 3,
+              clip: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-50-56',
+              width: 50,
+              height: 56,
+              roundedCorners: true,
+              roundedCornerRadius: 2,
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-progress-40-44',
+              width: 40,
+              height: 44,
+              lineWidth: 3,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              gradient: {
+                colors: ['#41efff', '#615dfa']
+              },
+              scale: {
+                start: 0,
+                end: 1,
+                stop: .8
+              }
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-border-40-44',
+              width: 40,
+              height: 44,
+              lineWidth: 3,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              lineColor: '#e7e8ee'
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-image-30-32',
+              width: 30,
+              height: 32,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              clip: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-40-44',
+              width: 40,
+              height: 44,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-dark-32-34',
+              width: 32,
+              height: 34,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              lineColor: '#45437f',
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-32-36',
+              width: 32,
+              height: 36,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              lineColor: '#fff',
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-dark-26-28',
+              width: 26,
+              height: 28,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              lineColor: '#45437f',
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-28-32',
+              width: 28,
+              height: 32,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              lineColor: '#fff',
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-dark-22-24',
+              width: 22,
+              height: 24,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              lineColor: '#45437f',
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-22-24',
+              width: 22,
+              height: 24,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              lineColor: '#fff',
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-dark-16-18',
+              width: 16,
+              height: 18,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              lineColor: '#45437f',
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-120-130',
+              width: 120,
+              height: 130,
+              roundedCorners: true,
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-100-108',
+              width: 100,
+              height: 108,
+              roundedCorners: true,
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-image-124-136',
+              width: 124,
+              height: 136,
+              roundedCorners: true,
+              clip: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-image-84-92',
+              width: 84,
+              height: 92,
+              roundedCorners: true,
+              clip: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-34-36',
+              width: 34,
+              height: 36,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-image-40-44',
+              width: 40,
+              height: 44,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              clip: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-image-24-26',
+              width: 24,
+              height: 26,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              clip: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-image-18-20',
+              width: 18,
+              height: 20,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              clip: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-overlay-30-32',
+              width: 30,
+              height: 32,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              lineColor: 'rgba(97, 93, 250, .9)',
+              fill: true
+            });
+        }
+
+        var links = document.getElementsByClassName('reacting-picture');
+
+        // For each <li> inside #links
+        for (var i = 0; i < links.length; i++) {
+            var link = links[i];
+            link.addEventListener('click', (e) => {
+                let reactIcon = e.target.parentNode;
+
+                const dataPostId = postId;
+                const dataReact = reactIcon.getAttribute('data-react');
+                const data = {
+                    postId: dataPostId,
+                    userId: "{{ app.user.id }}",
+                    react: dataReact
+                };
+
+                let datas = new FormData();
+                datas.append("data", JSON.stringify(data));
+
+                fetch("{{ path('front_react_post_add') }}", { method: 'POST', body: datas })
+                    .then(response => response.json())
+                    .then(data => {
+
+                        const postId = document.getElementById(`like-picture`);
+                        postId.style.fill = '#23d2e2';
+
+                        const reactId = document.getElementById(`list_react_post`);
+                        reactId.innerHTML = data.react.content;
+
+                        app.plugins.createDropdown({
+                            trigger: '.reaction-item-dropdown-trigger',
+                            container: '.reaction-item-dropdown',
+                            triggerEvent: 'hover',
+                            offset: {
+                                bottom: 38,
+                                left: -16
+                            },
+                            animation: {
+                                type: 'translate-bottom',
+                                speed: .3,
+                                translateOffset: {
+                                    vertical: 20
+                                }
+                            }
+                        });
+
+                        app.plugins.createDropdown({
+                            trigger: '.reaction-options-dropdown-trigger',
+                            container: '.reaction-options-dropdown',
+                            triggerEvent: 'click',
+                            offset: {
+                                bottom: 54,
+                                left: -16
+                            },
+                            animation: {
+                                type: 'translate-bottom',
+                                speed: .3,
+                                translateOffset: {
+                                    vertical: 20
+                                }
+                            },
+                            closeOnDropdownClick: true
+                        });
+
+                        app.plugins.createDropdown({
+                            trigger: '.reaction-options-small-dropdown-trigger',
+                            container: '.reaction-options-small-dropdown',
+                            triggerEvent: 'click',
+                            offset: {
+                                bottom: 30,
+                                left: -80
+                            },
+                            animation: {
+                                type: 'translate-bottom',
+                                speed: .3,
+                                translateOffset: {
+                                    vertical: 16
+                                }
+                            },
+                            closeOnDropdownClick: true
+                        });
+                    });
+            });
+        }
+
+        const commentForm = document.getElementById('form_comment_response');
+            commentForm.addEventListener('submit', function(e) {
+              e.preventDefault();
+              e.stopImmediatePropagation();
+
+              let form = e.target;
+              const formData = new FormData(form);
+
+              formData.append('postId', postId);
+
+              fetch("{{ path('front_fil_add_comment') }}", { method: "POST", body: formData })
+                .then(response => response.json())
+                .then(data => {
+
+                    if (data.message === 'ok') {
+                        document.getElementById('comment_list_post').insertAdjacentHTML('afterbegin', data.comment.content);
+                        document.getElementById('popup-post-reply').value = '';
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-148-164',
+                          width: 148,
+                          height: 164,
+                          roundedCorners: true,
+                          fill: true
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-progress-124-136',
+                          width: 124,
+                          height: 136,
+                          lineWidth: 8,
+                          roundedCorners: true,
+                          gradient: {
+                            colors: ['#41efff', '#615dfa']
+                          },
+                          scale: {
+                            start: 0,
+                            end: 1,
+                            stop: .74
+                          }
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-border-124-136',
+                          width: 124,
+                          height: 136,
+                          lineWidth: 8,
+                          roundedCorners: true,
+                          lineColor: '#e7e8ee'
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-image-100-110',
+                          width: 100,
+                          height: 110,
+                          roundedCorners: true,
+                          clip: true
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-120-132',
+                          width: 120,
+                          height: 132,
+                          roundedCorners: true,
+                          fill: true
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-progress-100-110',
+                          width: 100,
+                          height: 110,
+                          lineWidth: 6,
+                          roundedCorners: true,
+                          gradient: {
+                            colors: ['#41efff', '#615dfa']
+                          },
+                          scale: {
+                            start: 0,
+                            end: 1,
+                            stop: .8
+                          }
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-border-100-110',
+                          width: 100,
+                          height: 110,
+                          lineWidth: 6,
+                          roundedCorners: true,
+                          lineColor: '#e7e8ee'
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-image-82-90',
+                          width: 82,
+                          height: 90,
+                          roundedCorners: true,
+                          roundedCornerRadius: 3,
+                          clip: true
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-100-110',
+                          width: 100,
+                          height: 110,
+                          roundedCorners: true,
+                          fill: true
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-progress-84-92',
+                          width: 84,
+                          height: 92,
+                          lineWidth: 5,
+                          roundedCorners: true,
+                          roundedCornerRadius: 3,
+                          gradient: {
+                            colors: ['#41efff', '#615dfa']
+                          },
+                          scale: {
+                            start: 0,
+                            end: 1,
+                            stop: .8
+                          }
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-border-84-92',
+                          width: 84,
+                          height: 92,
+                          lineWidth: 5,
+                          roundedCorners: true,
+                          roundedCornerRadius: 3,
+                          lineColor: '#e7e8ee'
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-image-68-74',
+                          width: 68,
+                          height: 74,
+                          roundedCorners: true,
+                          roundedCornerRadius: 3,
+                          clip: true
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-50-56',
+                          width: 50,
+                          height: 56,
+                          roundedCorners: true,
+                          roundedCornerRadius: 2,
+                          fill: true
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-progress-40-44',
+                          width: 40,
+                          height: 44,
+                          lineWidth: 3,
+                          roundedCorners: true,
+                          roundedCornerRadius: 1,
+                          gradient: {
+                            colors: ['#41efff', '#615dfa']
+                          },
+                          scale: {
+                            start: 0,
+                            end: 1,
+                            stop: .8
+                          }
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-border-40-44',
+                          width: 40,
+                          height: 44,
+                          lineWidth: 3,
+                          roundedCorners: true,
+                          roundedCornerRadius: 1,
+                          lineColor: '#e7e8ee'
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-image-30-32',
+                          width: 30,
+                          height: 32,
+                          roundedCorners: true,
+                          roundedCornerRadius: 1,
+                          clip: true
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-40-44',
+                          width: 40,
+                          height: 44,
+                          roundedCorners: true,
+                          roundedCornerRadius: 1,
+                          fill: true
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-dark-32-34',
+                          width: 32,
+                          height: 34,
+                          roundedCorners: true,
+                          roundedCornerRadius: 1,
+                          lineColor: '#45437f',
+                          fill: true
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-32-36',
+                          width: 32,
+                          height: 36,
+                          roundedCorners: true,
+                          roundedCornerRadius: 1,
+                          lineColor: '#fff',
+                          fill: true
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-dark-26-28',
+                          width: 26,
+                          height: 28,
+                          roundedCorners: true,
+                          roundedCornerRadius: 1,
+                          lineColor: '#45437f',
+                          fill: true
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-28-32',
+                          width: 28,
+                          height: 32,
+                          roundedCorners: true,
+                          roundedCornerRadius: 1,
+                          lineColor: '#fff',
+                          fill: true
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-dark-22-24',
+                          width: 22,
+                          height: 24,
+                          roundedCorners: true,
+                          roundedCornerRadius: 1,
+                          lineColor: '#45437f',
+                          fill: true
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-22-24',
+                          width: 22,
+                          height: 24,
+                          roundedCorners: true,
+                          roundedCornerRadius: 1,
+                          lineColor: '#fff',
+                          fill: true
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-dark-16-18',
+                          width: 16,
+                          height: 18,
+                          roundedCorners: true,
+                          roundedCornerRadius: 1,
+                          lineColor: '#45437f',
+                          fill: true
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-120-130',
+                          width: 120,
+                          height: 130,
+                          roundedCorners: true,
+                          fill: true
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-100-108',
+                          width: 100,
+                          height: 108,
+                          roundedCorners: true,
+                          fill: true
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-image-124-136',
+                          width: 124,
+                          height: 136,
+                          roundedCorners: true,
+                          clip: true
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-image-84-92',
+                          width: 84,
+                          height: 92,
+                          roundedCorners: true,
+                          clip: true
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-34-36',
+                          width: 34,
+                          height: 36,
+                          roundedCorners: true,
+                          roundedCornerRadius: 1,
+                          fill: true
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-image-40-44',
+                          width: 40,
+                          height: 44,
+                          roundedCorners: true,
+                          roundedCornerRadius: 1,
+                          clip: true
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-image-24-26',
+                          width: 24,
+                          height: 26,
+                          roundedCorners: true,
+                          roundedCornerRadius: 1,
+                          clip: true
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-image-18-20',
+                          width: 18,
+                          height: 20,
+                          roundedCorners: true,
+                          roundedCornerRadius: 1,
+                          clip: true
+                        });
+
+                        app.plugins.createHexagon({
+                          container: '.hexagon-overlay-30-32',
+                          width: 30,
+                          height: 32,
+                          roundedCorners: true,
+                          roundedCornerRadius: 1,
+                          lineColor: 'rgba(97, 93, 250, .9)',
+                          fill: true
+                        });
+                                }
+                            });
+                          return false;
+                        })
+    });
+    }
+    loadPicture();
+  })
+})
 </script>
 {% endblock %}

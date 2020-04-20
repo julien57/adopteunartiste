@@ -636,15 +636,23 @@ photoPost.forEach(function(post) {
     let datas = new FormData();
     datas.append("data", JSON.stringify(data));
 
-  fetch("{{ path('front_fil_get_picture') }}", { method: 'POST', body: datas})
+    async function loadPicture() {
+        let loading = document.getElementById('load-bar-picture');
+        loading.style.display = 'inline-flex';
+        loading.style.position = 'fixed';
+        loading.style.top = '50%';
+        loading.style.left = '50%';
+        loading.style.zIndex = '999999';
+
+         await fetch("{{ path('front_fil_get_picture') }}", { method: 'POST', body: datas})
     .then(response => response.json())
     .then(data => {
-
+        loading.style.display = 'none';
         document.getElementById('cover_picture').src = 'img/upload/posts/'+data.post[0].photo[0].url;
         document.getElementById('post_text').textContent = data.post[0].text;
 
         let datePost = new Date(data.post[0].publishedAt);
-        console.log(datePost)
+
         document.getElementById('time_to_post').textContent = `il y a ${datePost.getHours()}h`;
 
         document.getElementById('link_user').textContent = data.post[0].user.pseudo;
@@ -1479,6 +1487,8 @@ photoPost.forEach(function(post) {
                           return false;
                         })
     });
+    }
+    loadPicture();
   })
 })
 
