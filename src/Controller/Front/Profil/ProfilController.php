@@ -48,6 +48,9 @@ class ProfilController extends AbstractController
     public function removeAdopt(User $user, AdoptRepository $adoptRepository)
     {
         $adopt = $adoptRepository->findOneBy(['userFrom' => $user, 'userTo' => $this->getUser()]);
+        if (!$adopt) {
+            $adopt = $adoptRepository->findOneBy(['userFrom' => $this->getUser(), 'userTo' => $user]);
+        }
         if ($adopt) {
             $this->em->remove($adopt);
             $this->em->flush();

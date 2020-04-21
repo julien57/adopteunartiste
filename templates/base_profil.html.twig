@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('css/vendor/tiny-slider.css') }}">
     <!-- favicon -->
     <link rel="icon" href="{{ asset('img/favicon.ico') }}">
+    {% block style %}{% endblock %}
     <title>Profil</title>
 </head>
 <body>
@@ -34,7 +35,7 @@
 {% block start_body %}{% endblock %}
 
 <!-- CONTENT GRID -->
-<div class="content-grid">
+<div class="{% if app.request.attributes.get('_route') != 'front_profil_blog_single' %}content-grid{% endif %}">
     {% for message in app.flashes('success') %}
         <div class="alert alert-success">
             {{ message }}

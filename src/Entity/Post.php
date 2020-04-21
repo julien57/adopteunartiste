@@ -11,6 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Post
 {
+    const ARTICLE_POST_TYPE = 'article';
+    const POST_POST_TYPE = 'post';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -48,6 +51,21 @@ class Post
      * @ORM\OneToMany(targetEntity="App\Entity\CommentPost", mappedBy="post")
      */
     private $commentPosts;
+
+    /**
+     * @ORM\Column(type="string", length=8, nullable=true)
+     */
+    private $type;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $title;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -187,6 +205,42 @@ class Post
                 $commentPost->setPost(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(?string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(?string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

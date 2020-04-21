@@ -1,0 +1,456 @@
+{% extends 'base_profil.html.twig' %}
+
+{% block body %}
+    <div class="profile-header">
+        <!-- PROFILE HEADER COVER -->
+        <figure class="profile-header-cover liquid">
+            <img src="{% if userProfil.cover %}{{ asset( constant('App\\Services\\File\\UploadFile::COVERUPLOAD_DIR')) ~ userProfil.cover }}{% else %}{{ asset('img/cover/01.jpg') }}{% endif %}" alt="photo couverture {{ userProfil.pseudo }}">
+        </figure>
+        <!-- /PROFILE HEADER COVER -->
+
+        <!-- PROFILE HEADER INFO -->
+        <div class="profile-header-info">
+            <!-- USER SHORT DESCRIPTION -->
+            <div class="user-short-description big">
+                <!-- USER SHORT DESCRIPTION AVATAR -->
+                <a class="user-short-description-avatar user-avatar big" href="profile-timeline.html">
+                    <!-- USER AVATAR BORDER -->
+                    <div class="user-avatar-border">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-148-164"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR BORDER -->
+
+                    <!-- USER AVATAR CONTENT -->
+                    <div class="user-avatar-content">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-image-100-110" data-src="{% if userProfil.avatar %}{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ userProfil.avatar }}{% else %}{{ asset('img/avatar/01.jpg') }}{% endif %}"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR CONTENT -->
+
+                    <!-- USER AVATAR PROGRESS -->
+                    <div class="user-avatar-progress">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-progress-124-136"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR PROGRESS -->
+
+                    <!-- USER AVATAR PROGRESS BORDER -->
+                    <div class="user-avatar-progress-border">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-border-124-136"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR PROGRESS BORDER -->
+
+                    <!-- USER AVATAR BADGE -->
+                    <div class="user-avatar-badge">
+                        <!-- USER AVATAR BADGE BORDER -->
+                        <div class="user-avatar-badge-border">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-40-44"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR BADGE BORDER -->
+
+                        <!-- USER AVATAR BADGE CONTENT -->
+                        <div class="user-avatar-badge-content">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-dark-32-34"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR BADGE CONTENT -->
+
+                        <!-- USER AVATAR BADGE TEXT -->
+                        <p class="user-avatar-badge-text">24</p>
+                        <!-- /USER AVATAR BADGE TEXT -->
+                    </div>
+                    <!-- /USER AVATAR BADGE -->
+                </a>
+                <!-- /USER SHORT DESCRIPTION AVATAR -->
+
+                <!-- USER SHORT DESCRIPTION AVATAR -->
+                <a class="user-short-description-avatar user-short-description-avatar-mobile user-avatar medium" href="profile-timeline.html">
+                    <!-- USER AVATAR BORDER -->
+                    <div class="user-avatar-border">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-120-132"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR BORDER -->
+
+                    <!-- USER AVATAR CONTENT -->
+                    <div class="user-avatar-content">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-image-82-90" data-src="{% if userProfil.avatar %}{% else %}{{ asset('img/avatar/01.jpg') }}{% endif %}"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR CONTENT -->
+
+                    <!-- USER AVATAR PROGRESS -->
+                    <div class="user-avatar-progress">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-progress-100-110"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR PROGRESS -->
+
+                    <!-- USER AVATAR PROGRESS BORDER -->
+                    <div class="user-avatar-progress-border">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-border-100-110"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR PROGRESS BORDER -->
+
+                    <!-- USER AVATAR BADGE -->
+                    <div class="user-avatar-badge">
+                        <!-- USER AVATAR BADGE BORDER -->
+                        <div class="user-avatar-badge-border">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-32-36"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR BADGE BORDER -->
+
+                        <!-- USER AVATAR BADGE CONTENT -->
+                        <div class="user-avatar-badge-content">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-dark-26-28"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR BADGE CONTENT -->
+
+                        <!-- USER AVATAR BADGE TEXT -->
+                        <p class="user-avatar-badge-text">24</p>
+                        <!-- /USER AVATAR BADGE TEXT -->
+                    </div>
+                    <!-- /USER AVATAR BADGE -->
+                </a>
+                <!-- /USER SHORT DESCRIPTION AVATAR -->
+
+                <!-- USER SHORT DESCRIPTION TITLE -->
+                <p class="user-short-description-title"><a href="profile-timeline.html">{{ userProfil.domainArtist.title }}</a></p>
+                <!-- /USER SHORT DESCRIPTION TITLE -->
+
+                <!-- USER SHORT DESCRIPTION TEXT -->
+                <p class="user-short-description-text"><a href="{{ userProfil.website }}" target="_blank">{{ userProfil.website }}</a></p>
+                <!-- /USER SHORT DESCRIPTION TEXT -->
+            </div>
+            <!-- /USER SHORT DESCRIPTION -->
+
+            <!-- PROFILE HEADER SOCIAL LINKS WRAP -->
+            <div class="profile-header-social-links-wrap">
+                <!-- PROFILE HEADER SOCIAL LINKS -->
+                <div id="profile-header-social-links-slider" class="profile-header-social-links">
+
+                    {% if userProfil.facebook %}
+                        <div class="profile-header-social-link">
+                            <a class="social-link facebook" target="_blank" href="{{ userProfil.facebook }}">
+                                <svg class="icon-facebook">
+                                    <use xlink:href="#svg-facebook"></use>
+                                </svg>
+                            </a>
+                        </div>
+                    {% endif %}
+
+                    {% if userProfil.twitter %}
+                        <div class="profile-header-social-link">
+                            <a class="social-link twitter" target="_blank"  href="{{ userProfil.twitter }}">
+                                <svg class="icon-twitter">
+                                    <use xlink:href="#svg-twitter"></use>
+                                </svg>
+                            </a>
+                        </div>
+                    {% endif %}
+
+                    {% if userProfil.instagram %}
+                        <div class="profile-header-social-link">
+                            <a class="social-link instagram" target="_blank"  href="{{ userProfil.instagram }}">
+                                <svg class="icon-instagram">
+                                    <use xlink:href="#svg-instagram"></use>
+                                </svg>
+                            </a>
+                        </div>
+                    {% endif %}
+
+                    {% if userProfil.twitch %}
+                        <div class="profile-header-social-link">
+                            <a class="social-link twitch" target="_blank"  href="{{ userProfil.twitch }}">
+                                <svg class="icon-twitch">
+                                    <use xlink:href="#svg-twitch"></use>
+                                </svg>
+                            </a>
+                        </div>
+                    {% endif %}
+
+                    {% if userProfil.youtube %}
+                        <div class="profile-header-social-link">
+                            <a class="social-link youtube" href="{{ userProfil.youtube }}">
+                                <svg class="icon-youtube">
+                                    <use xlink:href="#svg-youtube"></use>
+                                </svg>
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+
+            </div>
+
+            <!-- USER STATS -->
+            <div class="user-stats">
+                <!-- USER STAT -->
+                <div class="user-stat big">
+                    <!-- USER STAT TITLE -->
+                    <p class="user-stat-title" id="nb_published">{{ userProfil.posts|length }}</p>
+                    <!-- /USER STAT TITLE -->
+
+                    <!-- USER STAT TEXT -->
+                    <p class="user-stat-text">publications</p>
+                    <!-- /USER STAT TEXT -->
+                </div>
+                <!-- /USER STAT -->
+
+                <!-- USER STAT -->
+                <div class="user-stat big">
+                    <!-- USER STAT TITLE -->
+                    <p class="user-stat-title">{{ post_adopt.getAllAdoptUser(userProfil)|length }}</p>
+                    <!-- /USER STAT TITLE -->
+
+                    <!-- USER STAT TEXT -->
+                    <p class="user-stat-text">Adoptés</p>
+                    <!-- /USER STAT TEXT -->
+                </div>
+                <!-- /USER STAT -->
+
+                <!-- USER STAT -->
+                <div class="user-stat big">
+                    <!-- USER STAT TITLE -->
+                    <p class="user-stat-title">{{ userProfil.nbVisit }}</p>
+                    <!-- /USER STAT TITLE -->
+
+                    <!-- USER STAT TEXT -->
+                    <p class="user-stat-text">vues</p>
+                    <!-- /USER STAT TEXT -->
+                </div>
+                <!-- /USER STAT -->
+
+                <!-- USER STAT -->
+                <div class="user-stat big">
+                    <!-- USER STAT IMAGE -->
+                    <img class="user-stat-image" src="{{ asset('img/flag/usa.png') }}" alt="flag-usa">
+                    <!-- /USER STAT IMAGE -->
+
+                    <!-- USER STAT TEXT -->
+                    <p class="user-stat-text">usa</p>
+                    <!-- /USER STAT TEXT -->
+                </div>
+                <!-- /USER STAT -->
+            </div>
+            <!-- /USER STATS -->
+
+            {% if app.user != userProfil %}
+                <!-- PROFILE HEADER INFO ACTIONS -->
+                <div class="profile-header-info-actions">
+                    <!-- PROFILE HEADER INFO ACTION -->
+                    <button class="profile-header-info-action button secondary" id="btn_adopt">{% if post_adopt.getAdoptAxist(userProfil, app.user) %}Abandonner{% else %}Adopter{% endif %}</button>
+                    <!-- /PROFILE HEADER INFO ACTION -->
+
+                    <!-- PROFILE HEADER INFO ACTION -->
+                    <button class="profile-header-info-action button primary"><span class="hide-text-mobile">Send</span> Message</button>
+                    <!-- /PROFILE HEADER INFO ACTION -->
+                </div>
+            {% endif %}
+            <!-- /PROFILE HEADER INFO ACTIONS -->
+        </div>
+        <!-- /PROFILE HEADER INFO -->
+    </div>
+    <!-- /PROFILE HEADER -->
+
+    <!-- SECTION NAVIGATION -->
+    <nav class="section-navigation">
+        <!-- SECTION MENU -->
+        <div id="section-navigation-slider" class="section-menu">
+            <!-- SECTION MENU ITEM -->
+            <a class="section-menu-item" href="profile-about.html">
+                <!-- SECTION MENU ITEM ICON -->
+                <svg class="section-menu-item-icon icon-profile">
+                    <use xlink:href="#svg-profile"></use>
+                </svg>
+                <!-- /SECTION MENU ITEM ICON -->
+
+                <!-- SECTION MENU ITEM TEXT -->
+                <p class="section-menu-item-text">About</p>
+                <!-- /SECTION MENU ITEM TEXT -->
+            </a>
+            <!-- /SECTION MENU ITEM -->
+
+            <!-- SECTION MENU ITEM -->
+            <a class="section-menu-item" href="{{ path('front_profil_user', {'pseudo': userProfil.pseudo}) }}">
+                <!-- SECTION MENU ITEM ICON -->
+                <svg class="section-menu-item-icon icon-timeline">
+                    <use xlink:href="#svg-timeline"></use>
+                </svg>
+                <!-- /SECTION MENU ITEM ICON -->
+
+                <!-- SECTION MENU ITEM TEXT -->
+                <p class="section-menu-item-text">Timeline</p>
+                <!-- /SECTION MENU ITEM TEXT -->
+            </a>
+            <!-- /SECTION MENU ITEM -->
+
+            <!-- SECTION MENU ITEM -->
+            <a class="section-menu-item" href="{{ path('front_profile_adopt_list', {'pseudo': userProfil.pseudo}) }}">
+                <!-- SECTION MENU ITEM ICON -->
+                <svg class="section-menu-item-icon icon-friend">
+                    <use xlink:href="#svg-friend"></use>
+                </svg>
+                <!-- /SECTION MENU ITEM ICON -->
+
+                <!-- SECTION MENU ITEM TEXT -->
+                <p class="section-menu-item-text">Adoptions</p>
+                <!-- /SECTION MENU ITEM TEXT -->
+            </a>
+
+            <!-- SECTION MENU ITEM -->
+            <a class="section-menu-item" href="{{ path('front_profile_photos', {'pseudo': userProfil.pseudo}) }}">
+                <!-- SECTION MENU ITEM ICON -->
+                <svg class="section-menu-item-icon icon-photos">
+                    <use xlink:href="#svg-photos"></use>
+                </svg>
+                <!-- /SECTION MENU ITEM ICON -->
+
+                <!-- SECTION MENU ITEM TEXT -->
+                <p class="section-menu-item-text">Photos</p>
+                <!-- /SECTION MENU ITEM TEXT -->
+            </a>
+            <!-- /SECTION MENU ITEM -->
+
+            <!-- SECTION MENU ITEM -->
+            <a class="section-menu-item active" href="{{ path('front_profil_blog_list', {'pseudo': userProfil.pseudo}) }}">
+                <!-- SECTION MENU ITEM ICON -->
+                <svg class="section-menu-item-icon icon-blog-posts">
+                    <use xlink:href="#svg-blog-posts"></use>
+                </svg>
+                <!-- /SECTION MENU ITEM ICON -->
+
+                <!-- SECTION MENU ITEM TEXT -->
+                <p class="section-menu-item-text">Blog</p>
+                <!-- /SECTION MENU ITEM TEXT -->
+            </a>
+            <!-- /SECTION MENU ITEM -->
+
+            <!-- SECTION MENU ITEM -->
+            <a class="section-menu-item" href="profile-store.html">
+                <!-- SECTION MENU ITEM ICON -->
+                <svg class="section-menu-item-icon icon-store">
+                    <use xlink:href="#svg-store"></use>
+                </svg>
+                <!-- /SECTION MENU ITEM ICON -->
+
+                <!-- SECTION MENU ITEM TEXT -->
+                <p class="section-menu-item-text">Store</p>
+                <!-- /SECTION MENU ITEM TEXT -->
+            </a>
+            <!-- /SECTION MENU ITEM -->
+        </div>
+        <!-- /SECTION MENU -->
+
+        <!-- SLIDER CONTROLS -->
+        <div id="section-navigation-slider-controls" class="slider-controls">
+            <!-- SLIDER CONTROL -->
+            <div class="slider-control left">
+                <!-- SLIDER CONTROL ICON -->
+                <svg class="slider-control-icon icon-small-arrow">
+                    <use xlink:href="#svg-small-arrow"></use>
+                </svg>
+                <!-- /SLIDER CONTROL ICON -->
+            </div>
+            <!-- /SLIDER CONTROL -->
+
+            <!-- SLIDER CONTROL -->
+            <div class="slider-control right">
+                <!-- SLIDER CONTROL ICON -->
+                <svg class="slider-control-icon icon-small-arrow">
+                    <use xlink:href="#svg-small-arrow"></use>
+                </svg>
+                <!-- /SLIDER CONTROL ICON -->
+            </div>
+            <!-- /SLIDER CONTROL -->
+        </div>
+        <!-- /SLIDER CONTROLS -->
+    </nav>
+    <!-- /SECTION NAVIGATION -->
+
+    <!-- GRID -->
+    <section class="section">
+        <!-- SECTION HEADER -->
+        <div class="section-header">
+            <!-- SECTION HEADER INFO -->
+            <div class="section-header-info">
+
+                <!-- SECTION TITLE -->
+                <h2 class="section-title">Créer un article</h2>
+                <!-- /SECTION TITLE -->
+            </div>
+            <!-- /SECTION HEADER INFO -->
+        </div>
+        <!-- /SECTION HEADER -->
+
+        <!-- SECTION FILTERS BAR -->
+        <div class="section-filters-bar v2" style="display:block;height:100%; padding:30px">
+            <!-- FORM -->
+            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-input small active">
+                        {{ form_label(form.title) }}
+                        {{ form_widget(form.title) }}
+                        <small style="color:red">{{ form_errors(form.title) }}</small>
+                    </div>
+                    <div class="form-input small active mt-4">
+                        {{ form_label(form.text) }}
+                        {{ form_widget(form.text) }}
+                        <small style="color:red">{{ form_errors(form.text) }}</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div id="preview" style="width:100%;height:200px;background:#5a6268;display:flex;justify-content:center;align-items:center"><span style="color:white">Preview</span></div>
+                    {{ form_label(form.photo) }}
+                    {{ form_widget(form.photo, {'attr': {'onchange': 'loadFile(event)'}}) }}
+                    <small style="color:red">{{ form_errors(form.photo) }}</small>
+                </div>
+            </div>
+
+                <!-- BUTTON -->
+                <button type="submit" class="button primary mt-4">Publier</button>
+            {{ form_end(form) }}
+
+        </div>
+        <!-- /SECTION FILTERS BAR -->
+
+    </section>
+{% endblock %}
+
+{% block javascript %}
+{{ parent() }}
+<script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+<script>
+CKEDITOR.replace('article_user[text]');
+CKEDITOR.config.height = '25em';
+
+var loadFile = function(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+        const output = document.getElementById('preview');
+        output.style.background = `center no-repeat url(${reader.result})`;
+        output.style.backgroundSize = 'cover';
+        console.log(output)
+    };
+    reader.readAsDataURL(event.target.files[0]);
+};
+</script>
+{% endblock %}

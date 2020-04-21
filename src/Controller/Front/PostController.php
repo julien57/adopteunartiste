@@ -45,6 +45,7 @@ class PostController extends AbstractController
 
         $post = new Post();
         $post->setUser($this->getUser());
+        $post->setType('post');
         $post->setText($request->get('quick-post-text'));
 
         if ($request->files->get('inpFile')) {

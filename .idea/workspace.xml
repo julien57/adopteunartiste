@@ -2,9 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63ff9cd7-3cb6-497e-b0b2-d6f2408246d0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Controller/Front/Profil/AdoptController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/Front/Profil/PhotoController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/Front/Profil/UserBlogController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/CommentArticleUserType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/SearchUserType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/front/html/comments.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/front/profil/adopt_list.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/front/profil/blog_add.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/front/profil/blog_list.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/front/profil/blog_single.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/front/profil/photo_list.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/PostRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/PostRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/front/fil/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/fil/list.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/styles.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/styles.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Front/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Front/PostController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Front/Profil/ProfilController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Front/Profil/ProfilController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/CommentPost.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/CommentPost.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/AdoptRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/AdoptRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/PhotoRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/PhotoRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Services/Post/Adopt.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Post/Adopt.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base_profil.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base_profil.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/html/post.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/html/post.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/front/inc/popup_picture.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/inc/popup_picture.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/front/profil/profil_user.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/profil/profil_user.html.twig" afterDir="false" />
     </list>
@@ -190,6 +210,7 @@
       <recent name="$PROJECT_DIR$/src/Controller/Back" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/front/profil" />
       <recent name="$PROJECT_DIR$/src/Controller/Back" />
       <recent name="$PROJECT_DIR$/templates/back" />
     </key>
@@ -205,7 +226,7 @@
       <option name="presentableId" value="Default" />
       <updated>1586982412399</updated>
       <workItem from="1586982415408" duration="4882000" />
-      <workItem from="1586988301740" duration="145271000" />
+      <workItem from="1586988301740" duration="176717000" />
     </task>
     <servers />
   </component>
@@ -229,10 +250,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="645" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1586983835968" />
-    <state x="698" y="302" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1587222064094">
+    <state x="698" y="302" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1587482442533">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="698" y="302" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1587222064094" />
+    <state x="698" y="302" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1587482442533" />
     <state x="624" y="363" key="NewPhpClassDialog" timestamp="1586988909289">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -241,18 +262,18 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="469" y="179" key="SettingsEditor/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1587023341160" />
-    <state width="581" height="445" key="SwitcherDM" timestamp="1587238422612">
+    <state width="581" height="445" key="SwitcherDM" timestamp="1587498717272">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="581" height="445" key="SwitcherDM/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1587238422612" />
+    <state width="581" height="445" key="SwitcherDM/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1587498717272" />
     <state x="653" y="372" key="com.intellij.ide.util.TipDialog" timestamp="1586982415807">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="653" y="372" key="com.intellij.ide.util.TipDialog/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1586982415807" />
-    <state x="648" y="142" width="986" height="682" key="find.popup" timestamp="1587411594033">
+    <state x="648" y="142" width="986" height="682" key="find.popup" timestamp="1587500427040">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="648" y="142" width="986" height="682" key="find.popup/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1587411594033" />
+    <state x="648" y="142" width="986" height="682" key="find.popup/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1587500427040" />
     <state x="609" y="274" width="700" height="530" key="recent.locations.popup" timestamp="1587301970015">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

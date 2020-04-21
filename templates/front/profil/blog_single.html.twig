@@ -1,0 +1,1341 @@
+{% extends 'base_profil.html.twig' %}
+
+{% block style %}
+    <link rel="stylesheet" href="{{ asset('css/vendor/simplebar.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    <!-- FLOATY BAR -->
+    <aside class="floaty-bar">
+        <!-- BAR ACTIONS -->
+        <div class="bar-actions">
+            <!-- PROGRESS STAT -->
+            <div class="progress-stat">
+                <!-- BAR PROGRESS WRAP -->
+                <div class="bar-progress-wrap">
+                    <!-- BAR PROGRESS INFO -->
+                    <p class="bar-progress-info">Next: <span class="bar-progress-text"></span></p>
+                    <!-- /BAR PROGRESS INFO -->
+                </div>
+                <!-- /BAR PROGRESS WRAP -->
+
+                <!-- PROGRESS STAT BAR -->
+                <div id="logged-user-level-cp" class="progress-stat-bar"></div>
+                <!-- /PROGRESS STAT BAR -->
+            </div>
+            <!-- /PROGRESS STAT -->
+        </div>
+        <!-- /BAR ACTIONS -->
+
+        <!-- BAR ACTIONS -->
+        <div class="bar-actions">
+            <!-- ACTION LIST -->
+            <div class="action-list dark">
+                <!-- ACTION LIST ITEM -->
+                <a class="action-list-item" href="marketplace-cart.html">
+                    <!-- ACTION LIST ITEM ICON -->
+                    <svg class="action-list-item-icon icon-shopping-bag">
+                        <use xlink:href="#svg-shopping-bag"></use>
+                    </svg>
+                    <!-- /ACTION LIST ITEM ICON -->
+                </a>
+                <!-- /ACTION LIST ITEM -->
+
+                <!-- ACTION LIST ITEM -->
+                <a class="action-list-item" href="hub-profile-requests.html">
+                    <!-- ACTION LIST ITEM ICON -->
+                    <svg class="action-list-item-icon icon-friend">
+                        <use xlink:href="#svg-friend"></use>
+                    </svg>
+                    <!-- /ACTION LIST ITEM ICON -->
+                </a>
+                <!-- /ACTION LIST ITEM -->
+
+                <!-- ACTION LIST ITEM -->
+                <a class="action-list-item" href="hub-profile-messages.html">
+                    <!-- ACTION LIST ITEM ICON -->
+                    <svg class="action-list-item-icon icon-messages">
+                        <use xlink:href="#svg-messages"></use>
+                    </svg>
+                    <!-- /ACTION LIST ITEM ICON -->
+                </a>
+                <!-- /ACTION LIST ITEM -->
+
+                <!-- ACTION LIST ITEM -->
+                <a class="action-list-item unread" href="hub-profile-notifications.html">
+                    <!-- ACTION LIST ITEM ICON -->
+                    <svg class="action-list-item-icon icon-notification">
+                        <use xlink:href="#svg-notification"></use>
+                    </svg>
+                    <!-- /ACTION LIST ITEM ICON -->
+                </a>
+                <!-- /ACTION LIST ITEM -->
+            </div>
+            <!-- /ACTION LIST -->
+
+            <!-- ACTION ITEM WRAP -->
+            <a class="action-item-wrap" href="hub-profile-info.html">
+                <!-- ACTION ITEM -->
+                <div class="action-item dark">
+                    <!-- ACTION ITEM ICON -->
+                    <svg class="action-item-icon icon-settings">
+                        <use xlink:href="#svg-settings"></use>
+                    </svg>
+                    <!-- /ACTION ITEM ICON -->
+                </div>
+                <!-- /ACTION ITEM -->
+            </a>
+            <!-- /ACTION ITEM WRAP -->
+        </div>
+        <!-- /BAR ACTIONS -->
+    </aside>
+    <!-- /FLOATY BAR -->
+
+    <!-- CONTENT GRID -->
+    <div class="content-grid full">
+        <!-- POST OPEN -->
+        <article class="post-open">
+            <!-- POST OPEN COVER -->
+            <figure class="post-open-cover liquid">
+                <img src="{{ asset( constant('App\\Services\\File\\UploadFile::PHOTO_POST_UPLOAD_DIR')) ~ post.photo[0].url }}" alt="cover-19">
+            </figure>
+            <!-- /POST OPEN COVER -->
+
+            <!-- POST OPEN BODY -->
+            <div class="post-open-body">
+                <!-- POST OPEN HEADING -->
+                <div class="post-open-heading">
+                    <!-- POST OPEN TIMESTAMP -->
+                    <p class="post-open-timestamp"><span class="highlighted">le {{ post.publishedAt|date('d/m/Y à H:i') }}</span></p>
+                    <!-- /POST OPEN TIMESTAMP -->
+
+                    <!-- POST OPEN TITLE -->
+                    <h2 class="post-open-title">{{ post.title }}</h2>
+                    <!-- /POST OPEN TITLE -->
+                </div>
+                <!-- /POST OPEN HEADING -->
+
+                <!-- POST OPEN CONTENT -->
+                <div class="post-open-content">
+                    <!-- POST OPEN CONTENT SIDEBAR -->
+                    <div class="post-open-content-sidebar">
+                        <!-- USER AVATAR -->
+                        <div class="user-avatar small no-outline">
+                            <!-- USER AVATAR CONTENT -->
+                            <div class="user-avatar-content">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-image-30-32" data-src="{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ userProfil.avatar }}"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR CONTENT -->
+
+                            <!-- USER AVATAR PROGRESS -->
+                            <div class="user-avatar-progress">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-progress-40-44"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR PROGRESS -->
+
+                            <!-- USER AVATAR PROGRESS BORDER -->
+                            <div class="user-avatar-progress-border">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-border-40-44"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR PROGRESS BORDER -->
+
+                            <!-- USER AVATAR BADGE -->
+                            <div class="user-avatar-badge">
+                                <!-- USER AVATAR BADGE BORDER -->
+                                <div class="user-avatar-badge-border">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-22-24"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR BADGE BORDER -->
+
+                                <!-- USER AVATAR BADGE CONTENT -->
+                                <div class="user-avatar-badge-content">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-dark-16-18"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR BADGE CONTENT -->
+
+                                <!-- USER AVATAR BADGE TEXT -->
+                                <p class="user-avatar-badge-text">24</p>
+                                <!-- /USER AVATAR BADGE TEXT -->
+                            </div>
+                            <!-- /USER AVATAR BADGE -->
+                        </div>
+                        <!-- /USER AVATAR -->
+
+                    </div>
+                    <!-- /POST OPEN CONTENT SIDEBAR -->
+
+                    <!-- POST OPEN CONTENT BODY -->
+                    <div class="post-open-content-body">
+                        <!-- POST OPEN PARAGRAPH -->
+                        <div class="post-open-paragraph">{{ post.text|raw }}</div>
+                        <!-- /POST OPEN PARAGRAPH -->
+
+                    </div>
+                    <!-- /POST OPEN CONTENT BODY -->
+                </div>
+                <!-- /POST OPEN CONTENT -->
+
+                <!-- CONTENT ACTIONS -->
+                <div class="content-actions">
+                    <!-- CONTENT ACTION -->
+                    <div class="content-action">
+                        <!-- META LINE -->
+                        <div class="meta-line">
+                            <!-- META LINE LIST -->
+                            <div class="meta-line-list reaction-item-list">
+                                {% for react in post_react.getReactPost(post) %}
+                                    <div class="reaction-item">
+                                        <!-- REACTION IMAGE -->
+                                        <img class="reaction-image reaction-item-dropdown-trigger" src="{{ asset('img/reaction/' ~ react.type ~ '.png') }}" alt="reaction-{{ react.type }}">
+                                        <!-- /REACTION IMAGE -->
+
+                                        <!-- SIMPLE DROPDOWN -->
+                                        <div class="simple-dropdown padded reaction-item-dropdown">
+                                            <!-- SIMPLE DROPDOWN TEXT -->
+                                            <p class="simple-dropdown-text"><img class="reaction" src="{{ asset('img/reaction/' ~ react.type ~ '.png') }}" alt="reaction-{{ react.type }}"> <span class="bold">{{ react.type }}</span></p>
+                                            <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                            <!-- SIMPLE DROPDOWN TEXT -->
+                                            <p class="simple-dropdown-text">{{ react.count }}</p>
+                                            <!-- /SIMPLE DROPDOWN TEXT -->
+                                        </div>
+                                        <!-- /SIMPLE DROPDOWN -->
+                                    </div>
+                                    <!-- /REACTION ITEM -->
+                                {% endfor %}
+                            </div>
+                            <!-- /META LINE LIST -->
+
+                            <!-- META LINE TEXT -->
+                            <p class="meta-line-text">{{ post.reacts|length }}</p>
+                            <!-- /META LINE TEXT -->
+                        </div>
+                        <!-- /META LINE -->
+
+                        <!-- META LINE -->
+                        <div class="meta-line">
+                            <!-- META LINE LIST -->
+                            <div class="meta-line-list user-avatar-list">
+                                <!-- USER AVATAR -->
+                                <div class="user-avatar micro no-stats">
+                                    <!-- USER AVATAR BORDER -->
+                                    <div class="user-avatar-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-22-24"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BORDER -->
+
+                                    <!-- USER AVATAR CONTENT -->
+                                    <div class="user-avatar-content">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-image-18-20" data-src="img/avatar/09.jpg"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR CONTENT -->
+                                </div>
+                                <!-- /USER AVATAR -->
+
+                                <!-- USER AVATAR -->
+                                <div class="user-avatar micro no-stats">
+                                    <!-- USER AVATAR BORDER -->
+                                    <div class="user-avatar-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-22-24"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BORDER -->
+
+                                    <!-- USER AVATAR CONTENT -->
+                                    <div class="user-avatar-content">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-image-18-20" data-src="img/avatar/08.jpg"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR CONTENT -->
+                                </div>
+                                <!-- /USER AVATAR -->
+
+                                <!-- USER AVATAR -->
+                                <div class="user-avatar micro no-stats">
+                                    <!-- USER AVATAR BORDER -->
+                                    <div class="user-avatar-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-22-24"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BORDER -->
+
+                                    <!-- USER AVATAR CONTENT -->
+                                    <div class="user-avatar-content">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-image-18-20" data-src="img/avatar/12.jpg"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR CONTENT -->
+                                </div>
+                                <!-- /USER AVATAR -->
+
+                                <!-- USER AVATAR -->
+                                <div class="user-avatar micro no-stats">
+                                    <!-- USER AVATAR BORDER -->
+                                    <div class="user-avatar-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-22-24"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BORDER -->
+
+                                    <!-- USER AVATAR CONTENT -->
+                                    <div class="user-avatar-content">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-image-18-20" data-src="img/avatar/16.jpg"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR CONTENT -->
+                                </div>
+                                <!-- /USER AVATAR -->
+
+                                <!-- USER AVATAR -->
+                                <div class="user-avatar micro no-stats">
+                                    <!-- USER AVATAR BORDER -->
+                                    <div class="user-avatar-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-22-24"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BORDER -->
+
+                                    <!-- USER AVATAR CONTENT -->
+                                    <div class="user-avatar-content">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-image-18-20" data-src="img/avatar/06.jpg"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR CONTENT -->
+                                </div>
+                                <!-- /USER AVATAR -->
+                            </div>
+                            <!-- /META LINE LIST -->
+
+                        </div>
+                        <!-- /META LINE -->
+                    </div>
+                    <!-- /CONTENT ACTION -->
+
+                    <!-- CONTENT ACTION -->
+                    <div class="content-action">
+                        <!-- META LINE -->
+                        <div class="meta-line">
+                            <!-- META LINE LINK -->
+                            <p class="meta-line-link">{{ post.commentPosts|length }} Commentaires</p>
+                            <!-- /META LINE LINK -->
+                        </div>
+                        <!-- /META LINE -->
+
+                    </div>
+                    <!-- /CONTENT ACTION -->
+                </div>
+                <!-- /CONTENT ACTIONS -->
+
+                <!-- POST OPTIONS -->
+                <div class="post-options">
+                    <!-- POST OPTION WRAP -->
+                    <div class="post-option-wrap">
+                        <!-- POST OPTION -->
+                        <div class="post-option reaction-options-dropdown-trigger">
+                            <!-- POST OPTION ICON -->
+                            <svg class="post-option-icon icon-thumbs-up">
+                                <use xlink:href="#svg-thumbs-up"></use>
+                            </svg>
+                            <!-- /POST OPTION ICON -->
+
+                            <!-- POST OPTION TEXT -->
+                            <p class="post-option-text" id="like-{{ post.id }}" {% if post_react.getIfReactUser(post, app.user) %}style="color:#23d2e2"{% endif %}>Réagir!</p>
+                            <!-- /POST OPTION TEXT -->
+                        </div>
+                        <!-- /POST OPTION -->
+
+                        <!-- REACTION OPTIONS -->
+                        <div class="reaction-options reaction-options-dropdown">
+                            <!-- REACTION OPTION -->
+                            <div class="reaction-option text-tooltip-tft reacting" data-react="like" data-post="{{ post.id }}" id="react-like" data-title="Like">
+                                <!-- REACTION OPTION IMAGE -->
+                                <img class="reaction-option-image" src="{{ asset('img/reaction/like.png') }}" alt="reaction-like">
+                                <!-- /REACTION OPTION IMAGE -->
+                            </div>
+                            <!-- /REACTION OPTION -->
+
+                            <!-- REACTION OPTION -->
+                            <div class="reaction-option text-tooltip-tft reacting" data-react="love" data-post="{{ post.id }}" id="react-love" data-title="Love">
+                                <!-- REACTION OPTION IMAGE -->
+                                <img class="reaction-option-image" src="{{ asset('img/reaction/love.png') }}" alt="reaction-love">
+                                <!-- /REACTION OPTION IMAGE -->
+                            </div>
+                            <!-- /REACTION OPTION -->
+
+                            <!-- REACTION OPTION -->
+                            <div class="reaction-option text-tooltip-tft reacting" data-react="dislike" data-post="{{ post.id }}" id="react-dislike" data-title="Dislike">
+                                <!-- REACTION OPTION IMAGE -->
+                                <img class="reaction-option-image" src="{{ asset('img/reaction/dislike.png') }}" alt="reaction-dislike">
+                                <!-- /REACTION OPTION IMAGE -->
+                            </div>
+                            <!-- /REACTION OPTION -->
+
+                            <!-- REACTION OPTION -->
+                            <div class="reaction-option text-tooltip-tft reacting" data-react="happy" data-post="{{ post.id }}" id="react-happy" data-title="Happy">
+                                <!-- REACTION OPTION IMAGE -->
+                                <img class="reaction-option-image" src="{{ asset('img/reaction/happy.png') }}" alt="reaction-happy">
+                                <!-- /REACTION OPTION IMAGE -->
+                            </div>
+                            <!-- /REACTION OPTION -->
+
+                            <!-- REACTION OPTION -->
+                            <div class="reaction-option text-tooltip-tft reacting" data-react="funny" data-post="{{ post.id }}" id="react-funny" data-title="Funny">
+                                <!-- REACTION OPTION IMAGE -->
+                                <img class="reaction-option-image" src="{{ asset('img/reaction/funny.png') }}" alt="reaction-funny">
+                                <!-- /REACTION OPTION IMAGE -->
+                            </div>
+                            <!-- /REACTION OPTION -->
+
+                            <!-- REACTION OPTION -->
+                            <div class="reaction-option text-tooltip-tft reacting" data-react="wow" data-post="{{ post.id }}" id="react-wow" data-title="Wow">
+                                <!-- REACTION OPTION IMAGE -->
+                                <img class="reaction-option-image" src="{{ asset('img/reaction/wow.png') }}" alt="reaction-wow">
+                                <!-- /REACTION OPTION IMAGE -->
+                            </div>
+                            <!-- /REACTION OPTION -->
+
+                            <!-- REACTION OPTION -->
+                            <div class="reaction-option text-tooltip-tft reacting" data-react="angry" data-post="{{ post.id }}" id="react-angry" data-title="Angry">
+                                <!-- REACTION OPTION IMAGE -->
+                                <img class="reaction-option-image" id="react-angry" src="{{ asset('img/reaction/angry.png') }}" alt="reaction-angry">
+                                <!-- /REACTION OPTION IMAGE -->
+                            </div>
+                            <!-- /REACTION OPTION -->
+
+                            <!-- REACTION OPTION -->
+                            <div class="reaction-option text-tooltip-tft reacting" data-react="sad" data-post="{{ post.id }}" data-title="Sad" id="react-sad">
+                                <!-- REACTION OPTION IMAGE -->
+                                <img class="reaction-option-image" src="{{ asset('img/reaction/sad.png') }}" alt="reaction-sad">
+                                <!-- /REACTION OPTION IMAGE -->
+                            </div>
+                            <!-- /REACTION OPTION -->
+                        </div>
+                        <!-- /REACTION OPTIONS -->
+                    </div>
+                    <!-- /POST OPTION WRAP -->
+
+                    <!-- POST OPTION -->
+                    <div class="post-option active">
+                        <!-- POST OPTION ICON -->
+                        <svg class="post-option-icon icon-comment">
+                            <use xlink:href="#svg-comment"></use>
+                        </svg>
+                        <!-- /POST OPTION ICON -->
+
+                        <!-- POST OPTION TEXT -->
+                        <p class="post-option-text">Commentaires</p>
+                        <!-- /POST OPTION TEXT -->
+                    </div>
+                    <!-- /POST OPTION -->
+
+                </div>
+                <!-- /POST OPTIONS -->
+
+                <!-- POST COMMENT LIST -->
+                <div id="comments" class="post-comment-list">
+                    {% for comment in comments %}
+                        <div class="post-comment">
+                        <!-- USER AVATAR -->
+                        <a class="user-avatar small no-outline" href="{{ path('front_profil_user', {'pseudo': comment.user.pseudo}) }}">
+                            <!-- USER AVATAR CONTENT -->
+                            <div class="user-avatar-content">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-image-30-32" data-src="{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ comment.user.avatar }}"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR CONTENT -->
+
+                            <!-- USER AVATAR PROGRESS -->
+                            <div class="user-avatar-progress">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-progress-40-44"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR PROGRESS -->
+
+                            <!-- USER AVATAR PROGRESS BORDER -->
+                            <div class="user-avatar-progress-border">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-border-40-44"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR PROGRESS BORDER -->
+
+                            <!-- USER AVATAR BADGE -->
+                            <div class="user-avatar-badge">
+                                <!-- USER AVATAR BADGE BORDER -->
+                                <div class="user-avatar-badge-border">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-22-24"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR BADGE BORDER -->
+
+                                <!-- USER AVATAR BADGE CONTENT -->
+                                <div class="user-avatar-badge-content">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-dark-16-18"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR BADGE CONTENT -->
+
+                                <!-- USER AVATAR BADGE TEXT -->
+                                <p class="user-avatar-badge-text">6</p>
+                                <!-- /USER AVATAR BADGE TEXT -->
+                            </div>
+                            <!-- /USER AVATAR BADGE -->
+                        </a>
+                        <!-- /USER AVATAR -->
+                        <p class="post-comment-text"><a class="post-comment-text-author" href="{{ path('front_profil_user', {'pseudo': comment.user.pseudo}) }}">{{ comment.user.pseudo }}</a>{{ comment.text }}</p>
+
+                            <div class="content-actions">
+                                <!-- CONTENT ACTION -->
+                                <div class="content-action">
+
+                                    <!-- META LINE -->
+                                    <div class="meta-line">
+                                        <!-- META LINE TIMESTAMP -->
+                                        <p class="meta-line-timestamp">le {{ comment.publishedAt|date('d/m/Y à H:i') }}</p>
+                                        <!-- /META LINE TIMESTAMP -->
+                                    </div>
+                                    <!-- /META LINE -->
+                                </div>
+                                <!-- /CONTENT ACTION -->
+                            </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% if post.commentPosts|length >= 7 %}
+                    <p class="post-comment-heading" id="more_comments_post">Voir plus de commentaires <span class="highlighted"></span></p>
+                {% endif %}
+
+                    <!-- POST COMMENT FORM -->
+                    <div class="post-comment-form">
+                        <!-- USER AVATAR -->
+                        <div class="user-avatar small no-outline">
+                            <!-- USER AVATAR CONTENT -->
+                            <div class="user-avatar-content">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-image-30-32" data-src="{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ app.user.avatar }}"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR CONTENT -->
+
+                            <!-- USER AVATAR PROGRESS -->
+                            <div class="user-avatar-progress">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-progress-40-44"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR PROGRESS -->
+
+                            <!-- USER AVATAR PROGRESS BORDER -->
+                            <div class="user-avatar-progress-border">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-border-40-44"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR PROGRESS BORDER -->
+
+                            <!-- USER AVATAR BADGE -->
+                            <div class="user-avatar-badge">
+                                <!-- USER AVATAR BADGE BORDER -->
+                                <div class="user-avatar-badge-border">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-22-24"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR BADGE BORDER -->
+
+                                <!-- USER AVATAR BADGE CONTENT -->
+                                <div class="user-avatar-badge-content">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-dark-16-18"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR BADGE CONTENT -->
+
+                                <!-- USER AVATAR BADGE TEXT -->
+                                <p class="user-avatar-badge-text">24</p>
+                                <!-- /USER AVATAR BADGE TEXT -->
+                            </div>
+                            <!-- /USER AVATAR BADGE -->
+                        </div>
+                        <!-- /USER AVATAR -->
+
+                        <!-- FORM -->
+                        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                            <!-- FORM ROW -->
+                            <div class="form-row">
+                                <!-- FORM ITEM -->
+                                <div class="form-item">
+                                    <!-- FORM INPUT -->
+                                    <div class="form-input small">
+                                        {{ form_label(form.text) }}
+                                        {{ form_widget(form.text) }}
+                                        <small style="color:red">{{ form_errors(form.text) }}</small>
+                                    </div>
+                                    <!-- /FORM INPUT -->
+                                </div>
+                                <!-- /FORM ITEM -->
+                            </div>
+                            <!-- /FORM ROW -->
+                        {{ form_end(form) }}
+                        <!-- /FORM -->
+                    </div>
+                    <!-- /POST COMMENT FORM -->
+                </div>
+                <!-- /POST COMMENT LIST -->
+            </div>
+            <!-- /POST OPEN BODY -->
+        </article>
+        <!-- /POST OPEN -->
+    </div>
+    <!-- /CONTENT GRID -->
+
+    <!-- CONTENT GRID -->
+    <div class="content-grid medium">
+        <!-- SECTION HEADER -->
+        <div class="section-header medium">
+            <!-- SECTION HEADER INFO -->
+            <div class="section-header-info">
+                <!-- SECTION PRETITLE -->
+                <p class="section-pretitle">Browse Other</p>
+                <!-- /SECTION PRETITLE -->
+
+                <!-- SECTION TITLE -->
+                <h2 class="section-title">Related Posts</h2>
+                <!-- /SECTION TITLE -->
+            </div>
+            <!-- /SECTION HEADER INFO -->
+        </div>
+        <!-- /SECTION HEADER -->
+
+        <!-- GRID -->
+        <div class="grid grid-4-4 centered">
+            <!-- POST PREVIEW -->
+            <div class="post-preview">
+                <!-- POST PREVIEW IMAGE -->
+                <figure class="post-preview-image liquid">
+                    <img src="img/cover/10.jpg" alt="cover-10">
+                </figure>
+                <!-- /POST PREVIEW IMAGE -->
+
+                <!-- POST PREVIEW INFO -->
+                <div class="post-preview-info fixed-height">
+                    <!-- POST PREVIEW INFO TOP -->
+                    <div class="post-preview-info-top">
+                        <!-- POST PREVIEW TIMESTAMP -->
+                        <p class="post-preview-timestamp">3 weeks ago</p>
+                        <!-- /POST PREVIEW TIMESTAMP -->
+
+                        <!-- POST PREVIEW TITLE -->
+                        <p class="post-preview-title">I spoke with the developers of RoBot SaMurai II at the 2019 GamingCon</p>
+                        <!-- /POST PREVIEW TITLE -->
+                    </div>
+                    <!-- /POST PREVIEW INFO TOP -->
+
+                    <!-- POST PREVIEW INFO BOTTOM -->
+                    <div class="post-preview-info-bottom">
+                        <!-- POST PREVIEW TEXT -->
+                        <p class="post-preview-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut...</p>
+                        <!-- /POST PREVIEW TEXT -->
+
+                        <!-- POST PREVIEW LINK -->
+                        <a class="post-preview-link" href="profile-post.html">Read more...</a>
+                        <!-- /POST PREVIEW LINK -->
+                    </div>
+                    <!-- /POST PREVIEW INFO BOTTOM -->
+                </div>
+                <!-- /POST PREVIEW INFO -->
+
+                <!-- CONTENT ACTIONS -->
+                <div class="content-actions">
+                    <!-- CONTENT ACTION -->
+                    <div class="content-action">
+                        <!-- META LINE -->
+                        <div class="meta-line">
+                            <!-- META LINE LIST -->
+                            <div class="meta-line-list reaction-item-list">
+                                <!-- REACTION ITEM -->
+                                <div class="reaction-item">
+                                    <!-- REACTION IMAGE -->
+                                    <img class="reaction-image reaction-item-dropdown-trigger" src="img/reaction/happy.png" alt="reaction-happy">
+                                    <!-- /REACTION IMAGE -->
+
+                                    <!-- SIMPLE DROPDOWN -->
+                                    <div class="simple-dropdown padded reaction-item-dropdown">
+                                        <!-- SIMPLE DROPDOWN TEXT -->
+                                        <p class="simple-dropdown-text"><img class="reaction" src="img/reaction/happy.png" alt="reaction-happy"> <span class="bold">Happy</span></p>
+                                        <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                        <!-- SIMPLE DROPDOWN TEXT -->
+                                        <p class="simple-dropdown-text">Neko Bebop</p>
+                                        <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                        <!-- SIMPLE DROPDOWN TEXT -->
+                                        <p class="simple-dropdown-text">Nick Grissom</p>
+                                        <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                        <!-- SIMPLE DROPDOWN TEXT -->
+                                        <p class="simple-dropdown-text">Sarah Diamond</p>
+                                        <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                        <!-- SIMPLE DROPDOWN TEXT -->
+                                        <p class="simple-dropdown-text">Marcus Jhonson</p>
+                                        <!-- /SIMPLE DROPDOWN TEXT -->
+                                    </div>
+                                    <!-- /SIMPLE DROPDOWN -->
+                                </div>
+                                <!-- /REACTION ITEM -->
+
+                                <!-- REACTION ITEM -->
+                                <div class="reaction-item">
+                                    <!-- REACTION IMAGE -->
+                                    <img class="reaction-image reaction-item-dropdown-trigger" src="img/reaction/love.png" alt="reaction-love">
+                                    <!-- /REACTION IMAGE -->
+
+                                    <!-- SIMPLE DROPDOWN -->
+                                    <div class="simple-dropdown padded reaction-item-dropdown">
+                                        <!-- SIMPLE DROPDOWN TEXT -->
+                                        <p class="simple-dropdown-text"><img class="reaction" src="img/reaction/love.png" alt="reaction-love"> <span class="bold">Love</span></p>
+                                        <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                        <!-- SIMPLE DROPDOWN TEXT -->
+                                        <p class="simple-dropdown-text">Jett Spiegel</p>
+                                        <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                        <!-- SIMPLE DROPDOWN TEXT -->
+                                        <p class="simple-dropdown-text">Jane Rodgers</p>
+                                        <!-- /SIMPLE DROPDOWN TEXT -->
+                                    </div>
+                                    <!-- /SIMPLE DROPDOWN -->
+                                </div>
+                                <!-- /REACTION ITEM -->
+
+                                <!-- REACTION ITEM -->
+                                <div class="reaction-item">
+                                    <!-- REACTION IMAGE -->
+                                    <img class="reaction-image reaction-item-dropdown-trigger" src="img/reaction/funny.png" alt="reaction-funny">
+                                    <!-- /REACTION IMAGE -->
+
+                                    <!-- SIMPLE DROPDOWN -->
+                                    <div class="simple-dropdown padded reaction-item-dropdown">
+                                        <!-- SIMPLE DROPDOWN TEXT -->
+                                        <p class="simple-dropdown-text"><img class="reaction" src="img/reaction/funny.png" alt="reaction-funny"> <span class="bold">Funny</span></p>
+                                        <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                        <!-- SIMPLE DROPDOWN TEXT -->
+                                        <p class="simple-dropdown-text">Neko Bebop</p>
+                                        <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                        <!-- SIMPLE DROPDOWN TEXT -->
+                                        <p class="simple-dropdown-text">Nick Grissom</p>
+                                        <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                        <!-- SIMPLE DROPDOWN TEXT -->
+                                        <p class="simple-dropdown-text">Sarah Diamond</p>
+                                        <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                        <!-- SIMPLE DROPDOWN TEXT -->
+                                        <p class="simple-dropdown-text">Jett Spiegel</p>
+                                        <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                        <!-- SIMPLE DROPDOWN TEXT -->
+                                        <p class="simple-dropdown-text">Marcus Jhonson</p>
+                                        <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                        <!-- SIMPLE DROPDOWN TEXT -->
+                                        <p class="simple-dropdown-text">Jane Rodgers</p>
+                                        <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                        <!-- SIMPLE DROPDOWN TEXT -->
+                                        <p class="simple-dropdown-text"><span class="bold">and 10 more...</span></p>
+                                        <!-- /SIMPLE DROPDOWN TEXT -->
+                                    </div>
+                                    <!-- /SIMPLE DROPDOWN -->
+                                </div>
+                                <!-- /REACTION ITEM -->
+                            </div>
+                            <!-- /REACTION ITEM LIST -->
+
+                            <!-- META LINE TEXT -->
+                            <p class="meta-line-text">21</p>
+                            <!-- /META LINE TEXT -->
+                        </div>
+                        <!-- /META LINE -->
+                    </div>
+                    <!-- /CONTENT ACTION -->
+
+                    <!-- CONTENT ACTION -->
+                    <div class="content-action">
+                        <!-- META LINE -->
+                        <div class="meta-line">
+                            <!-- META LINE LINK -->
+                            <a class="meta-line-link" href="profile-post.html#comments">8 Comments</a>
+                            <!-- /META LINE LINK -->
+                        </div>
+                        <!-- /META LINE -->
+
+                        <!-- META LINE -->
+                        <div class="meta-line">
+                            <!-- META LINE TEXT -->
+                            <p class="meta-line-text">0 Shares</p>
+                            <!-- /META LINE TEXT -->
+                        </div>
+                        <!-- /META LINE -->
+                    </div>
+                    <!-- /CONTENT ACTION -->
+                </div>
+                <!-- /CONTENT ACTIONS -->
+            </div>
+            <!-- /POST PREVIEW -->
+
+            <!-- POST PREVIEW -->
+            <div class="post-preview">
+                <!-- POST PREVIEW IMAGE -->
+                <figure class="post-preview-image liquid">
+                    <img src="img/cover/20.jpg" alt="cover-20">
+                </figure>
+                <!-- /POST PREVIEW IMAGE -->
+
+                <!-- POST PREVIEW INFO -->
+                <div class="post-preview-info fixed-height">
+                    <!-- POST PREVIEW INFO TOP -->
+                    <div class="post-preview-info-top">
+                        <!-- POST PREVIEW TIMESTAMP -->
+                        <p class="post-preview-timestamp">4 weeks ago</p>
+                        <!-- /POST PREVIEW TIMESTAMP -->
+
+                        <!-- POST PREVIEW TITLE -->
+                        <p class="post-preview-title">I will be at this month's StreamCon with NekoBebop</p>
+                        <!-- /POST PREVIEW TITLE -->
+                    </div>
+                    <!-- /POST PREVIEW INFO TOP -->
+
+                    <!-- POST PREVIEW INFO BOTTOM -->
+                    <div class="post-preview-info-bottom">
+                        <!-- POST PREVIEW TEXT -->
+                        <p class="post-preview-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut...</p>
+                        <!-- /POST PREVIEW TEXT -->
+
+                        <!-- POST PREVIEW LINK -->
+                        <a class="post-preview-link" href="profile-post.html">Read more...</a>
+                        <!-- /POST PREVIEW LINK -->
+                    </div>
+                    <!-- /POST PREVIEW INFO BOTTOM -->
+                </div>
+                <!-- /POST PREVIEW INFO -->
+
+                <!-- CONTENT ACTIONS -->
+                <div class="content-actions">
+                    <!-- CONTENT ACTION -->
+                    <div class="content-action">
+                        <!-- META LINE -->
+                        <div class="meta-line">
+                            <!-- META LINE LIST -->
+                            <div class="meta-line-list reaction-item-list">
+                                <!-- REACTION ITEM -->
+                                <div class="reaction-item">
+                                    <!-- REACTION IMAGE -->
+                                    <img class="reaction-image reaction-item-dropdown-trigger" src="img/reaction/happy.png" alt="reaction-happy">
+                                    <!-- /REACTION IMAGE -->
+
+                                    <!-- SIMPLE DROPDOWN -->
+                                    <div class="simple-dropdown padded reaction-item-dropdown">
+                                        <!-- SIMPLE DROPDOWN TEXT -->
+                                        <p class="simple-dropdown-text"><img class="reaction" src="img/reaction/happy.png" alt="reaction-happy"> <span class="bold">Happy</span></p>
+                                        <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                        <!-- SIMPLE DROPDOWN TEXT -->
+                                        <p class="simple-dropdown-text">Neko Bebop</p>
+                                        <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                        <!-- SIMPLE DROPDOWN TEXT -->
+                                        <p class="simple-dropdown-text">Nick Grissom</p>
+                                        <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                        <!-- SIMPLE DROPDOWN TEXT -->
+                                        <p class="simple-dropdown-text">Sarah Diamond</p>
+                                        <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                        <!-- SIMPLE DROPDOWN TEXT -->
+                                        <p class="simple-dropdown-text">Marcus Jhonson</p>
+                                        <!-- /SIMPLE DROPDOWN TEXT -->
+                                    </div>
+                                    <!-- /SIMPLE DROPDOWN -->
+                                </div>
+                                <!-- /REACTION ITEM -->
+
+                                <!-- REACTION ITEM -->
+                                <div class="reaction-item">
+                                    <!-- REACTION IMAGE -->
+                                    <img class="reaction-image reaction-item-dropdown-trigger" src="img/reaction/love.png" alt="reaction-love">
+                                    <!-- /REACTION IMAGE -->
+
+                                    <!-- SIMPLE DROPDOWN -->
+                                    <div class="simple-dropdown padded reaction-item-dropdown">
+                                        <!-- SIMPLE DROPDOWN TEXT -->
+                                        <p class="simple-dropdown-text"><img class="reaction" src="img/reaction/love.png" alt="reaction-love"> <span class="bold">Love</span></p>
+                                        <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                        <!-- SIMPLE DROPDOWN TEXT -->
+                                        <p class="simple-dropdown-text">Jett Spiegel</p>
+                                        <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                        <!-- SIMPLE DROPDOWN TEXT -->
+                                        <p class="simple-dropdown-text">Jane Rodgers</p>
+                                        <!-- /SIMPLE DROPDOWN TEXT -->
+                                    </div>
+                                    <!-- /SIMPLE DROPDOWN -->
+                                </div>
+                                <!-- /REACTION ITEM -->
+
+                                <!-- REACTION ITEM -->
+                                <div class="reaction-item">
+                                    <!-- REACTION IMAGE -->
+                                    <img class="reaction-image reaction-item-dropdown-trigger" src="img/reaction/like.png" alt="reaction-like">
+                                    <!-- /REACTION IMAGE -->
+
+                                    <!-- SIMPLE DROPDOWN -->
+                                    <div class="simple-dropdown padded reaction-item-dropdown">
+                                        <!-- SIMPLE DROPDOWN TEXT -->
+                                        <p class="simple-dropdown-text"><img class="reaction" src="img/reaction/like.png" alt="reaction-like"> <span class="bold">Like</span></p>
+                                        <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                        <!-- SIMPLE DROPDOWN TEXT -->
+                                        <p class="simple-dropdown-text">Neko Bebop</p>
+                                        <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                        <!-- SIMPLE DROPDOWN TEXT -->
+                                        <p class="simple-dropdown-text">Nick Grissom</p>
+                                        <!-- /SIMPLE DROPDOWN TEXT -->
+                                    </div>
+                                    <!-- /SIMPLE DROPDOWN -->
+                                </div>
+                                <!-- /REACTION ITEM -->
+                            </div>
+                            <!-- /REACTION ITEM LIST -->
+
+                            <!-- META LINE TEXT -->
+                            <p class="meta-line-text">8</p>
+                            <!-- /META LINE TEXT -->
+                        </div>
+                        <!-- /META LINE -->
+                    </div>
+                    <!-- /CONTENT ACTION -->
+
+                    <!-- CONTENT ACTION -->
+                    <div class="content-action">
+                        <!-- META LINE -->
+                        <div class="meta-line">
+                            <!-- META LINE LINK -->
+                            <a class="meta-line-link" href="profile-post.html#comments">2 Comments</a>
+                            <!-- /META LINE LINK -->
+                        </div>
+                        <!-- /META LINE -->
+
+                        <!-- META LINE -->
+                        <div class="meta-line">
+                            <!-- META LINE TEXT -->
+                            <p class="meta-line-text">0 Shares</p>
+                            <!-- /META LINE TEXT -->
+                        </div>
+                        <!-- /META LINE -->
+                    </div>
+                    <!-- /CONTENT ACTION -->
+                </div>
+                <!-- /CONTENT ACTIONS -->
+            </div>
+            <!-- /POST PREVIEW -->
+        </div>
+        <!-- /GRID -->
+    </div>
+    <!-- /CONTENT GRID -->
+{% endblock %}
+
+{% block javascript %}
+{{ parent() }}
+<script>
+const loadComments = document.getElementById('more_comments_post');
+let page = 2;
+document.addEventListener("DOMContentLoaded", function(event) {
+
+  loadComments.addEventListener('click', function() {
+
+    const postId = "{{ post.id }}";
+    const data = {
+        postId: postId,
+        pageId: page
+    };
+
+    let datas = new FormData();
+    datas.append("data", JSON.stringify(data));
+
+    fetch("{{ path('front_profil_blog_single', {'slug': post.slug}) }}", { method: 'POST', body: datas })
+        .then(response => response.json())
+        .then(data => {
+            if (data.nbPage < 6) {
+                loadComments.style.display = 'none';
+            }
+            document.getElementById('comments').insertAdjacentHTML('beforeend', data.comments.content);
+            page++;
+            loadComments.setAttribute('data-page', page);
+            console.log(loadComments)
+            app.plugins.createHexagon({
+              container: '.hexagon-148-164',
+              width: 148,
+              height: 164,
+              roundedCorners: true,
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-progress-124-136',
+              width: 124,
+              height: 136,
+              lineWidth: 8,
+              roundedCorners: true,
+              gradient: {
+                colors: ['#41efff', '#615dfa']
+              },
+              scale: {
+                start: 0,
+                end: 1,
+                stop: .74
+              }
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-border-124-136',
+              width: 124,
+              height: 136,
+              lineWidth: 8,
+              roundedCorners: true,
+              lineColor: '#e7e8ee'
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-image-100-110',
+              width: 100,
+              height: 110,
+              roundedCorners: true,
+              clip: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-120-132',
+              width: 120,
+              height: 132,
+              roundedCorners: true,
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-progress-100-110',
+              width: 100,
+              height: 110,
+              lineWidth: 6,
+              roundedCorners: true,
+              gradient: {
+                colors: ['#41efff', '#615dfa']
+              },
+              scale: {
+                start: 0,
+                end: 1,
+                stop: .8
+              }
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-border-100-110',
+              width: 100,
+              height: 110,
+              lineWidth: 6,
+              roundedCorners: true,
+              lineColor: '#e7e8ee'
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-image-82-90',
+              width: 82,
+              height: 90,
+              roundedCorners: true,
+              roundedCornerRadius: 3,
+              clip: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-100-110',
+              width: 100,
+              height: 110,
+              roundedCorners: true,
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-progress-84-92',
+              width: 84,
+              height: 92,
+              lineWidth: 5,
+              roundedCorners: true,
+              roundedCornerRadius: 3,
+              gradient: {
+                colors: ['#41efff', '#615dfa']
+              },
+              scale: {
+                start: 0,
+                end: 1,
+                stop: .8
+              }
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-border-84-92',
+              width: 84,
+              height: 92,
+              lineWidth: 5,
+              roundedCorners: true,
+              roundedCornerRadius: 3,
+              lineColor: '#e7e8ee'
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-image-68-74',
+              width: 68,
+              height: 74,
+              roundedCorners: true,
+              roundedCornerRadius: 3,
+              clip: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-50-56',
+              width: 50,
+              height: 56,
+              roundedCorners: true,
+              roundedCornerRadius: 2,
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-progress-40-44',
+              width: 40,
+              height: 44,
+              lineWidth: 3,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              gradient: {
+                colors: ['#41efff', '#615dfa']
+              },
+              scale: {
+                start: 0,
+                end: 1,
+                stop: .8
+              }
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-border-40-44',
+              width: 40,
+              height: 44,
+              lineWidth: 3,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              lineColor: '#e7e8ee'
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-image-30-32',
+              width: 30,
+              height: 32,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              clip: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-40-44',
+              width: 40,
+              height: 44,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-dark-32-34',
+              width: 32,
+              height: 34,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              lineColor: '#45437f',
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-32-36',
+              width: 32,
+              height: 36,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              lineColor: '#fff',
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-dark-26-28',
+              width: 26,
+              height: 28,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              lineColor: '#45437f',
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-28-32',
+              width: 28,
+              height: 32,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              lineColor: '#fff',
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-dark-22-24',
+              width: 22,
+              height: 24,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              lineColor: '#45437f',
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-22-24',
+              width: 22,
+              height: 24,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              lineColor: '#fff',
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-dark-16-18',
+              width: 16,
+              height: 18,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              lineColor: '#45437f',
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-120-130',
+              width: 120,
+              height: 130,
+              roundedCorners: true,
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-100-108',
+              width: 100,
+              height: 108,
+              roundedCorners: true,
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-image-124-136',
+              width: 124,
+              height: 136,
+              roundedCorners: true,
+              clip: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-image-84-92',
+              width: 84,
+              height: 92,
+              roundedCorners: true,
+              clip: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-34-36',
+              width: 34,
+              height: 36,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              fill: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-image-40-44',
+              width: 40,
+              height: 44,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              clip: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-image-24-26',
+              width: 24,
+              height: 26,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              clip: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-image-18-20',
+              width: 18,
+              height: 20,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              clip: true
+            });
+
+            app.plugins.createHexagon({
+              container: '.hexagon-overlay-30-32',
+              width: 30,
+              height: 32,
+              roundedCorners: true,
+              roundedCornerRadius: 1,
+              lineColor: 'rgba(97, 93, 250, .9)',
+              fill: true
+            });
+        })
+    })
+});
+
+</script>
+{% endblock %}

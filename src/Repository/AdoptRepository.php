@@ -31,6 +31,39 @@ class AdoptRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function getAdopts(User $user)
+    {
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.userTo', 'userTo')
+            ->addSelect('userTo')
+            ->leftJoin('a.userFrom', 'userFrom')
+            ->addSelect('userFrom')
+            ->where('a.userFrom = :user')
+            ->orWhere('a.userTo = :user')
+            ->setParameter('user', $user)
+            ->andWhere('a.isValid = 1')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function searchAdopts(User $user, string $search)
+    {
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.userTo', 'userTo')
+            ->addSelect('userTo')
+            ->leftJoin('a.userFrom', 'userFrom')
+            ->addSelect('userFrom')
+            ->where('a.userFrom = :user')
+            ->orWhere('a.userTo = :user')
+            ->setParameter('user', $user)
+            ->andWhere('a.isValid = 1')
+            ->andWhere('userFrom.pseudo LIKE :search')
+            ->orWhere('userTo.pseudo LIKE :search')
+            ->setParameter('search', '%'.$search.'%')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Adopt[] Returns an array of Adopt objects
     //  */

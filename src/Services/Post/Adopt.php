@@ -19,7 +19,12 @@ class Adopt
 
     public function getAdoptAxist(User $userFrom, User $userTo)
     {
-        return $this->adoptRepository->findOneBy(['userFrom' => $userFrom, 'userTo' => $userTo]);
+        $resultOne = $this->adoptRepository->findOneBy(['userFrom' => $userFrom, 'userTo' => $userTo]);
+        if (!$resultOne) {
+            $resultOne = $this->adoptRepository->findOneBy(['userFrom' => $userTo, 'userTo' => $userFrom]);
+        }
+
+        return $resultOne;
     }
 
     public function getAllAdoptUser(User $user)

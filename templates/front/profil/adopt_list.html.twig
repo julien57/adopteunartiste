@@ -1,0 +1,704 @@
+{% extends 'base_profil.html.twig' %}
+
+{% block body %}
+    <div class="profile-header">
+        <!-- PROFILE HEADER COVER -->
+        <figure class="profile-header-cover liquid">
+            <img src="{% if userProfil.cover %}{{ asset( constant('App\\Services\\File\\UploadFile::COVERUPLOAD_DIR')) ~ userProfil.cover }}{% else %}{{ asset('img/cover/01.jpg') }}{% endif %}" alt="photo couverture {{ userProfil.pseudo }}">
+        </figure>
+        <!-- /PROFILE HEADER COVER -->
+
+        <!-- PROFILE HEADER INFO -->
+        <div class="profile-header-info">
+            <!-- USER SHORT DESCRIPTION -->
+            <div class="user-short-description big">
+                <!-- USER SHORT DESCRIPTION AVATAR -->
+                <a class="user-short-description-avatar user-avatar big" href="profile-timeline.html">
+                    <!-- USER AVATAR BORDER -->
+                    <div class="user-avatar-border">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-148-164"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR BORDER -->
+
+                    <!-- USER AVATAR CONTENT -->
+                    <div class="user-avatar-content">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-image-100-110" data-src="{% if userProfil.avatar %}{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ userProfil.avatar }}{% else %}{{ asset('img/avatar/01.jpg') }}{% endif %}"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR CONTENT -->
+
+                    <!-- USER AVATAR PROGRESS -->
+                    <div class="user-avatar-progress">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-progress-124-136"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR PROGRESS -->
+
+                    <!-- USER AVATAR PROGRESS BORDER -->
+                    <div class="user-avatar-progress-border">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-border-124-136"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR PROGRESS BORDER -->
+
+                    <!-- USER AVATAR BADGE -->
+                    <div class="user-avatar-badge">
+                        <!-- USER AVATAR BADGE BORDER -->
+                        <div class="user-avatar-badge-border">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-40-44"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR BADGE BORDER -->
+
+                        <!-- USER AVATAR BADGE CONTENT -->
+                        <div class="user-avatar-badge-content">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-dark-32-34"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR BADGE CONTENT -->
+
+                        <!-- USER AVATAR BADGE TEXT -->
+                        <p class="user-avatar-badge-text">24</p>
+                        <!-- /USER AVATAR BADGE TEXT -->
+                    </div>
+                    <!-- /USER AVATAR BADGE -->
+                </a>
+                <!-- /USER SHORT DESCRIPTION AVATAR -->
+
+                <!-- USER SHORT DESCRIPTION AVATAR -->
+                <a class="user-short-description-avatar user-short-description-avatar-mobile user-avatar medium" href="profile-timeline.html">
+                    <!-- USER AVATAR BORDER -->
+                    <div class="user-avatar-border">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-120-132"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR BORDER -->
+
+                    <!-- USER AVATAR CONTENT -->
+                    <div class="user-avatar-content">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-image-82-90" data-src="{% if userProfil.avatar %}{% else %}{{ asset('img/avatar/01.jpg') }}{% endif %}"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR CONTENT -->
+
+                    <!-- USER AVATAR PROGRESS -->
+                    <div class="user-avatar-progress">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-progress-100-110"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR PROGRESS -->
+
+                    <!-- USER AVATAR PROGRESS BORDER -->
+                    <div class="user-avatar-progress-border">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-border-100-110"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR PROGRESS BORDER -->
+
+                    <!-- USER AVATAR BADGE -->
+                    <div class="user-avatar-badge">
+                        <!-- USER AVATAR BADGE BORDER -->
+                        <div class="user-avatar-badge-border">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-32-36"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR BADGE BORDER -->
+
+                        <!-- USER AVATAR BADGE CONTENT -->
+                        <div class="user-avatar-badge-content">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-dark-26-28"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR BADGE CONTENT -->
+
+                        <!-- USER AVATAR BADGE TEXT -->
+                        <p class="user-avatar-badge-text">24</p>
+                        <!-- /USER AVATAR BADGE TEXT -->
+                    </div>
+                    <!-- /USER AVATAR BADGE -->
+                </a>
+                <!-- /USER SHORT DESCRIPTION AVATAR -->
+
+                <!-- USER SHORT DESCRIPTION TITLE -->
+                <p class="user-short-description-title"><a href="profile-timeline.html">{{ userProfil.domainArtist.title }}</a></p>
+                <!-- /USER SHORT DESCRIPTION TITLE -->
+
+                <!-- USER SHORT DESCRIPTION TEXT -->
+                <p class="user-short-description-text"><a href="{{ userProfil.website }}" target="_blank">{{ userProfil.website }}</a></p>
+                <!-- /USER SHORT DESCRIPTION TEXT -->
+            </div>
+            <!-- /USER SHORT DESCRIPTION -->
+
+            <!-- PROFILE HEADER SOCIAL LINKS WRAP -->
+            <div class="profile-header-social-links-wrap">
+                <!-- PROFILE HEADER SOCIAL LINKS -->
+                <div id="profile-header-social-links-slider" class="profile-header-social-links">
+
+                    {% if userProfil.facebook %}
+                        <div class="profile-header-social-link">
+                            <a class="social-link facebook" target="_blank" href="{{ userProfil.facebook }}">
+                                <svg class="icon-facebook">
+                                    <use xlink:href="#svg-facebook"></use>
+                                </svg>
+                            </a>
+                        </div>
+                    {% endif %}
+
+                    {% if userProfil.twitter %}
+                        <div class="profile-header-social-link">
+                            <a class="social-link twitter" target="_blank"  href="{{ userProfil.twitter }}">
+                                <svg class="icon-twitter">
+                                    <use xlink:href="#svg-twitter"></use>
+                                </svg>
+                            </a>
+                        </div>
+                    {% endif %}
+
+                    {% if userProfil.instagram %}
+                        <div class="profile-header-social-link">
+                            <a class="social-link instagram" target="_blank"  href="{{ userProfil.instagram }}">
+                                <svg class="icon-instagram">
+                                    <use xlink:href="#svg-instagram"></use>
+                                </svg>
+                            </a>
+                        </div>
+                    {% endif %}
+
+                    {% if userProfil.twitch %}
+                        <div class="profile-header-social-link">
+                            <a class="social-link twitch" target="_blank"  href="{{ userProfil.twitch }}">
+                                <svg class="icon-twitch">
+                                    <use xlink:href="#svg-twitch"></use>
+                                </svg>
+                            </a>
+                        </div>
+                    {% endif %}
+
+                    {% if userProfil.youtube %}
+                        <div class="profile-header-social-link">
+                            <a class="social-link youtube" href="{{ userProfil.youtube }}">
+                                <svg class="icon-youtube">
+                                    <use xlink:href="#svg-youtube"></use>
+                                </svg>
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+
+            </div>
+
+            <!-- USER STATS -->
+            <div class="user-stats">
+                <!-- USER STAT -->
+                <div class="user-stat big">
+                    <!-- USER STAT TITLE -->
+                    <p class="user-stat-title" id="nb_published">{{ userProfil.posts|length }}</p>
+                    <!-- /USER STAT TITLE -->
+
+                    <!-- USER STAT TEXT -->
+                    <p class="user-stat-text">publications</p>
+                    <!-- /USER STAT TEXT -->
+                </div>
+                <!-- /USER STAT -->
+
+                <!-- USER STAT -->
+                <div class="user-stat big">
+                    <!-- USER STAT TITLE -->
+                    <p class="user-stat-title">{{ post_adopt.getAllAdoptUser(userProfil)|length }}</p>
+                    <!-- /USER STAT TITLE -->
+
+                    <!-- USER STAT TEXT -->
+                    <p class="user-stat-text">Adoptés</p>
+                    <!-- /USER STAT TEXT -->
+                </div>
+                <!-- /USER STAT -->
+
+                <!-- USER STAT -->
+                <div class="user-stat big">
+                    <!-- USER STAT TITLE -->
+                    <p class="user-stat-title">{{ userProfil.nbVisit }}</p>
+                    <!-- /USER STAT TITLE -->
+
+                    <!-- USER STAT TEXT -->
+                    <p class="user-stat-text">vues</p>
+                    <!-- /USER STAT TEXT -->
+                </div>
+                <!-- /USER STAT -->
+
+                <!-- USER STAT -->
+                <div class="user-stat big">
+                    <!-- USER STAT IMAGE -->
+                    <img class="user-stat-image" src="{{ asset('img/flag/usa.png') }}" alt="flag-usa">
+                    <!-- /USER STAT IMAGE -->
+
+                    <!-- USER STAT TEXT -->
+                    <p class="user-stat-text">usa</p>
+                    <!-- /USER STAT TEXT -->
+                </div>
+                <!-- /USER STAT -->
+            </div>
+            <!-- /USER STATS -->
+
+            {% if app.user != userProfil %}
+                <!-- PROFILE HEADER INFO ACTIONS -->
+                <div class="profile-header-info-actions">
+                    <!-- PROFILE HEADER INFO ACTION -->
+                    <button class="profile-header-info-action button secondary" id="btn_adopt">{% if post_adopt.getAdoptAxist(userProfil, app.user) %}Abandonner{% else %}Adopter{% endif %}</button>
+                    <!-- /PROFILE HEADER INFO ACTION -->
+
+                    <!-- PROFILE HEADER INFO ACTION -->
+                    <button class="profile-header-info-action button primary"><span class="hide-text-mobile">Send</span> Message</button>
+                    <!-- /PROFILE HEADER INFO ACTION -->
+                </div>
+            {% endif %}
+            <!-- /PROFILE HEADER INFO ACTIONS -->
+        </div>
+        <!-- /PROFILE HEADER INFO -->
+    </div>
+    <!-- /PROFILE HEADER -->
+
+    <!-- SECTION NAVIGATION -->
+    <nav class="section-navigation">
+        <!-- SECTION MENU -->
+        <div id="section-navigation-slider" class="section-menu">
+            <!-- SECTION MENU ITEM -->
+            <a class="section-menu-item" href="profile-about.html">
+                <!-- SECTION MENU ITEM ICON -->
+                <svg class="section-menu-item-icon icon-profile">
+                    <use xlink:href="#svg-profile"></use>
+                </svg>
+                <!-- /SECTION MENU ITEM ICON -->
+
+                <!-- SECTION MENU ITEM TEXT -->
+                <p class="section-menu-item-text">About</p>
+                <!-- /SECTION MENU ITEM TEXT -->
+            </a>
+            <!-- /SECTION MENU ITEM -->
+
+            <!-- SECTION MENU ITEM -->
+            <a class="section-menu-item" href="{{ path('front_profil_user', {'pseudo': userProfil.pseudo}) }}">
+                <!-- SECTION MENU ITEM ICON -->
+                <svg class="section-menu-item-icon icon-timeline">
+                    <use xlink:href="#svg-timeline"></use>
+                </svg>
+                <!-- /SECTION MENU ITEM ICON -->
+
+                <!-- SECTION MENU ITEM TEXT -->
+                <p class="section-menu-item-text">Timeline</p>
+                <!-- /SECTION MENU ITEM TEXT -->
+            </a>
+            <!-- /SECTION MENU ITEM -->
+
+            <!-- SECTION MENU ITEM -->
+            <a class="section-menu-item active" href="{{ path('front_profile_adopt_list', {'pseudo': userProfil.pseudo}) }}">
+                <!-- SECTION MENU ITEM ICON -->
+                <svg class="section-menu-item-icon icon-friend">
+                    <use xlink:href="#svg-friend"></use>
+                </svg>
+                <!-- /SECTION MENU ITEM ICON -->
+
+                <!-- SECTION MENU ITEM TEXT -->
+                <p class="section-menu-item-text">Adoptions</p>
+                <!-- /SECTION MENU ITEM TEXT -->
+            </a>
+
+            <!-- SECTION MENU ITEM -->
+            <a class="section-menu-item" href="{{ path('front_profile_photos', {'pseudo': userProfil.pseudo}) }}">
+                <!-- SECTION MENU ITEM ICON -->
+                <svg class="section-menu-item-icon icon-photos">
+                    <use xlink:href="#svg-photos"></use>
+                </svg>
+                <!-- /SECTION MENU ITEM ICON -->
+
+                <!-- SECTION MENU ITEM TEXT -->
+                <p class="section-menu-item-text">Photos</p>
+                <!-- /SECTION MENU ITEM TEXT -->
+            </a>
+            <!-- /SECTION MENU ITEM -->
+
+            <!-- SECTION MENU ITEM -->
+            <a class="section-menu-item" href="{{ path('front_profil_blog_list', {'pseudo': userProfil.pseudo}) }}">
+                <!-- SECTION MENU ITEM ICON -->
+                <svg class="section-menu-item-icon icon-blog-posts">
+                    <use xlink:href="#svg-blog-posts"></use>
+                </svg>
+                <!-- /SECTION MENU ITEM ICON -->
+
+                <!-- SECTION MENU ITEM TEXT -->
+                <p class="section-menu-item-text">Blog</p>
+                <!-- /SECTION MENU ITEM TEXT -->
+            </a>
+            <!-- /SECTION MENU ITEM -->
+
+            <!-- SECTION MENU ITEM -->
+            <a class="section-menu-item" href="profile-store.html">
+                <!-- SECTION MENU ITEM ICON -->
+                <svg class="section-menu-item-icon icon-store">
+                    <use xlink:href="#svg-store"></use>
+                </svg>
+                <!-- /SECTION MENU ITEM ICON -->
+
+                <!-- SECTION MENU ITEM TEXT -->
+                <p class="section-menu-item-text">Store</p>
+                <!-- /SECTION MENU ITEM TEXT -->
+            </a>
+            <!-- /SECTION MENU ITEM -->
+        </div>
+        <!-- /SECTION MENU -->
+
+        <!-- SLIDER CONTROLS -->
+        <div id="section-navigation-slider-controls" class="slider-controls">
+            <!-- SLIDER CONTROL -->
+            <div class="slider-control left">
+                <!-- SLIDER CONTROL ICON -->
+                <svg class="slider-control-icon icon-small-arrow">
+                    <use xlink:href="#svg-small-arrow"></use>
+                </svg>
+                <!-- /SLIDER CONTROL ICON -->
+            </div>
+            <!-- /SLIDER CONTROL -->
+
+            <!-- SLIDER CONTROL -->
+            <div class="slider-control right">
+                <!-- SLIDER CONTROL ICON -->
+                <svg class="slider-control-icon icon-small-arrow">
+                    <use xlink:href="#svg-small-arrow"></use>
+                </svg>
+                <!-- /SLIDER CONTROL ICON -->
+            </div>
+            <!-- /SLIDER CONTROL -->
+        </div>
+        <!-- /SLIDER CONTROLS -->
+    </nav>
+    <!-- /SECTION NAVIGATION -->
+
+    <!-- GRID -->
+    <section class="section">
+        <!-- SECTION HEADER -->
+        <div class="section-header">
+            <!-- SECTION HEADER INFO -->
+            <div class="section-header-info">
+
+                <!-- SECTION TITLE -->
+                <h2 class="section-title">Adoptés <span class="highlighted">{{ countAdopt }}</span></h2>
+                <!-- /SECTION TITLE -->
+            </div>
+            <!-- /SECTION HEADER INFO -->
+        </div>
+        <!-- /SECTION HEADER -->
+
+        <!-- SECTION FILTERS BAR -->
+        <div class="section-filters-bar v1">
+            <!-- SECTION FILTERS BAR ACTIONS -->
+            <div class="section-filters-bar-actions">
+                <!-- FORM -->
+                {{ form_start(form) }}
+                    <!-- FORM INPUT -->
+                    <div class="form-input small with-button">
+                        {{ form_row(form.searchUser) }}
+                        <!-- BUTTON -->
+                        <button class="button primary">
+                            <!-- ICON MAGNIFYING GLASS -->
+                            <svg class="icon-magnifying-glass">
+                                <use xlink:href="#svg-magnifying-glass"></use>
+                            </svg>
+                            <!-- /ICON MAGNIFYING GLASS -->
+                        </button>
+                        <!-- /BUTTON -->
+                    </div>
+                {{ form_end(form) }}
+                <!-- /FORM -->
+            </div>
+        </div>
+        <!-- /SECTION FILTERS BAR -->
+
+        <!-- GRID -->
+        <div class="grid grid-4-4-4 centered">
+            {% for adopt in adopts %}
+                <div class="user-preview">
+                <!-- USER PREVIEW COVER -->
+                <figure class="user-preview-cover liquid">
+                    <img src="{% if adopt.userTo != userProfil %}{{ asset( constant('App\\Services\\File\\UploadFile::COVERUPLOAD_DIR')) ~ adopt.userTo.cover }}{% else %}{{ asset( constant('App\\Services\\File\\UploadFile::COVERUPLOAD_DIR')) ~ adopt.userFrom.cover }}{% endif %}" alt="cover-04">
+                </figure>
+                <!-- /USER PREVIEW COVER -->
+
+                <!-- USER PREVIEW INFO -->
+                <div class="user-preview-info">
+                    <!-- USER SHORT DESCRIPTION -->
+                    <div class="user-short-description">
+                        <!-- USER SHORT DESCRIPTION AVATAR -->
+                        <a class="user-short-description-avatar user-avatar medium" href="{% if adopt.userTo != userProfil %}{{ path('front_profil_user', {'pseudo': adopt.userTo.pseudo}) }}{% else %}{{ path('front_profil_user', {'pseudo': adopt.userFrom.pseudo}) }}{% endif %}">
+                            <!-- USER AVATAR BORDER -->
+                            <div class="user-avatar-border">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-120-132"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR BORDER -->
+
+                            <!-- USER AVATAR CONTENT -->
+                            <div class="user-avatar-content">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-image-82-90" data-src="{% if adopt.userTo != userProfil %}{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ adopt.userTo.avatar }}{% else %}{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ adopt.userFrom.avatar }}{% endif %}"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR CONTENT -->
+
+                            <!-- USER AVATAR PROGRESS -->
+                            <div class="user-avatar-progress">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-progress-100-110"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR PROGRESS -->
+
+                            <!-- USER AVATAR PROGRESS BORDER -->
+                            <div class="user-avatar-progress-border">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-border-100-110"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR PROGRESS BORDER -->
+
+                            <!-- USER AVATAR BADGE -->
+                            <div class="user-avatar-badge">
+                                <!-- USER AVATAR BADGE BORDER -->
+                                <div class="user-avatar-badge-border">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-32-36"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR BADGE BORDER -->
+
+                                <!-- USER AVATAR BADGE CONTENT -->
+                                <div class="user-avatar-badge-content">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-dark-26-28"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR BADGE CONTENT -->
+
+                                <!-- USER AVATAR BADGE TEXT -->
+                                <p class="user-avatar-badge-text">12</p>
+                                <!-- /USER AVATAR BADGE TEXT -->
+                            </div>
+                            <!-- /USER AVATAR BADGE -->
+                        </a>
+                        <!-- /USER SHORT DESCRIPTION AVATAR -->
+
+                        <!-- USER SHORT DESCRIPTION TITLE -->
+                        <p class="user-short-description-title"><a href="{% if adopt.userTo != userProfil %}{{ path('front_profil_user', {'pseudo': adopt.userTo.pseudo}) }}{% else %}{{ path('front_profil_user', {'pseudo': adopt.userFrom.pseudo}) }}{% endif %}">{% if adopt.userTo != app.user %}{{ adopt.userTo.pseudo }}{% else %}{{ adopt.userFrom.pseudo }}{% endif %}</a></p>
+                        <!-- /USER SHORT DESCRIPTION TITLE -->
+
+                        <!-- USER SHORT DESCRIPTION TEXT -->
+                        <p class="user-short-description-text">{% if adopt.userTo != userProfil%}<a target="_blank" href="{{ adopt.userTo.website }}">{{ adopt.userTo.website }}</a>{% else %}<a target="_blank" href="{{ adopt.userFrom.website }}">{{ adopt.userFrom.website }}</a>{% endif %}</p>
+                        <!-- /USER SHORT DESCRIPTION TEXT -->
+                    </div>
+                    <!-- /USER SHORT DESCRIPTION -->
+
+                    <!-- USER PREVIEW STATS SLIDES -->
+                    <div id="user-preview-stats-slides-01" class="user-preview-stats-slides">
+                        <!-- USER PREVIEW STATS SLIDE -->
+                        <div class="user-preview-stats-slide">
+                            <!-- USER STATS -->
+                            <div class="user-stats">
+                                <!-- USER STAT -->
+                                <div class="user-stat">
+                                    <!-- USER STAT TITLE -->
+                                    <p class="user-stat-title">{% if adopt.userTo != userProfil%}{{ adopt.userTo.posts|length }}{% else %}{{ adopt.userFrom.posts|length }}{% endif %}</p>
+                                    <!-- /USER STAT TITLE -->
+
+                                    <!-- USER STAT TEXT -->
+                                    <p class="user-stat-text">posts</p>
+                                    <!-- /USER STAT TEXT -->
+                                </div>
+                                <!-- /USER STAT -->
+
+                                <!-- USER STAT -->
+                                <div class="user-stat">
+                                    <!-- USER STAT TITLE -->
+                                    <p class="user-stat-title">{% if adopt.userTo != userProfil%}{{ adopt.userTo.adopts|length }}{% else %}{{ adopt.userFrom.adopts|length }}{% endif %}</p>
+                                    <!-- /USER STAT TITLE -->
+
+                                    <!-- USER STAT TEXT -->
+                                    <p class="user-stat-text">adoptés</p>
+                                    <!-- /USER STAT TEXT -->
+                                </div>
+                                <!-- /USER STAT -->
+
+                                <!-- USER STAT -->
+                                <div class="user-stat">
+                                    <!-- USER STAT TITLE -->
+                                    <p class="user-stat-title">{% if adopt.userTo != userProfil%}{{ adopt.userTo.nbVisit|length }}{% else %}{{ adopt.userFrom.nbVisit|length }}{% endif %}</p>
+                                    <!-- /USER STAT TITLE -->
+
+                                    <!-- USER STAT TEXT -->
+                                    <p class="user-stat-text">vues</p>
+                                    <!-- /USER STAT TEXT -->
+                                </div>
+                                <!-- /USER STAT -->
+                            </div>
+                            <!-- /USER STATS -->
+                        </div>
+                        <!-- /USER PREVIEW STATS SLIDE -->
+                    </div>
+                    <!-- /USER PREVIEW STATS SLIDES -->
+
+                    <!-- USER PREVIEW STATS ROSTER -->
+                    <div id="user-preview-stats-roster-01" class="user-preview-stats-roster slider-roster">
+                        <!-- SLIDER ROSTER ITEM -->
+                        <div class="slider-roster-item"></div>
+                        <!-- /SLIDER ROSTER ITEM -->
+
+                        <!-- SLIDER ROSTER ITEM -->
+                        <div class="slider-roster-item"></div>
+                        <!-- /SLIDER ROSTER ITEM -->
+                    </div>
+                    <!-- /USER PREVIEW STATS ROSTER -->
+
+                    {% if adopt.userTo != userProfil %}
+                        <div class="social-links small">
+                            {% if adopt.userTo.facebook %}
+                            <a class="social-link small facebook" target="_blank" href="{{ adopt.userTo.facebook }}">
+                                <svg class="social-link-icon icon-facebook">
+                                    <use xlink:href="#svg-facebook"></use>
+                                </svg>
+                            </a>
+                            {% endif %}
+                            {% if adopt.userTo.twitter %}
+                            <a class="social-link small twitter" target="_blank" href="{{ adopt.userTo.twitter }}">
+                                <svg class="social-link-icon icon-twitter">
+                                    <use xlink:href="#svg-twitter"></use>
+                                </svg>
+                            </a>
+                            {% endif %}
+                            {% if adopt.userTo.youtube %}
+                            <a class="social-link small youtube" target="_blank" href="{{ adopt.userTo.youtube }}">
+                                <svg class="social-link-icon icon-youtube">
+                                    <use xlink:href="#svg-twitter"></use>
+                                </svg>
+                            </a>
+                            {% endif %}
+                            {% if adopt.userTo.instagram %}
+                            <a class="social-link small instagram" target="_blank" href="{{ adopt.userTo.instagram }}">
+                                <svg class="social-link-icon icon-instagram">
+                                    <use xlink:href="#svg-instagram"></use>
+                                </svg>
+                            </a>
+                            {% endif %}
+                            {% if adopt.userTo.twitch %}
+                            <a class="social-link small twitch" target="_blank" href="{{ adopt.userTo.twitch }}">
+                                <svg class="social-link-icon icon-twitch">
+                                    <use xlink:href="#svg-twitch"></use>
+                                </svg>
+                            </a>
+                            {% endif %}
+                        </div>
+                    {% elseif adopt.userFrom != userProfil %}
+                        <div class="social-links small">
+                            {% if adopt.userFrom.facebook %}
+                                <a class="social-link small facebook" target="_blank" href="{{ adopt.userFrom.facebook }}">
+                                    <svg class="social-link-icon icon-facebook">
+                                        <use xlink:href="#svg-facebook"></use>
+                                    </svg>
+                                </a>
+                            {% endif %}
+                            {% if adopt.userFrom.twitter %}
+                                <a class="social-link small twitter" target="_blank" href="{{ adopt.userFrom.twitter }}">
+                                    <svg class="social-link-icon icon-twitter">
+                                        <use xlink:href="#svg-twitter"></use>
+                                    </svg>
+                                </a>
+                            {% endif %}
+                            {% if adopt.userFrom.instagram %}
+                                <a class="social-link small instagram" target="_blank" href="{{ adopt.userFrom.instagram }}">
+                                    <svg class="social-link-icon icon-instagram">
+                                        <use xlink:href="#svg-instagram"></use>
+                                    </svg>
+                                </a>
+                            {% endif %}
+                            {% if adopt.userFrom.twitch %}
+                                <a class="social-link small twitch" target="_blank" href="{{ adopt.userFrom.twitch }}">
+                                    <svg class="social-link-icon icon-twitch">
+                                        <use xlink:href="#svg-twitch"></use>
+                                    </svg>
+                                </a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+
+                    <!-- USER PREVIEW ACTIONS -->
+                    <div class="user-preview-actions">
+                        <!-- BUTTON -->
+                        <p class="button secondary adopt_user" data-user="{% if adopt.userTo != userProfil %}{{ adopt.userTo.id }}{% else %}{{ adopt.userFrom.id }}{% endif %}">{% if post_adopt.getAdoptAxist(adopt.userFrom, app.user) or post_adopt.getAdoptAxist(adopt.userTo, app.user) %}Abandonner{% else %}Adopter{% endif %}</p>
+                        <!-- /BUTTON -->
+
+                        <!-- BUTTON -->
+                        <p class="button primary">Send Message</p>
+                        <!-- /BUTTON -->
+                    </div>
+                    <!-- /USER PREVIEW ACTIONS -->
+                </div>
+                <!-- /USER PREVIEW INFO -->
+            </div>
+            {% endfor %}
+
+        </div>
+        <!-- /GRID -->
+
+        {% if adopts|length > 9 %}
+            <div class="section-pager-bar pagintion pt-2" id="pagination">
+                {{ knp_pagination_render(adopts) }}
+            </div>
+        {% endif %}
+    </section>
+{% endblock %}
+
+{% block javascript %}
+{{ parent() }}
+<script>
+const btnsAdopt = document.getElementsByClassName('adopt_user');
+
+for (adopt of btnsAdopt) {
+
+    adopt.addEventListener('click', (e) => {
+        const elt = e.target;
+
+        const userId = elt.getAttribute('data-user');
+
+    if (adopt.textContent === 'Adopter') {
+        fetch(`/profil/add-new-adopt/${userId}`, { method: 'POST'})
+        .then(response => response.json())
+        .then(data => {
+
+            if (data.message === 'ok') {
+                elt.textContent = 'Abandonner';
+            }
+        });
+    } else if (adopt.textContent === 'Abandonner') {
+        fetch(`/profil/remove-adopt/${userId}`, { method: 'POST'})
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            if (data.message === 'ok') {
+                elt.textContent = 'Adopter';
+            }
+        });
+    }
+});
+}
+</script>
+{% endblock %}
