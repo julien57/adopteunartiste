@@ -4,6 +4,8 @@ namespace App\Controller\Front;
 
 use App\Entity\User;
 use App\Form\BackUserType;
+use App\Repository\GroupRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,5 +51,26 @@ class HomeController extends AbstractController
     public function logout()
     {
 
+    }
+
+    /**
+     * @Route("/search", name="front_search_bar")
+     */
+    public function search(Request $request, UserRepository $userRepository, GroupRepository $groupRepository)
+    {
+        if ($request->get('data')) {
+            $searchValue = json_decode($request->get('data'));
+            $users = $userRepository->searchUser($searchValue->search);
+            $groups = $groupRepository->searchGroup($searchValue->search);
+
+            return $this->json([
+                'users' => $this->render('front/search.html.twig', ['users' => $users]),
+                'groups' => $this->render('front/search_group.html.twig', ['groups' => $groups]),
+            ]);
+        }
+
+        return $this->render('', [
+            'search' => $this->render('')
+        ]);
     }
 }

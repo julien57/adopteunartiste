@@ -4,14 +4,18 @@ namespace App\Controller\Front\Space;
 
 use App\Entity\Adopt;
 use App\Entity\Competence;
+use App\Entity\Group;
 use App\Entity\Service;
 use App\Entity\User;
 use App\Form\CompetencesUserType;
+use App\Form\GroupSocialType;
+use App\Form\GroupType;
 use App\Form\InfosUserType;
 use App\Form\PasswordUserType;
 use App\Form\ServicesUserType;
 use App\Form\SocialUserType;
 use App\Repository\AdoptRepository;
+use App\Repository\GroupRepository;
 use App\Repository\UserRepository;
 use App\Services\File\UploadFile;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,6 +24,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 /**
  * @Route("/espace-perso")
@@ -259,5 +264,116 @@ class PersonalSpace extends AbstractController
         }
 
         return $this->redirectToRoute('front_space_competences');
+    }
+
+    /**
+     * @Route("/mes-groupes", name="front_space_groups")
+     */
+    public function groups(GroupRepository $groupRepository, Request $request, SluggerInterface $slugger)
+    {
+        $groups = $groupRepository->findBy(['author' => $this->getUser()]);
+
+        $newGroup = new Group();
+        $form = $this->createForm(GroupType::class, $newGroup)->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->get('avatar')->getData()) {
+                $filename = UploadFile::uploadAvatar($form->get('avatar')->getData());
+                $newGroup->setAvatar($filename);
+            }
+
+            if ($form->get('cover')->getData()) {
+                $filename = UploadFile::uploadCover($form->get('cover')->getData());
+                $newGroup->setCover($filename);
+            }
+
+            $newGroup->setAuthor($this->getUser());
+            $slug = $slugger->slug($newGroup->getName())->lower();
+            $newGroup->setSlug($slug);
+
+            $this->em->persist($newGroup);
+            $this->em->flush();
+
+            $this->addFlash('success', 'Groupe créé !');
+            return $this->redirectToRoute('front_space_groups');
+        }
+
+        return $this->render('front/space/groups.html.twig', [
+            'groups' => $groups,
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/gestion-groupe/infos/{slug}", name="gront_space_manage_group")
+     */
+    public function manageGroup(Group $group, Request $request, SluggerInterface $slugger)
+    {
+        $oldAvatar = $group->getAvatar();
+        $oldCover = $group->getCover();
+
+        $form = $this->createForm(GroupType::class, $group)->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            if ($form->get('avatar')->getData()) {
+                $filename = UploadFile::uploadAvatar($form->get('avatar')->getData());
+                $group->setAvatar($filename);
+            } else {
+                $group->setAvatar($oldAvatar);
+            }
+
+            if ($form->get('cover')->getData()) {
+                $filename = UploadFile::uploadCover($form->get('cover')->getData());
+                $group->setCover($filename);
+            } else {
+                $group->setCover($oldCover);
+            }
+
+            $slug = $slugger->slug($group->getName())->lower();
+            $group->setSlug($slug);
+
+            $this->em->persist($group);
+            $this->em->flush();
+
+            $this->addFlash('success', 'Modifications du groupe '.$group->getName().' enregistrées !');
+            return $this->redirectToRoute('front_space_groups');
+        }
+
+        return $this->render('front/space/manage_group.html.twig', [
+            'form' => $form->createView(),
+            'group' => $group
+        ]);
+    }
+
+    /**
+     * @Route("/gestion-groupe/membres/{slug}", name="gront_space_manage_group_members")
+     */
+    public function groupMembers(Group $group)
+    {
+        return $this->render('front/space/manage_group_members.html.twig', [
+            'members' => $group->getMembers(),
+            'group' => $group
+        ]);
+    }
+
+    /**
+     * @Route("/gestion-groupe/reseaux-sociaux/{slug}", name="front_space_manage_group_social")
+     */
+    public function groupSocial(Group $group, Request $request)
+    {
+        $form = $this->createForm(GroupSocialType::class, $group)->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $this->em->flush();
+
+            $this->addFlash('success', 'Modifications du groupe '.$group->getName().' enregistrées !');
+            return $this->redirectToRoute('front_space_groups');
+        }
+
+        return $this->render('front/space/manage_group_social.html.twig', [
+            'form' => $form->createView(),
+            'group' => $group
+        ]);
     }
 }

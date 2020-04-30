@@ -193,7 +193,7 @@
                         <!-- META LINE -->
                         <div class="meta-line">
                             <!-- META LINE LIST -->
-                            <div class="meta-line-list reaction-item-list">
+                            <div class="meta-line-list reaction-item-list" id="list_react_article">
                                 {% for react in post_react.getReactPost(post) %}
                                     <div class="reaction-item">
                                         <!-- REACTION IMAGE -->
@@ -356,7 +356,7 @@
                         <!-- POST OPTION -->
                         <div class="post-option reaction-options-dropdown-trigger">
                             <!-- POST OPTION ICON -->
-                            <svg class="post-option-icon icon-thumbs-up">
+                            <svg class="post-option-icon icon-thumbs-up" id="like-picture">
                                 <use xlink:href="#svg-thumbs-up"></use>
                             </svg>
                             <!-- /POST OPTION ICON -->
@@ -370,7 +370,7 @@
                         <!-- REACTION OPTIONS -->
                         <div class="reaction-options reaction-options-dropdown">
                             <!-- REACTION OPTION -->
-                            <div class="reaction-option text-tooltip-tft reacting" data-react="like" data-post="{{ post.id }}" id="react-like" data-title="Like">
+                            <div class="reaction-option text-tooltip-tft reacting-article" data-react="like" data-post="{{ post.id }}" id="react-like" data-title="Like">
                                 <!-- REACTION OPTION IMAGE -->
                                 <img class="reaction-option-image" src="{{ asset('img/reaction/like.png') }}" alt="reaction-like">
                                 <!-- /REACTION OPTION IMAGE -->
@@ -378,7 +378,7 @@
                             <!-- /REACTION OPTION -->
 
                             <!-- REACTION OPTION -->
-                            <div class="reaction-option text-tooltip-tft reacting" data-react="love" data-post="{{ post.id }}" id="react-love" data-title="Love">
+                            <div class="reaction-option text-tooltip-tft reacting-article" data-react="love" data-post="{{ post.id }}" id="react-love" data-title="Love">
                                 <!-- REACTION OPTION IMAGE -->
                                 <img class="reaction-option-image" src="{{ asset('img/reaction/love.png') }}" alt="reaction-love">
                                 <!-- /REACTION OPTION IMAGE -->
@@ -386,7 +386,7 @@
                             <!-- /REACTION OPTION -->
 
                             <!-- REACTION OPTION -->
-                            <div class="reaction-option text-tooltip-tft reacting" data-react="dislike" data-post="{{ post.id }}" id="react-dislike" data-title="Dislike">
+                            <div class="reaction-option text-tooltip-tft reacting-article" data-react="dislike" data-post="{{ post.id }}" id="react-dislike" data-title="Dislike">
                                 <!-- REACTION OPTION IMAGE -->
                                 <img class="reaction-option-image" src="{{ asset('img/reaction/dislike.png') }}" alt="reaction-dislike">
                                 <!-- /REACTION OPTION IMAGE -->
@@ -394,7 +394,7 @@
                             <!-- /REACTION OPTION -->
 
                             <!-- REACTION OPTION -->
-                            <div class="reaction-option text-tooltip-tft reacting" data-react="happy" data-post="{{ post.id }}" id="react-happy" data-title="Happy">
+                            <div class="reaction-option text-tooltip-tft reacting-article" data-react="happy" data-post="{{ post.id }}" id="react-happy" data-title="Happy">
                                 <!-- REACTION OPTION IMAGE -->
                                 <img class="reaction-option-image" src="{{ asset('img/reaction/happy.png') }}" alt="reaction-happy">
                                 <!-- /REACTION OPTION IMAGE -->
@@ -402,7 +402,7 @@
                             <!-- /REACTION OPTION -->
 
                             <!-- REACTION OPTION -->
-                            <div class="reaction-option text-tooltip-tft reacting" data-react="funny" data-post="{{ post.id }}" id="react-funny" data-title="Funny">
+                            <div class="reaction-option text-tooltip-tft reacting-article" data-react="funny" data-post="{{ post.id }}" id="react-funny" data-title="Funny">
                                 <!-- REACTION OPTION IMAGE -->
                                 <img class="reaction-option-image" src="{{ asset('img/reaction/funny.png') }}" alt="reaction-funny">
                                 <!-- /REACTION OPTION IMAGE -->
@@ -410,7 +410,7 @@
                             <!-- /REACTION OPTION -->
 
                             <!-- REACTION OPTION -->
-                            <div class="reaction-option text-tooltip-tft reacting" data-react="wow" data-post="{{ post.id }}" id="react-wow" data-title="Wow">
+                            <div class="reaction-option text-tooltip-tft reacting-article" data-react="wow" data-post="{{ post.id }}" id="react-wow" data-title="Wow">
                                 <!-- REACTION OPTION IMAGE -->
                                 <img class="reaction-option-image" src="{{ asset('img/reaction/wow.png') }}" alt="reaction-wow">
                                 <!-- /REACTION OPTION IMAGE -->
@@ -418,7 +418,7 @@
                             <!-- /REACTION OPTION -->
 
                             <!-- REACTION OPTION -->
-                            <div class="reaction-option text-tooltip-tft reacting" data-react="angry" data-post="{{ post.id }}" id="react-angry" data-title="Angry">
+                            <div class="reaction-option text-tooltip-tft reacting-article" data-react="angry" data-post="{{ post.id }}" id="react-angry" data-title="Angry">
                                 <!-- REACTION OPTION IMAGE -->
                                 <img class="reaction-option-image" id="react-angry" src="{{ asset('img/reaction/angry.png') }}" alt="reaction-angry">
                                 <!-- /REACTION OPTION IMAGE -->
@@ -426,7 +426,7 @@
                             <!-- /REACTION OPTION -->
 
                             <!-- REACTION OPTION -->
-                            <div class="reaction-option text-tooltip-tft reacting" data-react="sad" data-post="{{ post.id }}" data-title="Sad" id="react-sad">
+                            <div class="reaction-option text-tooltip-tft reacting-article" data-react="sad" data-post="{{ post.id }}" data-title="Sad" id="react-sad">
                                 <!-- REACTION OPTION IMAGE -->
                                 <img class="reaction-option-image" src="{{ asset('img/reaction/sad.png') }}" alt="reaction-sad">
                                 <!-- /REACTION OPTION IMAGE -->
@@ -609,372 +609,124 @@
                     <!-- /POST COMMENT FORM -->
                 </div>
                 <!-- /POST COMMENT LIST -->
-            </div>
             <!-- /POST OPEN BODY -->
         </article>
         <!-- /POST OPEN -->
     </div>
     <!-- /CONTENT GRID -->
 
+    {% if lastArticles|length >= 2 %}
     <!-- CONTENT GRID -->
-    <div class="content-grid medium">
-        <!-- SECTION HEADER -->
-        <div class="section-header medium">
-            <!-- SECTION HEADER INFO -->
-            <div class="section-header-info">
-                <!-- SECTION PRETITLE -->
-                <p class="section-pretitle">Browse Other</p>
-                <!-- /SECTION PRETITLE -->
+        <div class="content-grid medium">
+            <!-- SECTION HEADER -->
+            <div class="section-header medium">
+                <!-- SECTION HEADER INFO -->
+                <div class="section-header-info">
 
-                <!-- SECTION TITLE -->
-                <h2 class="section-title">Related Posts</h2>
-                <!-- /SECTION TITLE -->
-            </div>
-            <!-- /SECTION HEADER INFO -->
-        </div>
-        <!-- /SECTION HEADER -->
-
-        <!-- GRID -->
-        <div class="grid grid-4-4 centered">
-            <!-- POST PREVIEW -->
-            <div class="post-preview">
-                <!-- POST PREVIEW IMAGE -->
-                <figure class="post-preview-image liquid">
-                    <img src="img/cover/10.jpg" alt="cover-10">
-                </figure>
-                <!-- /POST PREVIEW IMAGE -->
-
-                <!-- POST PREVIEW INFO -->
-                <div class="post-preview-info fixed-height">
-                    <!-- POST PREVIEW INFO TOP -->
-                    <div class="post-preview-info-top">
-                        <!-- POST PREVIEW TIMESTAMP -->
-                        <p class="post-preview-timestamp">3 weeks ago</p>
-                        <!-- /POST PREVIEW TIMESTAMP -->
-
-                        <!-- POST PREVIEW TITLE -->
-                        <p class="post-preview-title">I spoke with the developers of RoBot SaMurai II at the 2019 GamingCon</p>
-                        <!-- /POST PREVIEW TITLE -->
-                    </div>
-                    <!-- /POST PREVIEW INFO TOP -->
-
-                    <!-- POST PREVIEW INFO BOTTOM -->
-                    <div class="post-preview-info-bottom">
-                        <!-- POST PREVIEW TEXT -->
-                        <p class="post-preview-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut...</p>
-                        <!-- /POST PREVIEW TEXT -->
-
-                        <!-- POST PREVIEW LINK -->
-                        <a class="post-preview-link" href="profile-post.html">Read more...</a>
-                        <!-- /POST PREVIEW LINK -->
-                    </div>
-                    <!-- /POST PREVIEW INFO BOTTOM -->
+                    <!-- SECTION TITLE -->
+                    <h2 class="section-title">Derniers articles de {{ userProfil.pseudo }}</h2>
+                    <!-- /SECTION TITLE -->
                 </div>
-                <!-- /POST PREVIEW INFO -->
+                <!-- /SECTION HEADER INFO -->
+            </div>
+            <!-- /SECTION HEADER -->
 
-                <!-- CONTENT ACTIONS -->
-                <div class="content-actions">
-                    <!-- CONTENT ACTION -->
-                    <div class="content-action">
-                        <!-- META LINE -->
-                        <div class="meta-line">
-                            <!-- META LINE LIST -->
-                            <div class="meta-line-list reaction-item-list">
-                                <!-- REACTION ITEM -->
-                                <div class="reaction-item">
-                                    <!-- REACTION IMAGE -->
-                                    <img class="reaction-image reaction-item-dropdown-trigger" src="img/reaction/happy.png" alt="reaction-happy">
-                                    <!-- /REACTION IMAGE -->
+                <div class="grid grid-4-4 centered">
+                {% for article in lastArticles %}
+                    <div class="post-preview">
+                    <!-- POST PREVIEW IMAGE -->
+                    <figure class="post-preview-image liquid">
+                        <img src="{{ asset( constant('App\\Services\\File\\UploadFile::PHOTO_POST_UPLOAD_DIR')) ~ article.photo.0.url }}" alt="cover-10">
+                    </figure>
+                    <!-- /POST PREVIEW IMAGE -->
 
-                                    <!-- SIMPLE DROPDOWN -->
-                                    <div class="simple-dropdown padded reaction-item-dropdown">
-                                        <!-- SIMPLE DROPDOWN TEXT -->
-                                        <p class="simple-dropdown-text"><img class="reaction" src="img/reaction/happy.png" alt="reaction-happy"> <span class="bold">Happy</span></p>
-                                        <!-- /SIMPLE DROPDOWN TEXT -->
+                    <!-- POST PREVIEW INFO -->
+                    <div class="post-preview-info fixed-height">
+                        <!-- POST PREVIEW INFO TOP -->
+                        <div class="post-preview-info-top">
+                            <!-- POST PREVIEW TIMESTAMP -->
+                            <p class="post-preview-timestamp">{{ article.publishedAt|date('d/m/Y à H:i') }}</p>
+                            <!-- /POST PREVIEW TIMESTAMP -->
 
-                                        <!-- SIMPLE DROPDOWN TEXT -->
-                                        <p class="simple-dropdown-text">Neko Bebop</p>
-                                        <!-- /SIMPLE DROPDOWN TEXT -->
+                            <!-- POST PREVIEW TITLE -->
+                            <p class="post-preview-title">{{ article.title }}</p>
+                            <!-- /POST PREVIEW TITLE -->
+                        </div>
+                        <!-- /POST PREVIEW INFO TOP -->
 
-                                        <!-- SIMPLE DROPDOWN TEXT -->
-                                        <p class="simple-dropdown-text">Nick Grissom</p>
-                                        <!-- /SIMPLE DROPDOWN TEXT -->
+                        <!-- POST PREVIEW INFO BOTTOM -->
+                        <div class="post-preview-info-bottom">
+                            <!-- POST PREVIEW TEXT -->
+                            <p class="post-preview-text">{{ article.text|striptags|slice(0, 150) ~ '...' }}</p>
+                            <!-- /POST PREVIEW TEXT -->
 
-                                        <!-- SIMPLE DROPDOWN TEXT -->
-                                        <p class="simple-dropdown-text">Sarah Diamond</p>
-                                        <!-- /SIMPLE DROPDOWN TEXT -->
+                            <!-- POST PREVIEW LINK -->
+                            <a class="post-preview-link" href="{{ path('front_profil_blog_single', {'slug': article.slug}) }}">Voir la suite</a>
+                            <!-- /POST PREVIEW LINK -->
+                        </div>
+                        <!-- /POST PREVIEW INFO BOTTOM -->
+                    </div>
+                    <!-- /POST PREVIEW INFO -->
 
-                                        <!-- SIMPLE DROPDOWN TEXT -->
-                                        <p class="simple-dropdown-text">Marcus Jhonson</p>
-                                        <!-- /SIMPLE DROPDOWN TEXT -->
-                                    </div>
-                                    <!-- /SIMPLE DROPDOWN -->
+                    <!-- CONTENT ACTIONS -->
+                    <div class="content-actions">
+                        <!-- CONTENT ACTION -->
+                        <div class="content-action">
+                            <!-- META LINE -->
+                            <div class="meta-line">
+                                <!-- META LINE LIST -->
+                                <div class="meta-line-list reaction-item-list">
+                                    {% for react in post_react.getReactPost(article) %}
+                                        <div class="reaction-item">
+                                            <!-- REACTION IMAGE -->
+                                            <img class="reaction-image reaction-item-dropdown-trigger" src="{{ asset('img/reaction/' ~ react.type ~ '.png') }}" alt="reaction-{{ react.type }}">
+                                            <!-- /REACTION IMAGE -->
+
+                                            <!-- SIMPLE DROPDOWN -->
+                                            <div class="simple-dropdown padded reaction-item-dropdown">
+                                                <!-- SIMPLE DROPDOWN TEXT -->
+                                                <p class="simple-dropdown-text"><img class="reaction" src="{{ asset('img/reaction/' ~ react.type ~ '.png') }}" alt="reaction-{{ react.type }}"> <span class="bold">{{ react.type }}</span></p>
+                                                <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                                <!-- SIMPLE DROPDOWN TEXT -->
+                                                <p class="simple-dropdown-text">{{ react.count }}</p>
+                                                <!-- /SIMPLE DROPDOWN TEXT -->
+                                            </div>
+                                            <!-- /SIMPLE DROPDOWN -->
+                                        </div>
+                                        <!-- /REACTION ITEM -->
+                                    {% endfor %}
                                 </div>
-                                <!-- /REACTION ITEM -->
+                                <!-- /REACTION ITEM LIST -->
 
-                                <!-- REACTION ITEM -->
-                                <div class="reaction-item">
-                                    <!-- REACTION IMAGE -->
-                                    <img class="reaction-image reaction-item-dropdown-trigger" src="img/reaction/love.png" alt="reaction-love">
-                                    <!-- /REACTION IMAGE -->
-
-                                    <!-- SIMPLE DROPDOWN -->
-                                    <div class="simple-dropdown padded reaction-item-dropdown">
-                                        <!-- SIMPLE DROPDOWN TEXT -->
-                                        <p class="simple-dropdown-text"><img class="reaction" src="img/reaction/love.png" alt="reaction-love"> <span class="bold">Love</span></p>
-                                        <!-- /SIMPLE DROPDOWN TEXT -->
-
-                                        <!-- SIMPLE DROPDOWN TEXT -->
-                                        <p class="simple-dropdown-text">Jett Spiegel</p>
-                                        <!-- /SIMPLE DROPDOWN TEXT -->
-
-                                        <!-- SIMPLE DROPDOWN TEXT -->
-                                        <p class="simple-dropdown-text">Jane Rodgers</p>
-                                        <!-- /SIMPLE DROPDOWN TEXT -->
-                                    </div>
-                                    <!-- /SIMPLE DROPDOWN -->
-                                </div>
-                                <!-- /REACTION ITEM -->
-
-                                <!-- REACTION ITEM -->
-                                <div class="reaction-item">
-                                    <!-- REACTION IMAGE -->
-                                    <img class="reaction-image reaction-item-dropdown-trigger" src="img/reaction/funny.png" alt="reaction-funny">
-                                    <!-- /REACTION IMAGE -->
-
-                                    <!-- SIMPLE DROPDOWN -->
-                                    <div class="simple-dropdown padded reaction-item-dropdown">
-                                        <!-- SIMPLE DROPDOWN TEXT -->
-                                        <p class="simple-dropdown-text"><img class="reaction" src="img/reaction/funny.png" alt="reaction-funny"> <span class="bold">Funny</span></p>
-                                        <!-- /SIMPLE DROPDOWN TEXT -->
-
-                                        <!-- SIMPLE DROPDOWN TEXT -->
-                                        <p class="simple-dropdown-text">Neko Bebop</p>
-                                        <!-- /SIMPLE DROPDOWN TEXT -->
-
-                                        <!-- SIMPLE DROPDOWN TEXT -->
-                                        <p class="simple-dropdown-text">Nick Grissom</p>
-                                        <!-- /SIMPLE DROPDOWN TEXT -->
-
-                                        <!-- SIMPLE DROPDOWN TEXT -->
-                                        <p class="simple-dropdown-text">Sarah Diamond</p>
-                                        <!-- /SIMPLE DROPDOWN TEXT -->
-
-                                        <!-- SIMPLE DROPDOWN TEXT -->
-                                        <p class="simple-dropdown-text">Jett Spiegel</p>
-                                        <!-- /SIMPLE DROPDOWN TEXT -->
-
-                                        <!-- SIMPLE DROPDOWN TEXT -->
-                                        <p class="simple-dropdown-text">Marcus Jhonson</p>
-                                        <!-- /SIMPLE DROPDOWN TEXT -->
-
-                                        <!-- SIMPLE DROPDOWN TEXT -->
-                                        <p class="simple-dropdown-text">Jane Rodgers</p>
-                                        <!-- /SIMPLE DROPDOWN TEXT -->
-
-                                        <!-- SIMPLE DROPDOWN TEXT -->
-                                        <p class="simple-dropdown-text"><span class="bold">and 10 more...</span></p>
-                                        <!-- /SIMPLE DROPDOWN TEXT -->
-                                    </div>
-                                    <!-- /SIMPLE DROPDOWN -->
-                                </div>
-                                <!-- /REACTION ITEM -->
+                                <!-- META LINE TEXT -->
+                                <p class="meta-line-text">{{ article.reacts|length }}</p>
+                                <!-- /META LINE TEXT -->
                             </div>
-                            <!-- /REACTION ITEM LIST -->
-
-                            <!-- META LINE TEXT -->
-                            <p class="meta-line-text">21</p>
-                            <!-- /META LINE TEXT -->
+                            <!-- /META LINE -->
                         </div>
-                        <!-- /META LINE -->
-                    </div>
-                    <!-- /CONTENT ACTION -->
+                        <!-- /CONTENT ACTION -->
 
-                    <!-- CONTENT ACTION -->
-                    <div class="content-action">
-                        <!-- META LINE -->
-                        <div class="meta-line">
-                            <!-- META LINE LINK -->
-                            <a class="meta-line-link" href="profile-post.html#comments">8 Comments</a>
-                            <!-- /META LINE LINK -->
-                        </div>
-                        <!-- /META LINE -->
-
-                        <!-- META LINE -->
-                        <div class="meta-line">
-                            <!-- META LINE TEXT -->
-                            <p class="meta-line-text">0 Shares</p>
-                            <!-- /META LINE TEXT -->
-                        </div>
-                        <!-- /META LINE -->
-                    </div>
-                    <!-- /CONTENT ACTION -->
-                </div>
-                <!-- /CONTENT ACTIONS -->
-            </div>
-            <!-- /POST PREVIEW -->
-
-            <!-- POST PREVIEW -->
-            <div class="post-preview">
-                <!-- POST PREVIEW IMAGE -->
-                <figure class="post-preview-image liquid">
-                    <img src="img/cover/20.jpg" alt="cover-20">
-                </figure>
-                <!-- /POST PREVIEW IMAGE -->
-
-                <!-- POST PREVIEW INFO -->
-                <div class="post-preview-info fixed-height">
-                    <!-- POST PREVIEW INFO TOP -->
-                    <div class="post-preview-info-top">
-                        <!-- POST PREVIEW TIMESTAMP -->
-                        <p class="post-preview-timestamp">4 weeks ago</p>
-                        <!-- /POST PREVIEW TIMESTAMP -->
-
-                        <!-- POST PREVIEW TITLE -->
-                        <p class="post-preview-title">I will be at this month's StreamCon with NekoBebop</p>
-                        <!-- /POST PREVIEW TITLE -->
-                    </div>
-                    <!-- /POST PREVIEW INFO TOP -->
-
-                    <!-- POST PREVIEW INFO BOTTOM -->
-                    <div class="post-preview-info-bottom">
-                        <!-- POST PREVIEW TEXT -->
-                        <p class="post-preview-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut...</p>
-                        <!-- /POST PREVIEW TEXT -->
-
-                        <!-- POST PREVIEW LINK -->
-                        <a class="post-preview-link" href="profile-post.html">Read more...</a>
-                        <!-- /POST PREVIEW LINK -->
-                    </div>
-                    <!-- /POST PREVIEW INFO BOTTOM -->
-                </div>
-                <!-- /POST PREVIEW INFO -->
-
-                <!-- CONTENT ACTIONS -->
-                <div class="content-actions">
-                    <!-- CONTENT ACTION -->
-                    <div class="content-action">
-                        <!-- META LINE -->
-                        <div class="meta-line">
-                            <!-- META LINE LIST -->
-                            <div class="meta-line-list reaction-item-list">
-                                <!-- REACTION ITEM -->
-                                <div class="reaction-item">
-                                    <!-- REACTION IMAGE -->
-                                    <img class="reaction-image reaction-item-dropdown-trigger" src="img/reaction/happy.png" alt="reaction-happy">
-                                    <!-- /REACTION IMAGE -->
-
-                                    <!-- SIMPLE DROPDOWN -->
-                                    <div class="simple-dropdown padded reaction-item-dropdown">
-                                        <!-- SIMPLE DROPDOWN TEXT -->
-                                        <p class="simple-dropdown-text"><img class="reaction" src="img/reaction/happy.png" alt="reaction-happy"> <span class="bold">Happy</span></p>
-                                        <!-- /SIMPLE DROPDOWN TEXT -->
-
-                                        <!-- SIMPLE DROPDOWN TEXT -->
-                                        <p class="simple-dropdown-text">Neko Bebop</p>
-                                        <!-- /SIMPLE DROPDOWN TEXT -->
-
-                                        <!-- SIMPLE DROPDOWN TEXT -->
-                                        <p class="simple-dropdown-text">Nick Grissom</p>
-                                        <!-- /SIMPLE DROPDOWN TEXT -->
-
-                                        <!-- SIMPLE DROPDOWN TEXT -->
-                                        <p class="simple-dropdown-text">Sarah Diamond</p>
-                                        <!-- /SIMPLE DROPDOWN TEXT -->
-
-                                        <!-- SIMPLE DROPDOWN TEXT -->
-                                        <p class="simple-dropdown-text">Marcus Jhonson</p>
-                                        <!-- /SIMPLE DROPDOWN TEXT -->
-                                    </div>
-                                    <!-- /SIMPLE DROPDOWN -->
-                                </div>
-                                <!-- /REACTION ITEM -->
-
-                                <!-- REACTION ITEM -->
-                                <div class="reaction-item">
-                                    <!-- REACTION IMAGE -->
-                                    <img class="reaction-image reaction-item-dropdown-trigger" src="img/reaction/love.png" alt="reaction-love">
-                                    <!-- /REACTION IMAGE -->
-
-                                    <!-- SIMPLE DROPDOWN -->
-                                    <div class="simple-dropdown padded reaction-item-dropdown">
-                                        <!-- SIMPLE DROPDOWN TEXT -->
-                                        <p class="simple-dropdown-text"><img class="reaction" src="img/reaction/love.png" alt="reaction-love"> <span class="bold">Love</span></p>
-                                        <!-- /SIMPLE DROPDOWN TEXT -->
-
-                                        <!-- SIMPLE DROPDOWN TEXT -->
-                                        <p class="simple-dropdown-text">Jett Spiegel</p>
-                                        <!-- /SIMPLE DROPDOWN TEXT -->
-
-                                        <!-- SIMPLE DROPDOWN TEXT -->
-                                        <p class="simple-dropdown-text">Jane Rodgers</p>
-                                        <!-- /SIMPLE DROPDOWN TEXT -->
-                                    </div>
-                                    <!-- /SIMPLE DROPDOWN -->
-                                </div>
-                                <!-- /REACTION ITEM -->
-
-                                <!-- REACTION ITEM -->
-                                <div class="reaction-item">
-                                    <!-- REACTION IMAGE -->
-                                    <img class="reaction-image reaction-item-dropdown-trigger" src="img/reaction/like.png" alt="reaction-like">
-                                    <!-- /REACTION IMAGE -->
-
-                                    <!-- SIMPLE DROPDOWN -->
-                                    <div class="simple-dropdown padded reaction-item-dropdown">
-                                        <!-- SIMPLE DROPDOWN TEXT -->
-                                        <p class="simple-dropdown-text"><img class="reaction" src="img/reaction/like.png" alt="reaction-like"> <span class="bold">Like</span></p>
-                                        <!-- /SIMPLE DROPDOWN TEXT -->
-
-                                        <!-- SIMPLE DROPDOWN TEXT -->
-                                        <p class="simple-dropdown-text">Neko Bebop</p>
-                                        <!-- /SIMPLE DROPDOWN TEXT -->
-
-                                        <!-- SIMPLE DROPDOWN TEXT -->
-                                        <p class="simple-dropdown-text">Nick Grissom</p>
-                                        <!-- /SIMPLE DROPDOWN TEXT -->
-                                    </div>
-                                    <!-- /SIMPLE DROPDOWN -->
-                                </div>
-                                <!-- /REACTION ITEM -->
+                        <!-- CONTENT ACTION -->
+                        <div class="content-action">
+                            <!-- META LINE -->
+                            <div class="meta-line">
+                                <!-- META LINE LINK -->
+                                <a class="meta-line-link" href="{{ path('front_profil_blog_single', {'slug': article.slug}) }}#comments">{{ article.commentPosts|length }} Commentaire{% if article.commentPosts|length > 1 %}s{% endif %}</a>
+                                <!-- /META LINE LINK -->
                             </div>
-                            <!-- /REACTION ITEM LIST -->
+                            <!-- /META LINE -->
 
-                            <!-- META LINE TEXT -->
-                            <p class="meta-line-text">8</p>
-                            <!-- /META LINE TEXT -->
                         </div>
-                        <!-- /META LINE -->
+                        <!-- /CONTENT ACTION -->
                     </div>
-                    <!-- /CONTENT ACTION -->
-
-                    <!-- CONTENT ACTION -->
-                    <div class="content-action">
-                        <!-- META LINE -->
-                        <div class="meta-line">
-                            <!-- META LINE LINK -->
-                            <a class="meta-line-link" href="profile-post.html#comments">2 Comments</a>
-                            <!-- /META LINE LINK -->
-                        </div>
-                        <!-- /META LINE -->
-
-                        <!-- META LINE -->
-                        <div class="meta-line">
-                            <!-- META LINE TEXT -->
-                            <p class="meta-line-text">0 Shares</p>
-                            <!-- /META LINE TEXT -->
-                        </div>
-                        <!-- /META LINE -->
-                    </div>
-                    <!-- /CONTENT ACTION -->
+                    <!-- /CONTENT ACTIONS -->
                 </div>
-                <!-- /CONTENT ACTIONS -->
+                {% endfor %}
             </div>
-            <!-- /POST PREVIEW -->
+            <!-- /GRID -->
         </div>
-        <!-- /GRID -->
-    </div>
-    <!-- /CONTENT GRID -->
+    {% endif %}
 {% endblock %}
 
 {% block javascript %}
@@ -1004,7 +756,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById('comments').insertAdjacentHTML('beforeend', data.comments.content);
             page++;
             loadComments.setAttribute('data-page', page);
-            console.log(loadComments)
+
             app.plugins.createHexagon({
               container: '.hexagon-148-164',
               width: 148,
@@ -1336,6 +1088,93 @@ document.addEventListener("DOMContentLoaded", function(event) {
         })
     })
 });
+
+var links = document.getElementsByClassName('reacting-article');
+
+// For each <li> inside #links
+for (var i = 0; i < links.length; i++) {
+
+    var link = links[i];
+    link.addEventListener('click', (e) => {
+        let reactIcon = e.target.parentNode;
+
+        const dataReact = reactIcon.getAttribute('data-react');
+        const data = {
+            postId: "{{ post.id }}",
+            userId: "{{ app.user.id }}",
+            react: dataReact
+        };
+
+        let datas = new FormData();
+        datas.append("data", JSON.stringify(data));
+
+        fetch("{{ path('front_react_post_add') }}", { method: 'POST', body: datas })
+            .then(response => response.json())
+            .then(data => {
+
+                const postId = document.getElementById(`like-picture`);
+                postId.style.fill = '#23d2e2';
+
+                const reactId = document.getElementById(`list_react_article`);
+                console.log(reactId)
+                reactId.innerHTML = data.react.content;
+                console.log(reactId)
+
+                app.plugins.createDropdown({
+                    trigger: '.reaction-item-dropdown-trigger',
+                    container: '.reaction-item-dropdown',
+                    triggerEvent: 'hover',
+                    offset: {
+                        bottom: 38,
+                        left: -16
+                    },
+                    animation: {
+                        type: 'translate-bottom',
+                        speed: .3,
+                        translateOffset: {
+                            vertical: 20
+                        }
+                    }
+                });
+
+                app.plugins.createDropdown({
+                    trigger: '.reaction-options-dropdown-trigger',
+                    container: '.reaction-options-dropdown',
+                    triggerEvent: 'click',
+                    offset: {
+                        bottom: 54,
+                        left: -16
+                    },
+                    animation: {
+                        type: 'translate-bottom',
+                        speed: .3,
+                        translateOffset: {
+                            vertical: 20
+                        }
+                    },
+                    closeOnDropdownClick: true
+                });
+
+                app.plugins.createDropdown({
+                    trigger: '.reaction-options-small-dropdown-trigger',
+                    container: '.reaction-options-small-dropdown',
+                    triggerEvent: 'click',
+                    offset: {
+                        bottom: 30,
+                        left: -80
+                    },
+                    animation: {
+                        type: 'translate-bottom',
+                        speed: .3,
+                        translateOffset: {
+                            vertical: 16
+                        }
+                    },
+                    closeOnDropdownClick: true
+                });
+            });
+    });
+}
 
 </script>
 {% endblock %}

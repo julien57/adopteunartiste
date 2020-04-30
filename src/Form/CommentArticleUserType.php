@@ -18,7 +18,8 @@ class CommentArticleUserType extends AbstractType
                 'label' => false,
                 'constraints' => [
                     new NotBlank(['message' => 'Veuillez écrire un commentaire avant de valider le champ'])
-                ]
+                ],
+                'attr' => ['autocomplete' => 'off']
             ])
         ;
     }

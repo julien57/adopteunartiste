@@ -197,6 +197,16 @@ class User implements UserInterface
      */
     private $commentPosts;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Group", mappedBy="author", orphanRemoval=true)
+     */
+    private $groups;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="members")
+     */
+    private $userGroups;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
@@ -207,6 +217,9 @@ class User implements UserInterface
         $this->competences = new ArrayCollection();
         $this->services = new ArrayCollection();
         $this->commentPosts = new ArrayCollection();
+        $this->nbVisit = 0;
+        $this->groups = new ArrayCollection();
+        $this->userGroups = new ArrayCollection();
     }
 
     public function computeSlug(SluggerInterface $slugger)
@@ -729,6 +742,65 @@ class User implements UserInterface
             if ($commentPost->getUser() === $this) {
                 $commentPost->setUser(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Group[]
+     */
+    public function getGroups(): Collection
+    {
+        return $this->groups;
+    }
+
+    public function addGroup(Group $group): self
+    {
+        if (!$this->groups->contains($group)) {
+            $this->groups[] = $group;
+            $group->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGroup(Group $group): self
+    {
+        if ($this->groups->contains($group)) {
+            $this->groups->removeElement($group);
+            // set the owning side to null (unless already changed)
+            if ($group->getAuthor() === $this) {
+                $group->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Group[]
+     */
+    public function getUserGroups(): Collection
+    {
+        return $this->userGroups;
+    }
+
+    public function addUserGroup(Group $userGroup): self
+    {
+        if (!$this->userGroups->contains($userGroup)) {
+            $this->userGroups[] = $userGroup;
+            $userGroup->addMember($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserGroup(Group $userGroup): self
+    {
+        if ($this->userGroups->contains($userGroup)) {
+            $this->userGroups->removeElement($userGroup);
+            $userGroup->removeMember($this);
         }
 
         return $this;

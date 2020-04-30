@@ -1,11 +1,11 @@
 {% for comment in comments %}
-    <div class="post-comment">
+    <div class="post-comment pb-0">
         <!-- USER AVATAR -->
         <a class="user-avatar small no-outline" href="{{ path('front_profil_user', {'pseudo': comment.user.pseudo}) }}">
             <!-- USER AVATAR CONTENT -->
             <div class="user-avatar-content">
                 <!-- HEXAGON -->
-                <div class="hexagon-image-30-32" data-src="{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ comment.user.avatar }}"></div>
+                <div class="hexagon-image-30-32" data-src="{% if comment.user.avatar %}{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ comment.user.avatar }}{% else %}{{ asset('img/avatar/01.jpg') }}{% endif %}"></div>
                 <!-- /HEXAGON -->
             </div>
             <!-- /USER AVATAR CONTENT -->

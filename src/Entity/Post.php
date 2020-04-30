@@ -33,7 +33,7 @@ class Post
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="posts")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $user;
 
@@ -66,6 +66,12 @@ class Post
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $slug;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Group", inversedBy="posts")
+     */
+    private $userGroup;
+
 
     public function __construct()
     {
@@ -245,4 +251,15 @@ class Post
         return $this;
     }
 
+    public function getUserGroup(): ?Group
+    {
+        return $this->userGroup;
+    }
+
+    public function setUserGroup(?Group $userGroup): self
+    {
+        $this->userGroup = $userGroup;
+
+        return $this;
+    }
 }

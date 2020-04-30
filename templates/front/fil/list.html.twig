@@ -159,10 +159,299 @@
 
             {% for post in posts %}
                 <!-- WIDGET BOX -->
+                {% if post.type == constant('App\\Entity\\Post::ARTICLE_POST_TYPE') %}
+                    <div class="widget-box no-padding">
 
-                <div class="widget-box no-padding">
+                        {% if post.user == app.user %}
+                            <div class="widget-box-settings">
+                                <!-- POST SETTINGS WRAP -->
+                                <div class="post-settings-wrap">
+                                    <!-- POST SETTINGS -->
+                                    <div class="post-settings widget-box-post-settings-dropdown-trigger">
+                                        <!-- POST SETTINGS ICON -->
+                                        <svg class="post-settings-icon icon-more-dots">
+                                            <use xlink:href="#svg-more-dots"></use>
+                                        </svg>
+                                        <!-- /POST SETTINGS ICON -->
+                                    </div>
+                                    <!-- /POST SETTINGS -->
+
+                                    <!-- SIMPLE DROPDOWN -->
+                                    <div class="simple-dropdown widget-box-post-settings-dropdown">
+
+                                        <!-- SIMPLE DROPDOWN LINK -->
+                                        <a class="simple-dropdown-link" href="{{ path('front_profil_remove_post', {id: post.id}) }}">Supprimer</a>
+                                        <!-- /SIMPLE DROPDOWN LINK -->
+                                    </div>
+                                    <!-- /SIMPLE DROPDOWN -->
+                                </div>
+                                <!-- /POST SETTINGS WRAP -->
+                            </div>
+                        {% endif %}
+
+                        <!-- WIDGET BOX STATUS -->
+                        <div class="widget-box-status">
+                            <!-- WIDGET BOX STATUS CONTENT -->
+                            <div class="widget-box-status-content">
+                                <!-- USER STATUS -->
+                                <div class="user-status">
+                                    <!-- USER STATUS AVATAR -->
+                                    <a class="user-status-avatar" href="{{ path('front_profil_user', {'pseudo': post.user.pseudo}) }}">
+                                        <!-- USER AVATAR -->
+                                        <div class="user-avatar small no-outline">
+                                            <!-- USER AVATAR CONTENT -->
+                                            <div class="user-avatar-content">
+                                                <!-- HEXAGON -->
+                                                <div class="hexagon-image-30-32" data-src="{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ post.user.avatar }}"></div>
+                                                <!-- /HEXAGON -->
+                                            </div>
+                                            <!-- /USER AVATAR CONTENT -->
+
+                                            <!-- USER AVATAR PROGRESS -->
+                                            <div class="user-avatar-progress">
+                                                <!-- HEXAGON -->
+                                                <div class="hexagon-progress-40-44"></div>
+                                                <!-- /HEXAGON -->
+                                            </div>
+                                            <!-- /USER AVATAR PROGRESS -->
+
+                                            <!-- USER AVATAR PROGRESS BORDER -->
+                                            <div class="user-avatar-progress-border">
+                                                <!-- HEXAGON -->
+                                                <div class="hexagon-border-40-44"></div>
+                                                <!-- /HEXAGON -->
+                                            </div>
+                                            <!-- /USER AVATAR PROGRESS BORDER -->
+
+                                            <!-- USER AVATAR BADGE -->
+                                            <div class="user-avatar-badge">
+                                                <!-- USER AVATAR BADGE BORDER -->
+                                                <div class="user-avatar-badge-border">
+                                                    <!-- HEXAGON -->
+                                                    <div class="hexagon-22-24"></div>
+                                                    <!-- /HEXAGON -->
+                                                </div>
+                                                <!-- /USER AVATAR BADGE BORDER -->
+
+                                                <!-- USER AVATAR BADGE CONTENT -->
+                                                <div class="user-avatar-badge-content">
+                                                    <!-- HEXAGON -->
+                                                    <div class="hexagon-dark-16-18"></div>
+                                                    <!-- /HEXAGON -->
+                                                </div>
+                                                <!-- /USER AVATAR BADGE CONTENT -->
+
+                                                <!-- USER AVATAR BADGE TEXT -->
+                                                <p class="user-avatar-badge-text">24</p>
+                                                <!-- /USER AVATAR BADGE TEXT -->
+                                            </div>
+                                            <!-- /USER AVATAR BADGE -->
+                                        </div>
+                                        <!-- /USER AVATAR -->
+                                    </a>
+                                    <!-- /USER STATUS AVATAR -->
+
+                                    <!-- USER STATUS TITLE -->
+                                    <p class="user-status-title medium"><a class="bold" href="{{ path('front_profil_user', {'pseudo': post.user.pseudo}) }}">{{ post.user.pseudo }}</a> a publié <span class="bold">un article</span></p>
+                                    <!-- /USER STATUS TITLE -->
+
+                                    {% set difference = date(post.publishedAt).diff(date('now')) %}
+                                    {% set days = difference.days %}
+                                    {% set hours = difference.h %}
+                                    {% set minutes = difference.i %}
+                                    <p class="user-status-text small">
+                                        {% if days > 0 %}
+                                            il y a {{ days }} jours
+                                        {% elseif hours > 0 %}
+                                            il y a {{ hours }} heures
+                                        {% else %}
+                                            il y a {{ minutes }} minutes
+                                        {% endif %}
+                                    </p>
+                                </div>
+                                <!-- /USER STATUS -->
+                            </div>
+                            <!-- /WIDGET BOX STATUS CONTENT -->
+
+                            <!-- POST PREVIEW -->
+                            <div class="post-preview medium">
+                                <!-- POST PREVIEW IMAGE -->
+                                <figure class="post-preview-image liquid">
+                                    <img src="{{ asset( constant('App\\Services\\File\\UploadFile::PHOTO_POST_UPLOAD_DIR')) ~ post.photo.0.url }}" alt="{{ post.title }}">
+                                </figure>
+                                <!-- /POST PREVIEW IMAGE -->
+
+                                <!-- POST PREVIEW INFO -->
+                                <div class="post-preview-info">
+
+                                    <!-- POST PREVIEW TITLE -->
+                                    <p class="post-preview-title">{{ post.title }}</p>
+                                    <!-- /POST PREVIEW TITLE -->
+
+                                    <!-- POST PREVIEW TEXT -->
+                                    <p class="post-preview-text">{{ post.text|striptags|slice(0, 200) }}</p>
+                                    <!-- /POST PREVIEW TEXT -->
+
+                                    <!-- POST PREVIEW LINK -->
+                                    <a class="post-preview-link" href="{{ path('front_profil_blog_single', {'slug': post.slug}) }}">Lire la suite</a>
+                                    <!-- /POST PREVIEW LINK -->
+                                </div>
+                                <!-- /POST PREVIEW INFO -->
+                            </div>
+                            <!-- /POST PREVIEW -->
+
+                            <!-- WIDGET BOX STATUS CONTENT -->
+                            <div class="widget-box-status-content">
+
+                                <!-- CONTENT ACTIONS -->
+                                <div class="content-actions">
+                                    <!-- CONTENT ACTION -->
+                                    <div class="content-action">
+                                        <!-- META LINE -->
+                                        <div class="meta-line">
+                                            <!-- META LINE LIST -->
+                                            <div class="meta-line-list reaction-item-list" id="react-{{ post.id }}" data-post="{{ post.id }}">
+                                                <!-- REACTION ITEM -->
+                                                {% for react in post_react.getReactPost(post) %}
+                                                    <div class="reaction-item">
+                                                        <img class="reaction-image reaction-item-dropdown-trigger" src="{{ asset('img/reaction/' ~ react.type ~ '.png') }}" alt="reaction-{{ react.type }}">
+                                                        <div class="simple-dropdown padded reaction-item-dropdown">
+                                                            <p class="simple-dropdown-text"><img class="reaction" src="{{ asset('img/reaction/' ~ react.type ~ '.png') }}" alt="reaction-{{ react.type }}"> <span class="bold">{{ react.type }}</span></p>
+                                                            <p class="simple-dropdown-text">{{ react.count }}</p>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                            <!-- /META LINE LIST -->
+
+                                            <!-- META LINE TEXT -->
+                                            <p class="meta-line-text ml-1">{{ post_react.countReactPost(post) }}</p>
+                                            <!-- /META LINE TEXT -->
+                                        </div>
+                                        <!-- /META LINE -->
+                                    </div>
+                                    <!-- /CONTENT ACTION -->
+
+                                    <!-- CONTENT ACTION -->
+                                    <div class="content-action">
+                                        <!-- META LINE -->
+                                        <div class="meta-line">
+                                            <!-- META LINE LINK -->
+                                            <p class="meta-line-link">{{ post.commentPosts|length }} Commentaires</p>
+                                            <!-- /META LINE LINK -->
+                                        </div>
+                                        <!-- /META LINE -->
+
+                                    </div>
+                                    <!-- /CONTENT ACTION -->
+                                </div>
+                                <!-- /CONTENT ACTIONS -->
+                            </div>
+                            <!-- /WIDGET BOX STATUS CONTENT -->
+                        </div>
+                        <!-- /WIDGET BOX STATUS -->
+
+                        <!-- POST OPTIONS -->
+                        <div class="post-options">
+                            <!-- POST OPTION WRAP -->
+                            <div class="post-option-wrap">
+                                <!-- POST OPTION -->
+                                <div class="post-option reaction-options-dropdown-trigger">
+                                    <!-- POST OPTION ICON -->
+                                    <svg class="post-option-icon icon-thumbs-up">
+                                        <use xlink:href="#svg-thumbs-up"></use>
+                                    </svg>
+                                    <!-- /POST OPTION ICON -->
+
+                                    <!-- POST OPTION TEXT -->
+                                    <p class="post-option-text" id="like-{{ post.id }}" {% if post_react.getIfReactUser(post, app.user) %}style="color:#23d2e2"{% endif %}>Réagir!</p>
+                                    <!-- /POST OPTION TEXT -->
+                                </div>
+                                <!-- /POST OPTION -->
+
+                                <!-- REACTION OPTIONS -->
+                                <div class="reaction-options reaction-options-dropdown">
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft reacting" data-react="like" data-post="{{ post.id }}" id="react-like" data-title="Like">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img class="reaction-option-image" src="{{ asset('img/reaction/like.png') }}" alt="reaction-like">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft reacting" data-react="love" data-post="{{ post.id }}" id="react-love" data-title="Love">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img class="reaction-option-image" src="{{ asset('img/reaction/love.png') }}" alt="reaction-love">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft reacting" data-react="dislike" data-post="{{ post.id }}" id="react-dislike" data-title="Dislike">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img class="reaction-option-image" src="{{ asset('img/reaction/dislike.png') }}" alt="reaction-dislike">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft reacting" data-react="happy" data-post="{{ post.id }}" id="react-happy" data-title="Happy">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img class="reaction-option-image" src="{{ asset('img/reaction/happy.png') }}" alt="reaction-happy">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft reacting" data-react="funny" data-post="{{ post.id }}" id="react-funny" data-title="Funny">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img class="reaction-option-image" src="{{ asset('img/reaction/funny.png') }}" alt="reaction-funny">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft reacting" data-react="wow" data-post="{{ post.id }}" id="react-wow" data-title="Wow">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img class="reaction-option-image" src="{{ asset('img/reaction/wow.png') }}" alt="reaction-wow">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft reacting" data-react="angry" data-post="{{ post.id }}" id="react-angry" data-title="Angry">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img class="reaction-option-image" id="react-angry" src="{{ asset('img/reaction/angry.png') }}" alt="reaction-angry">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft reacting" data-react="sad" data-post="{{ post.id }}" data-title="Sad" id="react-sad">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img class="reaction-option-image" src="{{ asset('img/reaction/sad.png') }}" alt="reaction-sad">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+                                </div>
+                                <!-- /REACTION OPTIONS -->
+                            </div>
+                            <!-- /POST OPTION WRAP -->
+
+                            <!-- POST OPTION -->
+                            <div class="post-option see-comments" data-post="{{ post.id }}" data-page="1">
+                                <svg class="post-option-icon icon-comment">
+                                    <use xlink:href="#svg-comment"></use>
+                                </svg>
+                                <p class="post-option-text">Commentaires</p></div>
+                        </div>
+                        <!-- /POST OPTIONS -->
+                    </div>
+                {% else %}
+                    <div class="widget-box no-padding">
                     <!-- WIDGET BOX SETTINGS -->
-                    {% if post.user == app.user %}
+                    {% if post.user and post.user == app.user or post.userGroup and post.userGroup.author == app.user %}
                         <div class="widget-box-settings">
                             <!-- POST SETTINGS WRAP -->
                             <div class="post-settings-wrap">
@@ -198,13 +487,21 @@
                             <!-- USER STATUS -->
                             <div class="user-status">
                                 <!-- USER STATUS AVATAR -->
-                                <a class="user-status-avatar" href="{{ path('front_profil_user', {'pseudo': post.user.pseudo}) }}">
+                                {% if post.user %}
+                                    <a class="user-status-avatar" href="{{ path('front_profil_user', {'pseudo': post.user.pseudo}) }}">
+                                {% else %}
+                                    <a class="user-status-avatar" href="{{ path('front_group_single', {'slug': post.userGroup.slug}) }}">
+                                {% endif %}
                                     <!-- USER AVATAR -->
                                     <div class="user-avatar small no-outline">
                                         <!-- USER AVATAR CONTENT -->
                                         <div class="user-avatar-content">
                                             <!-- HEXAGON -->
+                                            {% if post.user %}
                                             <div class="hexagon-image-30-32" data-src="{% if post.user.avatar %}{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ post.user.avatar }}{% else %}{{ asset('img/avatar/01.jpg') }}{% endif %}"></div>
+                                            {% else %}
+                                            <div class="hexagon-image-30-32" data-src="{% if post.userGroup.avatar %}{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ post.userGroup.avatar }}{% else %}{{ asset('img/avatar/01.jpg') }}{% endif %}"></div>
+                                            {% endif %}
                                             <!-- /HEXAGON -->
                                         </div>
                                         <!-- /USER AVATAR CONTENT -->
@@ -254,7 +551,11 @@
                                 <!-- /USER STATUS AVATAR -->
 
                                 <!-- USER STATUS TITLE -->
+                                {% if post.user %}
                                 <p class="user-status-title medium"><a class="bold" href="{{ path('front_profil_user', {'pseudo': post.user.pseudo}) }}">{{ post.user.pseudo }}</a></p>
+                                {% else %}
+                                    <p class="user-status-title medium"><a class="bold" href="{{ path('front_group_single', {'slug': post.userGroup.slug}) }}">{{ post.userGroup.name }}</a></p>
+                                {% endif %}
                                 <!-- /USER STATUS TITLE -->
 
                                 <!-- USER STATUS TEXT -->
@@ -329,18 +630,11 @@
                                     <!-- META LINE -->
                                     <div class="meta-line">
                                         <!-- META LINE LINK -->
-                                        <p class="meta-line-link">3 Comments</p>
+                                        <p class="meta-line-link">{{ post.commentPosts|length }} Commentaires</p>
                                         <!-- /META LINE LINK -->
                                     </div>
                                     <!-- /META LINE -->
 
-                                    <!-- META LINE -->
-                                    <div class="meta-line">
-                                        <!-- META LINE TEXT -->
-                                        <p class="meta-line-text">0 Shares</p>
-                                        <!-- /META LINE TEXT -->
-                                    </div>
-                                    <!-- /META LINE -->
                                 </div>
                                 <!-- /CONTENT ACTION -->
                             </div>
@@ -351,124 +645,103 @@
                     <!-- /WIDGET BOX STATUS -->
 
                     <!-- POST OPTIONS -->
-                    <div class="post-options">
-                        <!-- POST OPTION WRAP -->
-                        <div class="post-option-wrap">
+                        <div class="post-options">
+                            <!-- POST OPTION WRAP -->
+                            <div class="post-option-wrap">
+                                <!-- POST OPTION -->
+                                <div class="post-option reaction-options-dropdown-trigger">
+                                    <!-- POST OPTION ICON -->
+                                    <svg class="post-option-icon icon-thumbs-up">
+                                        <use xlink:href="#svg-thumbs-up"></use>
+                                    </svg>
+                                    <!-- /POST OPTION ICON -->
+
+                                    <!-- POST OPTION TEXT -->
+                                    <p class="post-option-text" id="like-{{ post.id }}" {% if post_react.getIfReactUser(post, app.user) %}style="color:#23d2e2"{% endif %}>Réagir!</p>
+                                    <!-- /POST OPTION TEXT -->
+                                </div>
+                                <!-- /POST OPTION -->
+
+                                <!-- REACTION OPTIONS -->
+                                <div class="reaction-options reaction-options-dropdown">
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft reacting" data-react="like" data-post="{{ post.id }}" id="react-like" data-title="Like">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img class="reaction-option-image" src="{{ asset('img/reaction/like.png') }}" alt="reaction-like">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft reacting" data-react="love" data-post="{{ post.id }}" id="react-love" data-title="Love">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img class="reaction-option-image" src="{{ asset('img/reaction/love.png') }}" alt="reaction-love">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft reacting" data-react="dislike" data-post="{{ post.id }}" id="react-dislike" data-title="Dislike">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img class="reaction-option-image" src="{{ asset('img/reaction/dislike.png') }}" alt="reaction-dislike">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft reacting" data-react="happy" data-post="{{ post.id }}" id="react-happy" data-title="Happy">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img class="reaction-option-image" src="{{ asset('img/reaction/happy.png') }}" alt="reaction-happy">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft reacting" data-react="funny" data-post="{{ post.id }}" id="react-funny" data-title="Funny">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img class="reaction-option-image" src="{{ asset('img/reaction/funny.png') }}" alt="reaction-funny">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft reacting" data-react="wow" data-post="{{ post.id }}" id="react-wow" data-title="Wow">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img class="reaction-option-image" src="{{ asset('img/reaction/wow.png') }}" alt="reaction-wow">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft reacting" data-react="angry" data-post="{{ post.id }}" id="react-angry" data-title="Angry">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img class="reaction-option-image" id="react-angry" src="{{ asset('img/reaction/angry.png') }}" alt="reaction-angry">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft reacting" data-react="sad" data-post="{{ post.id }}" data-title="Sad" id="react-sad">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img class="reaction-option-image" src="{{ asset('img/reaction/sad.png') }}" alt="reaction-sad">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+                                </div>
+                                <!-- /REACTION OPTIONS -->
+                            </div>
+                            <!-- /POST OPTION WRAP -->
+
                             <!-- POST OPTION -->
-                            <div class="post-option reaction-options-dropdown-trigger">
-                                <!-- POST OPTION ICON -->
-                                <svg class="post-option-icon icon-thumbs-up">
-                                    <use xlink:href="#svg-thumbs-up"></use>
+                            <div class="post-option see-comments" data-post="{{ post.id }}" data-page="1">
+                                <svg class="post-option-icon icon-comment">
+                                    <use xlink:href="#svg-comment"></use>
                                 </svg>
-                                <!-- /POST OPTION ICON -->
-
-                                <!-- POST OPTION TEXT -->
-                                <p class="post-option-text" id="like-{{ post.id }}" {% if post_react.getIfReactUser(post, app.user) %}style="color:#23d2e2"{% endif %}>Réagir!</p>
-                                <!-- /POST OPTION TEXT -->
-                            </div>
-                            <!-- /POST OPTION -->
-
-                            <!-- REACTION OPTIONS -->
-                            <div class="reaction-options reaction-options-dropdown">
-                                <!-- REACTION OPTION -->
-                                <div class="reaction-option text-tooltip-tft reacting" data-react="like" data-post="{{ post.id }}" id="react-like" data-title="Like">
-                                    <!-- REACTION OPTION IMAGE -->
-                                    <img class="reaction-option-image" src="{{ asset('img/reaction/like.png') }}" alt="reaction-like">
-                                    <!-- /REACTION OPTION IMAGE -->
-                                </div>
-                                <!-- /REACTION OPTION -->
-
-                                <!-- REACTION OPTION -->
-                                <div class="reaction-option text-tooltip-tft reacting" data-react="love" data-post="{{ post.id }}" id="react-love" data-title="Love">
-                                    <!-- REACTION OPTION IMAGE -->
-                                    <img class="reaction-option-image" src="{{ asset('img/reaction/love.png') }}" alt="reaction-love">
-                                    <!-- /REACTION OPTION IMAGE -->
-                                </div>
-                                <!-- /REACTION OPTION -->
-
-                                <!-- REACTION OPTION -->
-                                <div class="reaction-option text-tooltip-tft reacting" data-react="dislike" data-post="{{ post.id }}" id="react-dislike" data-title="Dislike">
-                                    <!-- REACTION OPTION IMAGE -->
-                                    <img class="reaction-option-image" src="{{ asset('img/reaction/dislike.png') }}" alt="reaction-dislike">
-                                    <!-- /REACTION OPTION IMAGE -->
-                                </div>
-                                <!-- /REACTION OPTION -->
-
-                                <!-- REACTION OPTION -->
-                                <div class="reaction-option text-tooltip-tft reacting" data-react="happy" data-post="{{ post.id }}" id="react-happy" data-title="Happy">
-                                    <!-- REACTION OPTION IMAGE -->
-                                    <img class="reaction-option-image" src="{{ asset('img/reaction/happy.png') }}" alt="reaction-happy">
-                                    <!-- /REACTION OPTION IMAGE -->
-                                </div>
-                                <!-- /REACTION OPTION -->
-
-                                <!-- REACTION OPTION -->
-                                <div class="reaction-option text-tooltip-tft reacting" data-react="funny" data-post="{{ post.id }}" id="react-funny" data-title="Funny">
-                                    <!-- REACTION OPTION IMAGE -->
-                                    <img class="reaction-option-image" src="{{ asset('img/reaction/funny.png') }}" alt="reaction-funny">
-                                    <!-- /REACTION OPTION IMAGE -->
-                                </div>
-                                <!-- /REACTION OPTION -->
-
-                                <!-- REACTION OPTION -->
-                                <div class="reaction-option text-tooltip-tft reacting" data-react="wow" data-post="{{ post.id }}" id="react-wow" data-title="Wow">
-                                    <!-- REACTION OPTION IMAGE -->
-                                    <img class="reaction-option-image" src="{{ asset('img/reaction/wow.png') }}" alt="reaction-wow">
-                                    <!-- /REACTION OPTION IMAGE -->
-                                </div>
-                                <!-- /REACTION OPTION -->
-
-                                <!-- REACTION OPTION -->
-                                <div class="reaction-option text-tooltip-tft reacting" data-react="angry" data-post="{{ post.id }}" id="react-angry" data-title="Angry">
-                                    <!-- REACTION OPTION IMAGE -->
-                                    <img class="reaction-option-image" id="react-angry" src="{{ asset('img/reaction/angry.png') }}" alt="reaction-angry">
-                                    <!-- /REACTION OPTION IMAGE -->
-                                </div>
-                                <!-- /REACTION OPTION -->
-
-                                <!-- REACTION OPTION -->
-                                <div class="reaction-option text-tooltip-tft reacting" data-react="sad" data-post="{{ post.id }}" data-title="Sad" id="react-sad">
-                                    <!-- REACTION OPTION IMAGE -->
-                                    <img class="reaction-option-image" src="{{ asset('img/reaction/sad.png') }}" alt="reaction-sad">
-                                    <!-- /REACTION OPTION IMAGE -->
-                                </div>
-                                <!-- /REACTION OPTION -->
-                            </div>
-                            <!-- /REACTION OPTIONS -->
+                                <p class="post-option-text">Commentaires</p></div>
                         </div>
-                        <!-- /POST OPTION WRAP -->
-
-                        <!-- POST OPTION -->
-                        <div class="post-option">
-                            <!-- POST OPTION ICON -->
-                            <svg class="post-option-icon icon-comment">
-                                <use xlink:href="#svg-comment"></use>
-                            </svg>
-                            <!-- /POST OPTION ICON -->
-
-                            <!-- POST OPTION TEXT -->
-                            <p class="post-option-text">Commentaires</p>
-                            <!-- /POST OPTION TEXT -->
-                        </div>
-                        <!-- /POST OPTION -->
-
-                        <!-- POST OPTION -->
-                        <div class="post-option">
-                            <!-- POST OPTION ICON -->
-                            <svg class="post-option-icon icon-share">
-                                <use xlink:href="#svg-share"></use>
-                            </svg>
-                            <!-- /POST OPTION ICON -->
-
-                            <!-- POST OPTION TEXT -->
-                            <p class="post-option-text">Share</p>
-                            <!-- /POST OPTION TEXT -->
-                        </div>
-                        <!-- /POST OPTION -->
-                    </div>
                     <!-- /POST OPTIONS -->
                 </div>
-                <!-- /WIDGET BOX -->
+                {% endif %}
             {% endfor %}
 
             <!-- LOADER BARS -->
@@ -509,6 +782,335 @@ function addMoreElements() {
                 $('#fil_actu_posts').append(data.posts.content);
                 $('#load-bar').css('display', 'none');
                 page = page + 1;
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-148-164',
+                  width: 148,
+                  height: 164,
+                  roundedCorners: true,
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-progress-124-136',
+                  width: 124,
+                  height: 136,
+                  lineWidth: 8,
+                  roundedCorners: true,
+                  gradient: {
+                    colors: ['#41efff', '#615dfa']
+                  },
+                  scale: {
+                    start: 0,
+                    end: 1,
+                    stop: .74
+                  }
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-border-124-136',
+                  width: 124,
+                  height: 136,
+                  lineWidth: 8,
+                  roundedCorners: true,
+                  lineColor: '#e7e8ee'
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-image-100-110',
+                  width: 100,
+                  height: 110,
+                  roundedCorners: true,
+                  clip: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-120-132',
+                  width: 120,
+                  height: 132,
+                  roundedCorners: true,
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-progress-100-110',
+                  width: 100,
+                  height: 110,
+                  lineWidth: 6,
+                  roundedCorners: true,
+                  gradient: {
+                    colors: ['#41efff', '#615dfa']
+                  },
+                  scale: {
+                    start: 0,
+                    end: 1,
+                    stop: .8
+                  }
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-border-100-110',
+                  width: 100,
+                  height: 110,
+                  lineWidth: 6,
+                  roundedCorners: true,
+                  lineColor: '#e7e8ee'
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-image-82-90',
+                  width: 82,
+                  height: 90,
+                  roundedCorners: true,
+                  roundedCornerRadius: 3,
+                  clip: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-100-110',
+                  width: 100,
+                  height: 110,
+                  roundedCorners: true,
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-progress-84-92',
+                  width: 84,
+                  height: 92,
+                  lineWidth: 5,
+                  roundedCorners: true,
+                  roundedCornerRadius: 3,
+                  gradient: {
+                    colors: ['#41efff', '#615dfa']
+                  },
+                  scale: {
+                    start: 0,
+                    end: 1,
+                    stop: .8
+                  }
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-border-84-92',
+                  width: 84,
+                  height: 92,
+                  lineWidth: 5,
+                  roundedCorners: true,
+                  roundedCornerRadius: 3,
+                  lineColor: '#e7e8ee'
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-image-68-74',
+                  width: 68,
+                  height: 74,
+                  roundedCorners: true,
+                  roundedCornerRadius: 3,
+                  clip: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-50-56',
+                  width: 50,
+                  height: 56,
+                  roundedCorners: true,
+                  roundedCornerRadius: 2,
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-progress-40-44',
+                  width: 40,
+                  height: 44,
+                  lineWidth: 3,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  gradient: {
+                    colors: ['#41efff', '#615dfa']
+                  },
+                  scale: {
+                    start: 0,
+                    end: 1,
+                    stop: .8
+                  }
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-border-40-44',
+                  width: 40,
+                  height: 44,
+                  lineWidth: 3,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  lineColor: '#e7e8ee'
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-image-30-32',
+                  width: 30,
+                  height: 32,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  clip: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-40-44',
+                  width: 40,
+                  height: 44,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-dark-32-34',
+                  width: 32,
+                  height: 34,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  lineColor: '#45437f',
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-32-36',
+                  width: 32,
+                  height: 36,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  lineColor: '#fff',
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-dark-26-28',
+                  width: 26,
+                  height: 28,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  lineColor: '#45437f',
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-28-32',
+                  width: 28,
+                  height: 32,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  lineColor: '#fff',
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-dark-22-24',
+                  width: 22,
+                  height: 24,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  lineColor: '#45437f',
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-22-24',
+                  width: 22,
+                  height: 24,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  lineColor: '#fff',
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-dark-16-18',
+                  width: 16,
+                  height: 18,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  lineColor: '#45437f',
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-120-130',
+                  width: 120,
+                  height: 130,
+                  roundedCorners: true,
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-100-108',
+                  width: 100,
+                  height: 108,
+                  roundedCorners: true,
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-image-124-136',
+                  width: 124,
+                  height: 136,
+                  roundedCorners: true,
+                  clip: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-image-84-92',
+                  width: 84,
+                  height: 92,
+                  roundedCorners: true,
+                  clip: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-34-36',
+                  width: 34,
+                  height: 36,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-image-40-44',
+                  width: 40,
+                  height: 44,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  clip: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-image-24-26',
+                  width: 24,
+                  height: 26,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  clip: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-image-18-20',
+                  width: 18,
+                  height: 20,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  clip: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-overlay-30-32',
+                  width: 30,
+                  height: 32,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  lineColor: 'rgba(97, 93, 250, .9)',
+                  fill: true
+                });
 
                 app.plugins.createDropdown({
                   trigger: '.widget-box-post-settings-dropdown-trigger',
@@ -594,6 +1196,7 @@ function addMoreElements() {
                     }
                   }
                 });
+
                 //The server can answer saying it's the last page so that the browser doesn't make anymore calls
                 last_page = false;
             } else {
@@ -663,12 +1266,13 @@ photoPost.forEach(function(post) {
         for (const react of data.reacts) {
             countReactions++;
             const reactHtml = `<div class="reaction-item">
-                                        <img class="reaction-image reaction-item-dropdown-trigger" src="img/reaction/${react.type}.png" alt="reaction-${react.type}">
+                                        <img class="reaction-image reaction-item-dropdown-trigger" src="/img/reaction/${react.type}.png" alt="reaction-${react.type}">
                                         <div class="simple-dropdown padded reaction-item-dropdown">
-                                            <p class="simple-dropdown-text"><img class="reaction" src="img/reaction/${react.type}.png" alt="reaction-love"> <span class="bold">${react.type}</span></p>
+                                            <p class="simple-dropdown-text"><img class="reaction" src="/img/reaction/${react.type}.png" alt="reaction-love"> <span class="bold">${react.type}</span></p>
                                             <p class="simple-dropdown-text" id="count_react">${react.count}</p>
                                         </div>
                                     </div>`;
+
 
             document.getElementById('list_react_post').innerHTML = reactHtml;
 
@@ -688,6 +1292,7 @@ photoPost.forEach(function(post) {
                 }
               }
             });
+
         }
 
         document.getElementById('count_reactions').textContent = countReactions;
@@ -1490,7 +2095,406 @@ photoPost.forEach(function(post) {
     }
     loadPicture();
   })
-})
+});
+
+function displayAvatar() {
+    app.plugins.createHexagon({
+                  container: '.hexagon-148-164',
+                  width: 148,
+                  height: 164,
+                  roundedCorners: true,
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-progress-124-136',
+                  width: 124,
+                  height: 136,
+                  lineWidth: 8,
+                  roundedCorners: true,
+                  gradient: {
+                    colors: ['#41efff', '#615dfa']
+                  },
+                  scale: {
+                    start: 0,
+                    end: 1,
+                    stop: .74
+                  }
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-border-124-136',
+                  width: 124,
+                  height: 136,
+                  lineWidth: 8,
+                  roundedCorners: true,
+                  lineColor: '#e7e8ee'
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-image-100-110',
+                  width: 100,
+                  height: 110,
+                  roundedCorners: true,
+                  clip: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-120-132',
+                  width: 120,
+                  height: 132,
+                  roundedCorners: true,
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-progress-100-110',
+                  width: 100,
+                  height: 110,
+                  lineWidth: 6,
+                  roundedCorners: true,
+                  gradient: {
+                    colors: ['#41efff', '#615dfa']
+                  },
+                  scale: {
+                    start: 0,
+                    end: 1,
+                    stop: .8
+                  }
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-border-100-110',
+                  width: 100,
+                  height: 110,
+                  lineWidth: 6,
+                  roundedCorners: true,
+                  lineColor: '#e7e8ee'
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-image-82-90',
+                  width: 82,
+                  height: 90,
+                  roundedCorners: true,
+                  roundedCornerRadius: 3,
+                  clip: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-100-110',
+                  width: 100,
+                  height: 110,
+                  roundedCorners: true,
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-progress-84-92',
+                  width: 84,
+                  height: 92,
+                  lineWidth: 5,
+                  roundedCorners: true,
+                  roundedCornerRadius: 3,
+                  gradient: {
+                    colors: ['#41efff', '#615dfa']
+                  },
+                  scale: {
+                    start: 0,
+                    end: 1,
+                    stop: .8
+                  }
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-border-84-92',
+                  width: 84,
+                  height: 92,
+                  lineWidth: 5,
+                  roundedCorners: true,
+                  roundedCornerRadius: 3,
+                  lineColor: '#e7e8ee'
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-image-68-74',
+                  width: 68,
+                  height: 74,
+                  roundedCorners: true,
+                  roundedCornerRadius: 3,
+                  clip: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-50-56',
+                  width: 50,
+                  height: 56,
+                  roundedCorners: true,
+                  roundedCornerRadius: 2,
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-progress-40-44',
+                  width: 40,
+                  height: 44,
+                  lineWidth: 3,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  gradient: {
+                    colors: ['#41efff', '#615dfa']
+                  },
+                  scale: {
+                    start: 0,
+                    end: 1,
+                    stop: .8
+                  }
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-border-40-44',
+                  width: 40,
+                  height: 44,
+                  lineWidth: 3,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  lineColor: '#e7e8ee'
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-image-30-32',
+                  width: 30,
+                  height: 32,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  clip: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-40-44',
+                  width: 40,
+                  height: 44,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-dark-32-34',
+                  width: 32,
+                  height: 34,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  lineColor: '#45437f',
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-32-36',
+                  width: 32,
+                  height: 36,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  lineColor: '#fff',
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-dark-26-28',
+                  width: 26,
+                  height: 28,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  lineColor: '#45437f',
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-28-32',
+                  width: 28,
+                  height: 32,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  lineColor: '#fff',
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-dark-22-24',
+                  width: 22,
+                  height: 24,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  lineColor: '#45437f',
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-22-24',
+                  width: 22,
+                  height: 24,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  lineColor: '#fff',
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-dark-16-18',
+                  width: 16,
+                  height: 18,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  lineColor: '#45437f',
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-120-130',
+                  width: 120,
+                  height: 130,
+                  roundedCorners: true,
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-100-108',
+                  width: 100,
+                  height: 108,
+                  roundedCorners: true,
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-image-124-136',
+                  width: 124,
+                  height: 136,
+                  roundedCorners: true,
+                  clip: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-image-84-92',
+                  width: 84,
+                  height: 92,
+                  roundedCorners: true,
+                  clip: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-34-36',
+                  width: 34,
+                  height: 36,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  fill: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-image-40-44',
+                  width: 40,
+                  height: 44,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  clip: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-image-24-26',
+                  width: 24,
+                  height: 26,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  clip: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-image-18-20',
+                  width: 18,
+                  height: 20,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  clip: true
+                });
+
+                app.plugins.createHexagon({
+                  container: '.hexagon-overlay-30-32',
+                  width: 30,
+                  height: 32,
+                  roundedCorners: true,
+                  roundedCornerRadius: 1,
+                  lineColor: 'rgba(97, 93, 250, .9)',
+                  fill: true
+                });
+}
+
+// Comments
+const btnComments = document.getElementsByClassName('see-comments');
+
+for (let btnComment of btnComments) {
+
+    btnComment.addEventListener('click', function() {
+        const dataPost = btnComment.getAttribute('data-post');
+        const dataPage = btnComment.getAttribute('data-page');
+
+        const data = {
+            pageId: dataPage,
+            dataPost: dataPost
+        };
+
+        let datas = new FormData();
+        datas.append("data", JSON.stringify(data));
+
+        fetch("{{ path('front_comment_comments') }}", { method: 'POST', body: datas })
+            .then(response => response.json())
+            .then(data => {
+                const targetComments = btnComment.parentNode;
+                btnComment.classList.add('active');
+                // Change btn
+                btnComment.removeChild(btnComment.lastChild);
+                btnComment.insertAdjacentHTML('beforeend', '<p class="post-option-text">Suivants...</p>');
+
+                if (dataPage == 1) {
+                    targetComments.insertAdjacentHTML('afterend', data.form.content);
+                    targetComments.insertAdjacentHTML('afterend', data.comments.content);
+                } else {
+                    targetComments.insertAdjacentHTML('afterend', data.comments.content);
+                }
+
+                nbPage = parseInt(dataPage);
+                nbPage++;
+                btnComment.setAttribute('data-page', nbPage);
+
+                // Comment form
+                const commentForm = document.getElementById(data.idForm);
+
+                commentForm.addEventListener('submit', function(e) {
+                  e.preventDefault();
+                  e.stopImmediatePropagation();
+
+                  let form = e.target;
+                  const formData = new FormData(form);
+
+                  formData.append('postId', dataPost);
+
+                  fetch("{{ path('front_comment_comments') }}", { method: "POST", body: formData })
+                    .then(response => response.json())
+                    .then(data => {
+                        const targetComments = commentForm.parentNode;
+                        targetComments.insertAdjacentHTML('beforebegin', data.comment.content);
+                        commentForm.reset();
+
+                        displayAvatar();
+                    });
+                    return false;
+                });
+
+
+                displayAvatar();
+            })
+    })
+
+}
 
 </script>
 

@@ -32,7 +32,7 @@ class UserBlogController extends AbstractController
     /**
      * @Route("/blog/article/{slug}", name="front_profil_blog_single")
      */
-    public function single(Post $post, Request $request, PaginatorInterface $paginator)
+    public function single(Post $post, Request $request, PostRepository $postRepository, PaginatorInterface $paginator)
     {
         $comment = new CommentPost();
         $form = $this->createForm(CommentArticleUserType::class, $comment)->handleRequest($request);
@@ -69,11 +69,14 @@ class UserBlogController extends AbstractController
             );
         }
 
+        $lastArticles = $postRepository->findBy(['user' => $post->getUser()], ['publishedAt' => 'DESC'], 2);
+
         return $this->render('front/profil/blog_single.html.twig', [
             'userProfil' => $post->getUser(),
             'post' => $post,
             'form' => $form->createView(),
-            'comments' => $pagination
+            'comments' => $pagination,
+            'lastArticles' => $lastArticles
         ]);
     }
 

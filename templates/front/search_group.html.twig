@@ -1,0 +1,81 @@
+{% for group in groups %}
+    <a class="dropdown-box-list-item" href="{{ path('front_group_single', {'slug': group.slug}) }}">
+        <!-- USER STATUS -->
+        <div class="user-status notification">
+            <!-- USER STATUS AVATAR -->
+            <div class="user-status-avatar">
+                <!-- USER AVATAR -->
+                <div class="user-avatar small no-outline">
+                    <!-- USER AVATAR CONTENT -->
+                    <div class="user-avatar-content">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-image-30-32" data-src="{% if group.avatar %}{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ group.avatar }}{% else %}{{ asset('/img/avatar/01.jpg') }}{% endif %}"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR CONTENT -->
+
+                    <!-- USER AVATAR PROGRESS -->
+                    <div class="user-avatar-progress">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-progress-40-44"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR PROGRESS -->
+
+                    <!-- USER AVATAR PROGRESS BORDER -->
+                    <div class="user-avatar-progress-border">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-border-40-44"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR PROGRESS BORDER -->
+
+                    <!-- USER AVATAR BADGE -->
+                    <div class="user-avatar-badge">
+                        <!-- USER AVATAR BADGE BORDER -->
+                        <div class="user-avatar-badge-border">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-22-24"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR BADGE BORDER -->
+
+                        <!-- USER AVATAR BADGE CONTENT -->
+                        <div class="user-avatar-badge-content">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-dark-16-18"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR BADGE CONTENT -->
+
+                        <!-- USER AVATAR BADGE TEXT -->
+                        <p class="user-avatar-badge-text">12</p>
+                        <!-- /USER AVATAR BADGE TEXT -->
+                    </div>
+                    <!-- /USER AVATAR BADGE -->
+                </div>
+                <!-- /USER AVATAR -->
+            </div>
+            <!-- /USER STATUS AVATAR -->
+
+            <!-- USER STATUS TITLE -->
+            <p class="user-status-title"><span class="bold">{{ group.name }}</span></p>
+            <!-- /USER STATUS TITLE -->
+
+            <p class="user-status-text">{{ group.members|length }} membres</p>
+
+            <!-- USER STATUS ICON -->
+            <div class="user-status-icon">
+                <!-- ICON FRIEND -->
+                <svg class="icon-group">
+                    <use xlink:href="#svg-group"></use>
+                </svg>
+                <!-- /ICON FRIEND -->
+            </div>
+            <!-- /USER STATUS ICON -->
+        </div>
+        <!-- /USER STATUS -->
+    </a>
+{% else %}
+    <span class="dropdown-box-list-item">Aucun groupe correspondant</span>
+{% endfor %}

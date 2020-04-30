@@ -1,0 +1,263 @@
+{% extends 'base_profil.html.twig' %}
+
+{% block body %}
+    <!-- GRID -->
+    <div class="grid grid-3-9 medium-space">
+
+        {{ include('front/space/inc/sidebar.html.twig') }}
+
+        <div class="account-hub-content">
+            <!-- SECTION HEADER -->
+            <div class="section-header">
+                <!-- SECTION HEADER INFO -->
+                <div class="section-header-info">
+                    <!-- SECTION PRETITLE -->
+                    <p class="section-pretitle">Groupes</p>
+                    <!-- /SECTION PRETITLE -->
+
+                    <!-- SECTION TITLE -->
+                    <h2 class="section-title">Mes groupes</h2>
+                    <!-- /SECTION TITLE -->
+                </div>
+                <!-- /SECTION HEADER INFO -->
+            </div>
+
+            <!-- GRID COLUMN -->
+            <div class="grid grid-3-3-3 centered-on-mobile">
+                <!-- CREATE ENTITY BOX -->
+                <div class="create-entity-box">
+                    <!-- CREATE ENTITY BOX COVER -->
+                    <div class="create-entity-box-cover"></div>
+                    <!-- /CREATE ENTITY BOX COVER -->
+
+                    <!-- CREATE ENTITY BOX AVATAR -->
+                    <div class="create-entity-box-avatar">
+                        <!-- CREATE ENTITY BOX AVATAR ICON -->
+                        <svg class="create-entity-box-avatar-icon icon-group">
+                            <use xlink:href="#svg-group"></use>
+                        </svg>
+                        <!-- /CREATE ENTITY BOX AVATAR ICON -->
+                    </div>
+                    <!-- /CREATE ENTITY BOX AVATAR -->
+
+                    <!-- CREATE ENTITY BOX INFO -->
+                    <div class="create-entity-box-info">
+                        <!-- CREATE ENTITY BOX TITLE -->
+                        <p class="create-entity-box-title">Créer un groupe</p>
+                        <!-- /CREATE ENTITY BOX TITLE -->
+
+                        <!-- CREATE ENTITY BOX TEXT -->
+                        <p class="create-entity-box-text">Partagez votre passion avec les autres membres !</p>
+                        <!-- /CREATE ENTITY BOX TEXT -->
+
+                        <!-- BUTTON -->
+                        <p class="button secondary full popup-manage-group-trigger">Créer !</p>
+                        <!-- /BUTTON -->
+                    </div>
+                    <!-- /CREATE ENTITY BOX INFO -->
+                </div>
+                <!-- /CREATE ENTITY BOX -->
+
+                <!-- USER PREVIEW -->
+                {% for group in groups %}
+                    <div class="user-preview small fixed-height-medium">
+                    <!-- USER PREVIEW COVER -->
+                    <figure class="user-preview-cover liquid">
+                        <img src="{{ asset( constant('App\\Services\\File\\UploadFile::COVERUPLOAD_DIR')) ~ group.cover }}" alt="cover-29">
+                    </figure>
+                    <!-- /USER PREVIEW COVER -->
+
+                    <!-- USER PREVIEW INFO -->
+                    <div class="user-preview-info">
+                        <!-- USER SHORT DESCRIPTION -->
+                        <div class="user-short-description small">
+                            <!-- USER SHORT DESCRIPTION AVATAR -->
+                            <a class="user-short-description-avatar user-avatar no-stats" href="group-timeline.html">
+                                <!-- USER AVATAR BORDER -->
+                                <div class="user-avatar-border">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-100-108"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR BORDER -->
+
+                                <!-- USER AVATAR CONTENT -->
+                                <div class="user-avatar-content">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-image-84-92" data-src="{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ group.avatar }}" id="avatar-preview"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR CONTENT -->
+                            </a>
+                            <!-- /USER SHORT DESCRIPTION AVATAR -->
+
+                            <!-- USER SHORT DESCRIPTION TITLE -->
+                            <p class="user-short-description-title small"><a href="group-timeline.html">{{ group.name }}</a></p>
+                            <!-- /USER SHORT DESCRIPTION TITLE -->
+
+                            <!-- USER SHORT DESCRIPTION TEXT -->
+                            <p class="user-short-description-text regular">{{ group.description|slice(0, 100) }}</p>
+                            <!-- /USER SHORT DESCRIPTION TEXT -->
+                        </div>
+                        <!-- /USER SHORT DESCRIPTION -->
+
+                        <!-- BUTTON -->
+                        <a href="{{ path('gront_space_manage_group', {'slug': group.slug}) }}" class="button white full">Gestion du groupe</a>
+                        <!-- /BUTTON -->
+                    </div>
+                    <!-- /USER PREVIEW INFO -->
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- /GRID -->
+    </div>
+</div>
+    <div class="popup-box mid popup-manage-group">
+        <!-- POPUP CLOSE BUTTON -->
+        <div class="popup-close-button popup-manage-group-trigger">
+            <!-- POPUP CLOSE BUTTON ICON -->
+            <svg class="popup-close-button-icon icon-cross">
+                <use xlink:href="#svg-cross"></use>
+            </svg>
+            <!-- /POPUP CLOSE BUTTON ICON -->
+        </div>
+        <!-- /POPUP CLOSE BUTTON -->
+
+        <!-- POPUP BOX BODY -->
+        <div class="popup-box-body">
+            <!-- /POPUP BOX SIDEBAR -->
+
+            <!-- POPUP BOX CONTENT -->
+            <div class="popup-box-content" style="width:100%">
+                <!-- WIDGET BOX -->
+                <div class="widget-box">
+                    <!-- WIDGET BOX TITLE -->
+                    <p class="widget-box-title">Création d'un groupe</p>
+                    <!-- /WIDGET BOX TITLE -->
+
+                    <!-- WIDGET BOX CONTENT -->
+                    <div class="widget-box-content">
+                        <!-- FORM -->
+                        {{ form_start(form) }}
+                            <!-- FORM ROW -->
+                            <div class="form-row">
+                                <!-- FORM ITEM -->
+                                <div class="form-item">
+                                    <!-- FORM INPUT -->
+                                    <div class="form-input small">
+                                        {{ form_label(form.name) }}
+                                        {{ form_widget(form.name) }}
+                                        <small style="color:red">{{ form_errors(form.name) }}</small>
+                                    </div>
+                                    <!-- /FORM INPUT -->
+                                </div>
+                                <!-- /FORM ITEM -->
+                            </div>
+                            <!-- /FORM ROW -->
+
+                            <!-- FORM ROW -->
+                            <div class="form-row">
+                                <!-- FORM ITEM -->
+                                <div class="form-item">
+                                    <!-- FORM INPUT -->
+                                    <div class="form-input small ">
+                                        {{ form_label(form.description) }}
+                                        {{ form_widget(form.description) }}
+                                        <small style="color:red">{{ form_errors(form.description) }}</small>
+                                    </div>
+                                    <!-- /FORM INPUT -->
+                                </div>
+                                <!-- /FORM ITEM -->
+                            </div>
+                            <!-- /FORM ROW -->
+                            <!-- FORM ROW -->
+                            <div class="form-row">
+                                <!-- FORM ITEM -->
+                                <div class="form-item col-md-6">
+                                    <!-- FORM INPUT -->
+                                    <p style="font-size:.875rem;color:#adafca;font-weight:600;margin-bottom:15px">Miniature du groupe</p>
+                                    <div class="form-input small">
+                                        {{ form_widget(form.avatar) }}
+                                        {{ form_label(form.avatar) }}
+                                        <small style="color:red">{{ form_errors(form.avatar) }}</small>
+                                    </div>
+                                    <!-- /FORM INPUT -->
+                                </div>
+                                <div class="form-item col-md-6">
+                                    <!-- FORM INPUT -->
+                                    <p style="font-size:.875rem;color:#adafca;font-weight:600;margin-bottom:15px">Image de couverture</p>
+                                    <div class="form-input small">
+                                        {{ form_widget(form.cover) }}
+                                        {{ form_label(form.cover) }}
+                                        <small style="color:red">{{ form_errors(form.cover) }}</small>
+                                    </div>
+                                    <!-- /FORM INPUT -->
+                                </div>
+                                <!-- /FORM ITEM -->
+                            </div>
+                            <!-- /FORM ROW -->
+                        <div class="form-row">
+                            <!-- FORM ITEM -->
+                            <div class="form-item">
+                                <!-- FORM INPUT -->
+                                <div class="form-input small">
+                                    {{ form_label(form.email) }}
+                                    {{ form_widget(form.email) }}
+                                    <small style="color:red">{{ form_errors(form.email) }}</small>
+                                </div>
+                                <!-- /FORM INPUT -->
+                            </div>
+                            <!-- /FORM ITEM -->
+                        </div>
+                        <div class="form-row">
+                            <!-- FORM ITEM -->
+                            <div class="form-item">
+                                <!-- FORM INPUT -->
+                                <div class="form-input small">
+                                    {{ form_label(form.website) }}
+                                    {{ form_widget(form.website) }}
+                                    <small style="color:red">{{ form_errors(form.website) }}</small>
+                                </div>
+                                <!-- /FORM INPUT -->
+                            </div>
+                            <!-- /FORM ITEM -->
+                        </div>
+                        <div class="popup-box-sidebar-footer mt-3">
+                            <button type="submit" class="button secondary full popup-manage-group-trigger">Créer le groupe !</button>
+                        </div>
+
+                            <!-- /FORM ROW -->
+                        {{ form_end(form) }}
+                        <!-- /FORM -->
+                    </div>
+                    <!-- WIDGET BOX CONTENT -->
+                </div>
+                <!-- /WIDGET BOX -->
+            </div>
+            <!-- /POPUP BOX CONTENT -->
+        </div>
+        <!-- /POPUP BOX BODY -->
+    </div>
+{% endblock %}
+
+{% block javascript %}
+{{ parent() }}
+<script>
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            document.getElementById('preview_avatar').setAttribute('data-src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+document.getElementById('group_avatar').addEventListener('change', function(){
+    readURL(this);
+});
+</script>
+{% endblock %}

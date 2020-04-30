@@ -1,0 +1,271 @@
+{% extends 'base_profil.html.twig' %}
+
+{% block body %}
+    <!-- GRID -->
+    <div class="grid grid-3-9 medium-space">
+
+        {{ include('front/space/inc/sidebar.html.twig') }}
+
+        <!-- GRID COLUMN -->
+        <div class="account-hub-content">
+            <!-- SECTION HEADER -->
+            <div class="section-header">
+                <!-- SECTION HEADER INFO -->
+                <div class="section-header-info">
+                    <!-- SECTION PRETITLE -->
+                    <p class="section-pretitle">Gestion groupe</p>
+                    <!-- /SECTION PRETITLE -->
+
+                    <!-- SECTION TITLE -->
+                    <h2 class="section-title">{{ group.name }}</h2>
+                    <!-- /SECTION TITLE -->
+                </div>
+                <!-- /SECTION HEADER INFO -->
+            </div>
+            <!-- /SECTION HEADER -->
+
+            <!-- GRID COLUMN -->
+            <div class="grid-column">
+                <!-- GRID -->
+                <div class="grid grid-3-3-3 centered">
+                    <!-- USER PREVIEW -->
+                    <div class="user-preview small fixed-height">
+                        <!-- USER PREVIEW COVER -->
+                        <figure class="user-preview-cover liquid">
+                            <img src="{% if group.cover %}{{ asset( constant('App\\Services\\File\\UploadFile::COVERUPLOAD_DIR')) ~ group.cover }}{% else %}{{ asset('img/cover/01.jpg') }}{% endif %}" id="preview_cover" alt="cover-01">
+                        </figure>
+                        <!-- /USER PREVIEW COVER -->
+                        <!-- USER PREVIEW INFO -->
+                        <div class="user-preview-info">
+                            <!-- USER SHORT DESCRIPTION -->
+                            <div class="user-short-description small">
+                                <!-- USER SHORT DESCRIPTION AVATAR -->
+                                <div class="user-short-description-avatar user-avatar">
+                                    <!-- USER AVATAR BORDER -->
+                                    <div class="user-avatar-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-100-110"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BORDER -->
+
+                                    <!-- USER AVATAR CONTENT -->
+                                    <div class="user-avatar-content">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-image-68-74" id="preview_avatar" data-src="{% if group.avatar %}{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ group.avatar }}{% else %}{{ asset('img/avatar/01.jpg') }}{% endif %}"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR CONTENT -->
+
+                                    <!-- USER AVATAR PROGRESS -->
+                                    <div class="user-avatar-progress">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-progress-84-92"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR PROGRESS -->
+
+                                    <!-- USER AVATAR PROGRESS BORDER -->
+                                    <div class="user-avatar-progress-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-border-84-92"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR PROGRESS BORDER -->
+
+                                    <!-- USER AVATAR BADGE -->
+                                    <div class="user-avatar-badge">
+                                        <!-- USER AVATAR BADGE BORDER -->
+                                        <div class="user-avatar-badge-border">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-28-32"></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR BADGE BORDER -->
+
+                                        <!-- USER AVATAR BADGE CONTENT -->
+                                        <div class="user-avatar-badge-content">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-dark-22-24"></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR BADGE CONTENT -->
+
+                                        <!-- USER AVATAR BADGE TEXT -->
+                                        <p class="user-avatar-badge-text">24</p>
+                                        <!-- /USER AVATAR BADGE TEXT -->
+                                    </div>
+                                    <!-- /USER AVATAR BADGE -->
+                                </div>
+                                <!-- /USER SHORT DESCRIPTION AVATAR -->
+                            </div>
+                            <!-- /USER SHORT DESCRIPTION -->
+                        </div>
+                        <!-- /USER PREVIEW INFO -->
+                    </div>
+                    <!-- /USER PREVIEW -->
+                </div>
+                <!-- /GRID -->
+
+                <div class="section-filters-bar v1">
+                    <!-- SECTION FILTERS BAR ACTIONS -->
+                    <div class="section-filters-bar-actions">
+
+                        <!-- FILTER TABS -->
+                        <div class="filter-tabs">
+                            <!-- FILTER TAB -->
+                            <div class="filter-tab">
+                                <!-- FILTER TAB TEXT -->
+                                <a href="{{ path('gront_space_manage_group', {'slug': group.slug}) }}" class="filter-tab-text">Informations du groupe</a>
+                                <!-- /FILTER TAB TEXT -->
+                            </div>
+                            <!-- /FILTER TAB -->
+
+                            <!-- FILTER TAB -->
+                            <div class="filter-tab">
+                                <!-- FILTER TAB TEXT -->
+                                <a href="{{ path('gront_space_manage_group_members', {'slug': group.slug}) }}" class="filter-tab-text">Membres</a>
+                                <!-- /FILTER TAB TEXT -->
+                            </div>
+
+                            <!-- FILTER TAB -->
+                            <div class="filter-tab active">
+                                <!-- FILTER TAB TEXT -->
+                                <a href="{{ path('front_space_manage_group_social', {'slug': group.slug}) }}" class="filter-tab-text">Réseaux sociaux</a>
+                                <!-- /FILTER TAB TEXT -->
+                            </div>
+                            <!-- /FILTER TAB -->
+
+                        </div>
+                        <!-- /FILTER TABS -->
+                    </div>
+                </div>
+
+                <!-- WIDGET BOX -->
+                <div class="widget-box mt-3">
+
+                    {{ form_start(form) }}
+                    <!-- FORM ROW -->
+                    <div class="form-row split">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input social-input small active">
+                                <!-- SOCIAL LINK -->
+                                <div class="social-link no-hover facebook">
+                                    <!-- ICON FACEBOOK -->
+                                    <svg class="icon-facebook">
+                                        <use xlink:href="#svg-facebook"></use>
+                                    </svg>
+                                    <!-- /ICON FACEBOOK -->
+                                </div>
+                                {{ form_label(form.facebook) }}
+                                {{ form_widget(form.facebook) }}
+                                <small style="color:red">{{ form_errors(form.facebook) }}</small>
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input social-input small active">
+                                <!-- SOCIAL LINK -->
+                                <div class="social-link no-hover twitter">
+                                    <!-- ICON TWITTER -->
+                                    <svg class="icon-twitter">
+                                        <use xlink:href="#svg-twitter"></use>
+                                    </svg>
+                                    <!-- /ICON TWITTER -->
+                                </div>
+                                {{ form_label(form.twitter) }}
+                                {{ form_widget(form.twitter) }}
+                                <small style="color:red">{{ form_errors(form.twitter) }}</small>
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <!-- /FORM ROW -->
+
+                    <!-- FORM ROW -->
+                    <div class="form-row split">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input social-input small active">
+                                <!-- SOCIAL LINK -->
+                                <div class="social-link no-hover instagram">
+                                    <!-- ICON INSTAGRAM -->
+                                    <svg class="icon-instagram">
+                                        <use xlink:href="#svg-instagram"></use>
+                                    </svg>
+                                    <!-- /ICON INSTAGRAM -->
+                                </div>
+                                {{ form_label(form.instagram) }}
+                                {{ form_widget(form.instagram) }}
+                                <small style="color:red">{{ form_errors(form.instagram) }}</small>
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input social-input small active">
+                                <!-- SOCIAL LINK -->
+                                <div class="social-link no-hover twitch">
+                                    <!-- ICON TWITCH -->
+                                    <svg class="icon-twitch">
+                                        <use xlink:href="#svg-twitch"></use>
+                                    </svg>
+                                    <!-- /ICON TWITCH -->
+                                </div>
+                                {{ form_label(form.twitch) }}
+                                {{ form_widget(form.twitch) }}
+                                <small style="color:red">{{ form_errors(form.twitch) }}</small>
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <!-- /FORM ROW -->
+
+                    <!-- FORM ROW -->
+                    <div class="form-row split">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input social-input small active">
+                                <!-- SOCIAL LINK -->
+                                <div class="social-link no-hover youtube">
+                                    <!-- ICON YOUTUBE -->
+                                    <svg class="icon-youtube">
+                                        <use xlink:href="#svg-youtube"></use>
+                                    </svg>
+                                    <!-- /ICON YOUTUBE -->
+                                </div>
+                                {{ form_label(form.youtube) }}
+                                {{ form_widget(form.youtube) }}
+                                <small style="color:red">{{ form_errors(form.youtube) }}</small>
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                        <div class="form-item">
+                            <div class="form-item">
+                                <input type="submit" class="button primary" value="Enregistrer" style="width:100%">
+                            </div>
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+
+                </div>
+
+            </div>
+        </div>
+        <!-- /GRID -->
+    </div>
+{% endblock %}

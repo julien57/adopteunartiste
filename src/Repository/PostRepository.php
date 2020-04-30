@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Post;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -53,6 +54,27 @@ class PostRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function getLast10PostsFil(User $user)
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.photo', 'photo')
+            ->addSelect('photo')
+            ->leftJoin('p.reacts', 'reacts')
+            ->addSelect('reacts')
+            ->leftJoin('p.user', 'user')
+            ->addSelect('user')
+            ->leftJoin('user.adopts', 'adopts')
+            ->leftJoin('p.userGroup', 'userGroup')
+            ->where('adopts.userTo = :user')
+            ->orWhere('adopts.userFrom = :user')
+            ->orWhere('userGroup.members = :user')
+            ->setParameter('user', $user)
+            ->orderBy('p.publishedAt', 'DESC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
+
     public function findPostById(int $post)
     {
         return $this->createQueryBuilder('p')
@@ -60,6 +82,8 @@ class PostRepository extends ServiceEntityRepository
             ->addSelect('photo')
             ->leftJoin('p.user', 'user')
             ->addSelect('user')
+            ->leftJoin('p.userGroup', 'userGroup')
+            ->addSelect('userGroup')
             ->where('p.id = :id')
             ->setParameter('id', $post)
             ->getQuery()

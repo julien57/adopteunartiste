@@ -41,7 +41,7 @@ class FilController extends AbstractController
             );
 
             return $this->json([
-                'posts' => $this->render('front/html/posts.html.twig', ['posts' => $pagination->getItems(), 'last_page' => false])
+                'posts' => $this->render('front/html/posts.html.twig', ['posts' => $pagination->getItems() , 'last_page' => false])
             ]);
 
         } else {

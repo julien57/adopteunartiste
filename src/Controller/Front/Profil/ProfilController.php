@@ -66,9 +66,12 @@ class ProfilController extends AbstractController
      */
     public function removePost(Post $post)
     {
-        if ($post->getUser() === $this->getUser()) {
+        if ($post->getUser() === $this->getUser() || $post->getUserGroup()->getAuthor() === $this->getUser()) {
             foreach ($post->getReacts() as $react) {
                 $post->removeReact($react);
+            }
+            foreach ($post->getCommentPosts() as $commentPost) {
+                $post->removeCommentPost($commentPost);
             }
             $this->em->remove($post);
             $this->em->flush();

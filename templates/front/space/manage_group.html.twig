@@ -1,0 +1,243 @@
+{% extends 'base_profil.html.twig' %}
+
+{% block body %}
+    <!-- GRID -->
+    <div class="grid grid-3-9 medium-space">
+
+        {{ include('front/space/inc/sidebar.html.twig') }}
+
+        <!-- GRID COLUMN -->
+        <div class="account-hub-content">
+            <!-- SECTION HEADER -->
+            <div class="section-header">
+                <!-- SECTION HEADER INFO -->
+                <div class="section-header-info">
+                    <!-- SECTION PRETITLE -->
+                    <p class="section-pretitle">Gestion groupe</p>
+                    <!-- /SECTION PRETITLE -->
+
+                    <!-- SECTION TITLE -->
+                    <h2 class="section-title">{{ group.name }}</h2>
+                    <!-- /SECTION TITLE -->
+                </div>
+                <!-- /SECTION HEADER INFO -->
+            </div>
+            <!-- /SECTION HEADER -->
+
+            <!-- GRID COLUMN -->
+            <div class="grid-column">
+                <!-- GRID -->
+                <div class="grid grid-3-3-3 centered">
+                    <!-- USER PREVIEW -->
+                    <div class="user-preview small fixed-height">
+                        <!-- USER PREVIEW COVER -->
+                        <figure class="user-preview-cover liquid">
+                            <img src="{% if group.cover %}{{ asset( constant('App\\Services\\File\\UploadFile::COVERUPLOAD_DIR')) ~ group.cover }}{% else %}{{ asset('img/cover/01.jpg') }}{% endif %}" id="preview_cover" alt="cover-01">
+                        </figure>
+                        <!-- /USER PREVIEW COVER -->
+                        <!-- USER PREVIEW INFO -->
+                        <div class="user-preview-info">
+                            <!-- USER SHORT DESCRIPTION -->
+                            <div class="user-short-description small">
+                                <!-- USER SHORT DESCRIPTION AVATAR -->
+                                <div class="user-short-description-avatar user-avatar">
+                                    <!-- USER AVATAR BORDER -->
+                                    <div class="user-avatar-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-100-110"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BORDER -->
+
+                                    <!-- USER AVATAR CONTENT -->
+                                    <div class="user-avatar-content">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-image-68-74" id="preview_avatar" data-src="{% if group.avatar %}{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ group.avatar }}{% else %}{{ asset('img/avatar/01.jpg') }}{% endif %}"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR CONTENT -->
+
+                                    <!-- USER AVATAR PROGRESS -->
+                                    <div class="user-avatar-progress">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-progress-84-92"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR PROGRESS -->
+
+                                    <!-- USER AVATAR PROGRESS BORDER -->
+                                    <div class="user-avatar-progress-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-border-84-92"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR PROGRESS BORDER -->
+
+                                    <!-- USER AVATAR BADGE -->
+                                    <div class="user-avatar-badge">
+                                        <!-- USER AVATAR BADGE BORDER -->
+                                        <div class="user-avatar-badge-border">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-28-32"></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR BADGE BORDER -->
+
+                                        <!-- USER AVATAR BADGE CONTENT -->
+                                        <div class="user-avatar-badge-content">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-dark-22-24"></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR BADGE CONTENT -->
+
+                                        <!-- USER AVATAR BADGE TEXT -->
+                                        <p class="user-avatar-badge-text">24</p>
+                                        <!-- /USER AVATAR BADGE TEXT -->
+                                    </div>
+                                    <!-- /USER AVATAR BADGE -->
+                                </div>
+                                <!-- /USER SHORT DESCRIPTION AVATAR -->
+                            </div>
+                            <!-- /USER SHORT DESCRIPTION -->
+                        </div>
+                        <!-- /USER PREVIEW INFO -->
+                    </div>
+                    <!-- /USER PREVIEW -->
+                </div>
+                <!-- /GRID -->
+
+                <div class="section-filters-bar v1">
+                    <!-- SECTION FILTERS BAR ACTIONS -->
+                    <div class="section-filters-bar-actions">
+
+                        <!-- FILTER TABS -->
+                        <div class="filter-tabs">
+                            <!-- FILTER TAB -->
+                            <div class="filter-tab active">
+                                <!-- FILTER TAB TEXT -->
+                                <a href="{{ path('gront_space_manage_group', {'slug': group.slug}) }}" class="filter-tab-text">Informations du groupe</a>
+                                <!-- /FILTER TAB TEXT -->
+                            </div>
+                            <!-- /FILTER TAB -->
+
+                            <!-- FILTER TAB -->
+                            <div class="filter-tab">
+                                <!-- FILTER TAB TEXT -->
+                                <a href="{{ path('gront_space_manage_group_members', {'slug': group.slug}) }}" class="filter-tab-text">Membres</a>
+                                <!-- /FILTER TAB TEXT -->
+                            </div>
+
+                            <div class="filter-tab">
+                                <!-- FILTER TAB TEXT -->
+                                <a href="{{ path('front_space_manage_group_social', {'slug': group.slug}) }}" class="filter-tab-text">Réseaux sociaux</a>
+                                <!-- /FILTER TAB TEXT -->
+                            </div>
+                            <!-- /FILTER TAB -->
+
+                        </div>
+                        <!-- /FILTER TABS -->
+                    </div>
+                </div>
+
+                <!-- WIDGET BOX -->
+                <div class="widget-box mt-3">
+
+                    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                    <!-- FORM ROW -->
+                    <div class="form-row">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input small active">
+                                {{ form_label(form.name) }}
+                                {{ form_widget(form.name) }}
+                                <small style="color:red">{{ form_errors(form.name) }}</small>
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <!-- /FORM ROW -->
+
+                    <!-- FORM ROW -->
+                    <div class="form-row">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input small active">
+                                {{ form_label(form.description) }}
+                                {{ form_widget(form.description) }}
+                                <small style="color:red">{{ form_errors(form.description) }}</small>
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <!-- /FORM ROW -->
+                    <!-- FORM ROW -->
+                    <div class="form-row">
+                        <!-- FORM ITEM -->
+                        <div class="form-item col-md-6">
+                            <!-- FORM INPUT -->
+                            <p style="font-size:.875rem;color:#adafca;font-weight:600;margin-bottom:15px">Miniature du groupe</p>
+                            <div class="form-input small active">
+                                {{ form_widget(form.avatar) }}
+                                {{ form_label(form.avatar) }}
+                                <small style="color:red">{{ form_errors(form.avatar) }}</small>
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <div class="form-item col-md-6">
+                            <!-- FORM INPUT -->
+                            <p style="font-size:.875rem;color:#adafca;font-weight:600;margin-bottom:15px">Image de couverture</p>
+                            <div class="form-input small active">
+                                {{ form_widget(form.cover) }}
+                                {{ form_label(form.cover) }}
+                                <small style="color:red">{{ form_errors(form.cover) }}</small>
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <!-- /FORM ROW -->
+                    <div class="form-row">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input small active">
+                                {{ form_label(form.email) }}
+                                {{ form_widget(form.email) }}
+                                <small style="color:red">{{ form_errors(form.email) }}</small>
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <div class="form-row">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input small active">
+                                {{ form_label(form.website) }}
+                                {{ form_widget(form.website) }}
+                                <small style="color:red">{{ form_errors(form.website) }}</small>
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <div class="popup-box-sidebar-footer mt-3">
+                        <button type="submit" class="button secondary full popup-manage-group-trigger">Enregistrer !</button>
+                    </div>
+
+                    <!-- /FORM ROW -->
+                    {{ form_end(form) }}
+
+                </div>
+
+            </div>
+        </div>
+        <!-- /GRID -->
+    </div>
+{% endblock %}
