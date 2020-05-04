@@ -2,23 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63ff9cd7-3cb6-497e-b0b2-d6f2408246d0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/julienmontel.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/Front/Space/MessagingController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Services/Post/MessagingService.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/front/html/bar_user.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/front/html/messaging.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/front/space/messaging.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/adopteunartiste.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/adopteunartiste.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/twig.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/twig.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/File/UploadFile 2.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/front/profil/profil_user.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/profil/profil_user.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Front/Space/MessagingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Front/Space/MessagingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Messaging.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Messaging.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/MessagingRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/MessagingRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Services/File/UploadFile.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/File/UploadFile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/html/bar_user.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/html/bar_user.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/html/messaging.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/html/messaging.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/inc/header.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/inc/header.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/front/space/inc/sidebar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/space/inc/sidebar.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/space/messaging.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/space/messaging.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -241,10 +234,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="719" y="350" key="#com.intellij.fileTypes.FileTypeChooser/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588277336153" />
-    <state x="755" y="263" key="#com.intellij.ide.util.MemberChooser" timestamp="1587374078466">
+    <state x="755" y="263" key="#com.intellij.ide.util.MemberChooser" timestamp="1588579696725">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="755" y="263" key="#com.intellij.ide.util.MemberChooser/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1587374078466" />
+    <state x="755" y="263" key="#com.intellij.ide.util.MemberChooser/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588579696725" />
     <state x="645" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1586983835968">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -261,18 +254,18 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="469" y="179" key="SettingsEditor/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588243092355" />
-    <state width="581" height="445" key="SwitcherDM" timestamp="1588499347099">
+    <state width="581" height="445" key="SwitcherDM" timestamp="1588581238616">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="581" height="445" key="SwitcherDM/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588499347099" />
+    <state width="581" height="445" key="SwitcherDM/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588581238616" />
     <state x="653" y="372" key="com.intellij.ide.util.TipDialog" timestamp="1586982415807">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="653" y="372" key="com.intellij.ide.util.TipDialog/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1586982415807" />
-    <state x="705" y="120" width="986" height="682" key="find.popup" timestamp="1588499706275">
+    <state x="705" y="120" width="986" height="682" key="find.popup" timestamp="1588586823440">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="705" y="120" width="986" height="682" key="find.popup/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588499706275" />
+    <state x="705" y="120" width="986" height="682" key="find.popup/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588586823440" />
     <state x="609" y="274" width="700" height="530" key="recent.locations.popup" timestamp="1587301970015">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

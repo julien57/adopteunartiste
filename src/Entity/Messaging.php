@@ -38,6 +38,21 @@ class Messaging
      */
     private $sendFor;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isNew;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $photo;
+
+    public function __construct()
+    {
+        $this->isNew = true;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,6 +102,34 @@ class Messaging
     public function setSendFor(?User $sendFor): self
     {
         $this->sendFor = $sendFor;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNew(): bool
+    {
+        return $this->isNew;
+    }
+
+    /**
+     * @param bool $isNew
+     */
+    public function setIsNew(bool $isNew): void
+    {
+        $this->isNew = $isNew;
+    }
+
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto($photo): self
+    {
+        $this->photo = $photo;
 
         return $this;
     }

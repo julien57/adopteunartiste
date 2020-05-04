@@ -41,7 +41,7 @@
                 <!-- /SIDEBAR MENU HEADER -->
 
                 <!-- SIDEBAR MENU BODY -->
-                <div class="sidebar-menu-body accordion-content-linked {% if app.request.attributes.get('_route') == 'front_space_infos' or app.request.attributes.get('_route') == 'front_space_social' or app.request.attributes.get('_route') == 'front_space_adoption_request' or app.request.attributes.get('_route') == 'front_space_services' or app.request.attributes.get('_route') == 'front_space_competences' %}accordion-open{% endif %}">
+                <div class="sidebar-menu-body accordion-content-linked {% if app.request.attributes.get('_route') == 'front_space_infos' or app.request.attributes.get('_route') == 'front_space_social' or app.request.attributes.get('_route') == 'front_space_adoption_request' or app.request.attributes.get('_route') == 'front_space_services' or app.request.attributes.get('_route') == 'front_space_competences' or app.request.attributes.get('_route') == 'front_space_messaging_list' %}accordion-open{% endif %}">
                     <!-- SIDEBAR MENU LINK -->
                     <a class="sidebar-menu-link {% if app.request.attributes.get('_route') == 'front_space_infos' %}active{% endif %}" href="{{ path('front_space_infos') }}">Mes infos</a>
                     <!-- /SIDEBAR MENU LINK -->

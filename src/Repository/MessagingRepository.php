@@ -81,6 +81,22 @@ class MessagingRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function getNewMessageChat(User $user1, User $user2)
+    {
+        return $this->createQueryBuilder('m')
+            ->leftJoin('m.sendFor', 'sendFor')
+            ->leftJoin('m.sendTo', 'sendTo')
+            ->where('sendTo = :user1 AND sendFor = :user2')
+            ->orWhere('sendTo = :user2 AND sendFor = :user1')
+            ->setParameter('user1', $user1)
+            ->setParameter('user2', $user2)
+            ->andWhere('m.message IS NOT NULL')
+            ->andWhere('m.isNew = 1')
+            ->orderBy('m.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Messaging[] Returns an array of Messaging objects
     //  */

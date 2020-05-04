@@ -6,7 +6,12 @@
 
                 <div class="chat-widget-speaker right">
                     <!-- CHAT WIDGET SPEAKER MESSAGE -->
-                    <p class="chat-widget-speaker-message">{{ messaging.message }}</p>
+                    <p class="chat-widget-speaker-message">
+                        {{ messaging.message }}<br>
+                        {% if messaging.photo %}
+                            <img src="{{ asset( constant('App\\Services\\File\\UploadFile::PHOTO_MESSAGING_UPLOAD_DIR')) ~ messaging.photo }}" style="width:200px">
+                        {% endif %}
+                    </p>
                 </div>
 
             {% else %}
@@ -29,7 +34,12 @@
                 <!-- /CHAT WIDGET SPEAKER AVATAR -->
 
                 <!-- CHAT WIDGET SPEAKER MESSAGE -->
-                <p class="chat-widget-speaker-message">{{ messaging.message }}</p>
+                <p class="chat-widget-speaker-message">
+                    {{ messaging.message }}<br>
+                    {% if messaging.photo %}
+                        <img src="{{ asset( constant('App\\Services\\File\\UploadFile::PHOTO_MESSAGING_UPLOAD_DIR')) ~ messaging.photo }}" style="width:200px">
+                    {% endif %}
+                </p>
                 <!-- /CHAT WIDGET SPEAKER MESSAGE -->
 
                 <!-- CHAT WIDGET SPEAKER TIMESTAMP -->

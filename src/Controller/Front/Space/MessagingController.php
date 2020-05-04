@@ -6,6 +6,7 @@ use App\Entity\Messaging;
 use App\Entity\User;
 use App\Repository\MessagingRepository;
 use App\Repository\UserRepository;
+use App\Services\File\UploadFile;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -77,15 +78,54 @@ class MessagingController extends AbstractController
     {
         if ($request->get('idUser')) {
             $user = $userRepository->find($request->get('idUser'));
+            $newMessages = $messagingRepository->getNewMessageChat($user, $this->getUser());
+
             $messagings = $messagingRepository->getMessageChat($user, $this->getUser());
 
-            return $this->json([
-                'view_messaging' => $this->render('front/html/messaging.html.twig', [
-                    'user' => $user,
-                    'messagings' => $messagings,
-                ]),
-                'barUser' => $this->render('front/html/bar_user.html.twig', ['user' => $user])
-            ]);
+            if (!empty($newMessages)) {
+
+                foreach ($messagings as $messaging) {
+                    $messaging->setIsNew(false);
+                }
+
+                $this->em->flush();
+
+                return $this->json([
+                    'isNew' => 'ok',
+                    'view_messaging' => $this->render('front/html/messaging.html.twig', [
+                        'user' => $user,
+                        'messagings' => $messagings,
+                    ]),
+                    'barUser' => $this->render('front/html/bar_user.html.twig', ['user' => $user])
+                ]);
+            } else {
+                return $this->json([
+                    'isNew' => 'ok',
+                    'view_messaging' => $this->render('front/html/messaging.html.twig', [
+                        'user' => $user,
+                        'messagings' => $messagings,
+                    ]),
+                    'barUser' => $this->render('front/html/bar_user.html.twig', ['user' => $user])
+                ]);
+            }
+
+        }
+    }
+
+    /**
+     * @Route("/get-new-message", name="front_space_get_new_message")
+     */
+    public function getNewMessage(MessagingRepository $messagingRepository, UserRepository $userRepository, Request $request)
+    {
+        if ($request->get('idUser')) {
+            $user = $userRepository->find($request->get('idUser'));
+            $newMessages = $messagingRepository->getNewMessageChat($user, $this->getUser());
+
+            if (!empty($newMessages)) {
+                return $this->json(['message' => 'true']);
+            } else {
+                return $this->json(['message' => 'false']);
+            }
         }
     }
 
@@ -94,7 +134,8 @@ class MessagingController extends AbstractController
      */
     public function sendMessage(Request $request, UserRepository $userRepository)
     {
-        if ($request->get('chat_widget_message_text_2') && $request->get('userId')) {
+        if (($request->get('chat_widget_message_text_2') || $request->files->get('sendPhoto')) && $request->get('userId')) {
+
             $user = $userRepository->find($request->get('userId'));
 
             $message = new Messaging();
@@ -102,6 +143,11 @@ class MessagingController extends AbstractController
             $message->setSendTo($this->getUser());
             $message->setPublishedAt(new \DateTime());
             $message->setMessage($request->get('chat_widget_message_text_2'));
+
+            if ($request->files->get('sendPhoto')) {
+                $filename = UploadFile::uploadPhotoMessaging($request->files->get('sendPhoto'));
+                $message->setPhoto($filename);
+            }
 
             $this->em->persist($message);
             $this->em->flush();
