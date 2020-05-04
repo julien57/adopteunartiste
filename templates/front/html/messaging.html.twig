@@ -1,0 +1,45 @@
+
+    <!-- CHAT WIDGET CONVERSATION -->
+    <div class="chat-widget-conversation" data-simplebar>
+        {% for messaging in messagings %}
+            {% if messaging.sendFor != app.user %}
+
+                <div class="chat-widget-speaker right">
+                    <!-- CHAT WIDGET SPEAKER MESSAGE -->
+                    <p class="chat-widget-speaker-message">{{ messaging.message }}</p>
+                </div>
+
+            {% else %}
+
+                <div class="chat-widget-speaker left">
+                <!-- CHAT WIDGET SPEAKER AVATAR -->
+                <div class="chat-widget-speaker-avatar">
+                    <!-- USER AVATAR -->
+                    <div class="user-avatar tiny no-border">
+                        <!-- USER AVATAR CONTENT -->
+                        <div class="user-avatar-content">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-image-24-26" data-src="{% if  messaging.sendTo.avatar %}{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ messaging.sendTo.avatar }}{% else %}{{ asset('img/avatar/01.jpg') }}{% endif %}"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR CONTENT -->
+                    </div>
+                    <!-- /USER AVATAR -->
+                </div>
+                <!-- /CHAT WIDGET SPEAKER AVATAR -->
+
+                <!-- CHAT WIDGET SPEAKER MESSAGE -->
+                <p class="chat-widget-speaker-message">{{ messaging.message }}</p>
+                <!-- /CHAT WIDGET SPEAKER MESSAGE -->
+
+                <!-- CHAT WIDGET SPEAKER TIMESTAMP -->
+                <p class="chat-widget-speaker-timestamp">{{ messaging.publishedAt|format_datetime('full', 'short', locale='fr') }}</p>
+                <!-- /CHAT WIDGET SPEAKER TIMESTAMP -->
+            </div>
+
+            {% endif %}
+        {% endfor %}
+    </div>
+    <!-- /CHAT WIDGET CONVERSATION -->
+
+

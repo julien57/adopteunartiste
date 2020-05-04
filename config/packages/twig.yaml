@@ -3,3 +3,4 @@ twig:
     globals:
         post_react: '@App\Services\Post\React'
         post_adopt: '@App\Services\Post\Adopt'
+        messaging_service: '@App\Services\Post\MessagingService'

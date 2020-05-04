@@ -207,6 +207,16 @@ class User implements UserInterface
      */
     private $userGroups;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Messaging", mappedBy="sendTo")
+     */
+    private $senderTo;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Messaging", mappedBy="sendFor")
+     */
+    private $senderFor;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
@@ -220,6 +230,8 @@ class User implements UserInterface
         $this->nbVisit = 0;
         $this->groups = new ArrayCollection();
         $this->userGroups = new ArrayCollection();
+        $this->senderTo = new ArrayCollection();
+        $this->senderFor = new ArrayCollection();
     }
 
     public function computeSlug(SluggerInterface $slugger)
@@ -801,6 +813,68 @@ class User implements UserInterface
         if ($this->userGroups->contains($userGroup)) {
             $this->userGroups->removeElement($userGroup);
             $userGroup->removeMember($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Messaging[]
+     */
+    public function getSenderTo(): Collection
+    {
+        return $this->senderTo;
+    }
+
+    public function addSenderTo(Messaging $senderTo): self
+    {
+        if (!$this->senderTo->contains($senderTo)) {
+            $this->senderTo[] = $senderTo;
+            $senderTo->setSendTo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSenderTo(Messaging $senderTo): self
+    {
+        if ($this->senderTo->contains($senderTo)) {
+            $this->senderTo->removeElement($senderTo);
+            // set the owning side to null (unless already changed)
+            if ($senderTo->getSendTo() === $this) {
+                $senderTo->setSendTo(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Messaging[]
+     */
+    public function getSenderFor(): Collection
+    {
+        return $this->senderFor;
+    }
+
+    public function addSenderFor(Messaging $senderFor): self
+    {
+        if (!$this->senderFor->contains($senderFor)) {
+            $this->senderFor[] = $senderFor;
+            $senderFor->setSendFor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSenderFor(Messaging $senderFor): self
+    {
+        if ($this->senderFor->contains($senderFor)) {
+            $this->senderFor->removeElement($senderFor);
+            // set the owning side to null (unless already changed)
+            if ($senderFor->getSendFor() === $this) {
+                $senderFor->setSendFor(null);
+            }
         }
 
         return $this;

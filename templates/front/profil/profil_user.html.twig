@@ -260,7 +260,7 @@
                     <!-- /PROFILE HEADER INFO ACTION -->
 
                     <!-- PROFILE HEADER INFO ACTION -->
-                    <button class="profile-header-info-action button primary"><span class="hide-text-mobile">Send</span> Message</button>
+                    <a href="{{ path('front_space_messaging_create', {'id': userProfil.id}) }}" class="profile-header-info-action button primary"><span class="hide-text-mobile">Envoyer</span> un Message</a>
                     <!-- /PROFILE HEADER INFO ACTION -->
                 </div>
             {% endif %}

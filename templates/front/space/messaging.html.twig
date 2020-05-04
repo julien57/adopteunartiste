@@ -1,0 +1,2580 @@
+{% extends 'base_profil.html.twig' %}
+
+{% block body %}
+    <!-- GRID -->
+    <div class="grid grid-3-9 medium-space">
+
+        {{ include('front/space/inc/sidebar.html.twig') }}
+
+        <!-- GRID COLUMN -->
+        <div class="account-hub-content">
+            <!-- SECTION HEADER -->
+            <div class="section-header">
+                <!-- SECTION HEADER INFO -->
+                <div class="section-header-info">
+                    <!-- SECTION PRETITLE -->
+                    <p class="section-pretitle">Mon profil</p>
+                    <!-- /SECTION PRETITLE -->
+
+                    <!-- SECTION TITLE -->
+                    <h2 class="section-title">Messagerie</h2>
+                    <!-- /SECTION TITLE -->
+                </div>
+                <!-- /SECTION HEADER INFO -->
+            </div>
+            <!-- /SECTION HEADER -->
+
+            <!-- CHAT WIDGET WRAP -->
+            <div class="chat-widget-wrap">
+                <!-- CHAT WIDGET -->
+                <div class="chat-widget static">
+                    <!-- CHAT WIDGET MESSAGES -->
+                    <div class="chat-widget-messages" data-simplebar>
+                        {% for user in users %}
+                            <div class="chat-widget-message" data-user="{{ user.id }}">
+                            <!-- USER STATUS -->
+                            <div class="user-status">
+                                <!-- USER STATUS AVATAR -->
+                                <div class="user-status-avatar">
+                                    <!-- USER AVATAR -->
+                                    <div class="user-avatar small no-outline">
+                                        <!-- USER AVATAR CONTENT -->
+                                        <div class="user-avatar-content">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-image-30-32" data-src="{% if user.avatar %}{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ user.avatar }}{% else %}{{ asset('img/avatar/01.jpg') }}{% endif %}"></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR CONTENT -->
+
+                                        <!-- USER AVATAR PROGRESS -->
+                                        <div class="user-avatar-progress">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-progress-40-44"></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR PROGRESS -->
+
+                                        <!-- USER AVATAR PROGRESS BORDER -->
+                                        <div class="user-avatar-progress-border">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-border-40-44"></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR PROGRESS BORDER -->
+
+                                        <!-- USER AVATAR BADGE -->
+                                        <div class="user-avatar-badge">
+                                            <!-- USER AVATAR BADGE BORDER -->
+                                            <div class="user-avatar-badge-border">
+                                                <!-- HEXAGON -->
+                                                <div class="hexagon-22-24"></div>
+                                                <!-- /HEXAGON -->
+                                            </div>
+                                            <!-- /USER AVATAR BADGE BORDER -->
+
+                                            <!-- USER AVATAR BADGE CONTENT -->
+                                            <div class="user-avatar-badge-content">
+                                                <!-- HEXAGON -->
+                                                <div class="hexagon-dark-16-18"></div>
+                                                <!-- /HEXAGON -->
+                                            </div>
+                                            <!-- /USER AVATAR BADGE CONTENT -->
+
+                                            <!-- USER AVATAR BADGE TEXT -->
+                                            <p class="user-avatar-badge-text">6</p>
+                                            <!-- /USER AVATAR BADGE TEXT -->
+                                        </div>
+                                        <!-- /USER AVATAR BADGE -->
+                                    </div>
+                                    <!-- /USER AVATAR -->
+                                </div>
+                                <!-- /USER STATUS AVATAR -->
+
+                                <!-- USER STATUS TITLE -->
+                                <p class="user-status-title"><span class="bold">{{ user.pseudo }}</span></p>
+                                <!-- /USER STATUS TITLE -->
+                                {% set lastMessage = messaging_service.getLastMessage(user, app.user) %}
+                                <!-- USER STATUS TEXT -->
+                                <p class="user-status-text">{% if lastMessage %}{{ lastMessage.message }}{% else %}Aucun message...{% endif %}</p>
+                                <!-- /USER STATUS TEXT -->
+
+                                {% if lastMessage %}
+                                    {% set difference = date(lastMessage.publishedAt).diff(date('now')) %}
+                                    {% set days = difference.days %}
+                                    {% set hours = difference.h %}
+                                    {% set minutes = difference.i %}
+                                    <!-- USER STATUS TIMESTAMP -->
+                                    <p class="user-status-timestamp floaty">
+                                        {% if days > 0 %}
+                                            il y a {{ days }} jours
+                                        {% elseif hours > 0 %}
+                                            il y a {{ hours }} heures
+                                        {% else %}
+                                            il y a {{ minutes }} minutes
+                                        {% endif %}
+                                    </p>
+                                {% endif %}
+                            </div>
+                            <!-- /USER STATUS -->
+                        </div>
+                        {% endfor %}
+                        <!-- /CHAT WIDGET MESSAGE -->
+                    </div>
+                    <!-- /CHAT WIDGET MESSAGES -->
+
+                    <!-- CHAT WIDGET FORM -->
+                    <form class="chat-widget-form">
+                        <!-- INTERACTIVE INPUT -->
+                        <div class="interactive-input small">
+                            <input type="text" id="chat-widget-search-2" name="chat_widget_search_2" placeholder="Search Messages...">
+                            <!-- INTERACTIVE INPUT ICON WRAP -->
+                            <div class="interactive-input-icon-wrap">
+                                <!-- INTERACTIVE INPUT ICON -->
+                                <svg class="interactive-input-icon icon-magnifying-glass">
+                                    <use xlink:href="#svg-magnifying-glass"></use>
+                                </svg>
+                                <!-- /INTERACTIVE INPUT ICON -->
+                            </div>
+                            <!-- /INTERACTIVE INPUT ICON WRAP -->
+
+                            <!-- INTERACTIVE INPUT ACTION -->
+                            <div class="interactive-input-action">
+                                <!-- INTERACTIVE INPUT ACTION ICON -->
+                                <svg class="interactive-input-action-icon icon-cross-thin">
+                                    <use xlink:href="#svg-cross-thin"></use>
+                                </svg>
+                                <!-- /INTERACTIVE INPUT ACTION ICON -->
+                            </div>
+                            <!-- /INTERACTIVE INPUT ACTION -->
+                        </div>
+                        <!-- /INTERACTIVE INPUT -->
+                    </form>
+                    <!-- /CHAT WIDGET FORM -->
+                </div>
+                <!-- /CHAT WIDGET -->
+
+                <!-- CHAT WIDGET -->
+                <div class="chat-widget" id="messaging">
+
+                    <!-- CHAT WIDGET HEADER -->
+                    <div class="chat-widget-header" id="bar_header">
+                        <!-- CHAT WIDGET SETTINGS -->
+                        <div class="chat-widget-settings">
+                            <!-- POST SETTINGS WRAP -->
+                            <div class="post-settings-wrap">
+                                <!-- POST SETTINGS -->
+                                <div class="post-settings widget-box-post-settings-dropdown-trigger">
+                                    <!-- POST SETTINGS ICON -->
+                                    <svg class="post-settings-icon icon-more-dots">
+                                        <use xlink:href="#svg-more-dots"></use>
+                                    </svg>
+                                    <!-- /POST SETTINGS ICON -->
+                                </div>
+                                <!-- /POST SETTINGS -->
+
+                                <!-- SIMPLE DROPDOWN -->
+                                <div class="simple-dropdown widget-box-post-settings-dropdown">
+                                    <!-- SIMPLE DROPDOWN LINK -->
+                                    <p class="simple-dropdown-link">Report</p>
+                                    <!-- /SIMPLE DROPDOWN LINK -->
+
+                                    <!-- SIMPLE DROPDOWN LINK -->
+                                    <p class="simple-dropdown-link">Block</p>
+                                    <!-- /SIMPLE DROPDOWN LINK -->
+
+                                    <!-- SIMPLE DROPDOWN LINK -->
+                                    <p class="simple-dropdown-link">Mute</p>
+                                    <!-- /SIMPLE DROPDOWN LINK -->
+                                </div>
+                                <!-- /SIMPLE DROPDOWN -->
+                            </div>
+                            <!-- /POST SETTINGS WRAP -->
+                        </div>
+                        <!-- CHAT WIDGET SETTINGS -->
+
+                        <!-- USER STATUS -->
+                        <div class="user-status">
+                            <!-- USER STATUS AVATAR -->
+                            <div class="user-status-avatar">
+                                <!-- USER AVATAR -->
+                                <div class="user-avatar small no-outline online">
+                                    <!-- USER AVATAR CONTENT -->
+                                    <div class="user-avatar-content">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-image-30-32" data-src="{% if firstUser.avatar %}{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ firstUser.avatar }}{% else %}{{ asset('img/avatar/01.jpg') }}{% endif %}"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR CONTENT -->
+
+                                    <!-- USER AVATAR PROGRESS -->
+                                    <div class="user-avatar-progress">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-progress-40-44"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR PROGRESS -->
+
+                                    <!-- USER AVATAR PROGRESS BORDER -->
+                                    <div class="user-avatar-progress-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-border-40-44"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR PROGRESS BORDER -->
+
+                                    <!-- USER AVATAR BADGE -->
+                                    <div class="user-avatar-badge">
+                                        <!-- USER AVATAR BADGE BORDER -->
+                                        <div class="user-avatar-badge-border">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-22-24"></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR BADGE BORDER -->
+
+                                        <!-- USER AVATAR BADGE CONTENT -->
+                                        <div class="user-avatar-badge-content">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-dark-16-18"></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR BADGE CONTENT -->
+
+                                        <!-- USER AVATAR BADGE TEXT -->
+                                        <p class="user-avatar-badge-text">16</p>
+                                        <!-- /USER AVATAR BADGE TEXT -->
+                                    </div>
+                                    <!-- /USER AVATAR BADGE -->
+                                </div>
+                                <!-- /USER AVATAR -->
+                            </div>
+                            <!-- /USER STATUS AVATAR -->
+
+                            <!-- USER STATUS TITLE -->
+                            <p class="user-status-title"><span class="bold">{{ firstUser.pseudo }}</span></p>
+                            <!-- /USER STATUS TITLE -->
+
+                            <!-- USER STATUS TAG -->
+                            <p class="user-status-tag online">Online</p>
+                            <!-- /USER STATUS TAG -->
+                        </div>
+                        <!-- /USER STATUS -->
+                    </div>
+                    <!-- /CHAT WIDGET HEADER -->
+                    <div id="data-conversation"></div>
+                    <!-- CHAT WIDGET CONVERSATION -->
+                    <div class="chat-widget-conversation" id="data-conversation" data-simplebar>
+                        {% for messaging in messagings %}
+                            {% if messaging.sendFor != app.user %}
+
+                                <div class="chat-widget-speaker right">
+                                    <!-- CHAT WIDGET SPEAKER MESSAGE -->
+                                    <p class="chat-widget-speaker-message">{{ messaging.message }}</p>
+                                </div>
+
+                            {% else %}
+
+                                <div class="chat-widget-speaker left">
+                                    <!-- CHAT WIDGET SPEAKER AVATAR -->
+                                    <div class="chat-widget-speaker-avatar">
+                                        <!-- USER AVATAR -->
+                                        <div class="user-avatar tiny no-border">
+                                            <!-- USER AVATAR CONTENT -->
+                                            <div class="user-avatar-content">
+                                                <!-- HEXAGON -->
+                                                <div class="hexagon-image-24-26" data-src="{% if  messaging.sendTo.avatar %}{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ messaging.sendTo.avatar }}{% else %}{{ asset('img/avatar/01.jpg') }}{% endif %}"></div>
+                                                <!-- /HEXAGON -->
+                                            </div>
+                                            <!-- /USER AVATAR CONTENT -->
+                                        </div>
+                                        <!-- /USER AVATAR -->
+                                    </div>
+                                    <!-- /CHAT WIDGET SPEAKER AVATAR -->
+
+                                    <!-- CHAT WIDGET SPEAKER MESSAGE -->
+                                    <p class="chat-widget-speaker-message">{{ messaging.message }}</p>
+                                    <!-- /CHAT WIDGET SPEAKER MESSAGE -->
+
+                                    <!-- CHAT WIDGET SPEAKER TIMESTAMP -->
+                                    <p class="chat-widget-speaker-timestamp">Yesterday at 8:36PM</p>
+                                    <!-- /CHAT WIDGET SPEAKER TIMESTAMP -->
+                                </div>
+
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <!-- /CHAT WIDGET CONVERSATION -->
+
+                    <!-- CHAT WIDGET FORM -->
+                    <form class="chat-widget-form" id="form_response_messaging">
+                        <!-- FORM ROW -->
+                        <div class="form-row split">
+                            <!-- FORM ITEM -->
+                            <div class="form-item">
+                                <!-- INTERACTIVE INPUT -->
+                                <div class="interactive-input small">
+                                    <input type="text" id="chat-widget-message-text-2" name="chat_widget_message_text_2" autocomplete="off" placeholder="Saisissez votre message...">
+                                    <!-- INTERACTIVE INPUT ICON WRAP -->
+                                    <div class="interactive-input-icon-wrap actionable">
+                                        <!-- TOOLTIP WRAP -->
+                                        <div class="tooltip-wrap text-tooltip-tft" data-title="Send Photo">
+                                            <!-- INTERACTIVE INPUT ICON -->
+                                            <svg class="interactive-input-icon icon-camera">
+                                                <use xlink:href="#svg-camera"></use>
+                                            </svg>
+                                            <!-- /INTERACTIVE INPUT ICON -->
+                                        </div>
+                                        <!-- /TOOLTIP WRAP -->
+                                    </div>
+                                    <!-- /INTERACTIVE INPUT ICON WRAP -->
+
+                                    <!-- INTERACTIVE INPUT ACTION -->
+                                    <div class="interactive-input-action">
+                                        <!-- INTERACTIVE INPUT ACTION ICON -->
+                                        <svg class="interactive-input-action-icon icon-cross-thin">
+                                            <use xlink:href="#svg-cross-thin"></use>
+                                        </svg>
+                                        <!-- /INTERACTIVE INPUT ACTION ICON -->
+                                    </div>
+                                    <!-- /INTERACTIVE INPUT ACTION -->
+                                </div>
+                                <!-- /INTERACTIVE INPUT -->
+                            </div>
+                            <!-- /FORM ITEM -->
+
+                            <!-- FORM ITEM -->
+                            <div class="form-item auto-width">
+                                <!-- BUTTON -->
+                                <button type="submit" class="button primary padded" id="btn-send-message">
+                                    <!-- BUTTON ICON -->
+                                    <svg class="button-icon no-space icon-send-message">
+                                        <use xlink:href="#svg-send-message"></use>
+                                    </svg>
+                                    <!-- /BUTTON ICON -->
+                                </button>
+                                <!-- /BUTTON -->
+                            </div>
+                            <!-- /FORM ITEM -->
+                        </div>
+                        <!-- /FORM ROW -->
+                        <input type="hidden" name="userId" autocomplete="off" id="input_userId" value="{{ firstUser.id }}">
+                    </form>
+                </div>
+                <!-- /CHAT WIDGET -->
+            </div>
+            <!-- /CHAT WIDGET WRAP -->
+        </div>
+        <!-- /GRID -->
+    </div>
+{% endblock %}
+
+{% block javascript %}
+{{ parent() }}
+<script>
+var links = document.getElementsByClassName('chat-widget-message');
+        // For each <li> inside #links
+for (let link of links) {
+
+    link.addEventListener('click', (e) => {
+        let oldClass = document.querySelectorAll('.chat-widget-message')
+        for (let eltclass of  oldClass) {
+            eltclass.classList.remove('active')
+        }
+
+
+        const idUser = link.getAttribute('data-user');
+        link.classList.add('active');
+
+        let datas = new FormData();
+        datas.append('idUser', idUser);
+
+        fetch("{{ path('front_space_display_messaging') }}", { method: 'POST', body: datas })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('input_userId').value = idUser;
+                document.getElementById('bar_header').innerHTML = data.barUser.content;
+                document.getElementById('data-conversation').nextElementSibling.remove();
+                document.getElementById('data-conversation').insertAdjacentHTML('afterend', data.view_messaging.content);
+
+                /*-------------------
+    CONTENT TABS
+-------------------*/
+app.plugins.createTab({
+  triggers: '.tab-box-option',
+  elements: '.tab-box-item'
+});
+
+/*------------------------
+    CONTENT DROPDOWNS
+------------------------*/
+app.plugins.createDropdown({
+  trigger: '.widget-box-post-settings-dropdown-trigger',
+  container: '.widget-box-post-settings-dropdown',
+  offset: {
+    top: 30,
+    right: 9
+  },
+  animation: {
+    type: 'translate-top',
+    speed: .3,
+    translateOffset: {
+      vertical: 20
+    }
+  }
+});
+
+app.plugins.createDropdown({
+  trigger: '.reaction-item-dropdown-trigger',
+  container: '.reaction-item-dropdown',
+  triggerEvent: 'hover',
+  offset: {
+    bottom: 38,
+    left: -16
+  },
+  animation: {
+    type: 'translate-bottom',
+    speed: .3,
+    translateOffset: {
+      vertical: 20
+    }
+  }
+});
+
+app.plugins.createDropdown({
+  trigger: '.reaction-options-dropdown-trigger',
+  container: '.reaction-options-dropdown',
+  triggerEvent: 'click',
+  offset: {
+    bottom: 54,
+    left: -16
+  },
+  animation: {
+    type: 'translate-bottom',
+    speed: .3,
+    translateOffset: {
+      vertical: 20
+    }
+  },
+  closeOnDropdownClick: true
+});
+
+app.plugins.createDropdown({
+  trigger: '.reaction-options-small-dropdown-trigger',
+  container: '.reaction-options-small-dropdown',
+  triggerEvent: 'click',
+  offset: {
+    bottom: 30,
+    left: -80
+  },
+  animation: {
+    type: 'translate-bottom',
+    speed: .3,
+    translateOffset: {
+      vertical: 16
+    }
+  },
+  closeOnDropdownClick: true
+});
+
+app.plugins.createDropdown({
+  trigger: '.post-settings-dropdown-trigger',
+  container: '.post-settings-dropdown',
+  offset: {
+    bottom: 30,
+    right: 0
+  },
+  animation: {
+    type: 'translate-bottom',
+    speed: .3,
+    translateOffset: {
+      vertical: 16
+    }
+  }
+});
+
+/*----------------------------
+    CONTENT PROGRESS BARS
+----------------------------*/
+/*-----------------------
+    EXP TO NEXT LEVEL
+-----------------------*/
+app.plugins.createProgressBar({
+  container: '#exp-to-next-level',
+  height: 6,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#exp-to-next-level',
+  height: 6,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 200,
+    stop: 162
+  },
+  linkText: true,
+  linkUnits: 'exp',
+  invertedProgress: true,
+  animateOnScroll: true
+});
+
+/*----------------
+    BADGE ITEM
+----------------*/
+app.plugins.createProgressBar({
+  container: '#badge-bronze',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-bronze',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 1,
+    stop: 1
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-silver',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-silver',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 100,
+    stop: 100
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-gold',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-gold',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 500,
+    stop: 461
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-platinum',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-platinum',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 1000,
+    stop: 461
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-traveller',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-traveller',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 5,
+    stop: 4
+  },
+  invertedProgress: true,
+  linkText: true,
+  linkUnits: 'topics',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-caffeinated',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-caffeinated',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 1,
+    stop: 0
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-upowered',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-upowered',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 50,
+    stop: 42
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-scientist',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-scientist',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 1,
+    stop: 1
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-ncreature',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-ncreature',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 100,
+    stop: 100
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-warrior',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-warrior',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 1,
+    stop: 1
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-liked',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-liked',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 500,
+    stop: 462
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-sloved',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-sloved',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 1000,
+    stop: 462
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-qconq',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-qconq',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 10,
+    stop: 4
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-villain',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-villain',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 100,
+    stop: 89
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-age',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-age',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 730,
+    stop: 605
+  },
+  invertedProgress: true,
+  linkText: true,
+  linkUnits: 'days',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-tstruck',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-tstruck',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 50,
+    stop: 41
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-uexp',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-uexp',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 20,
+    stop: 17
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-globet',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-globet',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 10,
+    stop: 8
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-verifieds',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-verifieds',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 1,
+    stop: 1
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-gempost',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-gempost',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 1,
+    stop: 0
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-peoplesp',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-peoplesp',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 200,
+    stop: 181
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-rulerm',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-rulerm',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 5,
+    stop: 1
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-marketeer',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-marketeer',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 10,
+    stop: 7
+  },
+  invertedProgress: true,
+  linkText: true,
+  linkUnits: 'items',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-tycoon',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-tycoon',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 100,
+    stop: 32
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-mightiers',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-mightiers',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 50,
+    stop: 26
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-phantom',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-phantom',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 1,
+    stop: 1
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-forumsf',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-forumsf',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 20,
+    stop: 13
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-fcultivator',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-fcultivator',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 100,
+    stop: 33
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-splanner',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-splanner',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 25,
+    stop: 9
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-collector',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-collector',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 5,
+    stop: 2
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-prophoto',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-prophoto',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 500,
+    stop: 24
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-rmachine',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-rmachine',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 50,
+    stop: 41
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-bronzec',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-bronzec',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 1,
+    stop: 1
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-silverc',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-silverc',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 1,
+    stop: 1
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-goldc',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-goldc',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 1,
+    stop: 1
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-platinumc',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#badge-platinumc',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 1,
+    stop: 0
+  },
+  linkText: true,
+  linkUnits: '/',
+  emptyText: 'locked',
+  completeText: 'unlocked!'
+});
+
+/*-------------------
+    QUEST PREVIEW
+-------------------*/
+app.plugins.createProgressBar({
+  container: '#quest-preview-nth',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-preview-nth',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 100,
+    stop: 65
+  },
+  animateOnScroll: true
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-preview-sk',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-preview-sk',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 100,
+    stop: 85
+  },
+  animateOnScroll: true
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-preview-bp',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-preview-bp',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 100,
+    stop: 32
+  },
+  animateOnScroll: true
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-preview-htp',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-preview-htp',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 100,
+    stop: 0
+  },
+  animateOnScroll: true
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-preview-sm',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-preview-sm',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 100,
+    stop: 49
+  },
+  animateOnScroll: true
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-sk',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-sk',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 8,
+    stop: 7
+  },
+  linkText: true,
+  linkUnits: '/'
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-fu',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-fu',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 50,
+    stop: 50
+  },
+  linkText: true,
+  linkUnits: '/'
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-nth',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-nth',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 100,
+    stop: 67
+  },
+  linkText: true,
+  linkUnits: '%'
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-sm',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-sm',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 10,
+    stop: 5
+  },
+  linkText: true,
+  linkUnits: '/'
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-line-ps',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-line-ps',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 100,
+    stop: 100
+  },
+  linkText: true,
+  linkUnits: '%',
+  animateOnScroll: true
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-line-nth',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-line-nth',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 100,
+    stop: 67
+  },
+  linkText: true,
+  linkUnits: '%',
+  animateOnScroll: true
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-line-fu',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-line-fu',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 50,
+    stop: 50
+  },
+  linkText: true,
+  linkUnits: '/',
+  animateOnScroll: true
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-line-ph',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-line-ph',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 20,
+    stop: 20
+  },
+  linkText: true,
+  linkUnits: '/',
+  animateOnScroll: true
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-line-tr',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-line-tr',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 10,
+    stop: 2
+  },
+  linkText: true,
+  linkUnits: '/',
+  animateOnScroll: true
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-line-sk',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-line-sk',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 8,
+    stop: 7
+  },
+  linkText: true,
+  linkUnits: '/',
+  animateOnScroll: true
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-line-bp',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-line-bp',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 30,
+    stop: 12
+  },
+  linkText: true,
+  linkUnits: '/',
+  animateOnScroll: true
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-line-htp',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-line-htp',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 100,
+    stop: 0
+  },
+  linkText: true,
+  linkUnits: '%',
+  animateOnScroll: true
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-line-sm',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#quest-line-sm',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 10,
+    stop: 5
+  },
+  linkText: true,
+  linkUnits: '/',
+  animateOnScroll: true
+});
+
+/*------------------
+    POLL RESULT
+------------------*/
+app.plugins.createProgressBar({
+  container: '#poll-result-1',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#poll-result-1',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 100,
+    stop: 62
+  },
+  linkText: true,
+  linkUnits: '%'
+});
+
+app.plugins.createProgressBar({
+  container: '#poll-result-2',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#poll-result-2',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 100,
+    stop: 27
+  },
+  linkText: true,
+  linkUnits: '%'
+});
+
+app.plugins.createProgressBar({
+  container: '#poll-result-3',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#poll-result-3',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 100,
+    stop: 11
+  },
+  linkText: true,
+  linkUnits: '%'
+});
+
+
+/*---------------------
+    POST ENGAGEMENT
+---------------------*/
+app.plugins.createProgressBar({
+  container: '#post-engagement-1',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#post-engagement-1',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 100,
+    stop: 89
+  },
+  linkText: true,
+  linkUnits: '%',
+  animateOnScroll: true
+});
+
+app.plugins.createProgressBar({
+  container: '#post-engagement-2',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#post-engagement-2',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 100,
+    stop: 74
+  },
+  linkText: true,
+  linkUnits: '%',
+  animateOnScroll: true
+});
+
+app.plugins.createProgressBar({
+  container: '#post-engagement-3',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#post-engagement-3',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 100,
+    stop: 53
+  },
+  linkText: true,
+  linkUnits: '%',
+  animateOnScroll: true
+});
+
+app.plugins.createProgressBar({
+  container: '#post-engagement-4',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#post-engagement-4',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 100,
+    stop: 48
+  },
+  linkText: true,
+  linkUnits: '%',
+  animateOnScroll: true
+});
+
+app.plugins.createProgressBar({
+  container: '#post-engagement-5',
+  height: 4,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#post-engagement-5',
+  height: 4,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 100,
+    stop: 21
+  },
+  linkText: true,
+  linkUnits: '%',
+  animateOnScroll: true
+});
+
+/*-----------------
+    TOP COUNTRY
+-----------------*/
+app.plugins.createProgressBar({
+  container: '#top-country-1',
+  width: 178,
+  height: 6,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#top-country-1',
+  width: 178,
+  height: 6,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 25362,
+    stop: 25362
+  },
+  split: {
+    parts: 30,
+    gap: 2,
+    color: '#fff'
+  },
+  linkText: true,
+  linkUnits: false,
+  animateOnScroll: true
+});
+
+app.plugins.createProgressBar({
+  container: '#top-country-2',
+  width: 178,
+  height: 6,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#top-country-2',
+  width: 178,
+  height: 6,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 25362,
+    stop: 18201
+  },
+  split: {
+    parts: 30,
+    gap: 2,
+    color: '#fff'
+  },
+  linkText: true,
+  linkUnits: false,
+  animateOnScroll: true
+});
+
+app.plugins.createProgressBar({
+  container: '#top-country-3',
+  width: 178,
+  height: 6,
+  lineColor: '#e7e8ee'
+});
+
+app.plugins.createProgressBar({
+  container: '#top-country-3',
+  width: 178,
+  height: 6,
+  gradient: {
+    colors: ['#615dfa', '#41efff']
+  },
+  scale: {
+    start: 0,
+    end: 25362,
+    stop: 9567
+  },
+  split: {
+    parts: 30,
+    gap: 2,
+    color: '#fff'
+  },
+  linkText: true,
+  linkUnits: false,
+  animateOnScroll: true
+});
+
+/*----------------------
+    CONTENT SLIDERS
+----------------------*/
+/*---------------------
+    PROFILE HEADER
+---------------------*/
+app.plugins.createSlider({
+  container: '#profile-header-social-links-slider',
+  items: 4,
+  fixedWidth: 32,
+  gutter: 8,
+  loop: false,
+  nav: false,
+  controlsContainer: '#profile-header-social-links-slider-controls',
+  responsive: {
+    481: {
+      fixedWidth: 40,
+      gutter: 12
+    }
+  }
+});
+
+/*-------------------------
+    SECTION NAVIGATION
+-------------------------*/
+app.plugins.createSlider({
+  container: '#section-navigation-slider',
+  fixedWidth: 122,
+  nav: false,
+  loop: false,
+  controlsContainer: '#section-navigation-slider-controls'
+});
+
+/*-------------------------
+    SECTION NAVIGATION
+-------------------------*/
+app.plugins.createSlider({
+  container: '#section-navigation-medium-slider',
+  fixedWidth: 160,
+  nav: false,
+  loop: false,
+  controlsContainer: '#section-navigation-medium-slider-controls'
+});
+
+/*------------------------
+    USER STATS SLIDER
+------------------------*/
+app.plugins.createSlider({
+  container: '#user-stats-slider',
+  fixedWidth: 113,
+  nav: false,
+  loop: false,
+  controlsContainer: '#user-stats-slider-controls'
+});
+
+/*---------------------------
+    REACTION STATS SLIDER
+---------------------------*/
+app.plugins.createSlider({
+  container: '#reaction-stats-slider',
+  fixedWidth: 146,
+  nav: false,
+  loop: false,
+  controlsContainer: '#reaction-stats-slider-controls'
+});
+
+/*---------------------------
+    STAT BLOCK SLIDER
+---------------------------*/
+app.plugins.createSlider({
+  container: '#stat-block-slider',
+  fixedWidth: 272,
+  nav: false,
+  loop: false,
+  controlsContainer: '#stat-block-slider-controls'
+});
+
+/*-------------------
+    STREAM SLIDER
+-------------------*/
+app.plugins.createSlider({
+  container: '#stream-slider',
+  fixedWidth: 184,
+  gutter: 16,
+  nav: false,
+  controlsContainer: '#stream-slider-controls'
+});
+
+/*----------------
+    STATS BOX
+----------------*/
+app.plugins.createSlider({
+  container: '#stats-box-slider-items',
+  mode: 'gallery',
+  nav: false,
+  speed: 1000,
+  autoplay: true,
+  autoplayButtonOutput: false,
+  controlsContainer: '#stats-box-slider-controls'
+});
+
+/*--------------------
+    REACTION STAT
+--------------------*/
+app.plugins.createSlider({
+  container: '#reaction-stat-slider-items',
+  nav: false,
+  speed: 600,
+  controlsContainer: '#reaction-stat-slider-controls'
+});
+
+/*-----------------
+    BADGE STAT
+-----------------*/
+app.plugins.createSlider({
+  container: '#badge-stat-slider-items',
+  nav: false,
+  loop: false,
+  speed: 600,
+  controlsContainer: '#badge-stat-slider-controls'
+});
+
+/*-------------------
+    PRODUCT BOX
+-------------------*/
+app.plugins.createSlider({
+  container: '#product-box-slider-items',
+  mode: 'gallery',
+  speed: 1000,
+  autoplay: true,
+  autoplayButtonOutput: false,
+  controlsContainer: '#product-box-slider-controls',
+  navContainer: '#product-box-slider-roster'
+});
+
+/*-------------------------
+    USER PREVIEW STATS
+-------------------------*/
+const createUserPreviewStatsSliders = function () {
+  let i = 1;
+
+  while (true) {
+    const j = i < 10 ? `0${i}` : i;
+
+    const upStatsSlider = app.plugins.createSlider({
+      container: `#user-preview-stats-slides-${j}`,
+      loop: false,
+      controls: false,
+      navContainer: `#user-preview-stats-roster-${j}`
+    });
+
+    if (!upStatsSlider) break;
+
+    i++;
+  }
+};
+
+createUserPreviewStatsSliders();
+
+const centerTinySlider = function (sliderInfo, itemWidth, gutterWidth) {
+  sliderInfo.container.style.width = `${sliderInfo.slideCount * itemWidth + (sliderInfo.slideCount - 1) * gutterWidth}px`;
+};
+
+/*--------------------------------
+    USER PREVIEW SOCIAL LINKS
+--------------------------------*/
+const createUserPreviewSocialLinksSliders = function () {
+  let i = 1;
+
+  while (true) {
+    const j = i < 10 ? `0${i}` : i;
+
+    const upSocialLinkSlider = app.plugins.createSlider({
+      container: `#user-preview-social-links-slider-${j}`,
+      items: 4,
+      fixedWidth: 32,
+      gutter: 8,
+      loop: false,
+      nav: false,
+      controlsContainer: `#user-preview-social-links-slider-controls-${j}`
+    });
+
+    if (!upSocialLinkSlider) break;
+
+    centerTinySlider(upSocialLinkSlider.getInfo(), 32, 8);
+
+    i++;
+  }
+};
+
+createUserPreviewSocialLinksSliders();
+        })
+    })
+}
+
+var commentForm = document.getElementById('form_response_messaging');
+commentForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+
+    let form = e.target;
+    const formData = new FormData(form);
+
+    fetch("{{ path('front_space_send_message') }}", { method: "POST", body: formData })
+       .then(response => response.json())
+       .then(data => {
+           if (data.message === 'ok') {
+                let datas = new FormData();
+                datas.append('idUser', data.userId);
+
+                fetch("{{ path('front_space_display_messaging') }}", { method: 'POST', body: datas })
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('data-conversation').nextElementSibling.remove();
+                        document.getElementById('data-conversation').insertAdjacentHTML('afterend', data.view_messaging.content);
+                        document.getElementById('form_response_messaging').reset();
+                    })
+           }
+    })
+}, false);
+
+setInterval(function() {
+    inputUserId = document.getElementById('input_userId');
+    UserId = inputUserId.value;
+    let datas = new FormData();
+    datas.append('idUser', UserId);
+
+  fetch("{{ path('front_space_display_messaging') }}", { method: 'POST', body: datas })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('data-conversation').nextElementSibling.remove();
+        document.getElementById('data-conversation').insertAdjacentHTML('afterend', data.view_messaging.content);
+
+        /*---------------------------
+            USER AVATAR HEXAGONS
+        ---------------------------*/
+        app.plugins.createHexagon({
+          container: '.hexagon-148-164',
+          width: 148,
+          height: 164,
+          roundedCorners: true,
+          fill: true
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-progress-124-136',
+          width: 124,
+          height: 136,
+          lineWidth: 8,
+          roundedCorners: true,
+          gradient: {
+            colors: ['#41efff', '#615dfa']
+          },
+          scale: {
+            start: 0,
+            end: 1,
+            stop: .74
+          }
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-border-124-136',
+          width: 124,
+          height: 136,
+          lineWidth: 8,
+          roundedCorners: true,
+          lineColor: '#e7e8ee'
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-image-100-110',
+          width: 100,
+          height: 110,
+          roundedCorners: true,
+          clip: true
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-120-132',
+          width: 120,
+          height: 132,
+          roundedCorners: true,
+          fill: true
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-progress-100-110',
+          width: 100,
+          height: 110,
+          lineWidth: 6,
+          roundedCorners: true,
+          gradient: {
+            colors: ['#41efff', '#615dfa']
+          },
+          scale: {
+            start: 0,
+            end: 1,
+            stop: .8
+          }
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-border-100-110',
+          width: 100,
+          height: 110,
+          lineWidth: 6,
+          roundedCorners: true,
+          lineColor: '#e7e8ee'
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-image-82-90',
+          width: 82,
+          height: 90,
+          roundedCorners: true,
+          roundedCornerRadius: 3,
+          clip: true
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-100-110',
+          width: 100,
+          height: 110,
+          roundedCorners: true,
+          fill: true
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-progress-84-92',
+          width: 84,
+          height: 92,
+          lineWidth: 5,
+          roundedCorners: true,
+          roundedCornerRadius: 3,
+          gradient: {
+            colors: ['#41efff', '#615dfa']
+          },
+          scale: {
+            start: 0,
+            end: 1,
+            stop: .8
+          }
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-border-84-92',
+          width: 84,
+          height: 92,
+          lineWidth: 5,
+          roundedCorners: true,
+          roundedCornerRadius: 3,
+          lineColor: '#e7e8ee'
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-image-68-74',
+          width: 68,
+          height: 74,
+          roundedCorners: true,
+          roundedCornerRadius: 3,
+          clip: true
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-50-56',
+          width: 50,
+          height: 56,
+          roundedCorners: true,
+          roundedCornerRadius: 2,
+          fill: true
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-progress-40-44',
+          width: 40,
+          height: 44,
+          lineWidth: 3,
+          roundedCorners: true,
+          roundedCornerRadius: 1,
+          gradient: {
+            colors: ['#41efff', '#615dfa']
+          },
+          scale: {
+            start: 0,
+            end: 1,
+            stop: .8
+          }
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-border-40-44',
+          width: 40,
+          height: 44,
+          lineWidth: 3,
+          roundedCorners: true,
+          roundedCornerRadius: 1,
+          lineColor: '#e7e8ee'
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-image-30-32',
+          width: 30,
+          height: 32,
+          roundedCorners: true,
+          roundedCornerRadius: 1,
+          clip: true
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-40-44',
+          width: 40,
+          height: 44,
+          roundedCorners: true,
+          roundedCornerRadius: 1,
+          fill: true
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-dark-32-34',
+          width: 32,
+          height: 34,
+          roundedCorners: true,
+          roundedCornerRadius: 1,
+          lineColor: '#45437f',
+          fill: true
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-32-36',
+          width: 32,
+          height: 36,
+          roundedCorners: true,
+          roundedCornerRadius: 1,
+          lineColor: '#fff',
+          fill: true
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-dark-26-28',
+          width: 26,
+          height: 28,
+          roundedCorners: true,
+          roundedCornerRadius: 1,
+          lineColor: '#45437f',
+          fill: true
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-28-32',
+          width: 28,
+          height: 32,
+          roundedCorners: true,
+          roundedCornerRadius: 1,
+          lineColor: '#fff',
+          fill: true
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-dark-22-24',
+          width: 22,
+          height: 24,
+          roundedCorners: true,
+          roundedCornerRadius: 1,
+          lineColor: '#45437f',
+          fill: true
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-22-24',
+          width: 22,
+          height: 24,
+          roundedCorners: true,
+          roundedCornerRadius: 1,
+          lineColor: '#fff',
+          fill: true
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-dark-16-18',
+          width: 16,
+          height: 18,
+          roundedCorners: true,
+          roundedCornerRadius: 1,
+          lineColor: '#45437f',
+          fill: true
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-120-130',
+          width: 120,
+          height: 130,
+          roundedCorners: true,
+          fill: true
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-100-108',
+          width: 100,
+          height: 108,
+          roundedCorners: true,
+          fill: true
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-image-124-136',
+          width: 124,
+          height: 136,
+          roundedCorners: true,
+          clip: true
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-image-84-92',
+          width: 84,
+          height: 92,
+          roundedCorners: true,
+          clip: true
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-34-36',
+          width: 34,
+          height: 36,
+          roundedCorners: true,
+          roundedCornerRadius: 1,
+          fill: true
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-image-40-44',
+          width: 40,
+          height: 44,
+          roundedCorners: true,
+          roundedCornerRadius: 1,
+          clip: true
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-image-24-26',
+          width: 24,
+          height: 26,
+          roundedCorners: true,
+          roundedCornerRadius: 1,
+          clip: true
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-image-18-20',
+          width: 18,
+          height: 20,
+          roundedCorners: true,
+          roundedCornerRadius: 1,
+          clip: true
+        });
+
+        app.plugins.createHexagon({
+          container: '.hexagon-overlay-30-32',
+          width: 30,
+          height: 32,
+          roundedCorners: true,
+          roundedCornerRadius: 1,
+          lineColor: 'rgba(97, 93, 250, .9)',
+          fill: true
+        });
+    })
+}, 1000)
+</script>
+{% endblock %}

@@ -1,0 +1,99 @@
+<div class="chat-widget-settings">
+    <!-- POST SETTINGS WRAP -->
+    <div class="post-settings-wrap">
+        <!-- POST SETTINGS -->
+        <div class="post-settings widget-box-post-settings-dropdown-trigger">
+            <!-- POST SETTINGS ICON -->
+            <svg class="post-settings-icon icon-more-dots">
+                <use xlink:href="#svg-more-dots"></use>
+            </svg>
+            <!-- /POST SETTINGS ICON -->
+        </div>
+        <!-- /POST SETTINGS -->
+
+        <!-- SIMPLE DROPDOWN -->
+        <div class="simple-dropdown widget-box-post-settings-dropdown">
+            <!-- SIMPLE DROPDOWN LINK -->
+            <p class="simple-dropdown-link">Report</p>
+            <!-- /SIMPLE DROPDOWN LINK -->
+
+            <!-- SIMPLE DROPDOWN LINK -->
+            <p class="simple-dropdown-link">Block</p>
+            <!-- /SIMPLE DROPDOWN LINK -->
+
+            <!-- SIMPLE DROPDOWN LINK -->
+            <p class="simple-dropdown-link">Mute</p>
+            <!-- /SIMPLE DROPDOWN LINK -->
+        </div>
+        <!-- /SIMPLE DROPDOWN -->
+    </div>
+    <!-- /POST SETTINGS WRAP -->
+</div>
+<!-- CHAT WIDGET SETTINGS -->
+
+<!-- USER STATUS -->
+<div class="user-status">
+    <!-- USER STATUS AVATAR -->
+    <div class="user-status-avatar">
+        <!-- USER AVATAR -->
+        <div class="user-avatar small no-outline online">
+            <!-- USER AVATAR CONTENT -->
+            <div class="user-avatar-content">
+                <!-- HEXAGON -->
+                <div class="hexagon-image-30-32" data-src="{% if user.avatar %}{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ user.avatar }}{% else %}{{ asset('img/avatar/01.jpg') }}{% endif %}"></div>
+                <!-- /HEXAGON -->
+            </div>
+            <!-- /USER AVATAR CONTENT -->
+
+            <!-- USER AVATAR PROGRESS -->
+            <div class="user-avatar-progress">
+                <!-- HEXAGON -->
+                <div class="hexagon-progress-40-44"></div>
+                <!-- /HEXAGON -->
+            </div>
+            <!-- /USER AVATAR PROGRESS -->
+
+            <!-- USER AVATAR PROGRESS BORDER -->
+            <div class="user-avatar-progress-border">
+                <!-- HEXAGON -->
+                <div class="hexagon-border-40-44"></div>
+                <!-- /HEXAGON -->
+            </div>
+            <!-- /USER AVATAR PROGRESS BORDER -->
+
+            <!-- USER AVATAR BADGE -->
+            <div class="user-avatar-badge">
+                <!-- USER AVATAR BADGE BORDER -->
+                <div class="user-avatar-badge-border">
+                    <!-- HEXAGON -->
+                    <div class="hexagon-22-24"></div>
+                    <!-- /HEXAGON -->
+                </div>
+                <!-- /USER AVATAR BADGE BORDER -->
+
+                <!-- USER AVATAR BADGE CONTENT -->
+                <div class="user-avatar-badge-content">
+                    <!-- HEXAGON -->
+                    <div class="hexagon-dark-16-18"></div>
+                    <!-- /HEXAGON -->
+                </div>
+                <!-- /USER AVATAR BADGE CONTENT -->
+
+                <!-- USER AVATAR BADGE TEXT -->
+                <p class="user-avatar-badge-text">16</p>
+                <!-- /USER AVATAR BADGE TEXT -->
+            </div>
+            <!-- /USER AVATAR BADGE -->
+        </div>
+        <!-- /USER AVATAR -->
+    </div>
+    <!-- /USER STATUS AVATAR -->
+
+    <!-- USER STATUS TITLE -->
+    <p class="user-status-title"><span class="bold">{{ user.pseudo }}</span></p>
+    <!-- /USER STATUS TITLE -->
+
+    <!-- USER STATUS TAG -->
+    <p class="user-status-tag online">Online</p>
+    <!-- /USER STATUS TAG -->
+</div>
