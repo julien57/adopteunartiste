@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CompetenceRepository")
@@ -18,11 +19,16 @@ class Competence
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank(message="Veuillez entrer une compétence")
      */
     private $title;
 
     /**
      * @ORM\Column(type="integer")
+     *
+     * @Assert\Length(min="0", max="100", minMessage="Le pourcentage doit être supérieur à 0", maxMessage="Le pourcentage doit être inférieur à 100")
+     * @Assert\NotBlank(message="Veuillez entrer un pourcentage")
      */
     private $percentage;
 

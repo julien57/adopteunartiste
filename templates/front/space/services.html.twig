@@ -33,7 +33,7 @@
                     <!-- WIDGET BOX CONTENT -->
                     <div class="widget-box-content">
                         <!-- FORM -->
-                        {{ form_start(form) }}
+                        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
                         <!-- FORM ROW -->
                         <ul class="row" id="email-fields-list"
                             data-prototype="{{ form_widget(form.services.vars.prototype)|e }}"
@@ -67,7 +67,9 @@
                                     <!-- /FORM ITEM -->
                                 </li>
                                 <!-- /FORM ROW -->
-                                <a type="button" href="{{ path('front_space_service_remove', {'id': service.vars.data.id}) }}" onclick="return confirm('Etes-vous sûr de vouloir supprimer ce service ?')" class="btn btn-block btn-danger btn-sm col-md-12 mt-3">Supprimer ce service</a>
+                                {% if service.vars.data.id != ""  %}
+                                    <a type="button" href="{{ path('front_space_service_remove', {'id': service.vars.data.id}) }}" onclick="return confirm('Etes-vous sûr de vouloir supprimer ce service ?')" class="btn btn-block btn-danger btn-sm col-md-12 mt-3">Supprimer ce service</a>
+                                {% endif %}
                             {% endfor %}
                         </ul>
                     </div>

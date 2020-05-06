@@ -403,9 +403,10 @@
         <!-- GRID COLUMN -->
         <div class="grid-column">
 
-            <!-- WIDGET BOX -->
+            {% if userProfil.competences is not empty %}
             <div class="widget-box">
                 <!-- WIDGET BOX SETTINGS -->
+                {% if userProfil == app.user %}
                 <div class="widget-box-settings">
                     <!-- POST SETTINGS WRAP -->
                     <div class="post-settings-wrap">
@@ -422,128 +423,59 @@
                         <!-- SIMPLE DROPDOWN -->
                         <div class="simple-dropdown widget-box-post-settings-dropdown">
                             <!-- SIMPLE DROPDOWN LINK -->
-                            <p class="simple-dropdown-link">Widget Settings</p>
+                            <a href="{{ path('front_space_competences') }}" class="simple-dropdown-link">Editer</a>
                             <!-- /SIMPLE DROPDOWN LINK -->
                         </div>
                         <!-- /SIMPLE DROPDOWN -->
                     </div>
                     <!-- /POST SETTINGS WRAP -->
                 </div>
+                {% endif %}
                 <!-- /WIDGET BOX SETTINGS -->
 
                 <!-- WIDGET BOX TITLE -->
-                <p class="widget-box-title">Blog Posts <span class="highlighted">5</span></p>
+                <p class="widget-box-title">Compétences <span class="highlighted">{{ userProfil.competences|length }}</span></p>
                 <!-- /WIDGET BOX TITLE -->
 
                 <!-- WIDGET BOX CONTENT -->
                 <div class="widget-box-content">
                     <!-- POST PEEK LIST -->
                     <div class="post-peek-list">
-                        <!-- POST PEEK -->
-                        <div class="post-peek">
-                            <!-- POST PEEK IMAGE -->
-                            <a class="post-peek-image" href="profile-post.html">
-                                <figure class="picture small round liquid">
-                                    <img src="img/cover/19.jpg" alt="cover-19">
-                                </figure>
-                            </a>
-                            <!-- /POST PEEK IMAGE -->
+
+                        {% for competence in userProfil.competences %}
+                            <div class="post-peek">
 
                             <!-- POST PEEK TITLE -->
-                            <p class="post-peek-title"><a href="profile-post.html">Here's the how and why did I became a full time Gaming Streamer</a></p>
+                            <p class="post-peek-title">{{ competence.title }}</p>
                             <!-- /POST PEEK TITLE -->
 
                             <!-- POST PEEK TEXT -->
-                            <p class="post-peek-text">6 days ago</p>
+                                <div class="progress-stat-wrap">
+                                    <!-- PROGRESS STAT -->
+                                    <div class="progress-stat">
+                                        <!-- PROGRESS STAT BAR -->
+                                        <div id="{{ competence.title }}" class="progress-stat-bar"></div>
+                                        <!-- /PROGRESS STAT BAR -->
+
+                                        <!-- BAR PROGRESS WRAP -->
+                                        <div class="bar-progress-wrap">
+                                            <!-- BAR PROGRESS INFO -->
+                                            <p class="bar-progress-info medium negative"><span class="bar-progress-text no-space">10</span></p>
+                                            <!-- /BAR PROGRESS INFO -->
+                                        </div>
+                                        <!-- /BAR PROGRESS WRAP -->
+                                    </div>
+                                    <!-- /PROGRESS STAT -->
+                                </div>
                             <!-- /POST PEEK TEXT -->
                         </div>
-                        <!-- /POST PEEK -->
-
-                        <!-- POST PEEK -->
-                        <div class="post-peek">
-                            <!-- POST PEEK IMAGE -->
-                            <a class="post-peek-image" href="profile-post.html">
-                                <figure class="picture small round liquid">
-                                    <img src="img/cover/10.jpg" alt="cover-10">
-                                </figure>
-                            </a>
-                            <!-- /POST PEEK IMAGE -->
-
-                            <!-- POST PEEK TITLE -->
-                            <p class="post-peek-title"><a href="profile-post.html">I spoke with the developers of RoBot SaMurai II at the 2019 GamingCon</a></p>
-                            <!-- /POST PEEK TITLE -->
-
-                            <!-- POST PEEK TEXT -->
-                            <p class="post-peek-text">3 weeks ago</p>
-                            <!-- /POST PEEK TEXT -->
-                        </div>
-                        <!-- /POST PEEK -->
-
-                        <!-- POST PEEK -->
-                        <div class="post-peek">
-                            <!-- POST PEEK IMAGE -->
-                            <a class="post-peek-image" href="profile-post.html">
-                                <figure class="picture small round liquid">
-                                    <img src="img/cover/20.jpg" alt="cover-20">
-                                </figure>
-                            </a>
-                            <!-- /POST PEEK IMAGE -->
-
-                            <!-- POST PEEK TITLE -->
-                            <p class="post-peek-title"><a href="profile-post.html">I will be at this month's StreamCon with NekoBebop</a></p>
-                            <!-- /POST PEEK TITLE -->
-
-                            <!-- POST PEEK TEXT -->
-                            <p class="post-peek-text">4 weeks ago</p>
-                            <!-- /POST PEEK TEXT -->
-                        </div>
-                        <!-- /POST PEEK -->
-
-                        <!-- POST PEEK -->
-                        <div class="post-peek">
-                            <!-- POST PEEK IMAGE -->
-                            <a class="post-peek-image" href="profile-post.html">
-                                <figure class="picture small round liquid">
-                                    <img src="img/cover/06.jpg" alt="cover-06">
-                                </figure>
-                            </a>
-                            <!-- /POST PEEK IMAGE -->
-
-                            <!-- POST PEEK TITLE -->
-                            <p class="post-peek-title"><a href="profile-post.html">[Exclusive!] Check out all the new missions and story of the Fire Witch DLC!</a></p>
-                            <!-- /POST PEEK TITLE -->
-
-                            <!-- POST PEEK TEXT -->
-                            <p class="post-peek-text">1 month ago</p>
-                            <!-- /POST PEEK TEXT -->
-                        </div>
-                        <!-- /POST PEEK -->
-
-                        <!-- POST PEEK -->
-                        <div class="post-peek">
-                            <!-- POST PEEK IMAGE -->
-                            <a class="post-peek-image" href="profile-post.html">
-                                <figure class="picture small round liquid">
-                                    <img src="img/cover/07.jpg" alt="cover-07">
-                                </figure>
-                            </a>
-                            <!-- /POST PEEK IMAGE -->
-
-                            <!-- POST PEEK TITLE -->
-                            <p class="post-peek-title"><a href="profile-post.html">Old Super Mochi's Island is getting a remake!</a></p>
-                            <!-- /POST PEEK TITLE -->
-
-                            <!-- POST PEEK TEXT -->
-                            <p class="post-peek-text">1 month ago</p>
-                            <!-- /POST PEEK TEXT -->
-                        </div>
-                        <!-- /POST PEEK -->
+                        {% endfor %}
                     </div>
                     <!-- /POST PEEK LIST -->
                 </div>
                 <!-- /WIDGET BOX CONTENT -->
             </div>
-            <!-- /WIDGET BOX -->
+            {% endif %}
         </div>
         <!-- /GRID COLUMN -->
 
@@ -1079,6 +1011,73 @@
         </div>
 
         <!-- /GRID COLUMN -->
+        <div class="grid-column">
+            <div class="widget-box">
+                <!-- WIDGET BOX SETTINGS -->
+                {% if userProfil == app.user %}
+                <div class="widget-box-settings">
+                    <!-- POST SETTINGS WRAP -->
+                    <div class="post-settings-wrap" style="position: relative;">
+                        <!-- POST SETTINGS -->
+                        <div class="post-settings widget-box-post-settings-dropdown-trigger">
+                            <!-- POST SETTINGS ICON -->
+                            <svg class="post-settings-icon icon-more-dots">
+                                <use xlink:href="#svg-more-dots"></use>
+                            </svg>
+                            <!-- /POST SETTINGS ICON -->
+                        </div>
+                        <!-- /POST SETTINGS -->
+
+                        <!-- SIMPLE DROPDOWN -->
+                        <div class="simple-dropdown widget-box-post-settings-dropdown" style="position: absolute; z-index: 9999; top: 30px; right: 9px; opacity: 0; visibility: hidden; transform: translate(0px, -20px); transition: transform 0.3s ease-in-out 0s, opacity 0.3s ease-in-out 0s, visibility 0.3s ease-in-out 0s;">
+                            <!-- SIMPLE DROPDOWN LINK -->
+                            <a href="{{ path('front_space_services') }}" class="simple-dropdown-link">Editer</a>
+                            <!-- /SIMPLE DROPDOWN LINK -->
+                        </div>
+                        <!-- /SIMPLE DROPDOWN -->
+                    </div>
+                    <!-- /POST SETTINGS WRAP -->
+                </div>
+                {% endif %}
+
+                <!-- WIDGET BOX TITLE -->
+                <p class="widget-box-title">Services <span class="highlighted">{{ userProfil.services|length }}</span></p>
+                <!-- /WIDGET BOX TITLE -->
+
+                <!-- WIDGET BOX CONTENT -->
+                <div class="widget-box-content">
+                    <!-- EVENT PREVIEW LIST -->
+                    <div class="event-preview-list">
+                        <!-- EVENT PREVIEW -->
+                        {% for service in userProfil.services %}
+                        <div class="event-preview small">
+
+                            <!-- EVENT PREVIEW INFO -->
+                            <div class="event-preview-info p-0">
+
+                                <!-- EVENT PREVIEW TITLE -->
+                                <p class="event-preview-title popup-event-information-trigger">{{ service.title }}</p>
+                                <!-- /EVENT PREVIEW TITLE -->
+
+                                <!-- EVENT PREVIEW TEXT -->
+                                <p class="event-preview-text">{{ service.description }}</p>
+                                <!-- /EVENT PREVIEW TEXT -->
+
+                                <!-- META LINE -->
+                                <div class="meta-line">
+                                </div>
+                                <!-- /META LINE -->
+                            </div>
+                            <!-- /EVENT PREVIEW INFO -->
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                    <!-- /EVENT PREVIEW LIST -->
+                </div>
+                <!-- WIDGET BOX CONTENT -->
+            </div>
+        </div>
     </div>
 {% endblock %}
 
@@ -2091,6 +2090,24 @@ photoPost.forEach(function(post) {
     }
     loadPicture();
   })
+
+  {% for competence in userProfil.competences %}
+  app.plugins.createProgressBar({
+      container: "#{{ competence.title }}",
+      height: 4,
+      gradient: {
+        colors: ['#615dfa', '#41efff']
+      },
+      scale: {
+        start: 0,
+        end: 100,
+        stop: {{ competence.percentage }}
+      },
+      linkText: true,
+      linkUnits: '%',
+      animateOnScroll: true
+    });
+  {% endfor %}
 })
 </script>
 {% endblock %}

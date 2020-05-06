@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ServiceType extends AbstractType
 {
@@ -18,12 +19,18 @@ class ServiceType extends AbstractType
                 'label' => 'Nom du service',
                 'attr' => [
                     'class' => 'form-control'
+                ],
+                'constraints' => [
+                    new NotBlank(['message' => 'Veuillez entrer le nom de votre service'])
                 ]
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description',
                 'attr' => [
                     'class' => 'form-control'
+                ],
+                'constraints' => [
+                    new NotBlank(['message' => 'Veuillez entrer une courte description de votre service'])
                 ]
             ])
         ;

@@ -33,7 +33,7 @@
                     <!-- WIDGET BOX CONTENT -->
                     <div class="widget-box-content">
                         <!-- FORM -->
-                        {{ form_start(form) }}
+                        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
                         <!-- FORM ROW -->
                         <ul class="row" id="email-fields-list"
                             data-prototype="{{ form_widget(form.competences.vars.prototype)|e }}"
@@ -67,7 +67,9 @@
                                     <!-- /FORM ITEM -->
                                 </li>
                                 <!-- /FORM ROW -->
-                                <a type="button" href="{{ path('front_space_competence_remove', {'id': competence.vars.data.id}) }}" onclick="return confirm('Etes-vous sûr de vouloir supprimer cette compétence ?')" class="btn btn-block btn-danger btn-sm col-md-12 mt-3">Supprimer ce service</a>
+                                {% if competence.vars.data.id != ""  %}
+                                    <a type="button" href="{{ path('front_space_competence_remove', {'id': competence.vars.data.id}) }}" onclick="return confirm('Etes-vous sûr de vouloir supprimer cette compétence ?')" class="btn btn-block btn-danger btn-sm col-md-12 mt-3">Supprimer ce service</a>
+                                {% endif %}
                             {% endfor %}
                         </ul>
                     </div>
