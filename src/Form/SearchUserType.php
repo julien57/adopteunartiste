@@ -16,7 +16,7 @@ class SearchUserType extends AbstractType
     {
         $builder
             ->add('searchUser', TextType::class, [
-                'label' => 'Rechercher un Adopté',
+                'label' => 'Rechercher un artiste',
                 'constraints' => [
                     new NotBlank(['message' => 'Avant de lancer une recherche, il faut rechercher quelque chose'])
                 ]

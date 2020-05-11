@@ -59,6 +59,45 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getResult();
     }
 
+
+    public function searchGroupGroups(string $searchValue)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.pseudo LIKE :name')
+            ->setParameter('name', '%'.$searchValue.'%')
+            ->orderBy('u.subscribedAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getMembersByActif()
+    {
+        return $this->createQueryBuilder('u')
+            ->addSelect('COUNT(posts) AS HIDDEN postsCount, COUNT(adopts) AS HIDDEN adoptsCount')
+            ->leftJoin('u.posts', 'posts')
+            ->leftJoin('u.adopts', 'adopts')
+            ->groupBy('u')
+            ->orderBy('postsCount', 'DESC')
+            ->addOrderBy('adoptsCount', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getMembersByActifWithSearch(string $searchValue)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.pseudo LIKE :name')
+            ->setParameter('name', '%'.$searchValue.'%')
+            ->addSelect('COUNT(posts) AS HIDDEN postsCount, COUNT(adopts) AS HIDDEN adoptsCount')
+            ->leftJoin('u.posts', 'posts')
+            ->leftJoin('u.adopts', 'adopts')
+            ->groupBy('u')
+            ->orderBy('postsCount', 'DESC')
+            ->addOrderBy('adoptsCount', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

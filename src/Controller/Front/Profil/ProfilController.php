@@ -43,6 +43,21 @@ class ProfilController extends AbstractController
     }
 
     /**
+     * @Route("/profil/adopter/{pseudo}", name="front_profil_add_adopt_members")
+     */
+    public function addAdopteMembers(User $user)
+    {
+        $adopt = new Adopt();
+        $adopt->setUserTo($this->getUser());
+        $adopt->setUserFrom($user);
+
+        $this->em->persist($adopt);
+        $this->em->flush();
+
+        return $this->redirectToRoute('front_general_members_new');
+    }
+
+    /**
      * @Route("/profil/remove-adopt/{id}", name="front_profil_remove_adopt", requirements={"id":"\d+"})
      */
     public function removeAdopt(User $user, AdoptRepository $adoptRepository)
@@ -59,6 +74,23 @@ class ProfilController extends AbstractController
         return $this->json([
             'message' => 'ok'
         ]);
+    }
+
+    /**
+     * @Route("/profil/abandonner/{pseudo}", name="front_profil_remove_adopt_members")
+     */
+    public function removeAdoptMembers(User $user, AdoptRepository $adoptRepository)
+    {
+        $adopt = $adoptRepository->findOneBy(['userFrom' => $user, 'userTo' => $this->getUser()]);
+        if (!$adopt) {
+            $adopt = $adoptRepository->findOneBy(['userFrom' => $this->getUser(), 'userTo' => $user]);
+        }
+        if ($adopt) {
+            $this->em->remove($adopt);
+            $this->em->flush();
+        }
+
+        return $this->redirectToRoute('front_general_members_new');
     }
 
     /**

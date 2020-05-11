@@ -2,27 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63ff9cd7-3cb6-497e-b0b2-d6f2408246d0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Controller/Front/General/GroupController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/SearchGroup.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/front/general/groups.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/front/html/bar_user_tchat_right.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/front/html/chat-right.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/Front/General/MemberController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/front/general/members.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/sidebar/sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/sidebar/sidebar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Front/GroupController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Front/GroupController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Front/Space/MessagingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Front/Space/MessagingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Group.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Group.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/GroupType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/GroupType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Front/Profil/ProfilController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Front/Profil/ProfilController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/SearchUserType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/SearchUserType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Repository/GroupRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/GroupRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/Post/Adopt.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Post/Adopt.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/Post/MessagingService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Post/MessagingService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base_profil.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base_profil.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/front/group/single.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/group/single.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/front/inc/chat_right.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/inc/chat_right.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/front/inc/navbar_left.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/inc/navbar_left.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/front/space/groups.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/space/groups.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/front/space/messaging.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/space/messaging.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -254,10 +243,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="645" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1586983835968" />
-    <state x="698" y="302" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1588607309413">
+    <state x="698" y="302" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1589184592556">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="698" y="302" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588607309413" />
+    <state x="698" y="302" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1589184592556" />
     <state x="624" y="363" key="NewPhpClassDialog" timestamp="1586988909289">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -274,10 +263,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="653" y="372" key="com.intellij.ide.util.TipDialog/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1586982415807" />
-    <state x="705" y="120" width="986" height="682" key="find.popup" timestamp="1588858353824">
+    <state x="705" y="120" width="986" height="682" key="find.popup" timestamp="1589188548759">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="705" y="120" width="986" height="682" key="find.popup/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588858353824" />
+    <state x="705" y="120" width="986" height="682" key="find.popup/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1589188548759" />
     <state x="609" y="274" width="700" height="530" key="recent.locations.popup" timestamp="1588776292148">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

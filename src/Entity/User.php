@@ -217,6 +217,11 @@ class User implements UserInterface
      */
     private $senderFor;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $subscribedAt;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
@@ -232,6 +237,7 @@ class User implements UserInterface
         $this->userGroups = new ArrayCollection();
         $this->senderTo = new ArrayCollection();
         $this->senderFor = new ArrayCollection();
+        $this->subscribedAt = new \DateTime();
     }
 
     public function computeSlug(SluggerInterface $slugger)
@@ -876,6 +882,18 @@ class User implements UserInterface
                 $senderFor->setSendFor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSubscribedAt(): ?\DateTimeInterface
+    {
+        return $this->subscribedAt;
+    }
+
+    public function setSubscribedAt(\DateTimeInterface $subscribedAt): self
+    {
+        $this->subscribedAt = $subscribedAt;
 
         return $this;
     }

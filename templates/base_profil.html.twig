@@ -90,6 +90,37 @@
 <script src="{{ asset('js/utils/svg-loader.js') }}"></script>
 {% block javascript %}{% endblock %}
 <script>
+    app.querySelector('.navigation-widget-trigger', function (el) {
+        const navigationTrigger = el[0],
+            topOffset = 80,
+            navigationWidget = document.querySelector('#navigation-widget'),
+            navigationWidgetSmall = document.querySelector('#navigation-widget-small'),
+            activeClass = 'active',
+            hiddenClass = 'hidden',
+            delayedClass = 'delayed';
+
+        const setNavigationWidgetDimensions = function () {
+            navigationWidget.style.height = `${window.innerHeight - topOffset}px`;
+        };
+
+        const toggleNavigationWidget = function () {
+            navigationTrigger.classList.toggle(activeClass);
+
+            navigationWidget.classList.toggle(delayedClass);
+            navigationWidget.classList.toggle(hiddenClass);
+            navigationWidgetSmall.classList.toggle(delayedClass);
+            navigationWidgetSmall.classList.toggle(hiddenClass);
+
+            sidebar.navigation.active = !navigationWidget.classList.contains(hiddenClass);
+            updateGridPositions();
+        };
+
+        navigationTrigger.addEventListener('click', toggleNavigationWidget);
+
+        setNavigationWidgetDimensions();
+        window.addEventListener('resize', setNavigationWidgetDimensions);
+    });
+
     var links = document.getElementsByClassName('reacting');
 
     // For each <li> inside #links

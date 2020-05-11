@@ -74,7 +74,6 @@ class GroupRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-
     public function searchGroupGroups(string $searchValue)
     {
         return $this->createQueryBuilder('u')
