@@ -1,0 +1,164 @@
+<!-- CHAT WIDGET HEADER -->
+<div class="chat-widget-header">
+    <!-- CHAT WIDGET CLOSE BUTTON -->
+    <div class="chat-widget-close-button">
+        <!-- CHAT WIDGET CLOSE BUTTON ICON -->
+        <svg class="chat-widget-close-button-icon icon-back-arrow">
+            <use xlink:href="#svg-back-arrow"></use>
+        </svg>
+        <!-- CHAT WIDGET CLOSE BUTTON ICON -->
+    </div>
+    <!-- /CHAT WIDGET CLOSE BUTTON -->
+
+    <!-- USER STATUS -->
+    <div class="user-status">
+        <!-- USER STATUS AVATAR -->
+        <div class="user-status-avatar">
+            <!-- USER AVATAR -->
+            <div class="user-avatar small no-outline online">
+                <!-- USER AVATAR CONTENT -->
+                <div class="user-avatar-content">
+                    <!-- HEXAGON -->
+                    <div class="hexagon-image-30-32" data-src="{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ user.avatar }}"></div>
+                    <!-- /HEXAGON -->
+                </div>
+                <!-- /USER AVATAR CONTENT -->
+
+                <!-- USER AVATAR PROGRESS -->
+                <div class="user-avatar-progress">
+                    <!-- HEXAGON -->
+                    <div class="hexagon-progress-40-44"></div>
+                    <!-- /HEXAGON -->
+                </div>
+                <!-- /USER AVATAR PROGRESS -->
+
+                <!-- USER AVATAR PROGRESS BORDER -->
+                <div class="user-avatar-progress-border">
+                    <!-- HEXAGON -->
+                    <div class="hexagon-border-40-44"></div>
+                    <!-- /HEXAGON -->
+                </div>
+                <!-- /USER AVATAR PROGRESS BORDER -->
+
+                <!-- USER AVATAR BADGE -->
+                <div class="user-avatar-badge">
+                    <!-- USER AVATAR BADGE BORDER -->
+                    <div class="user-avatar-badge-border">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-22-24"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR BADGE BORDER -->
+
+                    <!-- USER AVATAR BADGE CONTENT -->
+                    <div class="user-avatar-badge-content">
+                        <!-- HEXAGON -->
+                        <div class="hexagon-dark-16-18"></div>
+                        <!-- /HEXAGON -->
+                    </div>
+                    <!-- /USER AVATAR BADGE CONTENT -->
+
+                    <!-- USER AVATAR BADGE TEXT -->
+                    <p class="user-avatar-badge-text">16</p>
+                    <!-- /USER AVATAR BADGE TEXT -->
+                </div>
+                <!-- /USER AVATAR BADGE -->
+            </div>
+            <!-- /USER AVATAR -->
+        </div>
+        <!-- /USER STATUS AVATAR -->
+
+        <!-- USER STATUS TITLE -->
+        <p class="user-status-title"><span class="bold">{{ user.pseudo }}</span></p>
+        <!-- /USER STATUS TITLE -->
+
+        <!-- USER STATUS TAG -->
+        <p class="user-status-tag online">Online</p>
+        <!-- /USER STATUS TAG -->
+    </div>
+    <!-- /USER STATUS -->
+</div>
+<!-- /CHAT WIDGET HEADER -->
+
+<!-- CHAT WIDGET CONVERSATION -->
+<div class="chat-widget-conversation" id="data-conversation" data-simplebar>
+    {% for messaging in messagings %}
+        {% if messaging.sendFor != app.user %}
+
+            <div class="chat-widget-speaker right">
+                <!-- CHAT WIDGET SPEAKER MESSAGE -->
+                <p class="chat-widget-speaker-message">
+                    {{ messaging.message }}<br>
+                    {% if messaging.photo %}
+                        <img src="{{ asset( constant('App\\Services\\File\\UploadFile::PHOTO_MESSAGING_UPLOAD_DIR')) ~ messaging.photo }}" style="width:200px">
+                    {% endif %}
+                </p>
+            </div>
+
+        {% else %}
+
+            <div class="chat-widget-speaker left">
+                <!-- CHAT WIDGET SPEAKER AVATAR -->
+                <div class="chat-widget-speaker-avatar">
+                    <!-- USER AVATAR -->
+                    <div class="user-avatar tiny no-border">
+                        <!-- USER AVATAR CONTENT -->
+                        <div class="user-avatar-content">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-image-24-26" data-src="{% if  messaging.sendTo.avatar %}{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ messaging.sendTo.avatar }}{% else %}{{ asset('img/avatar/01.jpg') }}{% endif %}"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR CONTENT -->
+                    </div>
+                    <!-- /USER AVATAR -->
+                </div>
+                <!-- /CHAT WIDGET SPEAKER AVATAR -->
+
+                <!-- CHAT WIDGET SPEAKER MESSAGE -->
+                <p class="chat-widget-speaker-message">
+                    {{ messaging.message }}<br>
+                    {% if messaging.photo %}
+                        <img src="{{ asset( constant('App\\Services\\File\\UploadFile::PHOTO_MESSAGING_UPLOAD_DIR')) ~ messaging.photo }}" style="width:200px">
+                    {% endif %}
+                </p>
+                <!-- /CHAT WIDGET SPEAKER MESSAGE -->
+
+                <!-- CHAT WIDGET SPEAKER TIMESTAMP -->
+                <p class="chat-widget-speaker-timestamp">{{ messaging.publishedAt|format_datetime('full', 'short', locale='fr') }}</p>
+                <!-- /CHAT WIDGET SPEAKER TIMESTAMP -->
+            </div>
+
+        {% endif %}
+    {% endfor %}
+</div>
+<!-- /CHAT WIDGET CONVERSATION -->
+
+<!-- CHAT WIDGET FORM -->
+<form class="chat-widget-form" id="form_response_messaging">
+    <!-- INTERACTIVE INPUT -->
+    <div class="interactive-input small">
+        <input type="text" id="chat_widget_message_text_2" name="chat_widget_message_text_2" autocomplete="off" placeholder="Ecrivez votre message...">
+        <!-- INTERACTIVE INPUT ICON WRAP -->
+        <div class="interactive-input-icon-wrap">
+            <!-- INTERACTIVE INPUT ICON -->
+            <svg class="interactive-input-icon icon-send-message">
+                <use xlink:href="#svg-send-message"></use>
+            </svg>
+            <!-- /INTERACTIVE INPUT ICON -->
+        </div>
+        <!-- /INTERACTIVE INPUT ICON WRAP -->
+
+        <!-- INTERACTIVE INPUT ACTION -->
+        <div class="interactive-input-action">
+            <!-- INTERACTIVE INPUT ACTION ICON -->
+            <svg class="interactive-input-action-icon icon-cross-thin">
+                <use xlink:href="#svg-cross-thin"></use>
+            </svg>
+            <!-- /INTERACTIVE INPUT ACTION ICON -->
+        </div>
+        <!-- /INTERACTIVE INPUT ACTION -->
+    </div>
+    <!-- /INTERACTIVE INPUT -->
+    <input type="hidden" name="userId" autocomplete="off" id="input_userId" value="{{ user.id }}">
+</form>
+<!-- /CHAT WIDGET FORM -->

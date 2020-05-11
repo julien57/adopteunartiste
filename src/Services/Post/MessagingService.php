@@ -27,4 +27,23 @@ class MessagingService
     {
         return $this->messagingRepository->getLastMessage($sendTo, $sendFor);
     }
+
+    public function listUser(User $userMe)
+    {
+        $usersId = $this->messagingRepository->getMessages($userMe);
+
+        $users = [];
+        foreach ($usersId as $id) {
+            $user = $this->userRepository->find($id['sendForId']);
+            $users[] = $user;
+        }
+        $firstUser = $users[0];
+        $messagings = $this->messagingRepository->getMessageChat($firstUser, $userMe);
+
+        return [
+            'users' => $users,
+            'firstUser' => $users[0],
+            'messagings' => $messagings
+        ];
+    }
 }

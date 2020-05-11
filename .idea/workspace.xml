@@ -2,13 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63ff9cd7-3cb6-497e-b0b2-d6f2408246d0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Controller/Front/General/GroupController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/SearchGroup.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/front/general/groups.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/front/html/bar_user_tchat_right.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/front/html/chat-right.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Competence.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Competence.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/CompetenceType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/CompetenceType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/ServiceType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ServiceType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/front/profil/profil_user.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/profil/profil_user.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/front/space/competences.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/space/competences.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/front/space/services.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/space/services.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/sidebar/sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/sidebar/sidebar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Front/GroupController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Front/GroupController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Front/Space/MessagingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Front/Space/MessagingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Group.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Group.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/GroupType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/GroupType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/GroupRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/GroupRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Services/Post/Adopt.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Post/Adopt.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Services/Post/MessagingService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Post/MessagingService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base_profil.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base_profil.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/group/single.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/group/single.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/inc/chat_right.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/inc/chat_right.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/inc/navbar_left.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/inc/navbar_left.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/space/groups.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/space/groups.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/space/messaging.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/space/messaging.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,17 +200,18 @@
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/templates/front/profil" />
-      <recent name="$PROJECT_DIR$/src/Controller/Back" />
-      <recent name="$PROJECT_DIR$/templates/back" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/Services" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/public/js" />
       <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$/src/Controller/Back" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/front" />
+      <recent name="$PROJECT_DIR$/templates/front/profil" />
+      <recent name="$PROJECT_DIR$/src/Controller/Back" />
+      <recent name="$PROJECT_DIR$/templates/back" />
     </key>
   </component>
   <component name="SvnConfiguration">
@@ -259,13 +274,13 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="653" y="372" key="com.intellij.ide.util.TipDialog/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1586982415807" />
-    <state x="705" y="120" width="986" height="682" key="find.popup" timestamp="1588751588538">
+    <state x="705" y="120" width="986" height="682" key="find.popup" timestamp="1588858353824">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="705" y="120" width="986" height="682" key="find.popup/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588751588538" />
-    <state x="609" y="274" width="700" height="530" key="recent.locations.popup" timestamp="1587301970015">
+    <state x="705" y="120" width="986" height="682" key="find.popup/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588858353824" />
+    <state x="609" y="274" width="700" height="530" key="recent.locations.popup" timestamp="1588776292148">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="609" y="274" width="700" height="530" key="recent.locations.popup/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1587301970015" />
+    <state x="609" y="274" width="700" height="530" key="recent.locations.popup/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588776292148" />
   </component>
 </project>

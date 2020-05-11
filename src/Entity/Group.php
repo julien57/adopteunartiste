@@ -121,11 +121,17 @@ class Group
      */
     private $twitch;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nbViews;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->members = new ArrayCollection();
         $this->posts = new ArrayCollection();
+        $this->nbViews = 0;
     }
 
     public function getId(): ?int
@@ -365,5 +371,17 @@ class Group
         }
 
         return false;
+    }
+
+    public function getNbViews(): ?int
+    {
+        return $this->nbViews;
+    }
+
+    public function setNbViews(?int $nbViews): self
+    {
+        $this->nbViews = $nbViews;
+
+        return $this;
     }
 }

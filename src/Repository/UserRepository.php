@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Group;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -41,6 +42,19 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $this->createQueryBuilder('u')
             ->where('u.pseudo LIKE :pseudo')
             ->setParameter('pseudo', '%'.$searchValue.'%')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getLastUsersInGroup(Group $group)
+    {
+        return $this->createQueryBuilder('u')
+            ->leftJoin('u.groups', 'groups')
+            ->where('groups = :group')
+            ->setParameter('group', $group)
+            ->andWhere('u.avatar IS NOT NULL')
+            ->orderBy('u.id', 'DESC')
+            ->setMaxResults(6)
             ->getQuery()
             ->getResult();
     }

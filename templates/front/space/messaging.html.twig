@@ -219,7 +219,7 @@
                     <!-- /CHAT WIDGET HEADER -->
                     <div id="data-conversation"></div>
                     <!-- CHAT WIDGET CONVERSATION -->
-                    <div class="chat-widget-conversation" id="data-conversation" data-simplebar>
+                    <div class="chat-widget-conversation" data-simplebar>
                         {% for messaging in messagings %}
                             {% if messaging.sendFor != app.user %}
 
@@ -272,6 +272,7 @@
                     <!-- /CHAT WIDGET CONVERSATION -->
 
                     <!-- CHAT WIDGET FORM -->
+                    <div class="col-md-12" id="div_preview_image" style="background:#23d2e2;border-radius:3px;display:none;padding:10px;"><img id="preview_photo_chat" src="" style="width:100px"></div>
                     <form class="chat-widget-form" id="form_response_messaging">
                         <!-- FORM ROW -->
                         <div class="form-row split">
@@ -291,7 +292,7 @@
                                             </svg>
                                             <!-- /INTERACTIVE INPUT ICON -->
                                         </div>
-                                        <input type="file" name="sendPhoto" id="send_photo" style="display:none">
+                                        <input type="file" name="sendPhoto" id="send_photo" onchange="loadFile(event)" style="display:none">
                                         </label>
                                         <!-- /TOOLTIP WRAP -->
                                     </div>
@@ -2506,6 +2507,17 @@ createUserPreviewSocialLinksSliders();
     })
 }
 
+var loadFile = function(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+        document.getElementById('div_preview_image').style.display = 'block';
+        var output = document.getElementById('preview_photo_chat');
+        output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+};
+
+
 var commentForm = document.getElementById('form_response_messaging');
 commentForm.addEventListener('submit', function(e) {
     e.preventDefault();
@@ -2530,6 +2542,7 @@ commentForm.addEventListener('submit', function(e) {
                         document.getElementById('data-conversation').nextElementSibling.remove();
                         document.getElementById('data-conversation').insertAdjacentHTML('afterend', data.view_messaging.content);
                         document.getElementById('form_response_messaging').reset();
+                        document.getElementById('div_preview_image').style.display = 'none';
                     })
            }
     })

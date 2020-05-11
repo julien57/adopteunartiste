@@ -86,6 +86,12 @@ class GroupController extends AbstractController
             $posts = $postRepository->findBy(['userGroup' => $group], ['id' => 'DESC'], 10);
         }
 
+        if ($group->getAuthor() !== $this->getUser()) {
+            $group->setNbViews($group->getNbViews() + 1);
+
+            $this->em->flush();
+        }
+
         return $this->render('front/group/single.html.twig', [
             'group' => $group,
             'posts' => $posts
@@ -102,7 +108,7 @@ class GroupController extends AbstractController
         } else {
             $group->addMember($this->getUser());
         }
-
+        
         $this->em->flush();
 
         return $this->redirectToRoute('front_group_single', ['slug' => $group->getSlug()]);

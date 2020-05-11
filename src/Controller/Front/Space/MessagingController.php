@@ -113,6 +113,47 @@ class MessagingController extends AbstractController
     }
 
     /**
+     * @Route("/display-messaging-right", name="front_space_display_messaging_right")
+     */
+    public function displayMessagingRight(Request $request, UserRepository $userRepository, MessagingRepository $messagingRepository)
+    {
+        if ($request->get('idUser')) {
+            $user = $userRepository->find($request->get('idUser'));
+            $newMessages = $messagingRepository->getNewMessageChat($user, $this->getUser());
+
+            $messagings = $messagingRepository->getMessageChat($user, $this->getUser());
+
+            if (!empty($newMessages)) {
+
+                foreach ($messagings as $messaging) {
+                    $messaging->setIsNew(false);
+                }
+
+                $this->em->flush();
+
+                return $this->json([
+                    'isNew' => 'ok',
+                    'view_messaging' => $this->render('front/html/chat-right.html.twig', [
+                        'user' => $user,
+                        'messagings' => $messagings,
+                    ]),
+                    'barUser' => $this->render('front/html/bar_user_tchat_right.html.twig', ['user' => $user])
+                ]);
+            } else {
+                return $this->json([
+                    'isNew' => 'ok',
+                    'view_messaging' => $this->render('front/html/chat-right.html.twig', [
+                        'user' => $user,
+                        'messagings' => $messagings,
+                    ]),
+                    'barUser' => $this->render('front/html/bar_user_tchat_right.html.twig', ['user' => $user])
+                ]);
+            }
+
+        }
+    }
+
+    /**
      * @Route("/get-new-message", name="front_space_get_new_message")
      */
     public function getNewMessage(MessagingRepository $messagingRepository, UserRepository $userRepository, Request $request)

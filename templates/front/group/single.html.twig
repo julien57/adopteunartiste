@@ -9,7 +9,7 @@
     <div class="profile-header v2">
         <!-- PROFILE HEADER COVER -->
         <figure class="profile-header-cover liquid">
-            <img src="{% if group.avatar %}{{ asset( constant('App\\Services\\File\\UploadFile::COVERUPLOAD_DIR')) ~ group.cover }}{% else %}{{ asset('/img/avatar/01.jpg') }}{% endif %}" alt="cover-29">
+            <img src="{% if group.cover %}{{ asset( constant('App\\Services\\File\\UploadFile::COVERUPLOAD_DIR')) ~ group.cover }}{% else %}{{ asset('/img/avatar/01.jpg') }}{% endif %}" alt="cover-29">
         </figure>
         <!-- /PROFILE HEADER COVER -->
 
@@ -164,6 +164,93 @@
     <div class="grid grid-3-6-3 mobile-prefer-content">
         <!-- GRID COLUMN -->
         <div class="grid-column">
+            <!-- WIDGET BOX -->
+            <div class="widget-box">
+                {% if group.author == app.user %}
+                <div class="widget-box-settings">
+                    <!-- POST SETTINGS WRAP -->
+                    <div class="post-settings-wrap">
+                        <!-- POST SETTINGS -->
+                        <div class="post-settings widget-box-post-settings-dropdown-trigger">
+                            <!-- POST SETTINGS ICON -->
+                            <svg class="post-settings-icon icon-more-dots">
+                                <use xlink:href="#svg-more-dots"></use>
+                            </svg>
+                            <!-- /POST SETTINGS ICON -->
+                        </div>
+                        <!-- /POST SETTINGS -->
+
+                        <!-- SIMPLE DROPDOWN -->
+                        <div class="simple-dropdown widget-box-post-settings-dropdown">
+                            <!-- SIMPLE DROPDOWN LINK -->
+                            <a href="{{ path('gront_space_manage_group', {'slug': group.slug}) }}" class="simple-dropdown-link">Gérer les infos</a>
+                            <!-- /SIMPLE DROPDOWN LINK -->
+                        </div>
+                        <!-- /SIMPLE DROPDOWN -->
+                    </div>
+                    <!-- /POST SETTINGS WRAP -->
+                </div>
+                {% endif %}
+
+                <!-- WIDGET BOX TITLE -->
+                <p class="widget-box-title">Infos du groupe</p>
+                <!-- /WIDGET BOX TITLE -->
+
+                <!-- WIDGET BOX CONTENT -->
+                <div class="widget-box-content">
+                    <!-- SOCIAL LINKS -->
+                    <div class="social-links multiline align-left">
+
+                        <p class="paragraph">{{ group.description }}</p>
+
+                        <div class="information-line-list">
+                            <!-- INFORMATION LINE -->
+                            <div class="information-line">
+                                <!-- INFORMATION LINE TITLE -->
+                                <p class="information-line-title">Créé le</p>
+                                <!-- /INFORMATION LINE TITLE -->
+
+                                <!-- INFORMATION LINE TEXT -->
+                                <p class="information-line-text">{{ group.createdAt|date('d/m/Y') }}</p>
+                                <!-- /INFORMATION LINE TEXT -->
+                            </div>
+                            <!-- /INFORMATION LINE -->
+
+                            <!-- INFORMATION LINE -->
+                            {% if group.email %}
+                            <div class="information-line">
+                                <!-- INFORMATION LINE TITLE -->
+                                <p class="information-line-title">Mail</p>
+                                <!-- /INFORMATION LINE TITLE -->
+
+                                <!-- INFORMATION LINE TEXT -->
+                                <p class="information-line-text"><a href="mailto:{{ group.email }}">{{ group.email }}</a></p>
+                                <!-- /INFORMATION LINE TEXT -->
+                            </div>
+                            {% endif %}
+                            <!-- /INFORMATION LINE -->
+
+                            <!-- INFORMATION LINE -->
+                            {% if group.website %}
+                            <div class="information-line">
+                                <!-- INFORMATION LINE TITLE -->
+                                <p class="information-line-title">Site Web</p>
+                                <!-- /INFORMATION LINE TITLE -->
+
+                                <!-- INFORMATION LINE TEXT -->
+                                <p class="information-line-text"><a target="_blank" href="{{ group.website }}">{{ group.website }}</a></p>
+                                <!-- /INFORMATION LINE TEXT -->
+                            </div>
+                            {% endif %}
+                            <!-- /INFORMATION LINE -->
+                        </div>
+
+                    </div>
+                    <!-- /SOCIAL LINKS -->
+                </div>
+                <!-- /WIDGET BOX CONTENT -->
+            </div>
+            <!-- /WIDGET BOX -->
             <!-- WIDGET BOX -->
             <div class="widget-box">
                 {% if group.author == app.user %}
@@ -726,369 +813,6 @@
             </div>
             <!-- /WIDGET BOX -->
 
-            <!-- WIDGET BOX -->
-            <div class="widget-box">
-                <!-- WIDGET BOX SETTINGS -->
-                <div class="widget-box-settings">
-                    <!-- POST SETTINGS WRAP -->
-                    <div class="post-settings-wrap">
-                        <!-- POST SETTINGS -->
-                        <div class="post-settings widget-box-post-settings-dropdown-trigger">
-                            <!-- POST SETTINGS ICON -->
-                            <svg class="post-settings-icon icon-more-dots">
-                                <use xlink:href="#svg-more-dots"></use>
-                            </svg>
-                            <!-- /POST SETTINGS ICON -->
-                        </div>
-                        <!-- /POST SETTINGS -->
-
-                        <!-- SIMPLE DROPDOWN -->
-                        <div class="simple-dropdown widget-box-post-settings-dropdown">
-                            <!-- SIMPLE DROPDOWN LINK -->
-                            <p class="simple-dropdown-link">Widget Settings</p>
-                            <!-- /SIMPLE DROPDOWN LINK -->
-                        </div>
-                        <!-- /SIMPLE DROPDOWN -->
-                    </div>
-                    <!-- /POST SETTINGS WRAP -->
-                </div>
-                <!-- /WIDGET BOX SETTINGS -->
-
-                <!-- WIDGET BOX TITLE -->
-                <p class="widget-box-title">Discussions <span class="highlighted">16</span></p>
-                <!-- /WIDGET BOX TITLE -->
-
-                <!-- WIDGET BOX CONTENT -->
-                <div class="widget-box-content">
-                    <!-- FILTERS -->
-                    <div class="filters">
-                        <!-- FILTER -->
-                        <p class="filter">Newest</p>
-                        <!-- /FILTER -->
-
-                        <!-- FILTER -->
-                        <p class="filter active">Popular</p>
-                        <!-- /FILTER -->
-                    </div>
-                    <!-- /FILTERS -->
-
-                    <!-- POST PREVIEW LINE LIST -->
-                    <div class="post-preview-line-list">
-                        <!-- POST PREVIEW LINE -->
-                        <div class="post-preview-line">
-                            <!-- POST PREVIEW LINE TITLE -->
-                            <p class="post-preview-line-title"><a href="forums-discussion.html">In your opinion, who has the best cosplay?</a></p>
-                            <!-- /POST PREVIEW LINE TITLE -->
-
-                            <!-- POST PREVIEW LINE META -->
-                            <div class="post-preview-line-meta">
-                                <!-- USER AVATAR -->
-                                <a class="user-avatar micro no-border" href="profile-timeline.html">
-                                    <!-- USER AVATAR CONTENT -->
-                                    <div class="user-avatar-content">
-                                        <!-- HEXAGON -->
-                                        <div class="hexagon-image-18-20" data-src="img/avatar/05.jpg"></div>
-                                        <!-- /HEXAGON -->
-                                    </div>
-                                    <!-- /USER AVATAR CONTENT -->
-                                </a>
-                                <!-- /USER AVATAR -->
-
-                                <!-- POST PREVIEW LINE AUTHOR -->
-                                <p class="post-preview-line-author"><a href="profile-timeline.html">By Neko Bebop</a></p>
-                                <!-- /POST PREVIEW LINE AUTHOR -->
-
-                                <!-- POST PREVIEW LINE TIMESTAMP -->
-                                <p class="post-preview-line-timestamp">2 weeks ago</p>
-                                <!-- /POST PREVIEW LINE TIMESTAMP -->
-                            </div>
-                            <!-- /POST PREVIEW LINE META -->
-                        </div>
-                        <!-- /POST PREVIEW LINE -->
-
-                        <!-- POST PREVIEW LINE -->
-                        <div class="post-preview-line">
-                            <!-- POST PREVIEW LINE TITLE -->
-                            <p class="post-preview-line-title"><a href="forums-discussion.html">Preparing everything for CosWorld 2019, show your works here!</a></p>
-                            <!-- /POST PREVIEW LINE TITLE -->
-
-                            <!-- POST PREVIEW LINE META -->
-                            <div class="post-preview-line-meta">
-                                <!-- USER AVATAR -->
-                                <a class="user-avatar micro no-border" href="profile-timeline.html">
-                                    <!-- USER AVATAR CONTENT -->
-                                    <div class="user-avatar-content">
-                                        <!-- HEXAGON -->
-                                        <div class="hexagon-image-18-20" data-src="img/avatar/03.jpg"></div>
-                                        <!-- /HEXAGON -->
-                                    </div>
-                                    <!-- /USER AVATAR CONTENT -->
-                                </a>
-                                <!-- /USER AVATAR -->
-
-                                <!-- POST PREVIEW LINE AUTHOR -->
-                                <p class="post-preview-line-author"><a href="profile-timeline.html">By Nick Grissom</a></p>
-                                <!-- /POST PREVIEW LINE AUTHOR -->
-
-                                <!-- POST PREVIEW LINE TIMESTAMP -->
-                                <p class="post-preview-line-timestamp">13 hours ago</p>
-                                <!-- /POST PREVIEW LINE TIMESTAMP -->
-                            </div>
-                            <!-- /POST PREVIEW LINE META -->
-                        </div>
-                        <!-- /POST PREVIEW LINE -->
-
-                        <!-- POST PREVIEW LINE -->
-                        <div class="post-preview-line">
-                            <!-- POST PREVIEW LINE TITLE -->
-                            <p class="post-preview-line-title"><a href="forums-discussion.html">Official Topic! Let's organize the global meetups for all continents!</a></p>
-                            <!-- /POST PREVIEW LINE TITLE -->
-
-                            <!-- POST PREVIEW LINE META -->
-                            <div class="post-preview-line-meta">
-                                <!-- USER AVATAR -->
-                                <a class="user-avatar micro no-border" href="profile-timeline.html">
-                                    <!-- USER AVATAR CONTENT -->
-                                    <div class="user-avatar-content">
-                                        <!-- HEXAGON -->
-                                        <div class="hexagon-image-18-20" data-src="img/avatar/02.jpg"></div>
-                                        <!-- /HEXAGON -->
-                                    </div>
-                                    <!-- /USER AVATAR CONTENT -->
-                                </a>
-                                <!-- /USER AVATAR -->
-
-                                <!-- POST PREVIEW LINE AUTHOR -->
-                                <p class="post-preview-line-author"><a href="profile-timeline.html">By Destroy Dex</a></p>
-                                <!-- /POST PREVIEW LINE AUTHOR -->
-
-                                <!-- POST PREVIEW LINE TIMESTAMP -->
-                                <p class="post-preview-line-timestamp">5 days ago</p>
-                                <!-- /POST PREVIEW LINE TIMESTAMP -->
-                            </div>
-                            <!-- /POST PREVIEW LINE META -->
-                        </div>
-                        <!-- /POST PREVIEW LINE -->
-
-                        <!-- POST PREVIEW LINE -->
-                        <div class="post-preview-line">
-                            <!-- POST PREVIEW LINE TITLE -->
-                            <p class="post-preview-line-title"><a href="forums-discussion.html">Share your cosplay tips here! Tutorials, DIY's, paints and more</a></p>
-                            <!-- /POST PREVIEW LINE TITLE -->
-
-                            <!-- POST PREVIEW LINE META -->
-                            <div class="post-preview-line-meta">
-                                <!-- USER AVATAR -->
-                                <a class="user-avatar micro no-border" href="profile-timeline.html">
-                                    <!-- USER AVATAR CONTENT -->
-                                    <div class="user-avatar-content">
-                                        <!-- HEXAGON -->
-                                        <div class="hexagon-image-18-20" data-src="img/avatar/05.jpg"></div>
-                                        <!-- /HEXAGON -->
-                                    </div>
-                                    <!-- /USER AVATAR CONTENT -->
-                                </a>
-                                <!-- /USER AVATAR -->
-
-                                <!-- POST PREVIEW LINE AUTHOR -->
-                                <p class="post-preview-line-author"><a href="profile-timeline.html">By Neko Bebop</a></p>
-                                <!-- /POST PREVIEW LINE AUTHOR -->
-
-                                <!-- POST PREVIEW LINE TIMESTAMP -->
-                                <p class="post-preview-line-timestamp">20 hours ago</p>
-                                <!-- /POST PREVIEW LINE TIMESTAMP -->
-                            </div>
-                            <!-- /POST PREVIEW LINE META -->
-                        </div>
-                        <!-- /POST PREVIEW LINE -->
-
-                        <!-- POST PREVIEW LINE -->
-                        <div class="post-preview-line">
-                            <!-- POST PREVIEW LINE TITLE -->
-                            <p class="post-preview-line-title"><a href="forums-discussion.html">Check out all the pictures I took at the CosplayWonder 2018</a></p>
-                            <!-- /POST PREVIEW LINE TITLE -->
-
-                            <!-- POST PREVIEW LINE META -->
-                            <div class="post-preview-line-meta">
-                                <!-- USER AVATAR -->
-                                <a class="user-avatar micro no-border" href="profile-timeline.html">
-                                    <!-- USER AVATAR CONTENT -->
-                                    <div class="user-avatar-content">
-                                        <!-- HEXAGON -->
-                                        <div class="hexagon-image-18-20" data-src="img/avatar/07.jpg"></div>
-                                        <!-- /HEXAGON -->
-                                    </div>
-                                    <!-- /USER AVATAR CONTENT -->
-                                </a>
-                                <!-- /USER AVATAR -->
-
-                                <!-- POST PREVIEW LINE AUTHOR -->
-                                <p class="post-preview-line-author"><a href="profile-timeline.html">By Sarah Diamond</a></p>
-                                <!-- /POST PREVIEW LINE AUTHOR -->
-
-                                <!-- POST PREVIEW LINE TIMESTAMP -->
-                                <p class="post-preview-line-timestamp">19 days ago</p>
-                                <!-- /POST PREVIEW LINE TIMESTAMP -->
-                            </div>
-                            <!-- /POST PREVIEW LINE META -->
-                        </div>
-                        <!-- /POST PREVIEW LINE -->
-                    </div>
-                    <!-- /POST PREVIEW LINE LIST -->
-                </div>
-                <!-- WIDGET BOX CONTENT -->
-            </div>
-            <!-- /WIDGET BOX -->
-
-            <!-- WIDGET BOX -->
-            <div class="widget-box">
-                <!-- WIDGET BOX SETTINGS -->
-                <div class="widget-box-settings">
-                    <!-- POST SETTINGS WRAP -->
-                    <div class="post-settings-wrap">
-                        <!-- POST SETTINGS -->
-                        <div class="post-settings widget-box-post-settings-dropdown-trigger">
-                            <!-- POST SETTINGS ICON -->
-                            <svg class="post-settings-icon icon-more-dots">
-                                <use xlink:href="#svg-more-dots"></use>
-                            </svg>
-                            <!-- /POST SETTINGS ICON -->
-                        </div>
-                        <!-- /POST SETTINGS -->
-
-                        <!-- SIMPLE DROPDOWN -->
-                        <div class="simple-dropdown widget-box-post-settings-dropdown">
-                            <!-- SIMPLE DROPDOWN LINK -->
-                            <p class="simple-dropdown-link">Widget Settings</p>
-                            <!-- /SIMPLE DROPDOWN LINK -->
-                        </div>
-                        <!-- /SIMPLE DROPDOWN -->
-                    </div>
-                    <!-- /POST SETTINGS WRAP -->
-                </div>
-                <!-- /WIDGET BOX SETTINGS -->
-
-                <!-- WIDGET BOX TITLE -->
-                <p class="widget-box-title">Videos <span class="highlighted">4</span></p>
-                <!-- /WIDGET BOX TITLE -->
-
-                <!-- WIDGET BOX CONTENT -->
-                <div class="widget-box-content">
-                    <!-- VIDEO BOX LIST -->
-                    <div class="video-box-list">
-                        <!-- VIDEO BOX -->
-                        <div class="video-box small">
-                            <!-- VIDEO BOX COVER -->
-                            <div class="video-box-cover popup-video-trigger">
-                                <!-- VIDEO BOX COVER IMAGE -->
-                                <figure class="video-box-cover-image liquid">
-                                    <img src="img/cover/30.jpg" alt="cover-30">
-                                </figure>
-                                <!-- /VIDEO BOX COVER IMAGE -->
-
-                                <!-- PLAY BUTTON -->
-                                <div class="play-button">
-                                    <!-- PLAY BUTTON ICON -->
-                                    <svg class="play-button-icon icon-play">
-                                        <use xlink:href="#svg-play"></use>
-                                    </svg>
-                                    <!-- /PLAY BUTTON ICON -->
-                                </div>
-                                <!-- /PLAY BUTTON -->
-
-                                <!-- VIDEO BOX INFO -->
-                                <div class="video-box-info">
-                                    <!-- VIDEO BOX TITLE -->
-                                    <p class="video-box-title">My Latest Cosplay</p>
-                                    <!-- /VIDEO BOX TITLE -->
-
-                                    <!-- VIDEO BOX TEXT -->
-                                    <p class="video-box-text">1 hour ago</p>
-                                    <!-- /VIDEO BOX TEXT -->
-                                </div>
-                                <!-- /VIDEO BOX INFO -->
-                            </div>
-                            <!-- /VIDEO BOX COVER -->
-                        </div>
-                        <!-- /VIDEO BOX -->
-
-                        <!-- VIDEO BOX -->
-                        <div class="video-box small">
-                            <!-- VIDEO BOX COVER -->
-                            <div class="video-box-cover popup-video-trigger">
-                                <!-- VIDEO BOX COVER IMAGE -->
-                                <figure class="video-box-cover-image liquid">
-                                    <img src="img/cover/44.jpg" alt="cover-44">
-                                </figure>
-                                <!-- /VIDEO BOX COVER IMAGE -->
-
-                                <!-- PLAY BUTTON -->
-                                <div class="play-button">
-                                    <!-- PLAY BUTTON ICON -->
-                                    <svg class="play-button-icon icon-play">
-                                        <use xlink:href="#svg-play"></use>
-                                    </svg>
-                                    <!-- /PLAY BUTTON ICON -->
-                                </div>
-                                <!-- /PLAY BUTTON -->
-
-                                <!-- VIDEO BOX INFO -->
-                                <div class="video-box-info">
-                                    <!-- VIDEO BOX TITLE -->
-                                    <p class="video-box-title">Jenny primary Photoshoot</p>
-                                    <!-- /VIDEO BOX TITLE -->
-
-                                    <!-- VIDEO BOX TEXT -->
-                                    <p class="video-box-text">12 days ago</p>
-                                    <!-- /VIDEO BOX TEXT -->
-                                </div>
-                                <!-- /VIDEO BOX INFO -->
-                            </div>
-                            <!-- /VIDEO BOX COVER -->
-                        </div>
-                        <!-- /VIDEO BOX -->
-
-                        <!-- VIDEO BOX -->
-                        <div class="video-box small">
-                            <!-- VIDEO BOX COVER -->
-                            <div class="video-box-cover popup-video-trigger">
-                                <!-- VIDEO BOX COVER IMAGE -->
-                                <figure class="video-box-cover-image liquid">
-                                    <img src="img/cover/42.jpg" alt="cover-42">
-                                </figure>
-                                <!-- /VIDEO BOX COVER IMAGE -->
-
-                                <!-- PLAY BUTTON -->
-                                <div class="play-button">
-                                    <!-- PLAY BUTTON ICON -->
-                                    <svg class="play-button-icon icon-play">
-                                        <use xlink:href="#svg-play"></use>
-                                    </svg>
-                                    <!-- /PLAY BUTTON ICON -->
-                                </div>
-                                <!-- /PLAY BUTTON -->
-
-                                <!-- VIDEO BOX INFO -->
-                                <div class="video-box-info">
-                                    <!-- VIDEO BOX TITLE -->
-                                    <p class="video-box-title">Tabatha Arcade Gaming Tips</p>
-                                    <!-- /VIDEO BOX TITLE -->
-
-                                    <!-- VIDEO BOX TEXT -->
-                                    <p class="video-box-text">5 days ago</p>
-                                    <!-- /VIDEO BOX TEXT -->
-                                </div>
-                                <!-- /VIDEO BOX INFO -->
-                            </div>
-                            <!-- /VIDEO BOX COVER -->
-                        </div>
-                        <!-- /VIDEO BOX -->
-                    </div>
-                    <!-- /VIDEO BOX LIST -->
-                </div>
-                <!-- WIDGET BOX CONTENT -->
-            </div>
-            <!-- /WIDGET BOX -->
         </div>
         <!-- /GRID COLUMN -->
     </div>

@@ -1,0 +1,260 @@
+{% extends 'base_profil.html.twig' %}
+
+{% block start_body %}
+    <div id="popapp"></div>
+{% endblock %}
+
+{% block body %}
+
+    <!-- SECTION FILTERS BAR -->
+    <div class="section-filters-bar v1">
+        <!-- SECTION FILTERS BAR ACTIONS -->
+        <div class="section-filters-bar-actions">
+            <!-- FORM -->
+            {{ form_start(form) }}
+                <!-- FORM INPUT -->
+                <div class="form-input small with-button">
+                    {{ form_row(form.searchGroup) }}
+                    <!-- BUTTON -->
+                    <button class="button primary">
+                        <!-- ICON MAGNIFYING GLASS -->
+                        <svg class="icon-magnifying-glass">
+                            <use xlink:href="#svg-magnifying-glass"></use>
+                        </svg>
+                        <!-- /ICON MAGNIFYING GLASS -->
+                    </button>
+                    <!-- /BUTTON -->
+                </div>
+            {{ form_end(form) }}
+            <!-- /FORM -->
+
+            <!-- FILTER TABS -->
+            <div class="filter-tabs">
+                <!-- FILTER TAB -->
+                <div class="filter-tab {% if app.request.attributes.get('_route') == 'front_groups_groups_new' %}active{% endif %}">
+                    <!-- FILTER TAB TEXT -->
+                    <a href="{{ path('front_groups_groups_new') }}" class="filter-tab-text">Plus récents</a>
+                    <!-- /FILTER TAB TEXT -->
+                </div>
+                <!-- /FILTER TAB -->
+
+                <!-- FILTER TAB -->
+                <div class="filter-tab {% if app.request.attributes.get('_route') == 'front_groups_groups_popular' %}active{% endif %}">
+                    <!-- FILTER TAB TEXT -->
+                    <a href="{{ path('front_groups_groups_popular') }}" class="filter-tab-text">Plus Populaires</a>
+                    <!-- /FILTER TAB TEXT -->
+                </div>
+                <!-- /FILTER TAB -->
+
+                <!-- FILTER TAB -->
+                <div class="filter-tab {% if app.request.attributes.get('_route') == 'front_groups_groups_alphabetic' %}active{% endif %}">
+                    <!-- FILTER TAB TEXT -->
+                    <a href="{{ path('front_groups_groups_alphabetic') }}" class="filter-tab-text">Alphabétique</a>
+                    <!-- /FILTER TAB TEXT -->
+                </div>
+                <!-- /FILTER TAB -->
+            </div>
+            <!-- /FILTER TABS -->
+        </div>
+        <!-- /SECTION FILTERS BAR ACTIONS -->
+
+
+    </div>
+    <!-- /SECTION FILTERS BAR -->
+
+    <!-- GRID -->
+    <div class="grid grid-4-4-4 centered">
+        {% for group in groups %}
+            <!-- USER PREVIEW -->
+            <div class="user-preview">
+                <!-- USER PREVIEW COVER -->
+                <figure class="user-preview-cover liquid">
+                    <img src="{% if group.cover %}{{ asset( constant('App\\Services\\File\\UploadFile::COVERUPLOAD_DIR')) ~ group.cover }}{% else %}{{ asset('/img/avatar/01.jpg') }}{% endif %}" alt="cover-29">
+                </figure>
+                <!-- /USER PREVIEW COVER -->
+
+                <!-- USER PREVIEW INFO -->
+                <div class="user-preview-info">
+                    <!-- TAG STICKER -->
+                    <div class="tag-sticker">
+                        <!-- TAG STICKER ICON -->
+                        <svg class="tag-sticker-icon icon-public">
+                            <use xlink:href="#svg-public"></use>
+                        </svg>
+                        <!-- /TAG STICKER ICON -->
+                    </div>
+                    <!-- /TAG STICKER -->
+
+                    <!-- USER SHORT DESCRIPTION -->
+                    <div class="user-short-description">
+                        <!-- USER SHORT DESCRIPTION AVATAR -->
+                        <a class="user-short-description-avatar user-avatar medium no-stats" href="{{ path('front_group_single', {'slug': group.slug}) }}">
+                            <!-- USER AVATAR BORDER -->
+                            <div class="user-avatar-border">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-120-130"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR BORDER -->
+
+                            <!-- USER AVATAR CONTENT -->
+                            <div class="user-avatar-content">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-image-100-110" data-src="{% if group.avatar %}{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ group.avatar }}{% else %}{{ asset('img/avatar/01.jpg') }}{% endif %}"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR CONTENT -->
+                        </a>
+                        <!-- /USER SHORT DESCRIPTION AVATAR -->
+
+                        <!-- USER SHORT DESCRIPTION TITLE -->
+                        <p class="user-short-description-title"><a href="{{ path('front_group_single', {'slug': group.slug}) }}">{{ group.name }}</a></p>
+                        <!-- /USER SHORT DESCRIPTION TITLE -->
+
+                        <!-- USER SHORT DESCRIPTION TEXT -->
+                        <p class="user-short-description-text">{{ group.description|slice(0, 30) ~ '...' }}</p>
+                        <!-- /USER SHORT DESCRIPTION TEXT -->
+                    </div>
+                    <!-- /USER SHORT DESCRIPTION -->
+
+                    <!-- USER STATS -->
+                    <div class="user-stats">
+                        <!-- USER STAT -->
+                        <div class="user-stat">
+                            <!-- USER STAT TITLE -->
+                            <p class="user-stat-title">{{ group.members|length }}</p>
+                            <!-- /USER STAT TITLE -->
+
+                            <!-- USER STAT TEXT -->
+                            <p class="user-stat-text">membres</p>
+                            <!-- /USER STAT TEXT -->
+                        </div>
+                        <!-- /USER STAT -->
+
+                        <!-- USER STAT -->
+                        <div class="user-stat">
+                            <!-- USER STAT TITLE -->
+                            <p class="user-stat-title">{{ group.posts|length }}</p>
+                            <!-- /USER STAT TITLE -->
+
+                            <!-- USER STAT TEXT -->
+                            <p class="user-stat-text">posts</p>
+                            <!-- /USER STAT TEXT -->
+                        </div>
+                        <!-- /USER STAT -->
+
+                        <!-- USER STAT -->
+                        <div class="user-stat">
+                            <!-- USER STAT TITLE -->
+                            <p class="user-stat-title">{{ group.nbViews }}</p>
+                            <!-- /USER STAT TITLE -->
+
+                            <!-- USER STAT TEXT -->
+                            <p class="user-stat-text">visites</p>
+                            <!-- /USER STAT TEXT -->
+                        </div>
+                        <!-- /USER STAT -->
+                    </div>
+                    <!-- /USER STATS -->
+
+                    <!-- USER AVATAR LIST -->
+                    <div class="user-avatar-list medium reverse centered">
+                        {% set membersGroup = post_adopt.getlast5usersGroup(group) %}
+                        {% for member in membersGroup %}
+                            <!-- USER AVATAR -->
+                            <div class="user-avatar smaller no-stats">
+                                <!-- USER AVATAR BORDER -->
+                                <div class="user-avatar-border">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-34-36"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR BORDER -->
+
+                                <!-- USER AVATAR CONTENT -->
+                                <div class="user-avatar-content">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-image-30-32" data-src="{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ member.avatar }}"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR CONTENT -->
+                            </div>
+                            <!-- /USER AVATAR -->
+                        {% endfor %}
+                        <!-- USER AVATAR -->
+                        {% if group.members|length > 6 %}
+                            <div class="user-avatar smaller no-stats">
+                                <!-- USER AVATAR BORDER -->
+                                <div class="user-avatar-border">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-34-36"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR BORDER -->
+
+                                <!-- USER AVATAR CONTENT -->
+                                <div class="user-avatar-content">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-image-30-32" data-src="{{ asset('img/avatar/23.jpg') }}"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR CONTENT -->
+
+                                <!-- USER AVATAR OVERLAY -->
+                                <div class="user-avatar-overlay">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-overlay-30-32"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR OVERLAY -->
+
+                                <!-- USER AVATAR OVERLAY CONTENT -->
+                                <div class="user-avatar-overlay-content">
+                                    <!-- USER AVATAR OVERLAY CONTENT TEXT -->
+                                    <p class="user-avatar-overlay-content-text">+{{ group.members|length - 6 }}</p>
+                                    <!-- /USER AVATAR OVERLAY CONTENT TEXT -->
+                                </div>
+                                <!-- /USER AVATAR OVERLAY CONTENT -->
+                            </div>
+                        {% endif %}
+                    </div>
+                    <!-- /USER AVATAR LIST -->
+
+                    <!-- USER PREVIEW ACTIONS -->
+                    <div class="user-preview-actions">
+                        <!-- BUTTON -->
+                        {% if group.members.contains(app.user) %}
+                            <a class="button secondary full" href="{{ path('front_group_leave_join_group', {'slug': group.slug}) }}">
+                                <!-- BUTTON ICON -->
+                                <svg class="button-icon icon-join-group">
+                                    <use xlink:href="#svg-leave-group"></use>
+                                </svg>
+                                <!-- /BUTTON ICON -->
+                                Quitter le groupe !
+                            </a>
+                        {% else %}
+                            <a class="button secondary full" href="{{ path('front_group_leave_join_group', {'slug': group.slug}) }}">
+                                <!-- BUTTON ICON -->
+                                <svg class="button-icon icon-join-group">
+                                    <use xlink:href="#svg-join-group"></use>
+                                </svg>
+                                <!-- /BUTTON ICON -->
+                                Rejoindre le groupe !
+                            </a>
+                        {% endif %}
+                    </div>
+                    <!-- /USER PREVIEW ACTIONS -->
+                </div>
+                <!-- /USER PREVIEW INFO -->
+            </div>
+            <!-- /USER PREVIEW -->
+        {% endfor %}
+    </div>
+    <!-- /GRID -->
+    {% if groups|length > 9 %}
+        <div class="section-pager-bar pagintion pt-2" id="pagination">
+            {{ knp_pagination_render(groups) }}
+        </div>
+    {% endif %}
+
+{% endblock %}

@@ -72,7 +72,7 @@
                         <!-- USER SHORT DESCRIPTION -->
                         <div class="user-short-description small">
                             <!-- USER SHORT DESCRIPTION AVATAR -->
-                            <a class="user-short-description-avatar user-avatar no-stats" href="group-timeline.html">
+                            <a class="user-short-description-avatar user-avatar no-stats" href="{{ path('front_group_single', {'slug': group.slug}) }}">
                                 <!-- USER AVATAR BORDER -->
                                 <div class="user-avatar-border">
                                     <!-- HEXAGON -->
@@ -92,7 +92,7 @@
                             <!-- /USER SHORT DESCRIPTION AVATAR -->
 
                             <!-- USER SHORT DESCRIPTION TITLE -->
-                            <p class="user-short-description-title small"><a href="group-timeline.html">{{ group.name }}</a></p>
+                            <p class="user-short-description-title small"><a href="{{ path('front_group_single', {'slug': group.slug}) }}">{{ group.name }}</a></p>
                             <!-- /USER SHORT DESCRIPTION TITLE -->
 
                             <!-- USER SHORT DESCRIPTION TEXT -->
@@ -224,7 +224,7 @@
                             <!-- /FORM ITEM -->
                         </div>
                         <div class="popup-box-sidebar-footer mt-3">
-                            <button type="submit" class="button secondary full popup-manage-group-trigger">Créer le groupe !</button>
+                            <button type="submit" class="button secondary full popup-manage-group-trigger" id="submit_group" disabled>Créer le groupe !</button>
                         </div>
 
                             <!-- /FORM ROW -->
@@ -259,5 +259,14 @@ function readURL(input) {
 document.getElementById('group_avatar').addEventListener('change', function(){
     readURL(this);
 });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+<script>
+$(':input[type="submit"]').prop('disabled', true);
+     $('input[type="text"]').keyup(function() {
+        if($(this).val() != '') {
+           $(':input[type="submit"]').prop('disabled', false);
+        }
+     });
 </script>
 {% endblock %}

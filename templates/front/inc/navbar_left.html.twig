@@ -1,10 +1,10 @@
 <nav id="navigation-widget-small" class="navigation-widget navigation-widget-desktop closed sidebar left delayed">
     <!-- USER AVATAR -->
-    <a class="user-avatar small no-outline online" href="profile-timeline.html">
+    <a class="user-avatar small no-outline online" href="{{ path('front_profil_user', {'pseudo': app.user.pseudo}) }}">
         <!-- USER AVATAR CONTENT -->
         <div class="user-avatar-content">
             <!-- HEXAGON -->
-            <div class="hexagon-image-30-32" data-src="img/avatar/01.jpg"></div>
+            <div class="hexagon-image-30-32" data-src="{{ asset( constant('App\\Services\\File\\UploadFile::AVATAR_UPLOAD_DIR')) ~ app.user.avatar }}"></div>
             <!-- /HEXAGON -->
         </div>
         <!-- /USER AVATAR CONTENT -->
@@ -56,7 +56,7 @@
         <!-- MENU ITEM -->
         <li class="menu-item">
             <!-- MENU ITEM LINK -->
-            <a class="menu-item-link text-tooltip-tfr" href="newsfeed.html" data-title="Newsfeed">
+            <a class="menu-item-link text-tooltip-tfr" href="{{ path('front_fil_list') }}" data-title="Fil d’actu">
                 <!-- MENU ITEM LINK ICON -->
                 <svg class="menu-item-link-icon icon-newsfeed">
                     <use xlink:href="#svg-newsfeed"></use>
@@ -70,7 +70,7 @@
         <!-- MENU ITEM -->
         <li class="menu-item">
             <!-- MENU ITEM LINK -->
-            <a class="menu-item-link text-tooltip-tfr" href="overview.html" data-title="Overview">
+            <a class="menu-item-link text-tooltip-tfr" href="" data-title="Mes stats">
                 <!-- MENU ITEM LINK ICON -->
                 <svg class="menu-item-link-icon icon-overview">
                     <use xlink:href="#svg-overview"></use>
@@ -84,7 +84,7 @@
         <!-- MENU ITEM -->
         <li class="menu-item">
             <!-- MENU ITEM LINK -->
-            <a class="menu-item-link text-tooltip-tfr" href="groups.html" data-title="Groups">
+            <a class="menu-item-link text-tooltip-tfr" href="{{ path('front_groups_groups_new') }}" data-title="Groupes">
                 <!-- MENU ITEM LINK ICON -->
                 <svg class="menu-item-link-icon icon-group">
                     <use xlink:href="#svg-group"></use>

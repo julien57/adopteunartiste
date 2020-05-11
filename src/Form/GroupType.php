@@ -19,14 +19,16 @@ class GroupType extends AbstractType
         $builder
             ->add('cover', FileType::class, [
                 'label' => ' ',
-                'data_class' => null
+                'data_class' => null,
+                'required' => false
             ])
             ->add('avatar', FileType::class, [
                 'label' => ' ',
-                'data_class' => null
+                'data_class' => null,
+                'required' => false
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Description du groupe'
+                'label' => 'Description du groupe *'
             ])
             ->add('name', TextType::class, [
                 'label' => 'Nom du groupe *'
