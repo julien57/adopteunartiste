@@ -73,6 +73,7 @@ class Post
     private $userGroup;
 
 
+
     public function __construct()
     {
         $this->photo = new ArrayCollection();

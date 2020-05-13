@@ -222,6 +222,11 @@ class User implements UserInterface
      */
     private $subscribedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Notification", mappedBy="userTo")
+     */
+    private $notifications;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
@@ -238,6 +243,7 @@ class User implements UserInterface
         $this->senderTo = new ArrayCollection();
         $this->senderFor = new ArrayCollection();
         $this->subscribedAt = new \DateTime();
+        $this->notifications = new ArrayCollection();
     }
 
     public function computeSlug(SluggerInterface $slugger)
@@ -894,6 +900,37 @@ class User implements UserInterface
     public function setSubscribedAt(\DateTimeInterface $subscribedAt): self
     {
         $this->subscribedAt = $subscribedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Notification[]
+     */
+    public function getNotifications(): Collection
+    {
+        return $this->notifications;
+    }
+
+    public function addNotification(Notification $notification): self
+    {
+        if (!$this->notifications->contains($notification)) {
+            $this->notifications[] = $notification;
+            $notification->setUserTo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotification(Notification $notification): self
+    {
+        if ($this->notifications->contains($notification)) {
+            $this->notifications->removeElement($notification);
+            // set the owning side to null (unless already changed)
+            if ($notification->getUserTo() === $this) {
+                $notification->setUserTo(null);
+            }
+        }
 
         return $this;
     }

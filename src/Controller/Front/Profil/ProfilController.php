@@ -6,6 +6,7 @@ use App\Entity\Adopt;
 use App\Entity\Post;
 use App\Entity\User;
 use App\Repository\AdoptRepository;
+use App\Repository\NotificationRepository;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -96,11 +97,15 @@ class ProfilController extends AbstractController
     /**
      * @Route("/profil/supprimer-post/{id}", name="front_profil_remove_post")
      */
-    public function removePost(Post $post)
+    public function removePost(Post $post, NotificationRepository $notificationRepository)
     {
         if ($post->getUser() === $this->getUser() || $post->getUserGroup()->getAuthor() === $this->getUser()) {
             foreach ($post->getReacts() as $react) {
                 $post->removeReact($react);
+            }
+            $notifications = $notificationRepository->findBy(['post' => $post]);
+            foreach ($notifications as $notification) {
+                $this->em->remove($notification);
             }
             foreach ($post->getCommentPosts() as $commentPost) {
                 $post->removeCommentPost($commentPost);

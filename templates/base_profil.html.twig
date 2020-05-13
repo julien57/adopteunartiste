@@ -3295,5 +3295,16 @@ for (let link of usersChat) {
             })})}
 
 </script>
+<script>
+    const notifsAction = document.getElementById('notif_actions');
+    notifsAction.addEventListener('click', function () {
+        fetch("{{ path('front_react_post_add') }}", { method: 'POST', body: datas })
+            .then(response => response.json())
+            .then(data => {
+
+            })
+        notifsAction.classList.remove('unread');
+    })
+</script>
 </body>
 </html>

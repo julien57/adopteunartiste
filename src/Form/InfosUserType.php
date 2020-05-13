@@ -74,7 +74,7 @@ class InfosUserType extends AbstractType
                 'required' => false
             ])
             ->add('avatar', FileType::class, [
-                'label' => 'MModifier photo de profil',
+                'label' => 'Modifier photo de profil',
                 'required' => false,
                 'data_class' => null
             ])

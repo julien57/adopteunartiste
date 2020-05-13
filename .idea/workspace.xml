@@ -2,16 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63ff9cd7-3cb6-497e-b0b2-d6f2408246d0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Controller/Front/General/MemberController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/front/general/members.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Front/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Front/PostController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/Front/Profil/ProfilController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Front/Profil/ProfilController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Post.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/SearchUserType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/SearchUserType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/GroupRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/GroupRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/InfosUserType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/InfosUserType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Services/Post/MessagingService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Post/MessagingService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base_profil.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base_profil.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/front/inc/navbar_left.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/inc/navbar_left.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/fil/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/fil/list.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/html/posts.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/html/posts.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/inc/header.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/inc/header.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -259,14 +260,18 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="581" height="445" key="SwitcherDM/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588581238616" />
+    <state x="829" y="434" width="326" height="223" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1589294339614">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="829" y="434" width="326" height="223" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1589294339614" />
     <state x="653" y="372" key="com.intellij.ide.util.TipDialog" timestamp="1586982415807">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="653" y="372" key="com.intellij.ide.util.TipDialog/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1586982415807" />
-    <state x="705" y="120" width="986" height="682" key="find.popup" timestamp="1589188548759">
+    <state x="705" y="120" width="986" height="682" key="find.popup" timestamp="1589359325780">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="705" y="120" width="986" height="682" key="find.popup/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1589188548759" />
+    <state x="705" y="120" width="986" height="682" key="find.popup/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1589359325780" />
     <state x="609" y="274" width="700" height="530" key="recent.locations.popup" timestamp="1588776292148">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

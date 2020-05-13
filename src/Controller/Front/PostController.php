@@ -2,6 +2,7 @@
 
 namespace App\Controller\Front;
 
+use App\Entity\Notification;
 use App\Entity\Photo;
 use App\Entity\Post;
 use App\Entity\React;
@@ -93,7 +94,14 @@ class PostController extends AbstractController
                     $react->addUser($user);
                     $react->setType($data->react);
 
+                    $notification = new Notification();
+                    $notification->setUserFrom($this->getUser());
+                    $notification->setUserTo($post->getUser());
+                    $notification->setType(Notification::NOTIF_REACT_TYPE);
+                    $notification->setPost($post);
+
                     $this->em->persist($react);
+                    $this->em->persist($notification);
 
                 } else {
                     $reactExist->setType($data->react);
