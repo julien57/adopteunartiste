@@ -210,27 +210,15 @@
                             <!-- ACTION REQUEST LIST -->
                             <div class="action-request-list">
                                 <!-- ACTION REQUEST -->
-                                <button class="action-request accept with-text" id="accept_request">
-                                    <!-- ACTION REQUEST ICON -->
-                                    <svg class="action-request-icon icon-add-friend">
-                                        <use xlink:href="#svg-add-friend"></use>
-                                    </svg>
-                                    <!-- /ACTION REQUEST ICON -->
-
-                                    <!-- ACTION REQUEST TEXT -->
-                                    <span class="action-request-text">Accepter</span>
-                                    <!-- /ACTION REQUEST TEXT -->
-                                </button>
-                                <!-- /ACTION REQUEST -->
 
                                 <!-- ACTION REQUEST -->
-                                <button class="action-request decline" id="decline_request">
+                                <a href="{{ path('gront_space_manage_group_remove_member', {'slug': group.slug, 'pseudo': member.pseudo}) }}" class="action-request decline" id="decline_request">
                                     <!-- ACTION REQUEST ICON -->
                                     <svg class="action-request-icon icon-remove-friend">
                                         <use xlink:href="#svg-remove-friend"></use>
                                     </svg>
                                     <!-- /ACTION REQUEST ICON -->
-                                </button>
+                                </a>
                                 <!-- /ACTION REQUEST -->
                             </div>
                             <!-- ACTION REQUEST LIST -->

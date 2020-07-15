@@ -90,6 +90,19 @@ class PostRepository extends ServiceEntityRepository
             ->getArrayResult();
     }
 
+    public function findPostBetweenDates(\DateTime $start, \DateTime $end, User $user)
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.user = :user')
+            ->setParameter('user', $user)
+            ->andWhere('p.publishedAt > :start')
+            ->andWhere('p.publishedAt < :end')
+            ->setParameter('start', $end)
+            ->setParameter('end', $start)
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Post[] Returns an array of Post objects
     //  */

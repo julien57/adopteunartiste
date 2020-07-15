@@ -57,4 +57,9 @@ class MessagingService
     {
         return $this->notificationRepository->findBy(['userTo' => $user], ['createdAt' => 'DESC'], 5);
     }
+
+    public function getAllNotificationsByUser(User $user)
+    {
+        return $this->notificationRepository->findBy(['userTo' => $user], ['createdAt' => 'DESC'], 30);
+    }
 }

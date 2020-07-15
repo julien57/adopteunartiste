@@ -3,6 +3,7 @@
 namespace App\Controller\Front;
 
 use App\Entity\CommentPost;
+use App\Entity\Notification;
 use App\Form\CommentArticleUserType;
 use App\Repository\CommentPostRepository;
 use App\Repository\PostRepository;
@@ -46,7 +47,14 @@ class CommentController extends AbstractController
             $comment->setPost($post);
             $comment->setUser($this->getUser());
 
+            $notification = new Notification();
+            $notification->setUserFrom($this->getUser());
+            $notification->setUserTo($post->getUser());
+            $notification->setType(Notification::NOTIF_COMMENT_TYPE);
+            $notification->setPost($post);
+
             $this->em->persist($comment);
+            $this->em->persist($notification);
             $this->em->flush();
 
             return $this->json([

@@ -358,6 +358,18 @@ class PersonalSpace extends AbstractController
     }
 
     /**
+     * @Route("/gestion-groupe/supprimer/membre/{slug}/{pseudo}", name="gront_space_manage_group_remove_member")
+     */
+    public function removeMemberToGroup(Group $group, string $pseudo, UserRepository $userRepository)
+    {
+        $user = $userRepository->findOneBy(['pseudo' => $pseudo]);
+        $group->removeMember($user);
+        $this->em->flush();
+
+        return $this->redirectToRoute('gront_space_manage_group_members', ['slug' => $group->getSlug()]);
+    }
+
+    /**
      * @Route("/gestion-groupe/reseaux-sociaux/{slug}", name="front_space_manage_group_social")
      */
     public function groupSocial(Group $group, Request $request)
